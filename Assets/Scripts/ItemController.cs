@@ -4,6 +4,7 @@ using System.Collections;
 public class ItemController : MonoBehaviour {
 
 	// Use this for initialization
+
 	void Start () {
 	
 	}
@@ -14,7 +15,7 @@ public class ItemController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D () {
-		Debug.Log ("I have collided!");
+		PlayerController.instance.IncrementCounter ();
 		Destroy (this.gameObject);
 	}
 }
