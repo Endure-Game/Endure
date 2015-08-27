@@ -43,8 +43,13 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// TODO: separate parts out into helper functions to make it less messy and monolithic
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
+
+		float playerWidth = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.x * this.player.transform.localScale.x;
+		float playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
+
 		float cameraX = this.camera.transform.position.x;
 		float cameraY = this.camera.transform.position.y;
 
@@ -59,10 +64,7 @@ public class WorldController : MonoBehaviour {
 		float scaledHeight = height * scale;
 		float horizontalCameraPadding = scaledWidth - this.camera.getHeight ();
 
-		//print (this.camera.getWidth ());
-		//print (this.camera.getHeight ());
-
-		//print (playerX);
+		// make camera track player
 
 		float newCameraX = cameraX;
 		float newCameraY = cameraY;
@@ -82,6 +84,17 @@ public class WorldController : MonoBehaviour {
 		this.camera.transform.position = new Vector3 (newCameraX,
 		                                              newCameraY,
 		                                   			  this.camera.transform.position.z);
+
+		// detect when player hits boundary
+		if (scaledWidth / 2 - playerX < playerWidth / 2) {
+			// east
+		} else if (scaledWidth / 2 + playerX < playerWidth / 2) {
+			// west
+		} else if (scaledHeight / 2 - playerY < playerHeight / 2) {
+			// north
+		} else if (scaledHeight / 2 + playerY < playerHeight / 2) {
+			// south
+		}
 	}
 
 }
