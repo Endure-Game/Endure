@@ -23,7 +23,7 @@ Call current technology "magic"
 
 In post-apocalyptic United States
 Apocalypse happened in 2021
-Game happens in 2121
+Game happens in 2221
 
 ## Character
 One person, with no known background (perhaps randomized sprite)
@@ -39,6 +39,8 @@ Why is he walking around? Why does he want to go places?
  * Adventurer who has heard legends of a better place?
  * You were in a caravan, which was attacked
  * You wake up, everyone is dead, you can't remember last several days or where you're going
+     - You have a map!
+     - It shows where you are, and there's another place marked (the place you're trying to get to)
 
 ## Enemies
 
@@ -59,8 +61,27 @@ Ron the hedgehog?
 ## Length
 Try for hour long game?
 
+## Obstacles
 
-Time period: 30-40 years? no, several hundred years
+ * Fighting with enemies
+ * River
+ * Rock wall
+
+## Combat
+ * Knife
+ * Sword
+ * Bows and arrows
+ * Crossbows
+ * Guns - very rare
+ * you'd have to find ammo as well
+
+ * Shield
+
+ * Move with keys
+ * Range combat use mouse
+ * hold key for shield
+
+Time period: 30-40 years? no, 200 years
 
 Very low maybe: fantasy
  * "fantasy" in the sense that current technology is considered magic by the time period in the game
