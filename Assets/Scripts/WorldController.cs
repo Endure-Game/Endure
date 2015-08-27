@@ -43,8 +43,8 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float newX;
-		float newY;
+		float newCameraX;
+		float newCameraY;
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 		float cameraX = this.camera.transform.position.x;
@@ -52,29 +52,30 @@ public class WorldController : MonoBehaviour {
 
 		GameObject nextRoom = rooms[0];
 		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-		float scale = (float) nextRoom.transform.localScale.x;		
-		
+		float scale = (float) nextRoom.transform.localScale.x;
+
+		float scaledWidth = width * scale;
 
 		//print (this.camera.getWidth ());
 		//print (this.camera.getHeight ());
 
 		//print (playerX);
 
-		if (playerX <= (this.size * (width*scale)-this.camera.getWidth ()) - ((width*scale - this.camera.getWidth ()) / 2) &&
-			playerX >= -(width*scale - this.camera.getWidth ()) / 2) {
-			newX = playerX;
+		if (playerX <= (this.size * scaledWidth-this.camera.getWidth ()) - ((scaledWidth - this.camera.getWidth ()) / 2) &&
+			playerX >= -(scaledWidth - this.camera.getWidth ()) / 2) {
+			newCameraX = playerX;
 		} else {
-			newX = cameraX;
+			newCameraX = cameraX;
 		}
-		if (playerY <= (this.size * (width*scale)-this.camera.getHeight ()) - ((width*scale - this.camera.getHeight ()) / 2) &&
-		//if (playerY <= (width*scale - this.camera.getHeight ()) / 2 &&
-		    playerY >= -(width*scale - this.camera.getHeight ()) / 2) {
-			newY = playerY;
+		if (playerY <= (this.size * scaledWidth-this.camera.getHeight ()) - ((scaledWidth - this.camera.getHeight ()) / 2) &&
+		//if (playerY <= (scaledWidth - this.camera.getHeight ()) / 2 &&
+		    playerY >= -(scaledWidth - this.camera.getHeight ()) / 2) {
+			newCameraY = playerY;
 		} else {
-			newY = cameraY;
+			newCameraY = cameraY;
 		}
-		this.camera.transform.position = new Vector3 (newX,
-		                                              newY,
+		this.camera.transform.position = new Vector3 (newCameraX,
+		                                              newCameraY,
 		                                   			  this.camera.transform.position.z);
 	}
 

@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			this.animator.SetBool ("Idle", true);
 		}
-
-		print (this.animator.GetInteger ("Direction"));
 	}
 	//called before start
 	void Awake () {
