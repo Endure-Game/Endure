@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float horizontal = Input.GetAxis ("Horizontal");
-		float vertical = Input.GetAxis ("Vertical");
+		float horizontal = Input.GetAxisRaw ("Horizontal");
+		float vertical = Input.GetAxisRaw ("Vertical");
 //		this.transform.Translate (horizontal, vertical, 0);
 		this.rb2d.velocity = this.speed * new Vector2 (horizontal, vertical);
 
