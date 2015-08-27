@@ -43,8 +43,6 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float newCameraX;
-		float newCameraY;
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 		float cameraX = this.camera.transform.position.x;
@@ -52,28 +50,35 @@ public class WorldController : MonoBehaviour {
 
 		GameObject nextRoom = rooms[0];
 		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+		float height = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
 		float scale = (float) nextRoom.transform.localScale.x;
 
 		float scaledWidth = width * scale;
+		float verticalCameraPadding = scaledWidth - this.camera.getWidth ();
+
+		float scaledHeight = height * scale;
+		float horizontalCameraPadding = scaledWidth - this.camera.getHeight ();
 
 		//print (this.camera.getWidth ());
 		//print (this.camera.getHeight ());
 
 		//print (playerX);
 
-		if (playerX <= (this.size * scaledWidth-this.camera.getWidth ()) - ((scaledWidth - this.camera.getWidth ()) / 2) &&
-			playerX >= -(scaledWidth - this.camera.getWidth ()) / 2) {
+		float newCameraX = cameraX;
+		float newCameraY = cameraY;
+
+		// only move camera to match player if the camera isn't at room edges
+		if (playerX <= verticalCameraPadding - (verticalCameraPadding / 2) &&
+			playerX >= -verticalCameraPadding / 2) {
 			newCameraX = playerX;
-		} else {
-			newCameraX = cameraX;
 		}
-		if (playerY <= (this.size * scaledWidth-this.camera.getHeight ()) - ((scaledWidth - this.camera.getHeight ()) / 2) &&
+
+		if (playerY <= horizontalCameraPadding - (horizontalCameraPadding / 2) &&
 		//if (playerY <= (scaledWidth - this.camera.getHeight ()) / 2 &&
-		    playerY >= -(scaledWidth - this.camera.getHeight ()) / 2) {
+		    playerY >= -horizontalCameraPadding / 2) {
 			newCameraY = playerY;
-		} else {
-			newCameraY = cameraY;
 		}
+
 		this.camera.transform.position = new Vector3 (newCameraX,
 		                                              newCameraY,
 		                                   			  this.camera.transform.position.z);
