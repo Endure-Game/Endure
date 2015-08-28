@@ -110,18 +110,22 @@ public class WorldController : MonoBehaviour {
 		this.playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
 
 		// detect when player hits boundary
-		if (this.roomWidth / 2 - inRoomX < this.playerWidth / 2) {
+		if (this.roomWidth / 2 - inRoomX <= this.playerWidth / 2) {
 			// east
 			this.roomX++;
-		} else if (this.roomWidth / 2 + inRoomX < this.playerWidth / 2) {
+			this.player.transform.Translate (playerWidth * 1.5f, 0, 0);
+		} else if (this.roomWidth / 2 + inRoomX <= this.playerWidth / 2) {
 			// west
 			this.roomX--;
-		} else if (this.roomHeight / 2 - inRoomY < this.playerHeight / 2) {
+			this.player.transform.Translate (-playerWidth * 1.5f, 0, 0);
+		} else if (this.roomHeight / 2 - inRoomY <= this.playerHeight / 2) {
 			// north
 			this.roomY++;
-		} else if (this.roomHeight / 2 + inRoomY < this.playerHeight / 2) {
+			this.player.transform.Translate (0, playerWidth * 1.5f, 0);
+		} else if (this.roomHeight / 2 + inRoomY <= this.playerHeight / 2) {
 			// south
 			this.roomY--;
+			this.player.transform.Translate (0, -playerWidth * 1.5f, 0);
 		}
 	}
 
