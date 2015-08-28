@@ -68,11 +68,6 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.TrackPlayer ();
-		this.CheckForRoomChange ();
-	}
-
-	void TrackPlayer () {
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 
@@ -81,8 +76,11 @@ public class WorldController : MonoBehaviour {
 		float inRoomX = playerX - targetRoom.transform.position.x;
 		float inRoomY = playerY - targetRoom.transform.position.y;
 
-		// make camera track player
+		this.TrackPlayer (playerX, playerY, targetRoom, inRoomX, inRoomY);
+		this.CheckForRoomChange (playerX, playerY, targetRoom, inRoomX, inRoomY);
+	}
 
+	void TrackPlayer (float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY) {
 		float newCameraX = playerX;
 		float newCameraY = playerY;
 
@@ -96,16 +94,7 @@ public class WorldController : MonoBehaviour {
 		                                              this.camera.transform.position.z);
 	}
 
-	void CheckForRoomChange () {
-		// TODO: this is also in TrackPlayer - refactor
-		float playerX = this.player.transform.position.x;
-		float playerY = this.player.transform.position.y;
-
-		GameObject targetRoom = this.rooms [this.roomX, this.roomY];
-
-		float inRoomX = playerX - targetRoom.transform.position.x;
-		float inRoomY = playerY - targetRoom.transform.position.y;
-
+	void CheckForRoomChange (float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY) {
 		this.playerWidth = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.x * this.player.transform.localScale.x;
 		this.playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
 
