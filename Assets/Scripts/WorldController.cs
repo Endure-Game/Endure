@@ -55,8 +55,8 @@ public class WorldController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!this.cameraLock) {
-			TrackPlayer ();
-			CheckForRoomChange ();
+			this.TrackPlayer ();
+			this.CheckForRoomChange ();
 		}
 	}
 
@@ -67,8 +67,8 @@ public class WorldController : MonoBehaviour {
 		float cameraX = this.camera.transform.position.x;
 		float cameraY = this.camera.transform.position.y;
 
-		float verticalCameraPadding = this.roomWidth - this.camera.getWidth ();
-		float horizontalCameraPadding = this.roomHeight - this.camera.getHeight ();
+		float horizontalCameraPadding = this.roomWidth - this.camera.getWidth ();
+		float verticalCameraPadding = this.roomHeight - this.camera.getHeight ();
 
 		// make camera track player
 
@@ -76,13 +76,11 @@ public class WorldController : MonoBehaviour {
 		float newCameraY = cameraY;
 
 		// only move camera to match player if the camera isn't at room edges
-		if (playerX <= verticalCameraPadding - (verticalCameraPadding / 2) &&
-		    playerX >= -verticalCameraPadding / 2) {
+		if (this.WithinPadding (playerX, horizontalCameraPadding)) {
 			newCameraX = playerX;
 		}
 
-		if (playerY <= horizontalCameraPadding - (horizontalCameraPadding / 2) &&
-		    playerY >= -horizontalCameraPadding / 2) {
+		if (this.WithinPadding (playerY, verticalCameraPadding)) {
 			newCameraY = playerY;
 		}
 
@@ -91,7 +89,7 @@ public class WorldController : MonoBehaviour {
 		                                              this.camera.transform.position.z);
 	}
 
-	void CheckForRoomChange() {
+	void CheckForRoomChange () {
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 
@@ -119,5 +117,9 @@ public class WorldController : MonoBehaviour {
 		this.cameraLock = true;
 		this.camera.transform.Translate (this.roomHeight * direction);
 		this.player.transform.position = new Vector2 (0, 0);
+	}
+
+	bool WithinPadding (float coordinate, float padding) {
+		return coordinate <= padding - (padding / 2) && coordinate >= -padding / 2;
 	}
 }
