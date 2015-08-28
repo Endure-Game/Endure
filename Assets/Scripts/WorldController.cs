@@ -45,11 +45,13 @@ public class WorldController : MonoBehaviour {
 	private int roomY = 0;
 
 	// animation data
-	public float transitionDuration = 1;
+	public float transitionDuration = 0.8f;
 
 	private bool animating = false;
-	private Vector3 oldPosition;
-	private Vector3 newPosition;
+	private Vector3 oldCameraPosition;
+	private Vector3 newCameraPosition;
+	private Vector3 oldPlayerPosition;
+	private Vector3 newPlayerPosition;
 	private float animationTime;
 
 	// Use this for initialization
@@ -90,7 +92,8 @@ public class WorldController : MonoBehaviour {
 			}
 
 			var completed = this.animationTime / this.transitionDuration;
-			this.camera.transform.position = Vector3.Lerp (this.oldPosition, this.newPosition, completed);
+			this.camera.transform.position = Vector3.Lerp (this.oldCameraPosition, this.newCameraPosition, completed);
+			this.player.transform.position = Vector3.Lerp (this.oldPlayerPosition, this.newPlayerPosition, completed);
 		}
 	}
 
@@ -138,13 +141,15 @@ public class WorldController : MonoBehaviour {
 	}
 
 	void AnimateCamera (int x, int y, float playerX, float playerY, float inRoomX, float inRoomY) {
-		var distance = new Vector3 (playerWidth * 1.5f, playerWidth * 1.5f, 1);
-		this.player.transform.Translate (Vector3.Scale (distance, new Vector3(x, y, 0)));
+		this.oldPlayerPosition = this.player.transform.position;
 
-		this.oldPosition = this.camera.transform.position;
+		var distance = new Vector3 (playerWidth * 1.5f, playerWidth * 1.5f, 1);
+		this.newPlayerPosition = this.player.transform.position + Vector3.Scale (distance, new Vector3(x, y, 0));
+
+		this.oldCameraPosition = this.camera.transform.position;
 		this.roomX += x;
 		this.roomY += y;
-		this.newPosition = this.CameraPosition (this.player.transform.position.x, this.player.transform.position.y);
+		this.newCameraPosition = this.CameraPosition (this.player.transform.position.x, this.player.transform.position.y);
 
 		this.animationTime = 0;
 		this.animating = true;
