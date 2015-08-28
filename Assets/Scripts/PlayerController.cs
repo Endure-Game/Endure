@@ -30,8 +30,7 @@ public class PlayerController : MonoBehaviour {
 		if(magnitude == 0){
 			magnitude = 1;
 		}
-		print (magnitude);
-		//print ("mAGNITUDE" + Vector2.SqrMagnitude(playerSpeed));
+		//print ("mAGNITUDE" + magnitude);
 
 		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
 
@@ -64,7 +63,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public static bool checkAggro(float aggro, GameObject other){
-		print (other.transform.position.x);
 		float distance = Vector2.Distance (instance.transform.position, other.transform.position);
 		
 		float enemyRadius = instance.transform.localScale.x * instance.playerRadius * aggro;

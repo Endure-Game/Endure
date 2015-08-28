@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy1Script : MonoBehaviour {
 
-	private float aggro = (float) 1;
+	private float aggro = (float) 0.5;
 
 
 	// Use this for initialization
@@ -22,7 +22,6 @@ public class Enemy1Script : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D (Collider2D other){
-		print (other.tag);
 		if (other.tag == "Player") {
 			if(PlayerController.checkAggro (this.aggro, this.gameObject)){
 				print ("Enemy has aggroed onto the player!");
