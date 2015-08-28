@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy1Script : MonoBehaviour {
 
-	public static float aggro = (float) 0.5;
+	private float aggro = (float) 1;
 
 
 	// Use this for initialization
@@ -15,13 +15,20 @@ public class Enemy1Script : MonoBehaviour {
 	void Update () {
 	
 	}
-	/*void OnTriggerEnter2D () {
+	void OnTriggerEnter2D () {
 		//PlayerController.instance.IncrementCounter ();
 		//Destroy (this.gameObject);
-		print ("Enemy has vision of player");
-	}*/
+		//print ("Enemy has vision of player");
+	}
 
-	public static float getAggro(){
-		return aggro;
+	void OnTriggerStay2D (Collider2D other){
+		print (other.tag);
+		if (other.tag == "Player") {
+			if(PlayerController.checkAggro (this.aggro, this.gameObject)){
+				print ("Enemy has aggroed onto the player!");
+			} else {
+				print ("no aggro.... yet");
+			}
+		}
 	}
 }
