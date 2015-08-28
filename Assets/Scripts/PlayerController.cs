@@ -25,12 +25,18 @@ public class PlayerController : MonoBehaviour {
 
 		if (horizontal > 0) {
 			this.animator.SetInteger ("Direction", 3);
+			this.animator.SetBool ("Idle", false);
 		} else if (horizontal < 0) {
 			this.animator.SetInteger ("Direction", 1);
+			this.animator.SetBool ("Idle", false);
 		} else if (vertical > 0) {
 			this.animator.SetInteger ("Direction", 2);
+			this.animator.SetBool ("Idle", false);
 		} else if (vertical < 0) {
 			this.animator.SetInteger ("Direction", 0);
+			this.animator.SetBool ("Idle", false);
+		} else {
+			this.animator.SetBool ("Idle", true);
 		}
 
 		print (this.animator.GetInteger ("Direction"));
