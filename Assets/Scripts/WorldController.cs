@@ -33,7 +33,7 @@ public class WorldController : MonoBehaviour {
 
 	// TODO: make better
 	private bool cameraLock = false;
-
+	
 	private float roomWidth;
 	private float roomHeight;
 
@@ -68,41 +68,28 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!this.cameraLock) {
-			this.TrackPlayer ();
-			this.CheckForRoomChange ();
-		}
+		this.TrackPlayer ();
+		this.CheckForRoomChange ();
 	}
 
 	void TrackPlayer () {
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 
-		float cameraX = this.camera.transform.position.x;
-		float cameraY = this.camera.transform.position.y;
-
-		float horizontalCameraPadding = this.roomWidth - this.camera.getWidth ();
-		float verticalCameraPadding = this.roomHeight - this.camera.getHeight ();
-
-		print (this.roomX + " " + this.roomY);
 		GameObject targetRoom = this.rooms [this.roomX, this.roomY];
 
-		float inRoomX = playerX + targetRoom.transform.position.x;
-		float inRoomY = playerY + targetRoom.transform.position.y;
+		float inRoomX = playerX - targetRoom.transform.position.x;
+		float inRoomY = playerY - targetRoom.transform.position.y;
 
 		// make camera track player
 
-		float newCameraX = cameraX;
-		float newCameraY = cameraY;
+		float newCameraX = playerX;
+		float newCameraY = playerY;
 
 		// only move camera to match player if the camera isn't at room edges
-		if (this.WithinPadding (inRoomX, horizontalCameraPadding)) {
-			newCameraX = playerX;
-		}
 
-		if (this.WithinPadding (inRoomY, verticalCameraPadding)) {
-			newCameraY = playerY;
-		}
+		newCameraX = targetRoom.transform.position.x + this.Restrain (inRoomX, this.camera.getWidth (), this.roomWidth);
+		newCameraY = targetRoom.transform.position.y + this.Restrain (inRoomY, this.camera.getHeight (), this.roomHeight);
 
 		this.camera.transform.position = new Vector3 (newCameraX,
 		                                              newCameraY,
@@ -139,6 +126,10 @@ public class WorldController : MonoBehaviour {
 		this.roomX += x;
 		this.roomY += y;
 
+		// TODO: get rid of ChangeRoom, just change roomX and roomY, then make
+		// TrackPlayer use roomX and roomY to adjust the camera so it's not out-of-bounds
+		// after setting it equal to the player
+
 		this.player.transform.Translate (new Vector2 (this.playerWidth * x * 1.1f, this.playerHeight * y * 1.1f));
 
 		Vector2 targetTranslation = new Vector2(this.camera.getWidth () * x, this.camera.getHeight () * y);
@@ -146,7 +137,18 @@ public class WorldController : MonoBehaviour {
 		//this.player.transform.position = new Vector2 (0, 0);
 	}
 
-	bool WithinPadding (float coordinate, float padding) {
-		return coordinate <= padding - (padding / 2) && coordinate >= -padding / 2;
+	bool WithinOffset (float coordinate, float offset) {
+		return coordinate <= offset - (offset / 2) && coordinate >= -offset / 2;
+	}
+
+	float Restrain (float coordinate, float cameraWidth, float roomWidth)
+	{
+		if (coordinate + cameraWidth / 2 > roomWidth / 2) {
+			return roomWidth / 2 - cameraWidth / 2;
+		} else if (coordinate - cameraWidth / 2 < -roomWidth / 2) {
+			return -roomWidth / 2 + cameraWidth / 2;
+		}
+
+		return coordinate;
 	}
 }
