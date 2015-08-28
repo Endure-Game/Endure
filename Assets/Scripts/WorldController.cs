@@ -80,13 +80,11 @@ public class WorldController : MonoBehaviour {
 			float playerX = this.player.transform.position.x;
 			float playerY = this.player.transform.position.y;
 
-			GameObject targetRoom = this.rooms [this.roomX, this.roomY];
+			float inRoomX = playerX - this.currentRoom ().transform.position.x;
+			float inRoomY = playerY - this.currentRoom ().transform.position.y;
 
-			float inRoomX = playerX - targetRoom.transform.position.x;
-			float inRoomY = playerY - targetRoom.transform.position.y;
-
-			this.TrackPlayer (playerX, playerY, targetRoom, inRoomX, inRoomY);
-			this.CheckForRoomChange (playerX, playerY, targetRoom, inRoomX, inRoomY);
+			this.TrackPlayer (playerX, playerY, inRoomX, inRoomY);
+			this.CheckForRoomChange (playerX, playerY, inRoomX, inRoomY);
 		} else {
 			this.animationTime += Time.deltaTime;
 			if (this.animationTime > this.transitionDuration) {
@@ -99,52 +97,52 @@ public class WorldController : MonoBehaviour {
 		}
 	}
 
-	void TrackPlayer (float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY) {
-		this.camera.transform.position = this.CameraPosition(playerX, playerY, targetRoom, inRoomX, inRoomY);
+	void TrackPlayer (float playerX, float playerY, float inRoomX, float inRoomY) {
+		this.camera.transform.position = this.CameraPosition(playerX, playerY, inRoomX, inRoomY);
 	}
 
-	Vector3 CameraPosition (float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY)
+	Vector3 CameraPosition (float playerX, float playerY, float inRoomX, float inRoomY)
 	{
 		float newCameraX = playerX;
 		float newCameraY = playerY;
 
 		// only move camera to match player if the camera isn't at room edges
 
-		newCameraX = targetRoom.transform.position.x + this.Restrain (inRoomX, this.camera.getWidth (), this.roomWidth);
-		newCameraY = targetRoom.transform.position.y + this.Restrain (inRoomY, this.camera.getHeight (), this.roomHeight);
+		newCameraX = this.currentRoom ().transform.position.x + this.Restrain (inRoomX, this.camera.getWidth (), this.roomWidth);
+		newCameraY = this.currentRoom ().transform.position.y + this.Restrain (inRoomY, this.camera.getHeight (), this.roomHeight);
 
 		return new Vector3 (newCameraX, newCameraY, this.camera.transform.position.z);
 	}
 
-	void CheckForRoomChange (float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY) {
+	void CheckForRoomChange (float playerX, float playerY, float inRoomX, float inRoomY) {
 		this.playerWidth = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.x * this.player.transform.localScale.x;
 		this.playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
 
 		// detect when player hits boundary
 		if (this.roomWidth / 2 - inRoomX <= this.playerWidth / 2) {
 			// east
-			this.AnimateCamera(1, 0, playerX, playerY, targetRoom, inRoomX, inRoomY);
+			this.AnimateCamera(1, 0, playerX, playerY, inRoomX, inRoomY);
 			this.player.transform.Translate (playerWidth * 1.5f, 0, 0);
 		} else if (this.roomWidth / 2 + inRoomX <= this.playerWidth / 2) {
 			// west
-			this.AnimateCamera(-1, 0, playerX, playerY, targetRoom, inRoomX, inRoomY);
+			this.AnimateCamera(-1, 0, playerX, playerY, inRoomX, inRoomY);
 			this.player.transform.Translate (-playerWidth * 1.5f, 0, 0);
 		} else if (this.roomHeight / 2 - inRoomY <= this.playerHeight / 2) {
 			// north
-			this.AnimateCamera(0, 1, playerX, playerY, targetRoom, inRoomX, inRoomY);
+			this.AnimateCamera(0, 1, playerX, playerY, inRoomX, inRoomY);
 			this.player.transform.Translate (0, playerWidth * 1.5f, 0);
 		} else if (this.roomHeight / 2 + inRoomY <= this.playerHeight / 2) {
 			// south
-			this.AnimateCamera(0, -1, playerX, playerY, targetRoom, inRoomX, inRoomY);
+			this.AnimateCamera(0, -1, playerX, playerY, inRoomX, inRoomY);
 			this.player.transform.Translate (0, -playerWidth * 1.5f, 0);
 		}
 	}
 
-	void AnimateCamera (int x, int y, float playerX, float playerY, GameObject targetRoom, float inRoomX, float inRoomY) {
+	void AnimateCamera (int x, int y, float playerX, float playerY, float inRoomX, float inRoomY) {
 		this.oldPosition = this.camera.transform.position;
 		this.roomX += x;
 		this.roomY += y;
-		this.newPosition = this.CameraPosition (playerX, playerY, this.rooms [this.roomX, this.roomY], inRoomX, inRoomY);
+		this.newPosition = this.CameraPosition (playerX, playerY, inRoomX, inRoomY);
 
 		this.animationTime = 0;
 		this.animating = true;
@@ -163,5 +161,9 @@ public class WorldController : MonoBehaviour {
 		}
 
 		return coordinate;
+	}
+
+	GameObject currentRoom () {
+		return this.rooms [this.roomX, this.roomY];
 	}
 }
