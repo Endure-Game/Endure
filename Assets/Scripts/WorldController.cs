@@ -5,9 +5,14 @@ public class WorldController : MonoBehaviour {
 
 	public static WorldController instance = null;
 	public int size = 3;
+
+	// TODO: the RoomManager should probably hold this
 	public GameObject[] rooms;
 
 	private RoomManager roomScript;
+
+	public GameObject[] roomTypes;
+
 	private PlayerController player;
 	private CameraController camera;
 
@@ -32,6 +37,13 @@ public class WorldController : MonoBehaviour {
 	private float roomWidth;
 	private float roomHeight;
 
+	private float playerWidth;
+	private float playerHeight;
+
+	private GameObject[,] rooms;
+	private int roomX = 0;
+	private int roomY = 0;
+
 	// Use this for initialization
 	void Start () {
 		this.player = PlayerController.instance;
@@ -50,6 +62,8 @@ public class WorldController : MonoBehaviour {
 		this.roomWidth = 32;
 		this.roomHeight = 32;
 
+		// TODO: view note about this.rooms at top
+		this.rooms = new GameObject[this.size, this.size];
 	}
 	
 	// Update is called once per frame
@@ -70,17 +84,23 @@ public class WorldController : MonoBehaviour {
 		float horizontalCameraPadding = this.roomWidth - this.camera.getWidth ();
 		float verticalCameraPadding = this.roomHeight - this.camera.getHeight ();
 
+		print (this.roomX + " " + this.roomY);
+		GameObject targetRoom = this.rooms [this.roomX, this.roomY];
+
+		float inRoomX = playerX + targetRoom.transform.position.x;
+		float inRoomY = playerY + targetRoom.transform.position.y;
+
 		// make camera track player
 
 		float newCameraX = cameraX;
 		float newCameraY = cameraY;
 
 		// only move camera to match player if the camera isn't at room edges
-		if (this.WithinPadding (playerX, horizontalCameraPadding)) {
+		if (this.WithinPadding (inRoomX, horizontalCameraPadding)) {
 			newCameraX = playerX;
 		}
 
-		if (this.WithinPadding (playerY, verticalCameraPadding)) {
+		if (this.WithinPadding (inRoomY, verticalCameraPadding)) {
 			newCameraY = playerY;
 		}
 
@@ -93,31 +113,37 @@ public class WorldController : MonoBehaviour {
 		float playerX = this.player.transform.position.x;
 		float playerY = this.player.transform.position.y;
 
-		float playerWidth = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.x * this.player.transform.localScale.x;
-		float playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
+		GameObject targetRoom = this.rooms [this.roomX, this.roomY];
+
+		this.playerWidth = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.x * this.player.transform.localScale.x;
+		this.playerHeight = this.player.GetComponent<SpriteRenderer>().sprite.bounds.size.y * this.player.transform.localScale.y;
 
 		// detect when player hits boundary
-		if (this.roomWidth / 2 - playerX < playerWidth / 2) {
+		if (this.roomWidth / 2 + targetRoom.transform.position.x - playerX < this.playerWidth / 2) {
 			// east
-			this.ChangeRoom (new Vector2 (1, 0));
-		} else if (this.roomWidth / 2 + playerX < playerWidth / 2) {
+			this.ChangeRoom (1, 0);
+		} else if (this.roomWidth / 2 + targetRoom.transform.position.x + playerX < this.playerWidth / 2) {
 			// west
-			this.ChangeRoom (new Vector2 (-1, 0));
-		} else if (this.roomHeight / 2 - playerY < playerHeight / 2) {
+			this.ChangeRoom (-1, 0);
+		} else if (this.roomHeight / 2 + targetRoom.transform.position.y - playerY < this.playerHeight / 2) {
 			// north
-			this.ChangeRoom (new Vector2 (0, 1));
-		} else if (this.roomHeight / 2 + playerY < playerHeight / 2) {
+			this.ChangeRoom (0, 1);
+		} else if (this.roomHeight / 2 + targetRoom.transform.position.y + playerY < this.playerHeight / 2) {
 			// south
-			this.ChangeRoom (new Vector2 (0, -1));
+			this.ChangeRoom (0, -1);
 		}
 	}
 
-	void ChangeRoom (Vector2 direction)
+	void ChangeRoom (int x, int y)
 	{
-		this.cameraLock = true;
-		Vector2 targetTranslation = Vector2.Scale (new Vector2(this.camera.getWidth (), this.camera.getHeight()), direction);
+		this.roomX += x;
+		this.roomY += y;
+
+		this.player.transform.Translate (new Vector2 (this.playerWidth * x * 1.1f, this.playerHeight * y * 1.1f));
+
+		Vector2 targetTranslation = new Vector2(this.camera.getWidth () * x, this.camera.getHeight () * y);
 		this.camera.transform.Translate (targetTranslation);
-		this.player.transform.position = new Vector2 (0, 0);
+		//this.player.transform.position = new Vector2 (0, 0);
 	}
 
 	bool WithinPadding (float coordinate, float padding) {
