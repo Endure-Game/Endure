@@ -16,12 +16,12 @@ public class ItemController : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D (Collider2D other) {
+	void OnCollisionEnter2D (Collision2D newOther) {
+		Collider2D other = newOther.collider;
+		print ("Is touching");
 		if (other.tag == "Player") {
-			if(PlayerController.checkAggro (this.aggro, this.gameObject)){
-				PlayerController.instance.IncrementCounter ();
-				Destroy (this.gameObject);
-			}
+			PlayerController.instance.IncrementCounter ();
+			Destroy (this.gameObject);
 		}
 		//PlayerController.instance.IncrementCounter ();
 		//Destroy (this.gameObject);
