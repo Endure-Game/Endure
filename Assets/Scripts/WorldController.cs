@@ -3,23 +3,42 @@ using System.Collections;
 
 public class WorldController : MonoBehaviour {
 
+	public static WorldController instance = null;
 	public int size = 3;
 	public GameObject[] rooms;
+
+	private RoomManager roomScript;
 	private PlayerController player;
 	private CameraController camera;
+
+	void Awake () {
+//		if (instance == null) {
+//			instance = this;
+//		} else if (instance != this) {
+//			Destroy(gameObject);
+//			DontDestroyOnLoad(gameObject);
+			roomScript = GetComponent<RoomManager>();
+			InitGame();
+//		}
+	}
+
+	void InitGame () {
+		roomScript.SetupRoom ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		this.player = PlayerController.instance;
 		this.camera = CameraController.instance;
 
-		GameObject nextRoom = rooms[0];
-		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-		float scale = (float) nextRoom.transform.localScale.x;		
-		for (int i = 0; i < this.size; i++) {
-			for (int j = 0; j < this.size; j++){
-				Instantiate (rooms[0], new Vector3(i*width*scale, j*width*scale, 0), Quaternion.identity);
-			}
-		}
+//		GameObject nextRoom = rooms[0];
+//		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+//		float scale = (float) nextRoom.transform.localScale.x;		
+//		for (int i = 0; i < this.size; i++) {
+//			for (int j = 0; j < this.size; j++){
+//				Instantiate (rooms[0], new Vector3(i*width*scale, j*width*scale, 0), Quaternion.identity);
+//			}
+//		}
 	}
 	
 	// Update is called once per frame
@@ -34,6 +53,7 @@ public class WorldController : MonoBehaviour {
 		GameObject nextRoom = rooms[0];
 		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 		float scale = (float) nextRoom.transform.localScale.x;		
+		
 
 		//print (this.camera.getWidth ());
 		//print (this.camera.getHeight ());
