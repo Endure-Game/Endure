@@ -88,13 +88,22 @@ public class WorldController : MonoBehaviour {
 		// detect when player hits boundary
 		if (scaledWidth / 2 - playerX < playerWidth / 2) {
 			// east
+			this.ChangeRoom(new Vector2(-1, 0));
 		} else if (scaledWidth / 2 + playerX < playerWidth / 2) {
 			// west
+			this.ChangeRoom(new Vector2(1, 0));
 		} else if (scaledHeight / 2 - playerY < playerHeight / 2) {
 			// north
+			this.ChangeRoom(new Vector2(0, 1));
 		} else if (scaledHeight / 2 + playerY < playerHeight / 2) {
 			// south
+			this.ChangeRoom(new Vector2(0, -1));
 		}
 	}
 
+	void ChangeRoom (Vector2 direction)
+	{
+		this.camera.transform.Translate (0.1f * direction);
+		this.player.transform.position = new Vector2 (0, 0);
+	}
 }
