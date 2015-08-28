@@ -45,7 +45,7 @@ public class WorldController : MonoBehaviour {
 //				Instantiate (rooms[0], new Vector3(i*width*scale, j*width*scale, 0), Quaternion.identity);
 //			}
 //		}
-
+		
 		// TODO: actually calculate this
 		this.roomWidth = 32;
 		this.roomHeight = 32;
@@ -99,10 +99,10 @@ public class WorldController : MonoBehaviour {
 		// detect when player hits boundary
 		if (this.roomWidth / 2 - playerX < playerWidth / 2) {
 			// east
-			this.ChangeRoom (new Vector2 (-1, 0));
+			this.ChangeRoom (new Vector2 (1, 0));
 		} else if (this.roomWidth / 2 + playerX < playerWidth / 2) {
 			// west
-			this.ChangeRoom (new Vector2 (1, 0));
+			this.ChangeRoom (new Vector2 (-1, 0));
 		} else if (this.roomHeight / 2 - playerY < playerHeight / 2) {
 			// north
 			this.ChangeRoom (new Vector2 (0, 1));
@@ -115,7 +115,8 @@ public class WorldController : MonoBehaviour {
 	void ChangeRoom (Vector2 direction)
 	{
 		this.cameraLock = true;
-		this.camera.transform.Translate (this.roomHeight * direction);
+		Vector2 targetTranslation = Vector2.Scale (new Vector2(this.camera.getWidth (), this.camera.getHeight()), direction);
+		this.camera.transform.Translate (targetTranslation);
 		this.player.transform.position = new Vector2 (0, 0);
 	}
 
