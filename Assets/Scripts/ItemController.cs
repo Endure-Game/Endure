@@ -4,6 +4,8 @@ using System.Collections;
 public class ItemController : MonoBehaviour {
 
 	// Use this for initialization
+	private float aggro = (float) 0.18;
+
 
 	void Start () {
 	
@@ -14,8 +16,14 @@ public class ItemController : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D () {
-		PlayerController.instance.IncrementCounter ();
-		Destroy (this.gameObject);
+	void OnCollisionEnter2D (Collision2D newOther) {
+		Collider2D other = newOther.collider;
+		print ("Is touching");
+		if (other.tag == "Player") {
+			PlayerController.instance.IncrementCounter ();
+			Destroy (this.gameObject);
+		}
+		//PlayerController.instance.IncrementCounter ();
+		//Destroy (this.gameObject);
 	}
 }
