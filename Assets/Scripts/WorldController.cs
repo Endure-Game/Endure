@@ -94,20 +94,23 @@ public class WorldController : MonoBehaviour {
 		// detect when player hits boundary
 		if (this.roomWidth / 2 - inRoomX <= this.playerWidth / 2) {
 			// east
-			this.AnimateCamera(1, 0, inRoomX, inRoomY);
+			this.AnimateCamera(1, 0);
 		} else if (this.roomWidth / 2 + inRoomX <= this.playerWidth / 2) {
 			// west
-			this.AnimateCamera(-1, 0, inRoomX, inRoomY);
+			this.AnimateCamera(-1, 0);
 		} else if (this.roomHeight / 2 - inRoomY <= this.playerHeight / 2) {
 			// north
-			this.AnimateCamera(0, 1, inRoomX, inRoomY);
+			this.AnimateCamera(0, 1);
 		} else if (this.roomHeight / 2 + inRoomY <= this.playerHeight / 2) {
 			// south
-			this.AnimateCamera(0, -1, inRoomX, inRoomY);
+			this.AnimateCamera(0, -1);
 		}
 	}
 
-	void AnimateCamera (int x, int y, float inRoomX, float inRoomY) {
+	void AnimateCamera (int x, int y) {
+		float inRoomX = PlayerX () - this.CurrentRoom ().transform.position.x;
+		float inRoomY = PlayerY () - this.CurrentRoom ().transform.position.y;
+
 		this.oldPlayerPosition = this.player.transform.position;
 
 		Vector3 distance = new Vector3 (playerWidth * 1.5f, playerWidth * 1.5f, 1);
@@ -116,7 +119,7 @@ public class WorldController : MonoBehaviour {
 		this.oldCameraPosition = this.camera.transform.position;
 		this.roomX += x;
 		this.roomY += y;
-		this.newCameraPosition = this.CameraPosition (this.player.transform.position.x, this.player.transform.position.y);
+		this.newCameraPosition = this.CameraPosition (this.newPlayerPosition.x, this.newPlayerPosition.y);
 
 		this.animationTime = 0;
 		this.animating = true;
