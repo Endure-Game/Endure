@@ -28,12 +28,25 @@ public class RoomManager : MonoBehaviour {
 
 	private GameObject[,] rooms;
 
-	List<Vector3> InitializeList () {
+	List<Vector3> InitializeList (float gridX, float gridY) {
+		// TODO: duplicated in RoomSetup, refactor
+		float centerX = gridX * this.columns;
+		float centerY = gridY * this.rows;
+
 		List<Vector3> gridPositions = new List<Vector3> ();
 		gridPositions.Clear ();
 		for (int x = 1; x < columns - 1; x ++) {
-			for(int y = 1; y < rows - 1; y ++){
-				gridPositions.Add(new Vector3 (x, y, 0f));
+			for (int y = 1; y < rows - 1; y ++) {
+				float width = this.columns;
+				float height = this.rows;
+
+				float tileWidth = 1;
+				float tileHeight = 1;
+
+				float tileX = x + tileWidth / 2 - width / 2 + centerX;
+				float tileY = y + tileHeight / 2 - height / 2 + centerY;
+
+				gridPositions.Add(new Vector3 (tileX, tileY, 0f));
 			}
 		}
 
@@ -58,6 +71,7 @@ public class RoomManager : MonoBehaviour {
 				float width = this.columns;
 				float height = this.rows;
 
+				// TODO: probably don't hardcode, but definitely don't duplicate this in InitializeList
 				float tileWidth = 1;
 				float tileHeight = 1;
 
@@ -93,7 +107,7 @@ public class RoomManager : MonoBehaviour {
 	public void SetupRoom () {
 		this.rooms = new GameObject[1, 1];
 		this.rooms[0, 0] = RoomSetup (0, 0);
-		List<Vector3> gridPositions = InitializeList ();
+		List<Vector3> gridPositions = InitializeList (0, 0);
 
 		//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
 		//we do have an item though so...
