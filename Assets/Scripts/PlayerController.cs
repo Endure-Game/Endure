@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 4;
 	public static PlayerController instance;
-
-
+	public int health = 10;
+	
 	private int counter = 0;
 	private Rigidbody2D rb2d;
 	private Animator animator;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 		CircleCollider2D myCollider = transform.GetComponent <CircleCollider2D>();
 		this.playerRadius = myCollider.radius;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		float horizontal = Input.GetAxisRaw ("Horizontal");
@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
 		if(magnitude == 0){
 			magnitude = 1;
 		}
+
+
 
 		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
 
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			this.animator.SetBool ("Idle", true);
 		}
+
 	}
 	//called before start
 	void Awake () {
