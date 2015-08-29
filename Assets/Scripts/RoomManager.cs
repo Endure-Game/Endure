@@ -26,22 +26,22 @@ public class RoomManager : MonoBehaviour {
 	public GameObject[] coins;
 	public GameObject[] blocks;
 
-	private List <Vector3> gridPositions = new List<Vector3> ();
-
 	private GameObject[,] rooms;
 
-	void InitializeList () {
+	List<Vector3> InitializeList () {
+		List<Vector3> gridPositions = new List<Vector3> ();
 		gridPositions.Clear ();
 		for (int x = 1; x < columns - 1; x ++) {
 			for(int y = 1; y < rows - 1; y ++){
 				gridPositions.Add(new Vector3 (x, y, 0f));
 			}
 		}
+
+		return gridPositions;
 	}
 
-	void RoomSetup () {
+	GameObject RoomSetup () {
 		GameObject room = new GameObject ("Room");
-		this.rooms [0, 0] = room;
 		Transform roomHolder = room.transform;
 
 		for (int x = 0; x < columns; x ++) {
@@ -62,20 +62,22 @@ public class RoomManager : MonoBehaviour {
 				instance.transform.SetParent (roomHolder);
 			}
 		}
+
+		return room;
 	}
 
-	Vector3 RandomPosition () {
+	Vector3 RandomPosition (List <Vector3> gridPositions) {
 		int randomIndex = Random.Range (0, gridPositions.Count);
 		Vector3 randomPosition = gridPositions [randomIndex];
 		gridPositions.RemoveAt (randomIndex);
 		return randomPosition;
 	}
 
-	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
+	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum, List<Vector3> gridPositions) {
 		int objectCount = Random.Range (minimum, maximum + 1);
 
 		for (int i = 0; i < objectCount; i++) {
-			Vector3 randomPosition = RandomPosition();
+			Vector3 randomPosition = RandomPosition(gridPositions);
 			GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
 			Instantiate(tileChoice, randomPosition, Quaternion.identity);
 		}
@@ -84,14 +86,14 @@ public class RoomManager : MonoBehaviour {
 
 	public void SetupRoom () {
 		this.rooms = new GameObject[1, 1];
-		RoomSetup ();
-		InitializeList ();
+		this.rooms[0, 0] = RoomSetup ();
+		List<Vector3> gridPositions = InitializeList ();
 
 		//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
 		//we do have an item though so...
 
-		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
-		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
+		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum, gridPositions);
+		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum, gridPositions);
 
 	}
 
