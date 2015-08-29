@@ -40,12 +40,15 @@ public class RoomManager : MonoBehaviour {
 		return gridPositions;
 	}
 
-	GameObject RoomSetup () {
+	GameObject RoomSetup (float gridX, float gridY) {
 		GameObject room = new GameObject ("Room");
 		Transform roomHolder = room.transform;
 
 		for (int x = 0; x < columns; x ++) {
 			for(int y = 0; y < rows; y ++){
+				float centerX = gridX * this.columns;
+				float centerY = gridY * this.rows;
+
 				GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
 
 				if ((x == 0 || x == columns - 1 || y == 0 || y == rows - 1) && x != 15 && y != 15) {
@@ -58,7 +61,10 @@ public class RoomManager : MonoBehaviour {
 				float tileWidth = 1;
 				float tileHeight = 1;
 
-				GameObject instance = Instantiate (toInstantiate, new Vector3(x + tileWidth / 2 - width / 2, y + tileHeight / 2 - height / 2, 0f),Quaternion.identity) as GameObject;
+				float tileX = x + tileWidth / 2 - width / 2 + centerX;
+				float tileY = y + tileHeight / 2 - height / 2 + centerY;
+
+				GameObject instance = Instantiate (toInstantiate, new Vector3(tileX, tileY, 0f),Quaternion.identity) as GameObject;
 				instance.transform.SetParent (roomHolder);
 			}
 		}
@@ -86,7 +92,7 @@ public class RoomManager : MonoBehaviour {
 
 	public void SetupRoom () {
 		this.rooms = new GameObject[1, 1];
-		this.rooms[0, 0] = RoomSetup ();
+		this.rooms[0, 0] = RoomSetup (0, 0);
 		List<Vector3> gridPositions = InitializeList ();
 
 		//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
