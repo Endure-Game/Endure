@@ -6,12 +6,7 @@ public class WorldController : MonoBehaviour {
 	public static WorldController instance = null;
 	public int size = 3;
 
-	// TODO: the RoomManager should probably hold this
-	public GameObject[] rooms;
-
 	private RoomManager roomScript;
-
-	public GameObject[] roomTypes;
 
 	private PlayerController player;
 	private CameraController camera;
@@ -40,7 +35,6 @@ public class WorldController : MonoBehaviour {
 	private float playerWidth;
 	private float playerHeight;
 
-	private GameObject[,] rooms;
 	private int roomX = 0;
 	private int roomY = 0;
 
@@ -58,22 +52,10 @@ public class WorldController : MonoBehaviour {
 	void Start () {
 		this.player = PlayerController.instance;
 		this.camera = CameraController.instance;
-
-//		GameObject nextRoom = rooms[0];
-//		float width = nextRoom.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-//		float scale = (float) nextRoom.transform.localScale.x;		
-//		for (int i = 0; i < this.size; i++) {
-//			for (int j = 0; j < this.size; j++){
-//				Instantiate (rooms[0], new Vector3(i*width*scale, j*width*scale, 0), Quaternion.identity);
-//			}
-//		}
 		
 		// TODO: actually calculate this
 		this.roomWidth = 32;
 		this.roomHeight = 32;
-
-		// TODO: view note about this.rooms at top
-		this.rooms = new GameObject[this.size, this.size];
 	}
 	
 	// Update is called once per frame
@@ -173,7 +155,7 @@ public class WorldController : MonoBehaviour {
 	}
 
 	GameObject CurrentRoom () {
-		return this.rooms [this.roomX, this.roomY];
+		return this.roomScript.GetRoom(this.roomX, this.roomY);
 	}
 
 	float PlayerX ()

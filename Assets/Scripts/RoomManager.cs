@@ -26,8 +26,9 @@ public class RoomManager : MonoBehaviour {
 	public GameObject[] coins;
 	public GameObject[] blocks;
 
-	private Transform roomHolder;
 	private List <Vector3> gridPositions = new List<Vector3> ();
+
+	private GameObject[,] rooms;
 
 	void InitializeList () {
 		gridPositions.Clear ();
@@ -39,7 +40,9 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	void RoomSetup () {
-		roomHolder = new GameObject ("Room").transform;
+		GameObject room = new GameObject ("Room");
+		this.rooms [0, 0] = room;
+		Transform roomHolder = room.transform;
 
 		for (int x = -1; x <= columns; x ++) {
 			for(int y = -1; y <= rows; y ++){
@@ -74,6 +77,7 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	public void SetupRoom () {
+		this.rooms = new GameObject[1, 1];
 		RoomSetup ();
 		InitializeList ();
 
@@ -83,6 +87,11 @@ public class RoomManager : MonoBehaviour {
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
 
+	}
+
+	public GameObject GetRoom (int x, int y)
+	{
+		return this.rooms [x, y];
 	}
 	
 }
