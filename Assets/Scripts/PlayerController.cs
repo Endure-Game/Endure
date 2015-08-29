@@ -5,12 +5,15 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 4;
 	public static PlayerController instance;
-	
+	public GameObject[] inventory;
+	public GameObject[] upgrades;
+	public int ammo = 0;
+
 	private int counter = 0;
 	private Rigidbody2D rb2d;
 	private Animator animator;
 	private float playerRadius;
-	
+
 	// Use this for initialization
 	void Start () {
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
