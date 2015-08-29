@@ -25,9 +25,6 @@ public class WorldController : MonoBehaviour {
 	void InitGame () {
 		roomScript.SetupRoom ();
 	}
-
-	// TODO: make better
-	private bool cameraLock = false;
 	
 	private float roomWidth;
 	private float roomHeight;
@@ -52,10 +49,9 @@ public class WorldController : MonoBehaviour {
 	void Start () {
 		this.player = PlayerController.instance;
 		this.camera = CameraController.instance;
-		
-		// TODO: actually calculate this
-		this.roomWidth = 32;
-		this.roomHeight = 32;
+
+		this.roomWidth = this.roomScript.columns;
+		this.roomHeight = this.roomScript.rows;
 	}
 	
 	// Update is called once per frame

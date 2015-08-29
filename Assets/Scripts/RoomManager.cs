@@ -22,7 +22,7 @@ public class RoomManager : MonoBehaviour {
 	public Count blockingCount = new Count (5, 20);
 	public GameObject[] floorTiles;
 	public GameObject[] outerWallTiles;
-	//need game objects for collectible items obsticals etc
+	//need game objects for collectible items obstacles etc
 	public GameObject[] coins;
 	public GameObject[] blocks;
 
@@ -44,15 +44,21 @@ public class RoomManager : MonoBehaviour {
 		this.rooms [0, 0] = room;
 		Transform roomHolder = room.transform;
 
-		for (int x = -1; x <= columns; x ++) {
-			for(int y = -1; y <= rows; y ++){
+		for (int x = 0; x < columns; x ++) {
+			for(int y = 0; y < rows; y ++){
 				GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
 
-				if( x == -1 || x == columns || y == -1 || y == rows){
+				if ((x == 0 || x == columns - 1 || y == 0 || y == rows - 1) && x != 15 && y != 15) {
 					toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
 				}
 
-				GameObject instance = Instantiate (toInstantiate, new Vector3(x, y, 0f),Quaternion.identity) as GameObject;
+				float width = this.columns;
+				float height = this.rows;
+
+				float tileWidth = 1;
+				float tileHeight = 1;
+
+				GameObject instance = Instantiate (toInstantiate, new Vector3(x + tileWidth / 2 - width / 2, y + tileHeight / 2 - height / 2, 0f),Quaternion.identity) as GameObject;
 				instance.transform.SetParent (roomHolder);
 			}
 		}
