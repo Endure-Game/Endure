@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ItemController : MonoBehaviour {
-
-	public string name;
+public class Healing : MonoBehaviour {
 
 	// Use this for initialization
-	private float aggro = (float) 0.18;
-
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+	
 	}
 
 	void OnCollisionEnter2D (Collision2D newOther) {
@@ -24,7 +20,5 @@ public class ItemController : MonoBehaviour {
 			PlayerController.instance.IncrementCounter ();
 			Destroy (this.gameObject);
 		}
-		//PlayerController.instance.IncrementCounter ();
-		//Destroy (this.gameObject);
 	}
 }
