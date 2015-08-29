@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
-		print (this.speed * (playerSpeed/magnitude));
 
 		if (horizontal > 0) {
 			this.animator.SetInteger ("Direction", 3);
