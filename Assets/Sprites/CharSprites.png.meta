@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9f614e2e198064749a17757e54086d40
-timeCreated: 1440713573
+timeCreated: 1440714545
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -253,7 +253,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: CharSprites_11
       rect:
@@ -833,7 +833,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: CharSprites_69
       rect:
