@@ -57,11 +57,13 @@ public class RoomManager : MonoBehaviour {
 		GameObject room = new GameObject ("Room");
 		Transform roomHolder = room.transform;
 
+		float centerX = gridX * this.columns;
+		float centerY = gridY * this.rows;
+
+		room.transform.position = new Vector3 (centerX, centerY, room.transform.position.z);
+		
 		for (int x = 0; x < columns; x ++) {
 			for(int y = 0; y < rows; y ++){
-				float centerX = gridX * this.columns;
-				float centerY = gridY * this.rows;
-
 				GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
 
 				if ((x == 0 || x == columns - 1 || y == 0 || y == rows - 1) && x != 15 && y != 15) {
