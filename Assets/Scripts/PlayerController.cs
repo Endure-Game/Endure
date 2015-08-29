@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 4;
 	public static PlayerController instance;
-	public int health = 10;
 	
 	private int counter = 0;
 	private Rigidbody2D rb2d;
@@ -72,6 +71,12 @@ public class PlayerController : MonoBehaviour {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public Health Health {
+		get {
+			return this.GetComponent<Health> ();
 		}
 	}
 }
