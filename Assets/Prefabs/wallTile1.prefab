@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 442450}
   - 212: {fileID: 21224112}
-  - 61: {fileID: 6119592}
+  - 58: {fileID: 5869694}
   m_Layer: 0
   m_Name: wallTile1
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6119592
-BoxCollider2D:
+--- !u!58 &5869694
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -38,10 +38,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_UsedByEffector: 1
+  m_Offset: {x: -.0179999992, y: .0299999993}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Radius: .439999998
 --- !u!212 &21224112
 SpriteRenderer:
   m_ObjectHideFlags: 1
