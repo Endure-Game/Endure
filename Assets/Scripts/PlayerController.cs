@@ -24,15 +24,15 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		float horizontal = Input.GetAxisRaw ("Horizontal");
 		float vertical = Input.GetAxisRaw ("Vertical");
-//		this.transform.Translate (horizontal, vertical, 0);
+
 		Vector2 playerSpeed = new Vector2 (horizontal, vertical);
-		float magnitude = Vector2.SqrMagnitude (playerSpeed);
+		float magnitude = playerSpeed.magnitude;
 		if(magnitude == 0){
 			magnitude = 1;
 		}
-		//print ("mAGNITUDE" + magnitude);
 
 		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
+		print (this.speed * (playerSpeed/magnitude));
 
 		if (horizontal > 0) {
 			this.animator.SetInteger ("Direction", 3);
