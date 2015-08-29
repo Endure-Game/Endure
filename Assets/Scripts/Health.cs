@@ -26,5 +26,9 @@ public class Health : MonoBehaviour {
 		// TODO: add health change animation
 
 		this.currentHealth += delta;
+
+		if (this.currentHealth <= 0) {
+			Destroy (this.gameObject);
+		}
 	}
 }
