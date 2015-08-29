@@ -105,16 +105,21 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	public void SetupRoom () {
-		this.rooms = new GameObject[1, 1];
-		this.rooms[0, 0] = RoomSetup (0, 0);
-		List<Vector3> gridPositions = InitializeList (0, 0);
+		int roomSide = 3;
+		this.rooms = new GameObject[roomSide, roomSide];
 
-		//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
-		//we do have an item though so...
-
-		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum, gridPositions);
-		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum, gridPositions);
-
+		for (int i = 0; i < roomSide; i++) {
+			for (int j = 0; j < roomSide; j++) {
+				this.rooms [i, j] = RoomSetup (i, j);
+				List<Vector3> gridPositions = InitializeList (i, j);
+				
+				//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
+				//we do have an item though so...
+				
+				LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum, gridPositions);
+				LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum, gridPositions);
+			}
+		}
 	}
 
 	public GameObject GetRoom (int x, int y)
