@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bddd36ffb4285489ed7f340904dd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
-  moveSpeed: 2
+  duration: .5
+  moveSpeed: 4
   healthChange: 1
 --- !u!222 &22219944
 CanvasRenderer:
@@ -177,7 +177,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: duration
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136876}

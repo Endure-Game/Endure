@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class HealthAnimation : MonoBehaviour {
-	public float duration = 1;
-	public float moveSpeed = 2;
+	public float duration = 0.5f;
+	public float moveSpeed = 4;
 	public int healthChange = 1;
 
 	private float elapsed = 0;
