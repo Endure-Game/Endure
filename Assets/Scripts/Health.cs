@@ -15,4 +15,16 @@ public class Health : MonoBehaviour {
 	void Start () {
 		this.currentHealth = this.maxHealth;
 	}
+
+	public void ChangeHealth (int delta) {
+		if (this.currentHealth + delta < 0) {
+			delta = -this.currentHealth;
+		} else if (this.currentHealth + delta > this.maxHealth) {
+			delta = this.maxHealth - this.currentHealth;
+		}
+
+		// TODO: add health change animation
+
+		this.currentHealth += delta;
+	}
 }
