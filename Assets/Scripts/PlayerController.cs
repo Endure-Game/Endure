@@ -102,4 +102,12 @@ public class PlayerController : MonoBehaviour {
 			return this.GetComponent<Health> ();
 		}
 	}
+
+	public void AddWeaponOrTool (string name) {
+
+	}
+
+	public void AddUpgrade (string name) {
+
+	}
 }

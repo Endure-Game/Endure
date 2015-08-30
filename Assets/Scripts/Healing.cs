@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Healing : MonoBehaviour {
+
+	public int amount = 3;
+	public Func<int> Woooooo;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +21,9 @@ public class Healing : MonoBehaviour {
 		Collider2D other = newOther.collider;
 		print ("Is touching");
 		if (other.tag == "Player") {
+			PlayerController.instance.Health.ChangeHealth(this.amount);
 			Destroy (this.gameObject);
 		}
+
 	}
 }
