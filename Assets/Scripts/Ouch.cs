@@ -6,8 +6,11 @@ public class Ouch : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		BoxCollider2D collider = this.gameObject.AddComponent<BoxCollider2D> ();
-		collider.isTrigger = true;
+		BoxCollider2D collider = this.gameObject.GetComponent<BoxCollider2D> ();
+		if (collider == null) {
+			collider = this.gameObject.AddComponent<BoxCollider2D> ();
+			collider.isTrigger = true;
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {

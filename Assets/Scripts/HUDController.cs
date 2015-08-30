@@ -16,8 +16,6 @@ public class HUDController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		print(1f * this.playerHealth.CurrentHealth / this.playerHealth.maxHealth);
 		healthBar.transform.localScale = new Vector3(1f * this.playerHealth.CurrentHealth / this.playerHealth.maxHealth, 1f, 1f);
 	}
 }
