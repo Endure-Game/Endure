@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Enemy1AI : MonoBehaviour {
 
+	private PlayerController player;
 	// Use this for initialization
 	void Start () {
-	
+		this.player = PlayerController.instance;
 	}
 	
 	// Update is called once per frame
@@ -17,19 +18,23 @@ public class Enemy1AI : MonoBehaviour {
 	public void enemyActive (GameObject enemy, float speed){
 		print (speed);
 		print (enemy.transform.position.x);
+		Rigidbody2D rb2d = enemy.GetComponent<Rigidbody2D>();
 
-		float horizontal = Input.GetAxisRaw ("Horizontal");
-		float vertical = Input.GetAxisRaw ("Vertical");
+		//Vector2 playerSpeed = new Vector2 (1, 1);
+		Vector2 heading = player.transform.position - enemy.transform.position;
+		//float horizontal = 1;
+		//float vertical = -1;
 		
-		Vector2 playerSpeed = new Vector2 (horizontal, vertical);
-		float magnitude = playerSpeed.magnitude;
+		//Vector2 enemySpeed = new Vector2 (horizontal, vertical);
+		float magnitude = heading.magnitude;
 		if(magnitude == 0){
 			magnitude = 1;
 		}
 		
 		
+		rb2d.velocity = speed * (heading/magnitude);
 		
-		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
+		/*this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
 		
 		if (horizontal > 0) {
 			this.animator.SetInteger ("Direction", 3);
@@ -45,6 +50,6 @@ public class Enemy1AI : MonoBehaviour {
 			this.animator.SetBool ("Idle", false);
 		} else {
 			this.animator.SetBool ("Idle", true);
-		}
+		}*/
 	}
 }
