@@ -17,7 +17,6 @@ public class Healing : MonoBehaviour {
 		Collider2D other = newOther.collider;
 		print ("Is touching");
 		if (other.tag == "Player") {
-			PlayerController.instance.IncrementCounter ();
 			Destroy (this.gameObject);
 		}
 	}
