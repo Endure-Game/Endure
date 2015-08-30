@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 		// combat controls
 
 		// melee attack
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 			print ("heeey");
 			int direction = this.animator.GetInteger("Direction");
 
