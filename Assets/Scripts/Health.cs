@@ -17,7 +17,6 @@ public class Health : MonoBehaviour {
 	void Start () {
 		this.currentHealth = this.maxHealth;
 		this.healthChangeDisplay = Resources.Load ("HealthChange", typeof(GameObject)) as GameObject;
-		print (this.healthChangeDisplay);
 	}
 
 	public void ChangeHealth (int delta) {

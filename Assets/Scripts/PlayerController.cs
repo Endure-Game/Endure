@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		float horizontal = Input.GetAxisRaw ("Horizontal");
 		float vertical = Input.GetAxisRaw ("Vertical");
-		print (horizontal);
+
 		Vector2 playerSpeed = new Vector2 (horizontal, vertical);
 		float magnitude = playerSpeed.magnitude;
 		if(magnitude == 0){
@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour {
 
 		// melee attack
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			print ("heeey");
 			this.animator.SetTrigger("Sword");
 			int direction = this.animator.GetInteger("Direction");
 
