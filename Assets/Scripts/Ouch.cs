@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Ouch : MonoBehaviour {
 	public int damage = 3;
+	public float knockback = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,8 @@ public class Ouch : MonoBehaviour {
 			if (target != null) {
 				target.ChangeHealth (-damage);
 			}
+
+			collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 		}
 	}
 }
