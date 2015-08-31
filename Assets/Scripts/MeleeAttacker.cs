@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MeleeAttacker : MonoBehaviour {
 	public int damage = 3;
+	public float knockback = 0.5f;
 	public float range = 0.6f;
 	public float delay = 0.5f;
 
