@@ -4,6 +4,7 @@ using System.Collections;
 public class HUDController : MonoBehaviour {
 
 	public GameObject healthBar;
+	public GameObject maxHealthBar;
 	public GameObject inventory;
 	public GameObject map;
 
@@ -19,5 +20,6 @@ public class HUDController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthBar.transform.localScale = new Vector3(1f * this.playerHealth.CurrentHealth / this.startingMaxHealth, 1f, 1f);
+		maxHealthBar.transform.localScale = new Vector3(1f * this.playerHealth.maxHealth / this.startingMaxHealth, 1f, 1f);
 	}
 }
