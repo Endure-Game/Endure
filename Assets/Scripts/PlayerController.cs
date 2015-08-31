@@ -40,41 +40,45 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
+		if (!meleeAttacker.Locked) {
+			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
 
-		this.rb2d.velocity = this.speed * (playerSpeed/magnitude);
-
-		if (horizontal > 0) {
-			this.animator.SetInteger ("Direction", 3);
-			this.animator.SetBool ("Idle", false);
-		} else if (horizontal < 0) {
-			this.animator.SetInteger ("Direction", 1);
-			this.animator.SetBool ("Idle", false);
-		} else if (vertical > 0) {
-			this.animator.SetInteger ("Direction", 2);
-			this.animator.SetBool ("Idle", false);
-		} else if (vertical < 0) {
-			this.animator.SetInteger ("Direction", 0);
-			this.animator.SetBool ("Idle", false);
-		} else {
-			this.animator.SetBool ("Idle", true);
-		}
-
-		// combat controls
-
-		// melee attack
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			this.animator.SetTrigger("Sword");
-			int direction = this.animator.GetInteger("Direction");
-
-			if (direction == 0) {
-				this.meleeAttacker.AttackSouth();
-			} else if (direction == 1) {
-				this.meleeAttacker.AttackWest();
-			} else if (direction == 2) {
-				this.meleeAttacker.AttackNorth();
-			} else if (direction == 3) {
-				this.meleeAttacker.AttackEast();
+			if (horizontal > 0) {
+				this.animator.SetInteger ("Direction", 3);
+				this.animator.SetBool ("Idle", false);
+			} else if (horizontal < 0) {
+				this.animator.SetInteger ("Direction", 1);
+				this.animator.SetBool ("Idle", false);
+			} else if (vertical > 0) {
+				this.animator.SetInteger ("Direction", 2);
+				this.animator.SetBool ("Idle", false);
+			} else if (vertical < 0) {
+				this.animator.SetInteger ("Direction", 0);
+				this.animator.SetBool ("Idle", false);
+			} else {
+				this.animator.SetBool ("Idle", true);
 			}
+
+			// combat controls
+
+			// melee attack
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				this.animator.SetBool ("Idle", true);
+				this.animator.SetTrigger ("Sword");
+				int direction = this.animator.GetInteger ("Direction");
+
+				if (direction == 0) {
+					this.meleeAttacker.AttackSouth ();
+				} else if (direction == 1) {
+					this.meleeAttacker.AttackWest ();
+				} else if (direction == 2) {
+					this.meleeAttacker.AttackNorth ();
+				} else if (direction == 3) {
+					this.meleeAttacker.AttackEast ();
+				}
+			}
+		} else {
+			this.rb2d.velocity = Vector2.zero;
 		}
 
 	}

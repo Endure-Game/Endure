@@ -8,7 +8,15 @@ public class MeleeAttacker : MonoBehaviour {
 
 	private GameObject weapon;
 	private float elapsed;
+
+	private float untilUnlocked;
 	private bool locked = false;
+
+	public bool Locked {
+		get {
+			return locked;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +24,17 @@ public class MeleeAttacker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.elapsed += Time.deltaTime;
+		this.untilUnlocked -= Time.deltaTime;
 
 		if (this.weapon != null) {
+			this.elapsed += Time.deltaTime;
 			if (this.elapsed > 0.1f) {
 				Destroy (this.weapon);
 				this.weapon = null;
 			}
 		}
 
-		if (this.elapsed >= this.delay) {
+		if (this.untilUnlocked <= 0) {
 			this.locked = false;
 		}
 	}
@@ -34,6 +43,7 @@ public class MeleeAttacker : MonoBehaviour {
 		if (!this.locked) {
 			Destroy (this.weapon);
 			this.elapsed = 0;
+			this.untilUnlocked = this.delay;
 			this.locked = true;
 
 			this.weapon = new GameObject ();
