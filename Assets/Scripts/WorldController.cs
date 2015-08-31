@@ -23,7 +23,7 @@ public class WorldController : MonoBehaviour {
 	}
 
 	void InitGame () {
-		roomScript.SetupRoom ();
+		roomScript.SetupRooms ();
 	}
 	
 	private float roomWidth;

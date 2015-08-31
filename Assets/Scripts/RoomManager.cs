@@ -20,7 +20,12 @@ public class RoomManager : MonoBehaviour {
 	public int columns = 32;
 	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
-	public GameObject[] floorTiles;
+
+	public int[,] tileMap;
+	public int biomeNumber = 4;
+
+	public GameObject[] forestTiles;
+	public GameObject[] canyonTiles;
 	public GameObject[] outerWallTiles;
 	//need game objects for collectible items obstacles etc
 	public GameObject[] coins;
@@ -53,7 +58,8 @@ public class RoomManager : MonoBehaviour {
 		return gridPositions;
 	}
 
-	GameObject RoomSetup (float gridX, float gridY) {
+	GameObject RoomSetup (int gridX, int gridY) {
+
 		GameObject room = new GameObject ("Room");
 		Transform roomHolder = room.transform;
 
@@ -64,7 +70,17 @@ public class RoomManager : MonoBehaviour {
 		
 		for (int x = 0; x < columns; x ++) {
 			for(int y = 0; y < rows; y ++){
-				GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+
+				// pick tileSet based on tile type
+				GameObject[] tileSet;
+				print (tileMap[x + gridX * this.columns, y + gridY * this.rows]);
+				if (tileMap[x + gridX * this.columns, y + gridY * this.rows] == 0) {
+					tileSet = this.forestTiles;
+				} else {
+					tileSet = this.canyonTiles;
+				}
+		
+				GameObject toInstantiate = tileSet[Random.Range(0, tileSet.Length)];
 
 				if ((x == 0 || x == columns - 1 || y == 0 || y == rows - 1) && x != 15 && y != 15) {
 					toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
@@ -106,9 +122,51 @@ public class RoomManager : MonoBehaviour {
 
 	}
 
-	public void SetupRoom () {
+	// Using Voronoi Generation to make a fill tileMap with tile numbers
+	public void TileMapGeneration (int size) {
+		tileMap = new int[size, size];
+
+		// Generate list of points with a biome number associated
+		List<Vector3> randomPoints = new List<Vector3>();
+		int randomPointsRegion = (int)(size / Mathf.Sqrt(this.biomeNumber));
+		for (int i = 0; i < size; i += randomPointsRegion) {
+			for (int j = 0; j < size; j += randomPointsRegion) {
+				Vector3 newPoint = new Vector3 (Random.Range (0, randomPointsRegion) + j,
+				                                Random.Range (0, randomPointsRegion) + i,
+				                                Random.Range (0, 2));
+				
+				randomPoints.Add(newPoint);
+			}
+		}
+
+		// For each Tile, check for closest biome point
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+
+				int distance = 1000;
+				int closestIndex = 0;
+				for (int pointI = 0; pointI < randomPoints.Count; pointI++) {
+					Vector3 point = randomPoints[pointI];
+
+					int dist = (int) (Mathf.Abs(point[0] - i) + Mathf.Abs(point[1] - j));
+					if (dist < distance) {
+						closestIndex = pointI;
+						distance = dist;
+					}
+				}
+
+				tileMap[i, j] = (int)randomPoints[closestIndex].z;
+			}
+		}
+
+	}
+
+	public void SetupRooms () {
+
 		int roomSide = 3;
 		this.rooms = new GameObject[roomSide, roomSide];
+
+		TileMapGeneration(roomSide * this.rows);
 
 		for (int i = 0; i < roomSide; i++) {
 			for (int j = 0; j < roomSide; j++) {
