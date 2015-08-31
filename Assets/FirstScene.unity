@@ -707,14 +707,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11401558, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11401558, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
-      propertyPath: delay
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   m_IsPrefabParent: 0

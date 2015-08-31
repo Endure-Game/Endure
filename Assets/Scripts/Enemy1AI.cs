@@ -21,11 +21,15 @@ public class Enemy1AI : MonoBehaviour {
 	void Update () {
 		if (active) {
 			Vector2 heading = player.transform.position - this.transform.position;
-			rb2d.velocity = speed * heading.normalized;
 
-			if (heading.magnitude < melee.range + 1) {
+			if (!melee.Locked) {
+				rb2d.velocity = speed * heading.normalized;
+			} else {
+				rb2d.velocity = Vector2.zero;
+			}
+
+			if (heading.magnitude < melee.range + 0.5f) {
 				Vector2 n = heading.normalized;
-				print (n.x + " " + n.y + " " + Mathf.Sqrt(2) / 2);
 				if (n.x > Mathf.Sqrt(2) / 2) {
 					melee.AttackEast ();
 				} else if (n.x < - Mathf.Sqrt(2) / 2) {
