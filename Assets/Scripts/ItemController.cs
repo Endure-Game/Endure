@@ -21,7 +21,6 @@ public class ItemController : MonoBehaviour {
 		Collider2D other = newOther.collider;
 		print ("Is touching");
 		if (other.tag == "Player") {
-			PlayerController.instance.IncrementCounter ();
 			Destroy (this.gameObject);
 		}
 		//PlayerController.instance.IncrementCounter ();

@@ -15,10 +15,8 @@ public class Upgrade : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D newOther) {
 		Collider2D other = newOther.collider;
-		print ("Is touching");
 		if (other.tag == "Player") {
-			PlayerController.instance.AddWeaponOrTool (this.gameObject.GetComponent<ItemController>().name);
-			Destroy (this.gameObject);
+			PlayerController.instance.AddUpgrade (this.gameObject.GetComponent<ItemController>().name);
 		}
 	}
 }

@@ -5,8 +5,6 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 4;
 	public static PlayerController instance;
-	public GameObject[] inventory;
-	public GameObject[] upgrades;
 	public int ammo = 0;
 
 	private int counter = 0;
@@ -15,6 +13,9 @@ public class PlayerController : MonoBehaviour {
 	private MeleeAttacker meleeAttacker;
 	private float playerRadius;
 
+	private ArrayList inventory = new ArrayList();
+	private ArrayList upgrades = new ArrayList();
+
 	// Use this for initialization
 	void Start () {
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
@@ -22,6 +23,9 @@ public class PlayerController : MonoBehaviour {
 		this.meleeAttacker = this.GetComponent<MeleeAttacker> ();
 		CircleCollider2D myCollider = transform.GetComponent <CircleCollider2D>();
 		this.playerRadius = myCollider.radius;
+
+		// Give player starting items
+		this.inventory.Add("sword");
 	}
 
 	// Update is called once per frame
@@ -104,10 +108,36 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void AddWeaponOrTool (string name) {
+		switch (name) {
 
+		case "sword": 
+			this.inventory.Add(name);
+			break;
+
+		default: 
+			print ("Error: not a valid weapon or tool name");
+			break;
+		}
 	}
 
 	public void AddUpgrade (string name) {
 
+		switch (name) {
+
+		case "sneakers":
+			this.speed *= 2;
+			this.upgrades.Add(name);
+			break;
+
+		case "painKillers":
+			this.Health.maxHealth *= 2;
+			this.Health.ChangeHealth(this.Health.maxHealth);
+			this.upgrades.Add(name);
+			break;
+			
+		default: 
+			print ("Error: not a valid upgrade name");
+			break;
+		}
 	}
 }
