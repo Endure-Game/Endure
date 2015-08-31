@@ -494,6 +494,7 @@ GameObject:
   - 114: {fileID: 1644791119}
   - 114: {fileID: 1644791118}
   - 114: {fileID: 1644791122}
+  - 114: {fileID: 1644791123}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -587,6 +588,18 @@ MonoBehaviour:
   healthBar: {fileID: 1839492390}
   inventory: {fileID: 0}
   map: {fileID: 0}
+--- !u!114 &1644791123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1644791117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd7884c1fe5647fbabe249310bd97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: sneakers
 --- !u!1 &1839492390
 GameObject:
   m_ObjectHideFlags: 0

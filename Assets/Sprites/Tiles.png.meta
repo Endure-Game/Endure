@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8699d7ae2d8b54f918aee5425c6b9ac1
-timeCreated: 1440798459
+timeCreated: 1440980959
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -78,6 +78,12 @@ TextureImporter:
     21300142: Tiles_71
     21300144: Tiles_72
     21300146: Tiles_73
+    21300148: Tiles_74
+    21300150: Tiles_75
+    21300152: Tiles_76
+    21300154: Tiles_77
+    21300156: Tiles_78
+    21300158: Tiles_79
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -576,7 +582,7 @@ TextureImporter:
     - name: Tiles_45
       rect:
         serializedVersion: 2
-        x: 160
+        x: 192
         y: 128
         width: 32
         height: 32
@@ -586,7 +592,7 @@ TextureImporter:
     - name: Tiles_46
       rect:
         serializedVersion: 2
-        x: 192
+        x: 224
         y: 128
         width: 32
         height: 32
@@ -596,16 +602,6 @@ TextureImporter:
     - name: Tiles_47
       rect:
         serializedVersion: 2
-        x: 224
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_48
-      rect:
-        serializedVersion: 2
         x: 0
         y: 96
         width: 32
@@ -613,7 +609,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_49
+    - name: Tiles_48
       rect:
         serializedVersion: 2
         x: 32
@@ -623,7 +619,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_50
+    - name: Tiles_49
       rect:
         serializedVersion: 2
         x: 64
@@ -633,7 +629,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_51
+    - name: Tiles_50
       rect:
         serializedVersion: 2
         x: 96
@@ -643,7 +639,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_52
+    - name: Tiles_51
       rect:
         serializedVersion: 2
         x: 128
@@ -653,7 +649,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_53
+    - name: Tiles_52
       rect:
         serializedVersion: 2
         x: 160
@@ -663,7 +659,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_54
+    - name: Tiles_53
       rect:
         serializedVersion: 2
         x: 192
@@ -673,11 +669,21 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Tiles_55
+    - name: Tiles_54
       rect:
         serializedVersion: 2
         x: 224
         y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Tiles_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -863,7 +869,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-  spritePackingTag:
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
