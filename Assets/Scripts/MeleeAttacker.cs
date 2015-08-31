@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class MeleeAttacker : MonoBehaviour {
+	public int damage = 3;
 
 	private GameObject weapon;
 	private float elapsed;
@@ -47,7 +48,8 @@ public class MeleeAttacker : MonoBehaviour {
 			collider.transform.Translate ((playerSize.x / 2 + width / 2) * direction, 0, 0);
 		}
 
-		this.weapon.AddComponent<Ouch> ();
+		Ouch ouch = this.weapon.AddComponent<Ouch> ();
+		ouch.damage = this.damage;
 	}
 
 	public void AttackNorth () {
