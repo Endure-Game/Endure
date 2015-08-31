@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4d8ab27382275488bbeb1163fd62e776
-timeCreated: 1440875716
+timeCreated: 1441000005
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -104,7 +104,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 256
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -112,9 +112,9 @@ TextureImporter:
     - name: Attacks_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 256
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -122,9 +122,9 @@ TextureImporter:
     - name: Attacks_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 128
         y: 256
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -132,9 +132,9 @@ TextureImporter:
     - name: Attacks_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 192
         y: 256
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -142,9 +142,9 @@ TextureImporter:
     - name: Attacks_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 256
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,9 +152,9 @@ TextureImporter:
     - name: Attacks_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 256
-        width: 32
+        x: 0
+        y: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -162,9 +162,9 @@ TextureImporter:
     - name: Attacks_6
       rect:
         serializedVersion: 2
-        x: 192
-        y: 256
-        width: 32
+        x: 64
+        y: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -172,9 +172,9 @@ TextureImporter:
     - name: Attacks_7
       rect:
         serializedVersion: 2
-        x: 224
-        y: 256
-        width: 32
+        x: 128
+        y: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,9 +182,9 @@ TextureImporter:
     - name: Attacks_8
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 32
+        x: 192
+        y: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -192,9 +192,9 @@ TextureImporter:
     - name: Attacks_9
       rect:
         serializedVersion: 2
-        x: 288
-        y: 256
-        width: 32
+        x: 256
+        y: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 32
+        y: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -212,9 +212,9 @@ TextureImporter:
     - name: Attacks_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 192
-        width: 32
+        x: 64
+        y: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -222,9 +222,9 @@ TextureImporter:
     - name: Attacks_12
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 32
+        x: 128
+        y: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -232,9 +232,9 @@ TextureImporter:
     - name: Attacks_13
       rect:
         serializedVersion: 2
-        x: 96
-        y: 192
-        width: 32
+        x: 192
+        y: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -242,9 +242,9 @@ TextureImporter:
     - name: Attacks_14
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 32
+        x: 256
+        y: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -252,9 +252,9 @@ TextureImporter:
     - name: Attacks_15
       rect:
         serializedVersion: 2
-        x: 160
-        y: 192
-        width: 32
+        x: 0
+        y: 64
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -262,9 +262,9 @@ TextureImporter:
     - name: Attacks_16
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 32
+        x: 64
+        y: 64
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -272,9 +272,9 @@ TextureImporter:
     - name: Attacks_17
       rect:
         serializedVersion: 2
-        x: 224
-        y: 192
-        width: 32
+        x: 128
+        y: 64
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -282,9 +282,9 @@ TextureImporter:
     - name: Attacks_18
       rect:
         serializedVersion: 2
-        x: 256
-        y: 192
-        width: 32
+        x: 192
+        y: 64
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -292,9 +292,9 @@ TextureImporter:
     - name: Attacks_19
       rect:
         serializedVersion: 2
-        x: 288
-        y: 192
-        width: 32
+        x: 256
+        y: 64
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -303,8 +303,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 32
+        y: 0
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -312,9 +312,9 @@ TextureImporter:
     - name: Attacks_21
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
-        width: 32
+        x: 64
+        y: 0
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -322,9 +322,9 @@ TextureImporter:
     - name: Attacks_22
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 32
+        x: 128
+        y: 0
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -332,9 +332,9 @@ TextureImporter:
     - name: Attacks_23
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
-        width: 32
+        x: 192
+        y: 0
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -342,259 +342,9 @@ TextureImporter:
     - name: Attacks_24
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_25
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_26
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_27
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_28
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_29
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 128
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_30
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_31
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_32
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_33
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_34
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_35
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_36
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_37
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_38
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_39
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 64
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_40
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_41
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_42
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_43
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_44
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_45
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_46
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_47
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_48
-      rect:
-        serializedVersion: 2
         x: 256
         y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Attacks_49
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 32
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}

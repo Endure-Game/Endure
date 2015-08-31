@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 		// melee attack
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			print ("heeey");
+			this.animator.SetTrigger("Sword");
 			int direction = this.animator.GetInteger("Direction");
 
 			if (direction == 0) {

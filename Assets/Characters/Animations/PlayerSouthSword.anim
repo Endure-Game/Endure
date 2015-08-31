@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayerSouthWalking
+  m_Name: PlayerSouthSword
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,13 +18,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300004, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+      value: {fileID: 21300000, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
     - time: .0833333358
-      value: {fileID: 21300006, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+      value: {fileID: 21300002, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
     - time: .166666672
-      value: {fileID: 21300008, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+      value: {fileID: 21300004, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
     - time: .25
-      value: {fileID: 21300010, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+      value: {fileID: 21300006, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,10 +43,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300004, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
-    - {fileID: 21300006, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
-    - {fileID: 21300008, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
-    - {fileID: 21300010, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+    - {fileID: 21300000, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
+    - {fileID: 21300002, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
+    - {fileID: 21300004, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
+    - {fileID: 21300006, guid: 4d8ab27382275488bbeb1163fd62e776, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
