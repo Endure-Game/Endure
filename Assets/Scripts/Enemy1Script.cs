@@ -10,7 +10,6 @@ public class Enemy1Script : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		enemyAI = this.gameObject.AddComponent <Enemy1AI> ();
-		print (enemyAI);
 	}
 	
 	// Update is called once per frame
