@@ -3,9 +3,8 @@ using System.Collections;
 
 public class Enemy1Script : MonoBehaviour {
 
-	public float speed = (float) 10;
 	private float aggro = (float) 1.0;
-	private static Enemy1AI enemyAI;
+	private Enemy1AI enemyAI;
 
 
 	// Use this for initialization
@@ -22,26 +21,20 @@ public class Enemy1Script : MonoBehaviour {
 	void Awake () {
 
 	}
-	void OnTriggerEnter2D () {
-		//PlayerController.instance.IncrementCounter ()
-		//Destroy (this.gameObject);
-		//print ("Enemy has vision of player");
-	}
 
-	void OnTriggerStay2D (Collider2D other){
-		if (other.tag == "Player") {
+	void OnTriggerEnter2D (Collider2D other){
+		this.enemyAI.enemyActive (true);
+		/*if (other.gameObject.tag == "Player") {
 			if(PlayerController.checkAggro (this.aggro, this.gameObject)){
-				enemyAI.enemyActive (this.gameObject, this.speed);
+				this.enemyAI.enemyActive (true);
 			} else {
 				print ("no aggro.... yet");
 			}
-		}
+		}*/
 	}
 
 	void OnTriggerExit2D (Collider2D other){
-		if (other.tag == "Player") {
-			print ("AWWW SHIT PLAY RAN AWAY :(");
-		}
+		this.enemyAI.enemyActive (false);
 	}
 
 	void Attack (){
