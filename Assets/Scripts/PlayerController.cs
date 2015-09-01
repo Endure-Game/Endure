@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private Animator animator;
 	private MeleeAttacker meleeAttacker;
+	private RangedAttacker rangedAttacker;
 	private float playerRadius;
 
 	private ArrayList inventory = new ArrayList();
@@ -21,8 +22,7 @@ public class PlayerController : MonoBehaviour {
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
 		this.meleeAttacker = this.GetComponent<MeleeAttacker> ();
-		CircleCollider2D myCollider = transform.GetComponent <CircleCollider2D>();
-		this.playerRadius = myCollider.radius;
+		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 
 		// Give player starting items
 		this.inventory.Add("sword");
@@ -60,6 +60,14 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// combat controls
+
+			// ranged attack
+			if (Input.GetMouseButtonDown (0)) {
+				Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				pz.z = 0;
+
+				this.rangedAttacker.Attack(pz);
+			}
 
 			// melee attack
 			if (Input.GetKeyDown (KeyCode.Space)) {
