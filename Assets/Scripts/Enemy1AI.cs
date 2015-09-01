@@ -30,16 +30,18 @@ public class Enemy1AI : MonoBehaviour {
 
 			if (heading.magnitude < melee.range + 0.5f) {
 				Vector2 n = heading.normalized;
-				if (n.x > Mathf.Sqrt(2) / 2) {
+				if (n.x > Mathf.Sqrt (2) / 2) {
 					melee.AttackEast ();
-				} else if (n.x < - Mathf.Sqrt(2) / 2) {
+				} else if (n.x < - Mathf.Sqrt (2) / 2) {
 					melee.AttackWest ();
-				} else if (n.y > Mathf.Sqrt(2) / 2) {
+				} else if (n.y > Mathf.Sqrt (2) / 2) {
 					melee.AttackNorth ();
-				} else if (n.y < -Mathf.Sqrt(2) / 2) {
+				} else if (n.y < -Mathf.Sqrt (2) / 2) {
 					melee.AttackSouth ();
 				}
 			}
+		} else {
+			rb2d.velocity = Vector2.zero;
 		}
 	}
 
