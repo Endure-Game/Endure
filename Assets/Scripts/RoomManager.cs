@@ -23,9 +23,10 @@ public class RoomManager : MonoBehaviour {
 
 	public int roomSide = 3;
 	public Tile[,] tileMap;
-	public Vector4[] randomPoints;
+	public List<Vector4> randomPoints;
 	public int biomeNumber = 4;
 
+	public GameObject[] elavationTiles;
 	public GameObject[] forestTiles;
 	public GameObject[] canyonTiles;
 	public GameObject[] outerWallTiles;
@@ -184,13 +185,16 @@ public class RoomManager : MonoBehaviour {
 //				} else 
 
 				Tile topLeft = tileMap[i, j];
-				Tile topRight = (i >= size) ? tileMap[i + skip, j] : topLeft;
-				Tile bottemLeft = (j >= size) ? tileMap[i, j + skip] : topLeft;
-				Tile bottemRight = (j >= size) ? tileMap[i + skip, j + skip] : topLeft;
+				Tile topRight = (i + skip < size) ? tileMap[i + skip, j] : topLeft;
+				Tile bottemLeft = (j + skip < size) ? tileMap[i, j + skip] : topLeft;
+				Tile bottemRight = (j + skip < size && i + skip < size) ? tileMap[i + skip, j + skip] : topLeft;
 
 				if (topLeft.biome != topRight.biome ||
 				    topLeft.biome != bottemLeft.biome ||
-				    topLeft.biome != bottemRight.biome) {
+				    topLeft.biome != bottemRight.biome ||
+				    topLeft.elevation != topRight.elevation ||
+				    topLeft.elevation != bottemLeft.elevation ||
+				    topLeft.elevation != bottemRight.elevation) {
 
 					for (int x = i; x < Mathf.Min(i + skip, size); x++) {
 						for (int y = j; y < Mathf.Min(j + skip, size); y++) {
@@ -261,16 +265,19 @@ public class RoomManager : MonoBehaviour {
 			for (int y = 1; y < this.roomSide * this.rows - 1; y++) {
 
 				bool lower = false;
+				List<int> walls = new List<int>();
 				for (int xDelta = -1; xDelta <= 1; xDelta++) {
 					for (int yDelta = -1; yDelta <= 1; yDelta++) {
 						if (this.tileMap[x + xDelta, y + yDelta].elevation > this.tileMap[x, y].elevation) {
 							lower = true;
+							walls.Add(xDelta + 1 + (yDelta + 1) * 3);
 						}
 					}
 				}
 
 				if (lower) {
-					this.tileMap[x, y].item = Instantiate (outerWallTiles[Random.Range(0, outerWallTiles.Length)], 
+
+					this.tileMap[x, y].item = Instantiate (GetWallTile(walls), 
 					                                   new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f), 
 					                                   Quaternion.identity) as GameObject;
 					this.tileMap[x, y].item.transform.SetParent(this.rooms[0,0].transform);
@@ -278,11 +285,85 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 
-		// Create 
+		// Create climb points
+		for (int i = 0; i < this.randomPoints.Count; i++) {
+			Vector4 point = this.randomPoints[i];
+
+			if (i < this.roomSide) {
+				int x = 1;
+				Vector4 rightPoint = this.randomPoints[i + 1];
+				while (point.x + x < rightPoint.x) {
+					Destroy(this.tileMap[(int)point.x + x, (int)point.y].item);
+					x++;
+				}
+			}
+
+			if (i < this.randomPoints.Count - this.roomSide) {
+				int y = 1;
+				Vector4 lowerPoint = this.randomPoints[i + this.roomSide];
+				while (point.y + y < lowerPoint.y) {
+					Tile tile = this.tileMap[(int)point.x, (int)point.y + y];
+					if (tile.item != null) {
+						Destroy(tile.item);
+						tile.item = Instantiate (this.elavationTiles[0], 
+						                         new Vector3((int)point.x - this.columns / 2 + .5f, (int)point.y + y - this.rows / 2 + .5f, 1f), 
+						                         Quaternion.identity) as GameObject;
+						tile.item.transform.SetParent(this.rooms[0,0].transform);
+					}
+					y++;
+				}
+			}
+		}
 	}
 
-	public GameObject GetRoom (int x, int y)
-	{
+	// DONT TOUCH MY MAGIC FUNCTION
+	private GameObject GetWallTile(List<int> walls) {
+
+		if (walls.IndexOf(2) != -1) {
+			if (walls.IndexOf(1) != -1 && walls.IndexOf(5) != -1) {
+				return this.elavationTiles[10];
+			} else if (walls.IndexOf(1) != -1) {
+				return this.elavationTiles[1];
+			} else if (walls.IndexOf(5) != -1) {
+				return this.elavationTiles[7];
+			} else {
+				return this.elavationTiles[8];
+			}
+		} else if (walls.IndexOf(0) != -1) {
+			if (walls.IndexOf(1) != -1 && walls.IndexOf(3) != -1) {
+				return this.elavationTiles[11];
+			} else if (walls.IndexOf(1) != -1) {
+				return this.elavationTiles[1];
+			} else if (walls.IndexOf(3) != -1) {
+				return this.elavationTiles[3];
+			} else {
+				return this.elavationTiles[2];
+			}
+		} else if (walls.IndexOf(6) != -1) {
+			if (walls.IndexOf(7) != -1 && walls.IndexOf(3) != -1) {
+				return this.elavationTiles[12];
+			} else if (walls.IndexOf(7) != -1) {
+				return this.elavationTiles[5];
+			} else if (walls.IndexOf(3) != -1) {
+				return this.elavationTiles[3];
+			} else {
+				return this.elavationTiles[4];
+			}
+		} else if (walls.IndexOf(8) != -1) {
+			if (walls.IndexOf(7) != -1 && walls.IndexOf(5) != -1) {
+				return this.elavationTiles[9];
+			} else if (walls.IndexOf(7) != -1) {
+				return this.elavationTiles[5];
+			} else if (walls.IndexOf(5) != -1) {
+				return this.elavationTiles[7];
+			} else {
+				return this.elavationTiles[6];
+			}
+		}
+		return this.elavationTiles[5];
+	}
+
+	public GameObject GetRoom (int x, int y) {
 		return this.rooms [x, y];
 	}
 	
