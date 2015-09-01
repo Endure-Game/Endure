@@ -15,6 +15,8 @@ public class HUDController : MonoBehaviour {
 	private Health playerHealth;
 	private int startingMaxHealth;
 
+	private bool paused = false;
+
 	// Use this for initialization
 	void Start () {
 		this.playerHealth = PlayerController.instance.Health;
@@ -30,6 +32,20 @@ public class HUDController : MonoBehaviour {
 			lowHealth.color = new Color(255, 0, 0, 0.3f);
 		} else {
 			lowHealth.color = new Color(0, 0, 0, 0);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			this.paused = !this.paused;
+
+			if (this.paused) {
+				Time.timeScale = 0;
+			} else {
+				Time.timeScale = 1;
+			}
+		}
+
+		if (this.paused) {
+			lowHealth.color = new Color(0, 0, 0, 0.8f);
 		}
 	}
 }
