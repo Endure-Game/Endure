@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 478010}
   - 212: {fileID: 21212796}
   m_Layer: 0
-  m_Name: floorTile3
+  m_Name: forestTile3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
