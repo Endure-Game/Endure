@@ -191,7 +191,8 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5843074, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &373454786
@@ -425,7 +426,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430258, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
       propertyPath: m_Name
@@ -496,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+  knockback: .5
   range: .600000024
   delay: .5
 --- !u!1 &1471773142
@@ -898,7 +900,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430258, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy1Script : MonoBehaviour {
 
-	private float aggro = (float) 1.0;
+	public float aggro = 10.0f;
 	private Enemy1AI enemyAI;
 
 
@@ -14,30 +14,13 @@ public class Enemy1Script : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-
-	void Awake () {
-
-	}
-
-	void OnTriggerEnter2D (Collider2D other){
-		this.enemyAI.enemyActive (true);
-		/*if (other.gameObject.tag == "Player") {
-			if(PlayerController.checkAggro (this.aggro, this.gameObject)){
-				this.enemyAI.enemyActive (true);
-			} else {
-				print ("no aggro.... yet");
-			}
-		}*/
-	}
-
-	void OnTriggerExit2D (Collider2D other){
-		this.enemyAI.enemyActive (false);
-	}
-
-	void Attack (){
-		print ("AM ATTACKING PLAYER AW SHIT NIGGA!");
+		float distance = (PlayerController.instance.transform.position - this.transform.position).magnitude;
+		print (distance);
+		if (distance < this.aggro) {
+			this.enemyAI.enemyActive (true);
+		} else {
+			this.enemyAI.enemyActive (false);
+		}
 	}
 
 

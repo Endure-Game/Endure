@@ -94,17 +94,6 @@ public class PlayerController : MonoBehaviour {
 		print (this.counter);
 	}
 
-	public static bool checkAggro(float aggro, GameObject other){
-		float distance = Vector2.Distance (instance.transform.position, other.transform.position);
-		
-		float enemyRadius = instance.transform.localScale.x * instance.playerRadius * aggro;
-		if (distance <= enemyRadius) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public Health Health {
 		get {
 			return this.GetComponent<Health> ();
