@@ -13,6 +13,17 @@ public class Health : MonoBehaviour {
 		}
 	}
 
+	private bool blocking = false;
+
+	public bool Block {
+		get {
+			return this.blocking;
+		}
+		set {
+			this.blocking = value;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		this.currentHealth = this.maxHealth;
@@ -26,16 +37,18 @@ public class Health : MonoBehaviour {
 			delta = this.maxHealth - this.currentHealth;
 		}
 
-		Vector3 startPos = new Vector3 (this.transform.position.x, this.transform.position.y + 0.75f, 0);
+		if (!this.Block || delta >= 0) {
+			Vector3 startPos = new Vector3 (this.transform.position.x, this.transform.position.y + 0.75f, 0);
 
-		// TODO: add health change animation
-		GameObject change = Instantiate (healthChangeDisplay, startPos, Quaternion.identity) as GameObject;
-		change.GetComponent<HealthAnimation> ().healthChange = delta;
+			// TODO: add health change animation
+			GameObject change = Instantiate (healthChangeDisplay, startPos, Quaternion.identity) as GameObject;
+			change.GetComponent<HealthAnimation> ().healthChange = delta;
 
-		this.currentHealth += delta;
+			this.currentHealth += delta;
 
-		if (this.currentHealth <= 0) {
-			Destroy (this.gameObject);
+			if (this.currentHealth <= 0) {
+				Destroy (this.gameObject);
+			}
 		}
 	}
 }
