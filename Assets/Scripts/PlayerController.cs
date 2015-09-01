@@ -67,10 +67,17 @@ public class PlayerController : MonoBehaviour {
 				pz.z = 0;
 
 				this.rangedAttacker.Attack(pz);
+                        }
+
+			// blocking
+			if (Input.GetKey (KeyCode.B)) {
+				this.Health.Block = true;
+			} else {
+				this.Health.Block = false;
 			}
 
 			// melee attack
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Input.GetKeyDown (KeyCode.Space) && !this.Health.Block) {
 				this.animator.SetBool ("Idle", true);
 				this.animator.SetTrigger ("Sword");
 				int direction = this.animator.GetInteger ("Direction");

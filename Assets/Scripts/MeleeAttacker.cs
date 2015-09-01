@@ -73,22 +73,22 @@ public class MeleeAttacker : MonoBehaviour {
 
 	public void AttackNorth () {
 		CreateOuch (true, 1);
-		print ("Attacking north");
+		//print ("Attacking north");
 	}
 	
 	public void AttackEast () {
 		CreateOuch (false, 1);
-		print ("Attacking east");
+		//print ("Attacking east");
 	}
 	
 	public void AttackWest () {
 		CreateOuch (false, -1);
-		print ("Attacking west");
+		//print ("Attacking west");
 	}
 	
 	public void AttackSouth () {
 		CreateOuch (true, -1);
-		print ("Attacking south");
+		//print ("Attacking south");
 	}
 
 	public Vector2 Size {
