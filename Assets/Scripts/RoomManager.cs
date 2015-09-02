@@ -20,6 +20,7 @@ public class RoomManager : MonoBehaviour {
 	public int columns = 32;
 	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
+	public int[] end = new int[2] {32, 32};
 
 	public int roomSide = 3;
 	public Tile[,] tileMap;
