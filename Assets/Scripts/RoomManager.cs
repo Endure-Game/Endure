@@ -138,7 +138,7 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 
-		int skip = 5;
+		int skip = 4;
 
 		// For each Tile, check for closest biome point
 		for (int i = 0; i < size; i+=skip) {
@@ -314,9 +314,43 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+
+		// Create blocking tiles
+		for (int num = 0; num < 1300; num++) {
+			BlockingExplosion(Random.Range (0, this.roomSide * this.columns), 
+			                  Random.Range (0, this.roomSide * this.rows), 
+			                  Random.Range (3, 8));
+		}
+
 	}
 
-	// DONT TOUCH MY MAGIC FUNCTION
+	private void BlockingExplosion(int x, int y, int level) {
+		if (level == 0 || x < 0 || y < 0 || x >= this.roomSide * this.columns || y >= this.roomSide * this.columns) {
+			return;
+		}
+		
+		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
+			return;
+		}
+
+		Tile tile = this.tileMap[x, y];
+		if (tile.item == null) {
+			tile.item = Instantiate (this.blocks[0], 
+			                         new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 1f), 
+			                         Quaternion.identity) as GameObject;
+			tile.item.transform.SetParent(this.rooms[0,0].transform);
+		}
+		
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (Random.Range(0, 10) > 3 && (j != 0 || i == 1)) {
+					BlockingExplosion(x + i, y + j, level - 1);
+				}
+			}
+		}
+	}
+	
+	// DONT TOUCH MY MAGIC FUNCTION --Chris
 	private GameObject GetWallTile(List<int> walls) {
 
 		if (walls.IndexOf(2) != -1) {
