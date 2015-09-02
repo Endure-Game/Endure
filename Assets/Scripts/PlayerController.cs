@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 	
@@ -14,8 +15,10 @@ public class PlayerController : MonoBehaviour {
 	private RangedAttacker rangedAttacker;
 	private float playerRadius;
 
-	private ArrayList inventory = new ArrayList();
-	private ArrayList upgrades = new ArrayList();
+	private List<string> inventory = new List<string> ();
+	private List<string> upgrades = new List<string> ();
+
+	private string currentMeleeWeapon = "";
 
 	// Use this for initialization
 	void Start () {
@@ -62,12 +65,12 @@ public class PlayerController : MonoBehaviour {
 			// combat controls
 
 			// ranged attack
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButtonDown (0) && this.rangedAttacker.damage > 0) {
 				Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				pz.z = 0;
 
 				this.rangedAttacker.Attack(pz);
-                        }
+			}
 
 			// blocking
 			if (Input.GetKey (KeyCode.B)) {
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// melee attack
-			if (Input.GetKeyDown (KeyCode.Space) && !this.Health.Block) {
+			if (Input.GetKeyDown (KeyCode.Space) && !this.Health.Block && this.meleeAttacker.damage > 0) {
 				this.animator.SetBool ("Idle", true);
 				this.animator.SetTrigger ("Sword");
 				int direction = this.animator.GetInteger ("Direction");
@@ -118,8 +121,12 @@ public class PlayerController : MonoBehaviour {
 	public void AddWeaponOrTool (string name) {
 		switch (name) {
 
-		case "sword": 
+		case "RustyMachete":
 			this.inventory.Add(name);
+			if (this.currentMeleeWeapon.Length == 0) {
+				this.currentMeleeWeapon = "RustyMachete";
+				this.meleeAttacker.damage = 2;
+			}
 			break;
 
 		default: 
