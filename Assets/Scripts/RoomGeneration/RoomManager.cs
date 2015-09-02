@@ -28,12 +28,6 @@ public class RoomManager : MonoBehaviour {
 	public int biomeNumber = 4;
 
 	public GameObject[] elavationTiles;
-	public GameObject[] forestTiles;
-	public GameObject[] desertTiles;
-	public GameObject[] plainsTiles;
-	public GameObject[] canyonTiles;
-	public GameObject[] snowTiles;
-	public GameObject[] beachTiles;
 	public GameObject[] outerWallTiles;
 	//need game objects for collectible items obstacles etc
 	public GameObject[] coins;
@@ -79,23 +73,20 @@ public class RoomManager : MonoBehaviour {
 		for (int x = 0; x < columns; x ++) {
 			for(int y = 0; y < rows; y ++){
 
-				// pick tileSet based on tile type
-				GameObject[] tileSet;
+				GameObject toInstantiate;
 				if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 0) {
-					tileSet = this.forestTiles;
+					toInstantiate = this.ForestTile.getGroundTile();
 				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 1) {
-					tileSet = this.desertTiles;
+					toInstantiate = this.DesertTile.getGroundTile();
 				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 2) {
-					tileSet = this.plainsTiles;
+					toInstantiate = this.PlainsTile.getGroundTile();
 				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 3) {
-					tileSet = this.canyonTiles;
+					toInstantiate = this.MountainTile.getGroundTile();
 				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 4) {
-					tileSet = this.snowTiles;
+					toInstantiate = this.SnowTile.getGroundTile();
 				} else {
-					tileSet = this.beachTiles;
+					toInstantiate = this.BeachTile.getGroundTile();
 				}
-		
-				GameObject toInstantiate = tileSet[Random.Range(0, tileSet.Length)];
 
 				float width = this.columns;
 				float height = this.rows;
@@ -430,10 +421,26 @@ public class RoomManager : MonoBehaviour {
 		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
 			return;
 		}
-
+		
 		Tile tile = this.tileMap[x, y];
+		
+		GameObject toInstantiate;
+		if (tile.biome == 0) {
+			toInstantiate = this.ForestTile.getBlockingTile();
+		} else if (tile.biome == 1) {
+			toInstantiate = this.DesertTile.getBlockingTile();
+		} else if (tile.biome == 2) {
+			toInstantiate = this.PlainsTile.getBlockingTile();
+		} else if (tile.biome == 3) {
+			toInstantiate = this.MountainTile.getBlockingTile();
+		} else if (tile.biome == 4) {
+			toInstantiate = this.SnowTile.getBlockingTile();
+		} else {
+			toInstantiate = this.BeachTile.getBlockingTile();
+		}
+		
 		if (tile.item == null) {
-			tile.item = Instantiate (this.blocks[0], 
+			tile.item = Instantiate (toInstantiate, 
 			                         new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 1f), 
 			                         Quaternion.identity) as GameObject;
 			tile.item.transform.SetParent(this.rooms[0,0].transform);
@@ -447,7 +454,7 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	// DONT TOUCH MY MAGIC FUNCTION --Chris
 	private GameObject GetWallTile(List<int> walls) {
 
@@ -498,5 +505,46 @@ public class RoomManager : MonoBehaviour {
 	public GameObject GetRoom (int x, int y) {
 		return this.rooms [x, y];
 	}
-	
+
+	public ForestTile ForestTile {
+		get {
+			return this.GetComponent<ForestTile> ();
+		}
+	}
+
+	public DesertTile DesertTile {
+		get {
+			return this.GetComponent<DesertTile> ();
+		}
+	}
+
+	public PlainsTile PlainsTile {
+		get {
+			return this.GetComponent<PlainsTile> ();
+		}
+	}
+
+	public MountainTile MountainTile {
+		get {
+			return this.GetComponent<MountainTile> ();
+		}
+	}
+
+	public SnowTile SnowTile {
+		get {
+			return this.GetComponent<SnowTile> ();
+		}
+	}
+
+	public BeachTile BeachTile {
+		get {
+			return this.GetComponent<BeachTile> ();
+		}
+	}
+
+//	public ElevationTile ElevationTile {
+//		get {
+//			return this.GetComponent<ElevationTile> ();
+//		}
+//	}
 }
