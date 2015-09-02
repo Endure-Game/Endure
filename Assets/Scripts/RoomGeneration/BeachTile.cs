@@ -11,6 +11,7 @@ public class BeachTile : MonoBehaviour
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
+	public float bloomTightness = 0.4f;
 	
 	public const int BiomeNumber = 5;
 	
@@ -64,7 +65,7 @@ public class BeachTile : MonoBehaviour
 		
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
-				if (Random.Range(0, 10) > 3 && (j != 0 || i == 1)) {
+				if (Random.Range(0, 10) > this.bloomTightness * 10 && (j != 0 || i == 1)) {
 					BlockingExplosion(x + i, y + j, level - 1);
 				}
 			}

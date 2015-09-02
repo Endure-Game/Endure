@@ -380,10 +380,11 @@ MonoBehaviour:
   - {fileID: 113766, guid: 751638792c1df496b9584c54e722764c, type: 2}
   blockingTiles:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
-  bloomNum: 90
+  bloomNum: 20
   bloomSize:
-    minimum: 3
-    maximum: 8
+    minimum: 14
+    maximum: 15
+  bloomTightness: .100000001
 --- !u!114 &373454791
 MonoBehaviour:
   m_ObjectHideFlags: 0
