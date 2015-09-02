@@ -68,6 +68,7 @@ public class MeleeAttacker : MonoBehaviour {
 
 			Ouch ouch = this.weapon.AddComponent<Ouch> ();
 			ouch.damage = this.damage;
+			print (ouch.damage);
 		}
 	}
 
