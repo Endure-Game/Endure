@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   ammo: 0
+  inventoryDisplay: {fileID: 0}
 --- !u!114 &11460858
 MonoBehaviour:
   m_ObjectHideFlags: 1

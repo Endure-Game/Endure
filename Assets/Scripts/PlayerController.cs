@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,7 +16,19 @@ public class PlayerController : MonoBehaviour {
 	private RangedAttacker rangedAttacker;
 	private float playerRadius;
 
-	private List<string> inventory = new List<string> ();
+	private class InventoryItem
+	{
+		public string name;
+		public Sprite sprite;
+		public InventoryItem (string n, Sprite s) {
+			this.name = n;
+			this.sprite = s;
+		}
+	};
+
+	public GameObject inventoryDisplay;
+
+	private List<InventoryItem> inventory = new List<InventoryItem> ();
 	private List<string> upgrades = new List<string> ();
 
 	private string currentMeleeWeapon = "";
@@ -28,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 
 		// Give player starting items
-		this.inventory.Add("sword");
+		//this.inventory.Add("sword");
 	}
 
 	// Update is called once per frame
@@ -118,13 +131,17 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void AddWeaponOrTool (string name) {
+	public void AddWeaponOrTool (string name, Sprite icon) {
 		switch (name) {
 
 		case "RustyMachete":
-			this.inventory.Add(name);
+			this.inventory.Add(new InventoryItem(name, icon));
+			GameObject invItem = new GameObject();
+			invItem.name = "InventoryItem";
+			invItem.transform.parent = this.inventoryDisplay.transform;
+			invItem.AddComponent<Image> ().sprite = icon;
 			if (this.currentMeleeWeapon.Length == 0) {
-				this.currentMeleeWeapon = "RustyMachete";
+				this.currentMeleeWeapon = name;
 				this.meleeAttacker.damage = 2;
 			}
 			break;
