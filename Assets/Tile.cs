@@ -7,6 +7,7 @@ public class Tile
 	public bool blocking;
 	public int elevation;
 	public GameObject item;
+	public bool path = false;
 
 	public Tile (int biome, bool blocking, int elevation) {
 		this.biome = biome;
