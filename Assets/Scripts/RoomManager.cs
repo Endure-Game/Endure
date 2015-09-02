@@ -29,7 +29,11 @@ public class RoomManager : MonoBehaviour {
 
 	public GameObject[] elavationTiles;
 	public GameObject[] forestTiles;
+	public GameObject[] desertTiles;
+	public GameObject[] plainsTiles;
 	public GameObject[] canyonTiles;
+	public GameObject[] snowTiles;
+	public GameObject[] beachTiles;
 	public GameObject[] outerWallTiles;
 	//need game objects for collectible items obstacles etc
 	public GameObject[] coins;
@@ -79,8 +83,16 @@ public class RoomManager : MonoBehaviour {
 				GameObject[] tileSet;
 				if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 0) {
 					tileSet = this.forestTiles;
-				} else {
+				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 1) {
+					tileSet = this.desertTiles;
+				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 2) {
+					tileSet = this.plainsTiles;
+				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 3) {
 					tileSet = this.canyonTiles;
+				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 4) {
+					tileSet = this.snowTiles;
+				} else {
+					tileSet = this.beachTiles;
 				}
 		
 				GameObject toInstantiate = tileSet[Random.Range(0, tileSet.Length)];
@@ -132,8 +144,8 @@ public class RoomManager : MonoBehaviour {
 			for (int j = 0; j < size; j += randomPointsRegion) {
 				Vector4 newPoint = new Vector4 (Random.Range (0, randomPointsRegion) + j,
 				                                Random.Range (0, randomPointsRegion) + i,
-				                                Random.Range (0, 2),
-				                                Random.Range (0, 2));
+				                                Random.Range (0, 6), // biome
+				                                Random.Range (0, 2)); // altitude
 				
 				randomPoints.Add(newPoint);
 			}

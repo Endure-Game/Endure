@@ -364,15 +364,35 @@ MonoBehaviour:
   - {fileID: 198724, guid: c70cc0c4b74d145ec9d1ed9b26c0e5a1, type: 2}
   - {fileID: 172630, guid: 6a38d033b29cc40cf998e01b02efc305, type: 2}
   forestTiles:
-  - {fileID: 119878, guid: b98d7e8824867415b8e4f895d53a8fb7, type: 2}
-  - {fileID: 159728, guid: 8cd2588ee70434f428b0fb0c60c55c04, type: 2}
-  - {fileID: 112258, guid: d6fe6e27884bd42d18dc59c19d3acea0, type: 2}
-  - {fileID: 111772, guid: ed58b36470dc64f0c8907575f7c7de84, type: 2}
+  - {fileID: 119920, guid: efc6da432fe7a44e4a8627c29dd29db3, type: 2}
+  - {fileID: 121050, guid: e703e268c34384900b94ae3120426f13, type: 2}
+  - {fileID: 126360, guid: ce40e8ef53518423bbcf671ec55c1fd9, type: 2}
+  - {fileID: 161738, guid: 87c51fa8513684829a03318e0e7e6c20, type: 2}
+  desertTiles:
+  - {fileID: 173704, guid: e0ed29f6f1d9a4fd9a2c714574fb03e0, type: 2}
+  - {fileID: 159704, guid: 06adea08ee0fb435e882c267f5960030, type: 2}
+  - {fileID: 102636, guid: c87f15c3a599e45afa68296875391461, type: 2}
+  - {fileID: 189106, guid: 2552a4983afc64d1f815b0a788ffe318, type: 2}
+  plainsTiles:
+  - {fileID: 174402, guid: 531ee2bc0d6574adf9e14f49589a0ba9, type: 2}
+  - {fileID: 154292, guid: 22505137973f84ab1bd2fd83e1c38abe, type: 2}
+  - {fileID: 160046, guid: 08562df4bb1a140a0a02ed0cdcdd54f4, type: 2}
+  - {fileID: 164292, guid: bd99ab88f9ca74e1986452b70beb5f9d, type: 2}
   canyonTiles:
-  - {fileID: 182066, guid: edfd1f00a30ff45709646394bee4106b, type: 2}
-  - {fileID: 187262, guid: dd0763823dcf149d08a63a707f10ca34, type: 2}
-  - {fileID: 108598, guid: 7975a4c7a030344e082a8b2805dacfff, type: 2}
-  - {fileID: 110794, guid: 017a4bb3980df4c0aa7d5bee0785d3fe, type: 2}
+  - {fileID: 149318, guid: 1546a0ee9df1b4a9b94025a0b503f44d, type: 2}
+  - {fileID: 124912, guid: c67728e08260c4a3b96eabe8cdaadbf7, type: 2}
+  - {fileID: 166882, guid: bfc36703ef3ac4fb89e4ddf72e52e6ee, type: 2}
+  - {fileID: 192316, guid: 16a8dd48ba0bc4c8e841a999c66a9008, type: 2}
+  snowTiles:
+  - {fileID: 123348, guid: e88335329d95e4e3b83ff31933ea75e8, type: 2}
+  - {fileID: 112460, guid: a40ef9859607542ff922b741cdd17d07, type: 2}
+  - {fileID: 145062, guid: b195f321c86fc47e8b0ce1362f5ffbc4, type: 2}
+  - {fileID: 102470, guid: f302eaf7050314cdb81f5a2e2f62294d, type: 2}
+  beachTiles:
+  - {fileID: 100050, guid: 88f00a47b8dc9462bb86f5acec54965c, type: 2}
+  - {fileID: 181276, guid: 1f1feda7372554119a900e627e3f87b9, type: 2}
+  - {fileID: 188208, guid: 2bf27a8aeabc8455cb323de13588d21c, type: 2}
+  - {fileID: 113766, guid: 751638792c1df496b9584c54e722764c, type: 2}
   outerWallTiles:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
   coins:
