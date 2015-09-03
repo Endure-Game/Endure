@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour {
 	public int columns = 32;
 	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
-	public int[] end = new int[2] {32, 32};
+	public int[] end = new int[2] {31, 31};
 
 	public int roomSide = 3;
 	public Tile[,] tileMap;
@@ -323,6 +323,91 @@ public class RoomManager : MonoBehaviour {
 			                  Random.Range (3, 8));
 		}
 
+		//create game path
+		//TODO fix sorting algo for randomPoints
+		List <int[]> pointsDist = new List<int[]>();
+
+		for (int i = 0; i < randomPoints.Count; i++) {
+			int pointX = (int)randomPoints[i].x;
+			int pointY = (int)randomPoints[i].y;
+			float dist = Math.Abs(pointX - end[0]) + Math.Abs(pointY - end[1]);
+			int[] tuple = new int[2] {i, (int)dist};
+			pointsDist.Add(tuple);
+		}
+		//first item is index of randomPoints the second is the distance
+		pointsDist.Sort ((a, b) => a [1].CompareTo (b [1]));
+
+
+		for (int i = 0; i < pointsDist.Count - 1 ; i++) {
+			int index1 = pointsDist[i][0];
+			int index2 = pointsDist[i + 1][0];
+		    float[] current = new float[2] {randomPoints[index1].x, randomPoints[index1].y};
+		    float[] next = new float[2] {randomPoints[index2].x, randomPoints[index2].y};			  
+			float xDiff = next[0] - current[0];
+			float yDiff = next[1] - current[1];
+			float moveX;
+			float moveY;
+
+			if(Mathf.Abs(xDiff) > Mathf.Abs(yDiff)){
+				moveX = Mathf.Sign(xDiff);
+				moveY = yDiff/Math.Abs(xDiff);
+			}else{
+				moveY = Mathf.Sign(yDiff);
+				moveX = xDiff/Math.Abs (yDiff);
+			}
+			print("placing placePath");
+			placePath(current, next, moveX, moveY);
+		
+		}
+
+
+
+	}
+
+	void placePath (float[] current, float[] next, float moveX, float moveY){
+
+		print (moveY);
+		print (moveX);
+		float currentX = current [0];
+		float currentY = current [1];
+		float nextX = next [0];
+		float nextY = next [1];
+
+		while ((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) && 
+		        (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) //|| 
+//		       ((int)Mathf.Floor(currentX) == (int)Mathf.Floor(nextX) &&
+//				 (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ||
+//		       ((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
+//				 (int)Mathf.Floor(currentY) == (int)Mathf.Floor(nextY))) 
+		{
+
+			Tile tile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY)];
+			if(tile.item != null){
+				Destroy (tile.item);
+			}
+			tile.item = Instantiate (this.elavationTiles[0], 
+			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f), 
+			                         Quaternion.identity) as GameObject;
+			tile.item.transform.SetParent(this.rooms[0,0].transform);
+			tile.path = true;
+			currentX = currentX + moveX;
+
+			tile = this.tileMap [(int)Mathf.Round(currentX), (int)Mathf.Round(currentY)];
+			if(tile.item != null){
+				Destroy (tile.item);
+			}
+			tile.item = Instantiate (this.elavationTiles[0], 
+			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f), 
+			                         Quaternion.identity) as GameObject;
+			tile.item.transform.SetParent(this.rooms[0,0].transform);
+			tile.path = true;
+			currentY = currentY + moveY;
+
+//			print (moveY);
+//			print (moveX);
+//			print (currentX);
+//			print (currentY);
+		}
 	}
 
 	private void BlockingExplosion(int x, int y, int level) {
