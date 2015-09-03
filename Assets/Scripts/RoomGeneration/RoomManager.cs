@@ -426,5 +426,7 @@ public class RoomManager : MonoBehaviour {
 		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
 		                                       Quaternion.identity) as GameObject;
 		this.tileMap[x, y].item.transform.SetParent(this.rooms[0,0].transform);
+		// Make higher tiles apear behind front tiles
+		this.tileMap[x, y].item.transform.Translate(new Vector3(0, 0, y));
 	}
 }

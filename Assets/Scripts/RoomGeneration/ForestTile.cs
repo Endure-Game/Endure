@@ -7,6 +7,7 @@ public class ForestTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
+	public GameObject tree;
 	
 	// randomization constants
 	public int bloomNum = 100;
@@ -60,7 +61,7 @@ public class ForestTile : MonoBehaviour
 		
 		if (tile.item == null) {
 			tile.blocking = true;
-			this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
+			this.GetComponent<RoomManager>().PlaceItem(this.tree, x, y);
 		}
 		
 		for (int i = -1; i <= 1; i++) {
