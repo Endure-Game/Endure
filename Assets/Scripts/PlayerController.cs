@@ -16,22 +16,28 @@ public class PlayerController : MonoBehaviour {
 	private RangedAttacker rangedAttacker;
 	private float playerRadius;
 
+	private bool pusher = false;//FOR PUSHING DEBUGGING SHITEWHO
+
 	private class InventoryItem
 	{
 		public string name;
 		public Sprite sprite;
-		public InventoryItem (string n, Sprite s) {
+		public string type;
+		public int damage;
+		public InventoryItem (string n, Sprite s, string t, int d) {
 			this.name = n;
 			this.sprite = s;
+			this.type = t;
+			this.damage = d;
 		}
 	};
 
 	public GameObject inventoryDisplay;
 
 	private List<InventoryItem> inventory = new List<InventoryItem> ();
+	private int selectedInventory = 0;
 	private List<string> upgrades = new List<string> ();
 
-	private string currentMeleeWeapon = "";
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +61,15 @@ public class PlayerController : MonoBehaviour {
 			magnitude = 1;
 		}
 
+		//DEBUGGING TOOL ONLY
+		if (Input.GetKey (KeyCode.G)) {
+			if(this.pusher){
+				this.pusher = false;
+			} else{
+				this.pusher = true;
+			}
+		}
+
 
 		if (!meleeAttacker.Locked) {
 			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
@@ -76,6 +91,27 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// combat controls
+			if (Input.GetKeyDown (KeyCode.Tab) || this.inventory.Count == 1) {
+				print ("Do something");
+				print ("Inv Count" + this.inventory.Count);
+				if(this.selectedInventory >= this.inventory.Count - 1){
+					this.selectedInventory = 0;
+				} else {
+					this.selectedInventory++;
+				}
+
+				if(this.inventory[this.selectedInventory].type == "Melee"){
+					this.meleeAttacker.damage = this.inventory[this.selectedInventory].damage;
+					this.rangedAttacker.damage = 0;
+				} else if (this.inventory[this.selectedInventory].type == "Ranged") {
+					this.rangedAttacker.damage = this.inventory[this.selectedInventory].damage;
+					this.meleeAttacker.damage = 0;
+				} else {
+					this.rangedAttacker.damage = 0;
+					this.meleeAttacker.damage = 0;
+				}
+				print (this.selectedInventory);
+			}
 
 			// ranged attack
 			if (Input.GetMouseButtonDown (0) && this.rangedAttacker.damage > 0) {
@@ -132,20 +168,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void AddWeaponOrTool (string name, Sprite icon) {
+
+		GameObject invItem = new GameObject ();
+
 		switch (name) {
 
 		case "RustyMachete":
-			this.inventory.Add(new InventoryItem(name, icon));
-			GameObject invItem = new GameObject();
-			invItem.name = "InventoryItem";
+			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3));
+			invItem.name = name;
 			invItem.transform.parent = this.inventoryDisplay.transform;
 			invItem.AddComponent<Image> ().sprite = icon;
-			if (this.currentMeleeWeapon.Length == 0) {
-				this.currentMeleeWeapon = name;
-				this.meleeAttacker.damage = 2;
-			}
 			break;
-
+		case "BowAndArrow":
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1));
+			invItem.name = name;
+			invItem.transform.parent = this.inventoryDisplay.transform;
+			invItem.AddComponent<Image> ().sprite = icon;
+			break;
 		default: 
 			print ("Error: not a valid weapon or tool name");
 			break;
@@ -170,6 +209,13 @@ public class PlayerController : MonoBehaviour {
 		default: 
 			print ("Error: not a valid upgrade name");
 			break;
+		}
+	}
+
+	//PUSHES THINGS OUT OF THE WAY
+	void OnCollisionEnter2D (Collision2D collider) {
+		if (this.pusher == true) {
+			collider.transform.position += (collider.transform.position - this.transform.position).normalized * 2;	
 		}
 	}
 }
