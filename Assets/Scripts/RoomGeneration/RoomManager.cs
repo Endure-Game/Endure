@@ -371,32 +371,6 @@ public class RoomManager : MonoBehaviour {
 
 		}
 	}
-		// Fill all Tiles with blocking tiles
-		for (int x = 1; x < this.roomSide * this.columns - 1; x++) {
-			for (int y = 1; y < this.roomSide * this.rows - 1; y++) {
-				Tile tile = tileMap[x, y];
-				if (tile.blocking == true) {
-					GameObject toInstantiate;
-					if (tileMap[x, y].biome == 0) {
-						toInstantiate = this.ForestTile.getBlockingTile();
-					} else if (tileMap[x, y].biome == 1) {
-						toInstantiate = this.DesertTile.getBlockingTile();
-					} else if (tileMap[x, y].biome == 2) {
-						toInstantiate = this.PlainsTile.getBlockingTile();
-					} else if (tileMap[x, y].biome == 3) {
-						toInstantiate = this.MountainTile.getBlockingTile();
-					} else if (tileMap[x, y].biome == 4) {
-						toInstantiate = this.SnowTile.getBlockingTile();
-					} else {
-						toInstantiate = this.BeachTile.getBlockingTile();
-					}
-					tile.item = Instantiate (toInstantiate,
-					                         new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 1f),
-					                         Quaternion.identity) as GameObject;
-					tile.item.transform.SetParent(this.rooms[0,0].transform);
-				}
-			}
-		}
 
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
@@ -405,6 +379,7 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
+
 		int objectCount = Random.Range (minimum, maximum + 1);
 
 		for (int i = 0; i < objectCount; i++) {
@@ -413,7 +388,6 @@ public class RoomManager : MonoBehaviour {
 			Tile tile = this.tileMap[x, y];
 			if (tile.item == null) {
 				this.PlaceItem(tileArray[Random.Range(0, tileArray.Length)], x, y);
-				print ("placed");
 			} else {
 				i--;
 			}

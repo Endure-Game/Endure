@@ -7,7 +7,8 @@ public class SnowTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
-	
+	public GameObject snowMan;
+
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
@@ -40,6 +41,14 @@ public class SnowTile : MonoBehaviour
 			                  randomTile.y,
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1));
 		}
+
+		if (Random.Range (0, 1) < .5) {
+			Tile snowManTile = region[Random.Range(0, region.Count)];
+			while (snowManTile.item != null) {
+				snowManTile = region[Random.Range(0, region.Count)];
+			}
+			this.GetComponent<RoomManager>().PlaceItem(snowMan, snowManTile.x, snowManTile.y);
+		}
 	}
 
 	private void BlockingExplosion(int x, int y, int level) {
@@ -60,6 +69,7 @@ public class SnowTile : MonoBehaviour
 		
 		if (tile.item == null) {
 			tile.blocking = true;
+			this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
 		}
 		
 		for (int i = -1; i <= 1; i++) {

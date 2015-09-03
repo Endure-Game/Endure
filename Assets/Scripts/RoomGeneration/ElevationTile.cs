@@ -41,49 +41,72 @@ public class ElevationTile : MonoBehaviour
 
 	// DONT TOUCH MY MAGIC FUNCTION --Chris
 	private GameObject GetWallTile(List<int> walls) {
-		
-		if (walls.IndexOf(2) != -1) {
-			if (walls.IndexOf(1) != -1 && walls.IndexOf(5) != -1) {
+
+		if (walls.Contains(2)) {
+			if (walls.Contains(1) && walls.Contains(5)) {
 				return this.tiles[10];
-			} else if (walls.IndexOf(1) != -1) {
-				return this.tiles[1];
-			} else if (walls.IndexOf(5) != -1) {
-				return this.tiles[7];
+			} else if (walls.Contains(1)) {
+				if (walls.Contains(3)) {
+					return this.tiles[11];
+				} else {
+					return this.tiles[1];
+				}
+			} else if (walls.Contains(5)) {
+				if (walls.Contains(7)) {
+					return this.tiles[9];
+				} else {
+					return this.tiles[7];
+				}
 			} else {
 				return this.tiles[8];
 			}
-		} else if (walls.IndexOf(0) != -1) {
-			if (walls.IndexOf(1) != -1 && walls.IndexOf(3) != -1) {
+		} else if (walls.Contains(0)) {
+			if (walls.Contains(1) && walls.Contains(3)) {
 				return this.tiles[11];
-			} else if (walls.IndexOf(1) != -1) {
+			} else if (walls.Contains(1)) {
 				return this.tiles[1];
-			} else if (walls.IndexOf(3) != -1) {
-				return this.tiles[3];
+			} else if (walls.Contains(3)) {
+				if (walls.Contains(7)) {
+					return this.tiles[12];
+				} else {
+					return this.tiles[3];
+				}
 			} else {
 				return this.tiles[2];
 			}
-		} else if (walls.IndexOf(6) != -1) {
-			if (walls.IndexOf(7) != -1 && walls.IndexOf(3) != -1) {
+		} else if (walls.Contains(6)) {
+			if (walls.Contains(7) && walls.Contains(3)) {
 				return this.tiles[12];
-			} else if (walls.IndexOf(7) != -1) {
+			} else if (walls.Contains(7)) {
 				return this.tiles[5];
-			} else if (walls.IndexOf(3) != -1) {
+			} else if (walls.Contains(3)) {
 				return this.tiles[3];
 			} else {
 				return this.tiles[4];
 			}
-		} else if (walls.IndexOf(8) != -1) {
-			if (walls.IndexOf(7) != -1 && walls.IndexOf(5) != -1) {
+		} else if (walls.Contains(8)) {
+			if (walls.Contains(7) && walls.Contains(5)) {
 				return this.tiles[9];
-			} else if (walls.IndexOf(7) != -1) {
+			} else if (walls.Contains(7)) {
 				return this.tiles[5];
-			} else if (walls.IndexOf(5) != -1) {
+			} else if (walls.Contains(5)) {
 				return this.tiles[7];
 			} else {
 				return this.tiles[6];
 			}
 		}
-		return this.tiles[5];
+
+		if (walls.IndexOf(1) != -1) {
+			return this.tiles[1];
+		} else if (walls.IndexOf(3) != -1) {
+			return this.tiles[3];
+		} else if (walls.IndexOf(5) != -1) {
+			return this.tiles[7];
+		} else if (walls.IndexOf(7) != -1) {
+			return this.tiles[5];
+		}
+		print ("elevation placement probems --Show Chris your game if you see this");
+		return this.tiles[0];
 	}
 }
 

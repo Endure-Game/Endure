@@ -61,6 +61,7 @@ public class BeachTile : MonoBehaviour
 		
 		if (tile.item == null) {
 			tile.blocking = true;
+			this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
 		}
 		
 		for (int i = -1; i <= 1; i++) {

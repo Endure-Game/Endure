@@ -347,11 +347,11 @@ MonoBehaviour:
   rows: 32
   columns: 32
   coinCount:
-    minimum: 4
-    maximum: 10
+    minimum: 50
+    maximum: 200
   blockingCount:
-    minimum: 5
-    maximum: 20
+    minimum: 50
+    maximum: 200
   end: 2000000020000000
   roomSide: 8
   biomeNumber: 16
@@ -380,10 +380,10 @@ MonoBehaviour:
   - {fileID: 113766, guid: 751638792c1df496b9584c54e722764c, type: 2}
   blockingTiles:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
-  bloomNum: 20
+  bloomNum: 15
   bloomSize:
-    minimum: 14
-    maximum: 15
+    minimum: 19
+    maximum: 20
   bloomTightness: .100000001
 --- !u!114 &373454791
 MonoBehaviour:
@@ -403,6 +403,7 @@ MonoBehaviour:
   - {fileID: 102470, guid: f302eaf7050314cdb81f5a2e2f62294d, type: 2}
   blockingTiles:
   - {fileID: 124120, guid: 95018a084c8124bccba0b5e33fa2d521, type: 2}
+  snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
   bloomNum: 100
   bloomSize:
     minimum: 3
