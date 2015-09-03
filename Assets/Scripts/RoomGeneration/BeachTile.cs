@@ -19,7 +19,7 @@ public class BeachTile : MonoBehaviour
 	private int width;
 	private int height;
 	
-	void Start() {
+	void Awake() {
 		this.tileMap = this.GetComponent<RoomManager>().tileMap;
 		this.height = this.tileMap.GetLength(0);
 		this.width = this.tileMap.GetLength(1);

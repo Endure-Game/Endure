@@ -11,15 +11,6 @@ public class WorldController : MonoBehaviour {
 	private PlayerController player;
 	private CameraController camera;
 
-	void Awake () {
-//		if (instance == null) {
-//			instance = this;
-//		} else if (instance != this) {
-//			Destroy(gameObject);
-//			DontDestroyOnLoad(gameObject);
-//		}
-	}
-
 	void InitGame () {
 		roomScript.SetupRooms ();
 	}

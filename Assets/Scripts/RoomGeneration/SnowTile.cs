@@ -19,7 +19,7 @@ public class SnowTile : MonoBehaviour
 	private int width;
 	private int height;
 	
-	void Start() {
+	void Awake() {
 		this.tileMap = this.GetComponent<RoomManager>().tileMap;
 		this.height = this.tileMap.GetLength(0);
 		this.width = this.tileMap.GetLength(1);
@@ -34,6 +34,7 @@ public class SnowTile : MonoBehaviour
 	}
 	
 	public void RandomBlocking(List<Tile> region) {
+
 		for (int num = 0; num < bloomNum; num++) {
 			
 			Tile randomTile = region[Random.Range(0, region.Count)];
@@ -53,10 +54,10 @@ public class SnowTile : MonoBehaviour
 
 	private void BlockingExplosion(int x, int y, int level) {
 
-		if (level == 0 || x < 0 || y < 0 || x >= width || y >= height) {
+		if (level == 0 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
 			return;
 		}
-		
+	
 		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
 			return;
 		}

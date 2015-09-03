@@ -189,7 +189,7 @@ public class RoomManager : MonoBehaviour {
 							}
 
 							tileMap[x, y] = new Tile (i, j, closestIndex, (int)randomPoints[closestIndex].z, false, (int)randomPoints[closestIndex].w);
-							regions[closestIndex].Add(tileMap[x, y]);
+							this.regions[closestIndex].Add(tileMap[x, y]);
 						}
 					}
 
@@ -198,7 +198,7 @@ public class RoomManager : MonoBehaviour {
 					for (int x = i; x < Mathf.Min(i + skip, size); x++) {
 						for (int y = j; y < Mathf.Min(j + skip, size); y++) {
 							tileMap[x, y] = new Tile (topLeft);
-							regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
+							this.regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
 						}
 					}
 				}
@@ -217,12 +217,6 @@ public class RoomManager : MonoBehaviour {
 		for (int i = 0; i < roomSide; i++) {
 			for (int j = 0; j < roomSide; j++) {
 				this.rooms [i, j] = RoomSetup (i, j);
-//				List<Vector3> gridPositions = InitializeList (i, j);
-
-				//this is where we would call LayoutObjectAtRandom, we don't have any health, items, weapons, etc. yet
-				//we do have an item though so...
-//				LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum, gridPositions);
-//				LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum, gridPositions);
 			}
 		}
 
@@ -231,10 +225,6 @@ public class RoomManager : MonoBehaviour {
 			for (int y = 0; y < this.roomSide * this.rows; y++) {
 				if (x == 0 || x == this.roomSide * this.rows - 1 || y == 0 || y == this.roomSide * this.columns - 1) {
 					this.PlaceItem(outerWallTiles[Random.Range(0, outerWallTiles.Length)], x, y);
-//					GameObject wallTile = Instantiate (outerWallTiles[Random.Range(0, outerWallTiles.Length)],
-//					                                   new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
-//					                                   Quaternion.identity) as GameObject;
-//					wallTile.transform.SetParent(this.rooms[0,0].transform);
 				}
 			}
 		}
@@ -263,10 +253,6 @@ public class RoomManager : MonoBehaviour {
 					if (tile.item != null) {
 						Destroy(tile.item);
 						this.PlaceItem(this.ElevationTile.tiles[0], (int)point.x, (int)point.y + y);
-//						tile.item = Instantiate (this.ElevationTile.tiles[0],
-//						                         new Vector3((int)point.x - this.columns / 2 + .5f, (int)point.y + y - this.rows / 2 + .5f, 1f),
-//						                         Quaternion.identity) as GameObject;
-//						tile.item.transform.SetParent(this.rooms[0,0].transform);
 					}
 					y++;
 				}
@@ -321,19 +307,19 @@ public class RoomManager : MonoBehaviour {
 				moveY = Mathf.Sign(yDiff);
 				moveX = xDiff/Math.Abs (yDiff);
 			}
-			print("placing placePath");
 			placePath(current, next, moveX, moveY);
 
 		}
 
-
-
+		
+		// Randomly distribute items throughout the game
+		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
+		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
+		
 	}
 
 	void placePath (float[] current, float[] next, float moveX, float moveY){
 
-		print (moveY);
-		print (moveX);
 		float currentX = current [0];
 		float currentY = current [1];
 		float nextX = next [0];
@@ -351,7 +337,7 @@ public class RoomManager : MonoBehaviour {
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			tile.item = Instantiate (this.elavationTiles[0],
+			tile.item = Instantiate (this.ElevationTile.tiles[0],
 			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f),
 			                         Quaternion.identity) as GameObject;
 			tile.item.transform.SetParent(this.rooms[0,0].transform);
@@ -362,7 +348,7 @@ public class RoomManager : MonoBehaviour {
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			tile.item = Instantiate (this.elavationTiles[0],
+			tile.item = Instantiate (this.ElevationTile.tiles[0],
 			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f),
 			                         Quaternion.identity) as GameObject;
 			tile.item.transform.SetParent(this.rooms[0,0].transform);
@@ -370,12 +356,6 @@ public class RoomManager : MonoBehaviour {
 			currentY = currentY + moveY;
 
 		}
-	}
-
-		// Randomly distribute items throughout the game
-		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
-		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
-
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
