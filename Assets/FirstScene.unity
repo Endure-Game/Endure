@@ -161,7 +161,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1644791121}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 10}
@@ -236,7 +236,7 @@ Prefab:
     - target: {fileID: 11439364, guid: fd11df54b479a479b8be820218b187bd, type: 2}
       propertyPath: inventoryDisplay
       value: 
-      objectReference: {fileID: 846675620}
+      objectReference: {fileID: 0}
     - target: {fileID: 21222764, guid: fd11df54b479a479b8be820218b187bd, type: 2}
       propertyPath: m_SortingOrder
       value: 0
@@ -646,33 +646,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5667725ad5cae499bbaaaf41b44ada34, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &846675620
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 846675621}
-  m_Layer: 0
-  m_Name: Inventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &846675621
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 846675620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -285.305847, y: -161.704742, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1644791121}
-  m_RootOrder: 0
 --- !u!1001 &924413951
 Prefab:
   m_ObjectHideFlags: 0
@@ -947,7 +920,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 846675621}
   - {fileID: 145957168}
   - {fileID: 1839492391}
   - {fileID: 1765774241}
@@ -972,7 +944,7 @@ MonoBehaviour:
   healthBar: {fileID: 1839492390}
   maxHealthBar: {fileID: 145957167}
   lowHealth: {fileID: 1765774242}
-  inventory: {fileID: 0}
+  selected: {fileID: 21300000, guid: 2b9160e8d0f22cc40af3b7b411231073, type: 3}
   map: {fileID: 0}
 --- !u!114 &1644791123
 MonoBehaviour:
@@ -1028,6 +1000,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1669030669
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.3795321
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.40982533
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 498666, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1765774240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1070,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1644791121}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1117,7 +1131,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1644791121}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 10}
