@@ -11,17 +11,6 @@ public class WorldController : MonoBehaviour {
 	private PlayerController player;
 	private CameraController camera;
 
-	void Awake () {
-//		if (instance == null) {
-//			instance = this;
-//		} else if (instance != this) {
-//			Destroy(gameObject);
-//			DontDestroyOnLoad(gameObject);
-			roomScript = GetComponent<RoomManager>();
-			InitGame();
-//		}
-	}
-
 	void InitGame () {
 		roomScript.SetupRooms ();
 	}
@@ -47,6 +36,10 @@ public class WorldController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		roomScript = GetComponent<RoomManager>();
+		InitGame();
+
 		this.player = PlayerController.instance;
 		this.camera = CameraController.instance;
 
