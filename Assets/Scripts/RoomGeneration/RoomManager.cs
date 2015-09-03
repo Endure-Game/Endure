@@ -312,7 +312,6 @@ public class RoomManager : MonoBehaviour {
 
 		}
 
-		
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
