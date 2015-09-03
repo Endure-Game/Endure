@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool pusher = false;//FOR PUSHING DEBUGGING SHITEWHO
 
-	private class InventoryItem
+	public class InventoryItem
 	{
 		public string name;
 		public Sprite sprite;
@@ -32,10 +32,15 @@ public class PlayerController : MonoBehaviour {
 		}
 	};
 
-	public GameObject inventoryDisplay;
-
-	private List<InventoryItem> inventory = new List<InventoryItem> ();
+	public List<InventoryItem> inventory = new List<InventoryItem> ();
 	private int selectedInventory = 0;
+
+	public int InventoryIndex {
+		get {
+			return selectedInventory;
+		}
+	}
+
 	private List<string> upgrades = new List<string> ();
 
 
@@ -62,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//DEBUGGING TOOL ONLY
-		if (Input.GetKey (KeyCode.G)) {
+		if (Input.GetKeyDown (KeyCode.G)) {
 			if(this.pusher){
 				this.pusher = false;
 			} else{
@@ -172,21 +177,13 @@ public class PlayerController : MonoBehaviour {
 
 	public void AddWeaponOrTool (string name, Sprite icon) {
 
-		GameObject invItem = new GameObject ();
-
 		switch (name) {
 
 		case "RustyMachete":
 			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3));
-			invItem.name = name;
-			invItem.transform.parent = this.inventoryDisplay.transform;
-			invItem.AddComponent<Image> ().sprite = icon;
 			break;
 		case "BowAndArrow":
 			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1));
-			invItem.name = name;
-			invItem.transform.parent = this.inventoryDisplay.transform;
-			invItem.AddComponent<Image> ().sprite = icon;
 			break;
 		default: 
 			print ("Error: not a valid weapon or tool name");
