@@ -74,10 +74,9 @@ public class PlayerController : MonoBehaviour {
 		if (!meleeAttacker.Locked) {
 			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
 			// make sure player is at the right z distance for correct overlap
-//			this.transform.position = new Vector3(this.transform.position.x, 
-//			                                      this.transform.position.y, 
-//			                                      (float)(this.transform.position.y + 16 ));
-
+			this.transform.position = new Vector3(this.transform.position.x, 
+			                                      this.transform.position.y, 
+			                                      (float)(this.transform.position.y + 16));
 			if (horizontal > 0) {
 				this.animator.SetInteger ("Direction", 3);
 				this.animator.SetBool ("Idle", false);

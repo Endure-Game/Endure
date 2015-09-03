@@ -19,7 +19,7 @@ public class Enemy1AI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (active) {
+		if (true) {
 			Vector2 heading = player.transform.position - this.transform.position;
 
 			if (!melee.Locked) {
