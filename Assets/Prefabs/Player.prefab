@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   ammo: 0
+  inventoryDisplay: {fileID: 0}
 --- !u!114 &11460858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f2a4e608d8927408fefbf4710ff8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 0
   knockback: .5
   delay: .5
   projectile: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67a1aa1b7711b9449651ffe09906733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 0
   knockback: .5
   range: .600000024
   delay: .5
