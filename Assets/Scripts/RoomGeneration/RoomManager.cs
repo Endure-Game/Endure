@@ -78,16 +78,17 @@ public class RoomManager : MonoBehaviour {
 		for (int x = 0; x < columns; x ++) {
 			for(int y = 0; y < rows; y ++){
 
+				Tile tile = tileMap[x + gridX * this.columns, y + gridY * this.rows];
 				GameObject toInstantiate;
-				if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 0) {
+				if (tile.biome == ForestTile.BiomeNumber) {
 					toInstantiate = this.ForestTile.getGroundTile();
-				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 1) {
+				} else if (tile.biome == DesertTile.BiomeNumber) {
 					toInstantiate = this.DesertTile.getGroundTile();
-				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 2) {
+				} else if (tile.biome == PlainsTile.BiomeNumber) {
 					toInstantiate = this.PlainsTile.getGroundTile();
-				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 3) {
+				} else if (tile.biome == MountainTile.BiomeNumber) {
 					toInstantiate = this.MountainTile.getGroundTile();
-				} else if (tileMap[x + gridX * this.columns, y + gridY * this.rows].biome == 4) {
+				} else if (tile.biome == SnowTile.BiomeNumber) {
 					toInstantiate = this.SnowTile.getGroundTile();
 				} else {
 					toInstantiate = this.BeachTile.getGroundTile();
