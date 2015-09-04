@@ -31,5 +31,6 @@ public class Tile
 		this.blocking = tile.blocking;
 		this.elevation = tile.elevation;
 	}
+	
 }
 

@@ -359,7 +359,6 @@ MonoBehaviour:
   end: 2000000020000000
   roomSide: 8
   biomeNumber: 16
-  randomPoints: []
   outerWallTiles:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
   coins:
@@ -384,10 +383,12 @@ MonoBehaviour:
   - {fileID: 113766, guid: 751638792c1df496b9584c54e722764c, type: 2}
   blockingTiles:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
-  bloomNum: 15
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  bloomNum: 10
   bloomSize:
-    minimum: 19
-    maximum: 20
+    minimum: 28
+    maximum: 22
   bloomTightness: .400000006
 --- !u!114 &373454791
 MonoBehaviour:
@@ -407,8 +408,10 @@ MonoBehaviour:
   - {fileID: 102470, guid: f302eaf7050314cdb81f5a2e2f62294d, type: 2}
   blockingTiles:
   - {fileID: 124120, guid: 95018a084c8124bccba0b5e33fa2d521, type: 2}
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
-  bloomNum: 100
+  bloomNum: 90
   bloomSize:
     minimum: 3
     maximum: 7
@@ -430,10 +433,12 @@ MonoBehaviour:
   - {fileID: 192316, guid: 16a8dd48ba0bc4c8e841a999c66a9008, type: 2}
   blockingTiles:
   - {fileID: 106628, guid: 67f84996e558c45c194e307262598506, type: 2}
-  bloomNum: 60
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  bloomNum: 30
   bloomSize:
-    minimum: 8
-    maximum: 10
+    minimum: 12
+    maximum: 15
 --- !u!114 &373454793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +457,9 @@ MonoBehaviour:
   - {fileID: 164292, guid: bd99ab88f9ca74e1986452b70beb5f9d, type: 2}
   blockingTiles:
   - {fileID: 132716, guid: 6241f2a9353bc43f5b027a9eda45d5a5, type: 2}
-  bloomNum: 400
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  bloomNum: 100
   bloomSize:
     minimum: 1
     maximum: 4
@@ -474,6 +481,8 @@ MonoBehaviour:
   - {fileID: 189106, guid: 2552a4983afc64d1f815b0a788ffe318, type: 2}
   blockingTiles:
   - {fileID: 120402, guid: b4b100efd7bdc467cbd000a1a555c9c6, type: 2}
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
     minimum: 10
@@ -499,9 +508,10 @@ MonoBehaviour:
   - {fileID: 126360, guid: ce40e8ef53518423bbcf671ec55c1fd9, type: 2}
   - {fileID: 161738, guid: 87c51fa8513684829a03318e0e7e6c20, type: 2}
   blockingTiles:
-  - {fileID: 195700, guid: baa1297299ee34355a6bf3e56e59cee2, type: 2}
-  tree: {fileID: 125472, guid: cdee29f0838fe4d7a873a1c367958af9, type: 2}
-  bloomNum: 200
+  - {fileID: 125472, guid: cdee29f0838fe4d7a873a1c367958af9, type: 2}
+  enemies:
+  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  bloomNum: 130
   bloomSize:
     minimum: 5
     maximum: 5

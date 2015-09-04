@@ -21,12 +21,13 @@ public class RoomManager : MonoBehaviour {
 	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
 	public int[] end = new int[2] {255, 255};
+	public int enemySpawnInterval = 100;
 
 	public int roomSide = 3;
 	public int biomeNumber = 4;
 	public Tile[,] tileMap;
-	public List<Tile>[] regions;
-	public List<Vector4> randomPoints;
+	public List<Region> regions;
+//	public List<Vector4> randomPoints;
 
 	public GameObject[] outerWallTiles;
 
@@ -38,6 +39,16 @@ public class RoomManager : MonoBehaviour {
 
 	void Awake() {
 		this.tileMap = new Tile[this.roomSide * this.columns, this.roomSide * this.rows];
+	}
+
+	private int timer = 0;
+	void Update() {
+		// spawn enemies
+		timer++;
+		if (timer % this.enemySpawnInterval == 0) {
+			this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+			print ("enemySpawned");
+		}
 	}
 
 	List<Vector3> InitializeList (float gridX, float gridY) {
@@ -115,33 +126,36 @@ public class RoomManager : MonoBehaviour {
 	// Using Voronoi Generation to make a fill tileMap with tile numbers
 	public void TileMapGeneration () {
 
-		// Initialize tileMap and regions
-		// ToDo: create private width and height variables
 		int size = this.rows * this.roomSide;
-		this.regions = new List<Tile>[this.biomeNumber];
-		for (int i = 0; i < this.regions.Length; i++) {
-			this.regions[i] = new List<Tile>();
-		}
 
 		// Generate list of points with a biome number associated
-		this.randomPoints = new List<Vector4>();
+		this.regions = new List<Region>();
 		int randomPointsRegion = (int)(size / Mathf.Sqrt(this.biomeNumber));
 		for (int i = 0; i < size; i += randomPointsRegion) {
 			for (int j = 0; j < size; j += randomPointsRegion) {
-				Vector4 newPoint = new Vector4 (Random.Range (0, randomPointsRegion) + j,
-				                                Random.Range (0, randomPointsRegion) + i,
-				                                Random.Range (0, 6), // biome
-				                                Random.Range (0, 2)); // altitude
 
-				randomPoints.Add(newPoint);
+				int randomX = Random.Range (0, randomPointsRegion) + j;
+				int randomY = Random.Range (0, randomPointsRegion) + i;
+				int biomeIndex = Random.Range (0, 6);
+				int altitude = Random.Range (0, 2);
+
+				BiomeTile biome;
+				if (biomeIndex == 0) {
+					biome = this.ForestTile;
+				} else if (biomeIndex == 1) {
+					biome = this.DesertTile;
+				} else if (biomeIndex == 2) {
+					biome = this.PlainsTile;
+				} else if (biomeIndex == 3) {
+					biome = this.MountainTile;
+				} else if (biomeIndex == 4) {
+					biome = this.SnowTile;
+				} else {
+					biome = this.BeachTile;
+				}
+				this.regions.Add(new Region(randomX, randomY, biome, altitude));
 			}
 		}
-
-//		for (int x = 0; x < size; x++) {
-//			for (int y = 0; y < size; y++) {
-//				this.getBiome(x, y);
-//			}
-//		}
 
 //		For each Tile, check for closest biome point
 		int skip = 15;
@@ -190,7 +204,7 @@ public class RoomManager : MonoBehaviour {
 
 							for (int x = i + 1; x < Mathf.Min(i + skip, size); x++) {
 								tileMap[x, y] = new Tile (left, x, y);
-								this.regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
+								this.regions[tileMap[x, y].regionIndex].tiles.Add(tileMap[x, y]);
 							}
 						}
 					}
@@ -200,7 +214,7 @@ public class RoomManager : MonoBehaviour {
 					for (int x = i; x < Mathf.Min(i + skip, size); x++) {
 						for (int y = j; y < Mathf.Min(j + skip, size); y++) {
 							tileMap[x, y] = new Tile (topLeft, x, y);
-							this.regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
+							this.regions[tileMap[x, y].regionIndex].tiles.Add(tileMap[x, y]);
 						}
 					}
 				}
@@ -235,26 +249,26 @@ public class RoomManager : MonoBehaviour {
 		this.ElevationTile.placeCliffTiles();
 
 		// Create climb points
-		for (int i = 0; i < this.randomPoints.Count; i++) {
-			Vector4 point = this.randomPoints[i];
+		for (int i = 0; i < this.regions.Count; i++) {
+			Region region = this.regions[i];
 
 			if (i < this.roomSide) {
 				int x = 1;
-				Vector4 rightPoint = this.randomPoints[i + 1];
-				while (point.x + x < rightPoint.x) {
-					Destroy(this.tileMap[(int)point.x + x, (int)point.y].item);
+				Region rightRegion = this.regions[i + 1];
+				while (region.focusX + x < rightRegion.focusX) {
+					Destroy(this.tileMap[region.focusX + x, region.focusY].item);
 					x++;
 				}
 			}
 
-			if (i < this.randomPoints.Count - this.roomSide) {
+			if (i < this.regions.Count - this.roomSide) {
 				int y = 1;
-				Vector4 lowerPoint = this.randomPoints[i + this.roomSide];
-				while (point.y + y < lowerPoint.y) {
-					Tile tile = this.tileMap[(int)point.x, (int)point.y + y];
+				Region upperRegion = this.regions[i + this.roomSide];
+				while (region.focusY + y < upperRegion.focusY) {
+					Tile tile = this.tileMap[region.focusX, region.focusY + y];
 					if (tile.item != null) {
 						Destroy(tile.item);
-						this.PlaceItem(this.ElevationTile.tiles[0], (int)point.x, (int)point.y + y);
+						this.PlaceItem(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
 					}
 					y++;
 				}
@@ -262,27 +276,19 @@ public class RoomManager : MonoBehaviour {
 		}
 
 		// Create blocking tiles
-		foreach (List<Tile> tiles in this.regions) {
-			if (tiles[0].biome == 0) {
-				this.ForestTile.RandomBlocking(tiles);
-			} else if (tiles[0].biome == 1) {
-				this.DesertTile.RandomBlocking(tiles);
-			} else if (tiles[0].biome == 2) {
-				this.PlainsTile.RandomBlocking(tiles);
-			} else if (tiles[0].biome == 3) {
-				this.MountainTile.RandomBlocking(tiles);
-			} else if (tiles[0].biome == 4) {
-				this.SnowTile.RandomBlocking(tiles);
-			} else {
-				this.BeachTile.RandomBlocking(tiles);
-			}
+		foreach (Region region in this.regions) {
+			region.makeBlocking();
 		}
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
+		List<Vector2> randomPoints = new List<Vector2>();
+		foreach (Region region in this.regions) {
+			randomPoints.Add(new Vector2(region.focusX, region.focusY));
+		}
 		List <int[]> pointsDist = new List<int[]>();
-		Vector4 start = new Vector4 (16f, 16f, 0f, 0f);
-		Vector4 exit = new Vector4 (255f, 255f, 0f, 0f);
+		Vector2 start = new Vector2 (16f, 16f);
+		Vector2 exit = new Vector2 (255f, 255f);
 		randomPoints.Insert (0, start);
 		randomPoints.Add (exit);
 
@@ -391,7 +397,6 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
-
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
@@ -474,17 +479,18 @@ public class RoomManager : MonoBehaviour {
 
 		int distance = 1000;
 		int closestIndex = 0;
-		for (int pointI = 0; pointI < randomPoints.Count; pointI++) {
-			Vector4 point = randomPoints[pointI];
+		for (int regionI = 0; regionI < this.regions.Count; regionI++) {
+			Region region = this.regions[regionI];
 			
-			int dist = (int) (Mathf.Abs(point[0] - x) + Mathf.Abs(point[1] - y));
+			int dist = (int) (Mathf.Abs(region.focusX - x) + Mathf.Abs(region.focusY - y));
 			if (dist < distance) {
-				closestIndex = pointI;
+				closestIndex = regionI;
 				distance = dist;
 			}
 		}
-		
-		tileMap[x, y] = new Tile (x, y, closestIndex, (int)randomPoints[closestIndex].z, false, (int)randomPoints[closestIndex].w);
-		this.regions[closestIndex].Add(tileMap[x, y]);
+
+		Region closest = this.regions[closestIndex];
+		tileMap[x, y] = new Tile (x, y, closestIndex, closest.biome.getBiomeNumber(), false, closest.altitude);
+		this.regions[closestIndex].tiles.Add(tileMap[x, y]);
 	}
 }

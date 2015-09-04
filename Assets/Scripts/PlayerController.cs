@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 4;
 	public static PlayerController instance;
 	public int ammo = 0;
+	public Region currentRegion;
 
 	private int counter = 0;
 	private Rigidbody2D rb2d;
@@ -162,7 +163,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
-
 	}
 	//called before start
 	void Awake () {
