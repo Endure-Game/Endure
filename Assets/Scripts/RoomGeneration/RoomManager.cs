@@ -40,6 +40,16 @@ public class RoomManager : MonoBehaviour {
 		this.tileMap = new Tile[this.roomSide * this.columns, this.roomSide * this.rows];
 	}
 
+	private int timer = 0;
+	void Update() {
+		// spawn enemies
+		timer++;
+		if (timer % 100 == 0) {
+			this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+			print ("enemySpawned");
+		}
+	}
+
 	List<Vector3> InitializeList (float gridX, float gridY) {
 		// TODO: duplicated in RoomSetup, refactor
 		float centerX = gridX * this.columns;

@@ -11,6 +11,7 @@ public class Region
 
 	public List<Tile> tiles;
 	private List<GameObject> enemies;
+	private int enemyLimit = 10;
 
 	public Region(int focusX, int focusY, BiomeTile biome, int altitude) {
 		this.focusX = focusX;
@@ -26,7 +27,12 @@ public class Region
 		this.biome.RandomBlocking(this.tiles);
 	}
 
-	public void makeEnemy() {
+	public void spawnEnemy() {
+
+		if (this.enemies.Count == this.enemyLimit) {
+			return;
+		}
+
 		GameObject enemy = this.biome.getEnemy();
 
 		Tile enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
