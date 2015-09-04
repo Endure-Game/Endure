@@ -348,7 +348,6 @@ public class RoomManager : MonoBehaviour {
 				if(westTile.item != null){
 					Destroy (westTile.item);
 				}
-				this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX) - 1, (int)Mathf.Floor(currentY));
 				tile.path = true;
 			}
 			if(currentX + 1 < this.roomSide * this.rows - 2){
@@ -356,7 +355,6 @@ public class RoomManager : MonoBehaviour {
 				if(eastTile.item != null){
 					Destroy (eastTile.item);
 				}
-				this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX) + 1, (int)Mathf.Floor(currentY));
 				tile.path = true;
 			}
 			if(currentY + 1 < this.roomSide * this.columns - 2){
@@ -364,7 +362,6 @@ public class RoomManager : MonoBehaviour {
 				if(northTile.item != null){
 					Destroy (northTile.item);
 				}
-				this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) + 1);
 				tile.path = true;
 			}
 			if(currentY - 1 > 1){
@@ -372,7 +369,6 @@ public class RoomManager : MonoBehaviour {
 				if(southTile.item != null){
 					Destroy (southTile.item);
 				}
-				this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) - 1);
 				tile.path = true;
 			}
 	
@@ -380,7 +376,6 @@ public class RoomManager : MonoBehaviour {
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY));
 			tile.path = true;
 			currentX = currentX + moveX;
 			
@@ -388,7 +383,6 @@ public class RoomManager : MonoBehaviour {
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			this.PlaceItem(this.ElevationTile.tiles[0], (int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY));
 			tile.path = true;
 			currentY = currentY + moveY;
 
