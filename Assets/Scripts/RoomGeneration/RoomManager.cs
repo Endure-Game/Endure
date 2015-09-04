@@ -390,6 +390,7 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
+
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
