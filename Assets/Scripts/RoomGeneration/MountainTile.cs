@@ -3,34 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-public class MountainTile : MonoBehaviour
+public class MountainTile : BiomeTile
 {
-	public GameObject[] groundTiles;
-	public GameObject[] blockingTiles;
 
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
 
 	public const int BiomeNumber = 3;
-	
-	private Tile[,] tileMap;
-	private int width;
-	private int height;
-	
-	void Awake() {
-		this.tileMap = this.GetComponent<RoomManager>().tileMap;
-		this.height = this.tileMap.GetLength(0);
-		this.width = this.tileMap.GetLength(1);
-	}
-	
-	public GameObject getGroundTile() {
-		return this.groundTiles[Random.Range(0, this.groundTiles.Length)];
-	}
-	
-	public GameObject getBlockingTile() {
-		return this.blockingTiles[Random.Range(0, this.blockingTiles.Length)];
-	}
 	
 	public void RandomBlocking(List<Tile> region) {
 		for (int num = 0; num < bloomNum; num++) {
