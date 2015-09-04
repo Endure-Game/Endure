@@ -384,10 +384,10 @@ MonoBehaviour:
   - {fileID: 113766, guid: 751638792c1df496b9584c54e722764c, type: 2}
   blockingTiles:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
-  bloomNum: 15
+  bloomNum: 10
   bloomSize:
-    minimum: 19
-    maximum: 20
+    minimum: 28
+    maximum: 22
   bloomTightness: .400000006
 --- !u!114 &373454791
 MonoBehaviour:
@@ -408,7 +408,7 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 124120, guid: 95018a084c8124bccba0b5e33fa2d521, type: 2}
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
-  bloomNum: 100
+  bloomNum: 90
   bloomSize:
     minimum: 3
     maximum: 7
@@ -430,10 +430,10 @@ MonoBehaviour:
   - {fileID: 192316, guid: 16a8dd48ba0bc4c8e841a999c66a9008, type: 2}
   blockingTiles:
   - {fileID: 106628, guid: 67f84996e558c45c194e307262598506, type: 2}
-  bloomNum: 60
+  bloomNum: 30
   bloomSize:
-    minimum: 8
-    maximum: 10
+    minimum: 12
+    maximum: 15
 --- !u!114 &373454793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   - {fileID: 164292, guid: bd99ab88f9ca74e1986452b70beb5f9d, type: 2}
   blockingTiles:
   - {fileID: 132716, guid: 6241f2a9353bc43f5b027a9eda45d5a5, type: 2}
-  bloomNum: 400
+  bloomNum: 100
   bloomSize:
     minimum: 1
     maximum: 4
@@ -501,7 +501,7 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 195700, guid: baa1297299ee34355a6bf3e56e59cee2, type: 2}
   tree: {fileID: 125472, guid: cdee29f0838fe4d7a873a1c367958af9, type: 2}
-  bloomNum: 200
+  bloomNum: 130
   bloomSize:
     minimum: 5
     maximum: 5
