@@ -31,7 +31,7 @@ public class EnemyRangedAI : MonoBehaviour {
 				this.rb2d.velocity = Vector2.zero;
 			}
 			if (heading.magnitude < this.cowardDistance && !ranged.Locked){
-				this.rb2d.velocity = this.speed * - heading.normalized; 
+				this.rb2d.velocity = this.speed * -heading.normalized; 
 			}
 			else if (heading.magnitude < this.rangedDistance){
 				//Vector3 target = heading;

@@ -30,6 +30,7 @@ public class EnemyCowardAI : MonoBehaviour {
 			if(this.feared){
 				this.rb2d.velocity = this.speed * - heading.normalized; 
 			} else {
+				//this.rb2d.velocity.
 				this.rb2d.velocity = Vector2.zero;
 			}
 		}
