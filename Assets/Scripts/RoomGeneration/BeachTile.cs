@@ -35,7 +35,7 @@ public class BeachTile : MonoBehaviour
 	
 	public void RandomBlocking(List<Tile> region) {
 		for (int num = 0; num < bloomNum; num++) {
-			
+
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
@@ -45,11 +45,7 @@ public class BeachTile : MonoBehaviour
 	
 	private void BlockingExplosion(int x, int y, int level) {
 		
-		if (level == 0 || x < 0 || y < 0 || x >= width || y >= height) {
-			return;
-		}
-		
-		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
+		if (level < 1 || x < 0 || y < 0 || x >= width || y >= height) {
 			return;
 		}
 		

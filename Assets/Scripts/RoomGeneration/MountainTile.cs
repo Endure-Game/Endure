@@ -44,14 +44,10 @@ public class MountainTile : MonoBehaviour
 
 	private void BlockingExplosion(int x, int y, int level) {
 		
-		if (level == 0 || x < 0 || y < 0 || x >= width || y >= height) {
+		if (level < 1 || x < 0 || y < 0 || x >= width || y >= height) {
 			return;
 		}
-		
-		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
-			return;
-		}
-		
+
 		Tile tile = this.tileMap[x, y];
 		
 		if (tile.biome != MountainTile.BiomeNumber || tile.blocking == true) {

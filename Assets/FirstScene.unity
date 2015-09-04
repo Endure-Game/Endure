@@ -388,7 +388,7 @@ MonoBehaviour:
   bloomSize:
     minimum: 19
     maximum: 20
-  bloomTightness: .100000001
+  bloomTightness: .400000006
 --- !u!114 &373454791
 MonoBehaviour:
   m_ObjectHideFlags: 0

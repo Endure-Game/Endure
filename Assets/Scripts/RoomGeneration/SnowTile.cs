@@ -54,11 +54,7 @@ public class SnowTile : MonoBehaviour
 
 	private void BlockingExplosion(int x, int y, int level) {
 
-		if (level == 0 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
-			return;
-		}
-	
-		if (Mathf.Sqrt(Random.Range(0, level)) < 1) {
+		if (level < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
 			return;
 		}
 		
