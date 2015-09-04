@@ -18,17 +18,24 @@ public class PlayerController : MonoBehaviour {
 
 	private bool pusher = false;//FOR PUSHING DEBUGGING SHITEWHO
 
+	public enum Control {
+		SPACE,
+		MOUSE
+	}
+
 	public class InventoryItem
 	{
 		public string name;
 		public Sprite sprite;
 		public string type;
 		public int damage;
-		public InventoryItem (string n, Sprite s, string t, int d) {
+		public Control control;
+		public InventoryItem (string n, Sprite s, string t, int d, Control c) {
 			this.name = n;
 			this.sprite = s;
 			this.type = t;
 			this.damage = d;
+			this.control = c;
 		}
 	};
 
@@ -180,10 +187,10 @@ public class PlayerController : MonoBehaviour {
 		switch (name) {
 
 		case "RustyMachete":
-			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3));
+			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE));
 			break;
 		case "BowAndArrow":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1));
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1, Control.MOUSE));
 			break;
 		default: 
 			print ("Error: not a valid weapon or tool name");

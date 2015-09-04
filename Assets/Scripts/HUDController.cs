@@ -9,6 +9,8 @@ public class HUDController : MonoBehaviour {
 
 	public Image lowHealth;
 	public Sprite selected;
+	public Sprite mouse;
+	public Sprite space;
 
 	public GameObject map;
 	private GameObject inventory;
@@ -91,7 +93,25 @@ public class HUDController : MonoBehaviour {
 			border.AddComponent<Image> ().sprite = this.selected;
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
-			border.transform.position = new Vector3 (this.rectTransform.rect.width - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width, this.rectTransform.rect.height - rt.rect.height / 2, 0);
+
+			var selX = this.rectTransform.rect.width - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
+			var selY = this.rectTransform.rect.height - rt.rect.height / 2;
+
+			border.transform.position = new Vector3 (selX, selY, 0);
+
+			var control = new GameObject ();
+
+			switch (PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].control) {
+				case PlayerController.Control.MOUSE:
+					control.AddComponent<Image> ().sprite = this.mouse;
+				break;
+				case PlayerController.Control.SPACE:
+					control.AddComponent<Image> ().sprite = this.space;
+				break;
+			}
+
+			control.transform.SetParent (this.inventory.transform);
+			control.transform.position = new Vector3 (selX, selY, 0);
 		}
 	}
 }
