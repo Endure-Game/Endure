@@ -59,31 +59,39 @@ public class HUDController : MonoBehaviour {
 			lowHealth.color = new Color(0, 0, 0, 0.8f);
 		}
 
-		// inventory
-		Destroy (this.inventory);
-		this.inventory = new GameObject ();
-		this.inventory.transform.parent = this.gameObject.transform;
-
-		float iconWidth = 100;
-		float barWidth = iconWidth * PlayerController.instance.inventory.Count;
-
-		int i = 0;
-
-		foreach (var item in PlayerController.instance.inventory) {
-			var icon = new GameObject ();
-			icon.AddComponent<Image> ().sprite = item.sprite;
-			icon.transform.SetParent(this.inventory.transform);
-			float x = this.rectTransform.rect.width / 2 - barWidth / 2 + i * iconWidth;
-			icon.transform.position = new Vector3 (this.rectTransform.rect.width / 2 - barWidth / 2 + i * iconWidth, 100, 0);
-
-			i++;
-		}
-
+		
 		if (PlayerController.instance.inventory.Count > 0) {
+
+			// inventory
+			Destroy (this.inventory);
+			this.inventory = new GameObject ();
+			this.inventory.transform.parent = this.gameObject.transform;
+
+			var sample = new GameObject ();
+			sample.AddComponent<Image> ().sprite = this.selected;
+			float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
+			Destroy (sample);
+
+			float barWidth = iconWidth * PlayerController.instance.inventory.Count;
+
+			int i = 0;
+
+			foreach (var item in PlayerController.instance.inventory) {
+				var icon = new GameObject ();
+				icon.AddComponent<Image> ().sprite = item.sprite;
+				var rectTransform = icon.GetComponent<RectTransform> ();
+				icon.transform.SetParent(this.inventory.transform);
+				float x = this.rectTransform.rect.width - barWidth + i * rectTransform.rect.width;
+				icon.transform.position = new Vector3 (x, this.rectTransform.rect.height - rectTransform.rect.height / 2, 0);
+
+				i++;
+			}
+
 			var border = new GameObject ();
 			border.AddComponent<Image> ().sprite = this.selected;
 			border.transform.SetParent (this.inventory.transform);
-			border.transform.position = new Vector3 (this.rectTransform.rect.width / 2 - barWidth / 2 + PlayerController.instance.InventoryIndex * iconWidth, 100, 0);
+			var rt = border.GetComponent<RectTransform> ();
+			border.transform.position = new Vector3 (this.rectTransform.rect.width - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width, this.rectTransform.rect.height - rt.rect.height / 2, 0);
 		}
 	}
 }
