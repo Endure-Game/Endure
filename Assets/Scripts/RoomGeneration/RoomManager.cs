@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour {
 	public int columns = 32;
 	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
-	public int[] end = new int[2] {31, 31};
+	public int[] end = new int[2] {255, 255};
 
 	public int roomSide = 3;
 	public int biomeNumber = 4;
@@ -280,6 +280,11 @@ public class RoomManager : MonoBehaviour {
 		//create game path
 		//TODO fix sorting algo for randomPoints
 		List <int[]> pointsDist = new List<int[]>();
+		Vector4 start = new Vector4 (16f, 16f, 0f, 0f);
+		Vector4 exit = new Vector4 (255f, 255f, 0f, 0f);
+		randomPoints.Insert (0, start);
+		randomPoints.Add (exit);
+
 
 		for (int i = 0; i < randomPoints.Count; i++) {
 			int pointX = (int)randomPoints[i].x;
@@ -288,8 +293,12 @@ public class RoomManager : MonoBehaviour {
 			int[] tuple = new int[2] {i, (int)dist};
 			pointsDist.Add(tuple);
 		}
+
+
 		//first item is index of randomPoints the second is the distance
 		pointsDist.Sort ((a, b) => a [1].CompareTo (b [1]));
+
+
 
 		for (int i = 0; i < pointsDist.Count - 1 ; i++) {
 			int index1 = pointsDist[i][0];
@@ -325,33 +334,55 @@ public class RoomManager : MonoBehaviour {
 		float nextX = next [0];
 		float nextY = next [1];
 
-		while ((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
-		        (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) //||
-//		       ((int)Mathf.Floor(currentX) == (int)Mathf.Floor(nextX) &&
-//				 (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ||
-//		       ((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
-//				 (int)Mathf.Floor(currentY) == (int)Mathf.Floor(nextY)))
-		{
+		while (((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
+		       (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ||
+
+			    ((int)Mathf.Floor(currentX) == (int)Mathf.Floor(nextX) &&
+			    (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ){
+
 
 			Tile tile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY)];
+			//DONT TOUCH MY MAGIC IF BLOCK - IAN
+			if(currentX - 1 > 1){
+				Tile westTile = this.tileMap [(int)Mathf.Floor(currentX) - 1, (int)Mathf.Floor(currentY)];
+				if(westTile.item != null){
+					Destroy (westTile.item);
+				}
+				tile.path = true;
+			}
+			if(currentX + 1 < this.roomSide * this.rows - 2){
+				Tile eastTile = this.tileMap [(int)Mathf.Floor(currentX) + 1, (int)Mathf.Floor(currentY)];
+				if(eastTile.item != null){
+					Destroy (eastTile.item);
+				}
+				tile.path = true;
+			}
+			if(currentY + 1 < this.roomSide * this.columns - 2){
+				Tile northTile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) + 1];
+				if(northTile.item != null){
+					Destroy (northTile.item);
+				}
+				tile.path = true;
+			}
+			if(currentY - 1 > 1){
+				Tile southTile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) - 1];
+				if(southTile.item != null){
+					Destroy (southTile.item);
+				}
+				tile.path = true;
+			}
+	
+
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			tile.item = Instantiate (this.ElevationTile.tiles[0],
-			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f),
-			                         Quaternion.identity) as GameObject;
-			tile.item.transform.SetParent(this.rooms[0,0].transform);
 			tile.path = true;
 			currentX = currentX + moveX;
-
-			tile = this.tileMap [(int)Mathf.Round(currentX), (int)Mathf.Round(currentY)];
+			
+			tile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY)];
 			if(tile.item != null){
 				Destroy (tile.item);
 			}
-			tile.item = Instantiate (this.ElevationTile.tiles[0],
-			                         new Vector3((int)Mathf.Floor(currentX) - this.columns / 2 + .5f, (int)Mathf.Floor(currentY) - this.rows / 2 + .5f, 1f),
-			                         Quaternion.identity) as GameObject;
-			tile.item.transform.SetParent(this.rooms[0,0].transform);
 			tile.path = true;
 			currentY = currentY + moveY;
 
