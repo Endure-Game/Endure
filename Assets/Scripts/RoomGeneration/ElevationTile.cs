@@ -5,33 +5,27 @@ using System.Collections.Generic;
 public class ElevationTile : MonoBehaviour
 {
 	public GameObject[] tiles;
-
-	private Tile[,] tileMap;
-	private int width;
-	private int height;
 	
-	void Start() {
-		this.tileMap = this.GetComponent<RoomManager>().tileMap;
-		this.height = this.tileMap.GetLength(0);
-		this.width = this.tileMap.GetLength(1);
-	}
-
 	public void placeCliffTiles() {
 
-		for (int x = 1; x < this.width - 1; x++) {
-			for (int y = 1; y < this.height - 1; y++) {
-				
+		Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
+		int height = tileMap.GetLength(0);
+		int width = tileMap.GetLength(1);
+
+		for (int x = 1; x < width - 1; x++) {
+			for (int y = 1; y < height - 1; y++) {
+
 				bool lower = false;
 				List<int> walls = new List<int>();
 				for (int xDelta = -1; xDelta <= 1; xDelta++) {
 					for (int yDelta = -1; yDelta <= 1; yDelta++) {
-						if (this.tileMap[x + xDelta, y + yDelta].elevation > this.tileMap[x, y].elevation) {
+						if (tileMap[x + xDelta, y + yDelta].elevation > tileMap[x, y].elevation) {
 							lower = true;
 							walls.Add(xDelta + 1 + (yDelta + 1) * 3);
 						}
 					}
 				}
-				
+
 				if (lower) {
 					this.GetComponent<RoomManager>().PlaceItem(GetWallTile(walls), x, y);
 				}

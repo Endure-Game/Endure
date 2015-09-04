@@ -324,7 +324,7 @@ public class RoomManager : MonoBehaviour {
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
-		
+
 	}
 
 	void placePath (float[] current, float[] next, float moveX, float moveY){
@@ -373,7 +373,6 @@ public class RoomManager : MonoBehaviour {
 					}
 					tile.path = true;
 				}
-	
 
 				if (tile.item != null) {
 					Destroy (tile.item);
