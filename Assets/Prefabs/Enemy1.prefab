@@ -132,6 +132,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  drops:
+  - chance: 10
+    item: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
+  - chance: 1
+    item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
 --- !u!212 &21262582
 SpriteRenderer:
   m_ObjectHideFlags: 1
