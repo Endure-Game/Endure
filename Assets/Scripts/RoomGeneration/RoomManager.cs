@@ -137,25 +137,18 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 
-		int skip = 4;
+//		for (int x = 0; x < size; x++) {
+//			for (int y = 0; y < size; y++) {
+//				this.getBiome(x, y);
+//			}
+//		}
 
-		// For each Tile, check for closest biome point
+//		For each Tile, check for closest biome point
+		int skip = 15;
 		for (int i = 0; i < size; i+=skip) {
 			for (int j = 0; j < size; j+=skip) {
 
-				int distance = 1000;
-				int closestIndex = 0;
-				for (int pointI = 0; pointI < randomPoints.Count; pointI++) {
-					Vector4 point = randomPoints[pointI];
-
-					int dist = (int) (Mathf.Abs(point[0] - i) + Mathf.Abs(point[1] - j));
-					if (dist < distance) {
-						closestIndex = pointI;
-						distance = dist;
-					}
-				}
-
-				tileMap[i, j] = new Tile (i, j, closestIndex, (int)randomPoints[closestIndex].z, false, (int)randomPoints[closestIndex].w);
+				this.getBiome(i, j);
 			}
 		}
 
@@ -174,23 +167,31 @@ public class RoomManager : MonoBehaviour {
 				    topLeft.elevation != bottemLeft.elevation ||
 				    topLeft.elevation != bottemRight.elevation) {
 
-					for (int x = i; x < Mathf.Min(i + skip, size); x++) {
-						for (int y = j; y < Mathf.Min(j + skip, size); y++) {
+					for (int y = j; y < Mathf.Min(j + skip, size); y++) {
+						this.getBiome(i, y);
+					}
 
-							int distance = 1000;
-							int closestIndex = 0;
-							for (int pointI = 0; pointI < randomPoints.Count; pointI++) {
-								Vector4 point = randomPoints[pointI];
+					for (int y = j; y < Mathf.Min(j + skip, size); y++) {
 
-								int dist = (int) (Mathf.Abs(point[0] - x) + Mathf.Abs(point[1] - y));
-								if (dist < distance) {
-									closestIndex = pointI;
-									distance = dist;
-								}
+						this.getBiome(i, y);
+						if (i + skip < size) {
+							this.getBiome(i + skip, y);
+						}
+						Tile left = tileMap[i, y];
+						Tile right = (i + skip < size) ? tileMap[i + skip, y] : left;
+
+						if (left.biome != right.biome ||
+						    left.elevation != right.elevation) {
+
+							for (int x = i + 1; x < Mathf.Min(i + skip, size); x++) {
+								this.getBiome(x, y);
 							}
+						} else {
 
-							tileMap[x, y] = new Tile (i, j, closestIndex, (int)randomPoints[closestIndex].z, false, (int)randomPoints[closestIndex].w);
-							this.regions[closestIndex].Add(tileMap[x, y]);
+							for (int x = i + 1; x < Mathf.Min(i + skip, size); x++) {
+								tileMap[x, y] = new Tile (left, x, y);
+								this.regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
+							}
 						}
 					}
 
@@ -198,7 +199,7 @@ public class RoomManager : MonoBehaviour {
 
 					for (int x = i; x < Mathf.Min(i + skip, size); x++) {
 						for (int y = j; y < Mathf.Min(j + skip, size); y++) {
-							tileMap[x, y] = new Tile (topLeft);
+							tileMap[x, y] = new Tile (topLeft, x, y);
 							this.regions[tileMap[x, y].regionIndex].Add(tileMap[x, y]);
 						}
 					}
@@ -324,7 +325,7 @@ public class RoomManager : MonoBehaviour {
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
-		
+
 	}
 
 	void placePath (float[] current, float[] next, float moveX, float moveY){
@@ -373,7 +374,6 @@ public class RoomManager : MonoBehaviour {
 					}
 					tile.path = true;
 				}
-	
 
 				if (tile.item != null) {
 					Destroy (tile.item);
@@ -391,6 +391,7 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
+
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
@@ -461,7 +462,29 @@ public class RoomManager : MonoBehaviour {
 		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
 		                                       Quaternion.identity) as GameObject;
 		this.tileMap[x, y].item.transform.SetParent(this.rooms[0,0].transform);
-		// Make higher tiles apear behind front tiles
+
+		// Make higher tiles apear behind lower tiles
 		this.tileMap[x, y].item.transform.Translate(new Vector3(0, 0, y));
+	}
+
+	private void getBiome(int x, int y) {
+		if (this.tileMap[x, y] != null) {
+			return;
+		}
+
+		int distance = 1000;
+		int closestIndex = 0;
+		for (int pointI = 0; pointI < randomPoints.Count; pointI++) {
+			Vector4 point = randomPoints[pointI];
+			
+			int dist = (int) (Mathf.Abs(point[0] - x) + Mathf.Abs(point[1] - y));
+			if (dist < distance) {
+				closestIndex = pointI;
+				distance = dist;
+			}
+		}
+		
+		tileMap[x, y] = new Tile (x, y, closestIndex, (int)randomPoints[closestIndex].z, false, (int)randomPoints[closestIndex].w);
+		this.regions[closestIndex].Add(tileMap[x, y]);
 	}
 }

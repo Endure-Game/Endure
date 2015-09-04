@@ -17,12 +17,20 @@ public class Ouch : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
+		OnOwie (collider);
+	}
+
+	void OnColliderEnter2D (Collider2D collider) {
+		OnOwie (collider);
+	}
+
+	void OnOwie (Collider2D collider) {
 		if (!collider.isTrigger && collider.transform != this.spawner) {
 			Health target = collider.GetComponent<Health> ();
 			if (target != null) {
 				target.ChangeHealth (-damage);
 			}
-
+			
 			collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 			if (this.destroyOnTouch) {
 				Destroy (this.gameObject);

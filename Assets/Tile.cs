@@ -23,9 +23,9 @@ public class Tile
 		this.elevation = elevation;
 	}
 
-	public Tile (Tile tile) {
-		this.x = tile.x;
-		this.y = tile.y;
+	public Tile (Tile tile, int x, int y) {
+		this.x = x;
+		this.y = y;
 		this.regionIndex = tile.regionIndex;
 		this.biome = tile.biome;
 		this.blocking = tile.blocking;
