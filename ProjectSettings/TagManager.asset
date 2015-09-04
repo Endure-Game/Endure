@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Inventory
+  - Enemy
+  - Animal
   layers:
   - Default
   - TransparentFX

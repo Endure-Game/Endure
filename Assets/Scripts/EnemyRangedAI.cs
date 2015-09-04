@@ -3,12 +3,14 @@ using System.Collections;
 
 public class EnemyRangedAI : MonoBehaviour {
 	public float speed = 3f;
-	
+	public float rangedDistance = 4f;
+	public float cowardDistance = 2f;
+
 	private bool active = false;
 	private Rigidbody2D rb2d;
 	private PlayerController player;
-	
 	private RangedAttacker ranged;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -24,33 +26,21 @@ public class EnemyRangedAI : MonoBehaviour {
 
 			//if (true) {
 			if (!ranged.Locked) {
-				rb2d.velocity = speed * heading.normalized;
+				this.rb2d.velocity = this.speed * heading.normalized;
 			} else {
-				rb2d.velocity = Vector2.zero;
+				this.rb2d.velocity = Vector2.zero;
 			}
-			if (heading.magnitude < 2f && !ranged.Locked){
-				rb2d.velocity = speed * -heading.normalized; 
+			if (heading.magnitude < this.cowardDistance && !ranged.Locked){
+				this.rb2d.velocity = this.speed * -heading.normalized; 
 			}
-			else if (heading.magnitude < 4f){
+			else if (heading.magnitude < this.rangedDistance){
 				//Vector3 target = heading;
 				//print (target.normalized);
 				//target.z = player.transform.position.z;
 				this.ranged.Attack (player.transform.position);
 			}
-			/*if (heading.magnitude < melee.range + 0.5f) {
-				Vector2 n = heading.normalized;
-				if (n.x > Mathf.Sqrt (2) / 2) {
-					melee.AttackEast ();
-				} else if (n.x < - Mathf.Sqrt (2) / 2) {
-					melee.AttackWest ();
-				} else if (n.y > Mathf.Sqrt (2) / 2) {
-					melee.AttackNorth ();
-				} else if (n.y < -Mathf.Sqrt (2) / 2) {
-					melee.AttackSouth ();
-				}
-			}*/
 		} else {
-			rb2d.velocity = Vector2.zero;
+			this.rb2d.velocity = Vector2.zero;
 		}
 	}
 	
