@@ -334,58 +334,62 @@ public class RoomManager : MonoBehaviour {
 		float nextX = next [0];
 		float nextY = next [1];
 
-		while (((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
+		if (currentX > 1 && currentX < this.roomSide * this.rows - 1 && currentY > 1 && currentY < this.roomSide * this.columns - 1) {
+
+			while (((int)Mathf.Floor(currentX) != (int)Mathf.Floor(nextX) &&
 		       (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ||
 
 			    ((int)Mathf.Floor(currentX) == (int)Mathf.Floor(nextX) &&
-			    (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY)) ){
+			    (int)Mathf.Floor(currentY) != (int)Mathf.Floor(nextY))) {
 
 
-			Tile tile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY)];
-			//DONT TOUCH MY MAGIC IF BLOCK - IAN
-			if(currentX - 1 > 1){
-				Tile westTile = this.tileMap [(int)Mathf.Floor(currentX) - 1, (int)Mathf.Floor(currentY)];
-				if(westTile.item != null){
-					Destroy (westTile.item);
+				Tile tile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY)];
+				//DONT TOUCH MY MAGIC IF BLOCK - IAN
+				if (currentX - 1 > 3) {
+					Tile westTile = this.tileMap [(int)Mathf.Floor (currentX) - 1, (int)Mathf.Floor (currentY)];
+					if (westTile.item != null) {
+						Destroy (westTile.item);
+					}
+					tile.path = true;
 				}
-				tile.path = true;
-			}
-			if(currentX + 1 < this.roomSide * this.rows - 2){
-				Tile eastTile = this.tileMap [(int)Mathf.Floor(currentX) + 1, (int)Mathf.Floor(currentY)];
-				if(eastTile.item != null){
-					Destroy (eastTile.item);
+				if (currentX + 1 < (this.roomSide * this.rows) - 3) {
+					Tile eastTile = this.tileMap [(int)Mathf.Floor (currentX) + 1, (int)Mathf.Floor (currentY)];
+					if (eastTile.item != null) {
+						Destroy (eastTile.item);
+					}
+					tile.path = true;
 				}
-				tile.path = true;
-			}
-			if(currentY + 1 < this.roomSide * this.columns - 2){
-				Tile northTile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) + 1];
-				if(northTile.item != null){
-					Destroy (northTile.item);
+				if (currentY + 1 < (this.roomSide * this.columns) - 3) {
+					Tile northTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) + 1];
+					if (northTile.item != null) {
+						Destroy (northTile.item);
+					}
+					tile.path = true;
 				}
-				tile.path = true;
-			}
-			if(currentY - 1 > 1){
-				Tile southTile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY) - 1];
-				if(southTile.item != null){
-					Destroy (southTile.item);
+				if (currentY - 1 > 3) {
+					Tile southTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) - 1];
+					if (southTile.item != null) {
+						Destroy (southTile.item);
+					}
+					tile.path = true;
 				}
-				tile.path = true;
-			}
 	
 
-			if(tile.item != null){
-				Destroy (tile.item);
-			}
-			tile.path = true;
-			currentX = currentX + moveX;
-			
-			tile = this.tileMap [(int)Mathf.Floor(currentX), (int)Mathf.Floor(currentY)];
-			if(tile.item != null){
-				Destroy (tile.item);
-			}
-			tile.path = true;
-			currentY = currentY + moveY;
+				if (tile.item != null) {
+					Destroy (tile.item);
+				}
+				tile.path = true;
+				currentX = currentX + moveX;
+				if (currentX > 1 && currentX < this.roomSide * this.rows - 1 && currentY > 1 && currentY < this.roomSide * this.columns - 1) {
+					tile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY)];
+					if (tile.item != null) {
+						Destroy (tile.item);
+					}
+					tile.path = true;
+				}
+				currentY = currentY + moveY;
 
+			}
 		}
 	}
 
