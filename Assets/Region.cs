@@ -10,7 +10,7 @@ public class Region
 	public int altitude;
 
 	public List<Tile> tiles;
-	private List<Enemy1AI> enemies;
+	private List<GameObject> enemies;
 
 	public Region(int focusX, int focusY, BiomeTile biome, int altitude) {
 		this.focusX = focusX;
@@ -19,6 +19,23 @@ public class Region
 		this.altitude = altitude;
 
 		this.tiles = new List<Tile>();
-		this.enemies = new List<Enemy1AI>();
+		this.enemies = new List<GameObject>();
+	}
+
+	public void makeBlocking() {
+		this.biome.RandomBlocking(this.tiles);
+	}
+
+	public void makeEnemy() {
+		GameObject enemy = this.biome.getEnemy();
+
+		Tile enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
+		while (enemyTile.item != null) {
+			enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
+		}
+		// TODO: change 16 to be whatever the column, row amount is.
+		this.enemies.Add(GameObject.Instantiate (enemy, 
+		                              new Vector3(enemyTile.x - 16 / 2 + .5f, enemyTile.y - 16 / 2 + .5f, 0f),
+		                              Quaternion.identity) as GameObject);
 	}
 }

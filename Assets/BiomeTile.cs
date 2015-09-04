@@ -6,7 +6,8 @@ public abstract class BiomeTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
-	
+	public GameObject[] enemies;
+
 	protected Tile[,] tileMap;
 	protected int width;
 	protected int height;
@@ -25,9 +26,11 @@ public abstract class BiomeTile : MonoBehaviour
 		return this.blockingTiles[Random.Range(0, this.blockingTiles.Length)];
 	}
 
+	public GameObject getEnemy() {
+		return this.enemies[Random.Range(0, this.enemies.Length)];
+	}
+
 	public abstract void RandomBlocking(List<Tile> region);
 	public abstract int getBiomeNumber();
-
-
 }
 

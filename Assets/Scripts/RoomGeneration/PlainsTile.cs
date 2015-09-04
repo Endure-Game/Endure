@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class PlainsTile : BiomeTile
 {
-	
+
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);

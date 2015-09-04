@@ -266,7 +266,7 @@ public class RoomManager : MonoBehaviour {
 
 		// Create blocking tiles
 		foreach (Region region in this.regions) {
-			region.biome.RandomBlocking(region.tiles);
+			region.makeBlocking();
 		}
 
 		//create game path
@@ -386,7 +386,6 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
-
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
@@ -480,7 +479,6 @@ public class RoomManager : MonoBehaviour {
 		}
 
 		Region closest = this.regions[closestIndex];
-		print (closest.biome.getBiomeNumber());
 		tileMap[x, y] = new Tile (x, y, closestIndex, closest.biome.getBiomeNumber(), false, closest.altitude);
 		this.regions[closestIndex].tiles.Add(tileMap[x, y]);
 	}

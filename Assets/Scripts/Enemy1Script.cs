@@ -21,8 +21,5 @@ public class Enemy1Script : MonoBehaviour {
 			this.enemyAI.enemyActive (false);
 		}
 	}
-
-
-
-
+	
 }
