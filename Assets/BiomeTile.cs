@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class BiomeTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
-
-	public const int BiomeNumber = -1;
 	
 	protected Tile[,] tileMap;
 	protected int width;
@@ -25,6 +24,10 @@ public abstract class BiomeTile : MonoBehaviour
 	public GameObject getBlockingTile() {
 		return this.blockingTiles[Random.Range(0, this.blockingTiles.Length)];
 	}
+
+	public abstract void RandomBlocking(List<Tile> region);
+	public abstract int getBiomeNumber();
+
 
 }
 

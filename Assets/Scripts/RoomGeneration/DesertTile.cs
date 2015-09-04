@@ -14,7 +14,7 @@ public class DesertTile : BiomeTile
 	
 	public const int BiomeNumber = 1;
 	
-	public void RandomBlocking(List<Tile> region) {
+	public override void RandomBlocking(List<Tile> region) {
 
 		// Add Boulders
 		for (int num = 0; num < bloomNum; num++) {
@@ -60,5 +60,9 @@ public class DesertTile : BiomeTile
 				}
 			}
 		}
+	}
+
+	public override int getBiomeNumber() {
+		return 1;
 	}
 }

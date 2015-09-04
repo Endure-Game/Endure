@@ -13,7 +13,7 @@ public class SnowTile : BiomeTile
 	
 	public const int BiomeNumber = 4;
 
-	public void RandomBlocking(List<Tile> region) {
+	public override void RandomBlocking(List<Tile> region) {
 
 		for (int num = 0; num < bloomNum; num++) {
 			
@@ -56,5 +56,9 @@ public class SnowTile : BiomeTile
 				}
 			}
 		}
+	}
+
+	public override int getBiomeNumber() {
+		return 4;
 	}
 }
