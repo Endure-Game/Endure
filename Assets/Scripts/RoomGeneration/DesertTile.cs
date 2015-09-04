@@ -51,7 +51,6 @@ public class DesertTile : MonoBehaviour
 			Tile cactusTile = region[Random.Range(0, region.Count)];
 			while (cactusTile.item != null) {
 				cactusTile = region[Random.Range(0, region.Count)];
-				print ("replacing");
 			}
 			this.GetComponent<RoomManager>().PlaceItem(cactus, cactusTile.x, cactusTile.y);
 		}
