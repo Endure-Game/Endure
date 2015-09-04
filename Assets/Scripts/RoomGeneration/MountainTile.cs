@@ -41,7 +41,7 @@ public class MountainTile : MonoBehaviour
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1));
 		}
 	}
-	
+
 	private void BlockingExplosion(int x, int y, int level) {
 		
 		if (level == 0 || x < 0 || y < 0 || x >= width || y >= height) {
@@ -69,6 +69,7 @@ public class MountainTile : MonoBehaviour
 					BlockingExplosion(x + i, y + j, level - 1);
 				}
 			}
+
 		}
 	}
 }

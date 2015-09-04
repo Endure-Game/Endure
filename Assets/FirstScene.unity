@@ -474,6 +474,10 @@ MonoBehaviour:
   - {fileID: 189106, guid: 2552a4983afc64d1f815b0a788ffe318, type: 2}
   blockingTiles:
   - {fileID: 120402, guid: b4b100efd7bdc467cbd000a1a555c9c6, type: 2}
+  cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
+  cactusCount:
+    minimum: 10
+    maximum: 15
   bloomNum: 25
   bloomSize:
     minimum: 3

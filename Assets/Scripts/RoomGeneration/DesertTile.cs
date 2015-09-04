@@ -7,6 +7,8 @@ public class DesertTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
+	public GameObject cactus;
+	public RoomManager.Count cactusCount = new RoomManager.Count(10, 30);
 	
 	// randomization constants
 	public int bloomNum = 100;
@@ -33,12 +35,24 @@ public class DesertTile : MonoBehaviour
 	}
 	
 	public void RandomBlocking(List<Tile> region) {
+
+		// Add Boulders
 		for (int num = 0; num < bloomNum; num++) {
 			
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1));
+		}
+
+		// Add cactuses
+		int cactusNum = Random.Range(this.cactusCount.minimum, this.cactusCount.maximum);
+		for (int num = 0; num < cactusNum; num++) {
+			Tile cactusTile = region[Random.Range(0, region.Count)];
+			while (cactusTile.item != null) {
+				cactusTile = region[Random.Range(0, region.Count)];
+			}
+			this.GetComponent<RoomManager>().PlaceItem(cactus, cactusTile.x, cactusTile.y);
 		}
 	}
 	
