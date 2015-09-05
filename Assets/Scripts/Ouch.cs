@@ -29,9 +29,9 @@ public class Ouch : MonoBehaviour {
 			Health target = collider.GetComponent<Health> ();
 			if (target != null) {
 				target.ChangeHealth (-damage);
+				collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 			}
-			
-			collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
+
 			if (this.destroyOnTouch) {
 				Destroy (this.gameObject);
 			}
