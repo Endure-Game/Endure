@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Ammo : MonoBehaviour {
 
-	public int amount = 3;
+	public int arrows = 5;
+	public int bullets = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -19,10 +20,10 @@ public class Ammo : MonoBehaviour {
 		Collider2D other = newOther.collider;
 		if (other.tag == "Player") {
 			if(this.gameObject.GetComponent<ItemController>().name == "arrows"){
-				PlayerController.instance.arrows += amount;
+				PlayerController.instance.arrows += arrows;
 			}
 			if(this.gameObject.GetComponent<ItemController>().name == "bullets"){
-				PlayerController.instance.bullets += amount;
+				PlayerController.instance.bullets += bullets;
 			}
 		}
 		//PlayerController.instance.IncrementCounter ();
