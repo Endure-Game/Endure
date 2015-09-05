@@ -11,6 +11,7 @@ public class Tile
 	public int elevation;
 
 	public bool blocking;
+	public GameObject ground;
 	public GameObject item;
 	public bool path = false;
 

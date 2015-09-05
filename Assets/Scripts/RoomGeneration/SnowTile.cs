@@ -1,28 +1,46 @@
 using UnityEngine;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class SnowTile : BiomeTile
 {
 	public GameObject snowMan;
+	public GameObject ice;
+	public GameObject crackedIce;
 
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
+
+	public int iceBloomNum = 2;
+	public RoomManager.Count iceBloomSize = new RoomManager.Count(7, 8);
 	
 	public const int BiomeNumber = 4;
-
+	
 	public override void RandomBlocking(List<Tile> region) {
 
+		// Place ice tiles
+		for (var num = 0; num < iceBloomNum; num++) {
+			Tile iceTile = region[Random.Range(0, region.Count)];
+			BlockingExplosion(iceTile.x,
+			                  iceTile.y,
+			                  Random.Range (iceBloomSize.minimum, iceBloomSize.maximum + 1),
+			                  new TilePlacer(this.placeIceLakeTile));
+		}
+
+		// Place blocking tiles
 		for (int num = 0; num < bloomNum; num++) {
 			
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
-			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1));
+			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
+			                  new TilePlacer(this.placeBlockingTile));
 		}
 
+		// Place snow man
 		if (Random.Range (0, 1) < .5) {
 			Tile snowManTile = region[Random.Range(0, region.Count)];
 			while (snowManTile.item != null) {
@@ -32,30 +50,14 @@ public class SnowTile : BiomeTile
 		}
 	}
 
-	private void BlockingExplosion(int x, int y, int level) {
-
-		if (level < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
-			return;
+	public void placeIceLakeTile(int x, int y) {
+		GameObject sprite;
+		if (Random.Range(0, 10) < 2)  {
+			sprite = this.crackedIce;
+		} else {
+			sprite = this.ice;
 		}
-		
-		Tile tile = this.tileMap[x, y];
-
-		if (tile.biome != SnowTile.BiomeNumber || tile.blocking == true) {
-			return;
-		}
-		
-		if (tile.item == null) {
-			tile.blocking = true;
-			this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
-		}
-		
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				if (Random.Range(0, 10) > 3 && (j != 0 || i == 1)) {
-					BlockingExplosion(x + i, y + j, level - 1);
-				}
-			}
-		}
+		this.GetComponent<RoomManager>().SetGroundTile(sprite, x, y);
 	}
 
 	public override int getBiomeNumber() {

@@ -27,7 +27,6 @@ public class RoomManager : MonoBehaviour {
 	public int biomeNumber = 4;
 	public Tile[,] tileMap;
 	public List<Region> regions;
-//	public List<Vector4> randomPoints;
 
 	public GameObject[] outerWallTiles;
 
@@ -105,18 +104,8 @@ public class RoomManager : MonoBehaviour {
 					toInstantiate = this.BeachTile.getGroundTile();
 				}
 
-				float width = this.columns;
-				float height = this.rows;
-
-				// TODO: probably don't hardcode, but definitely don't duplicate this in InitializeList
-				float tileWidth = 1;
-				float tileHeight = 1;
-
-				float tileX = x + tileWidth / 2 - width / 2 + centerX;
-				float tileY = y + tileHeight / 2 - height / 2 + centerY;
-
-				GameObject instance = Instantiate (toInstantiate, new Vector3(tileX, tileY, 0f),Quaternion.identity) as GameObject;
-				instance.transform.SetParent (roomHolder);
+				SetGroundTile(toInstantiate, x + gridX * 32, y + gridY * 32);
+				tileMap[x, y].ground.transform.SetParent (roomHolder);
 			}
 		}
 
@@ -225,9 +214,11 @@ public class RoomManager : MonoBehaviour {
 
 	public void SetupRooms () {
 
+		float startTime = Time.realtimeSinceStartup;
 		this.rooms = new GameObject[roomSide, roomSide];
 
 		TileMapGeneration();
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create rooms
 		for (int i = 0; i < roomSide; i++) {
@@ -235,6 +226,7 @@ public class RoomManager : MonoBehaviour {
 				this.rooms [i, j] = RoomSetup (i, j);
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create outer rock wall
 		for (int x = 0; x < this.roomSide * this.columns; x++) {
@@ -244,9 +236,11 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create altitude sprites
 		this.ElevationTile.placeCliffTiles();
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create climb points
 		for (int i = 0; i < this.regions.Count; i++) {
@@ -268,17 +262,20 @@ public class RoomManager : MonoBehaviour {
 					Tile tile = this.tileMap[region.focusX, region.focusY + y];
 					if (tile.item != null) {
 						Destroy(tile.item);
-						this.PlaceItem(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
+						this.SetGroundTile(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
+						this.tileMap[region.focusX, region.focusY].blocking = true;
 					}
 					y++;
 				}
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create blocking tiles
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
@@ -286,6 +283,7 @@ public class RoomManager : MonoBehaviour {
 		foreach (Region region in this.regions) {
 			randomPoints.Add(new Vector2(region.focusX, region.focusY));
 		}
+
 		List <int[]> pointsDist = new List<int[]>();
 		Vector2 start = new Vector2 (16f, 16f);
 		Vector2 exit = new Vector2 (255f, 255f);
@@ -327,10 +325,19 @@ public class RoomManager : MonoBehaviour {
 			placePath(current, next, moveX, moveY);
 
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
+		print (Time.realtimeSinceStartup - startTime);
+
+		// Spawn starting enemies
+		for (int i = 0; i < 100; i++) {
+			Region region = this.regions[Random.Range(0, this.regions.Count)];
+			region.spawnEnemy();
+		}
+		print (Time.realtimeSinceStartup - startTime);
 
 	}
 
@@ -397,6 +404,7 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
+
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
@@ -470,6 +478,14 @@ public class RoomManager : MonoBehaviour {
 
 		// Make higher tiles apear behind lower tiles
 		this.tileMap[x, y].item.transform.Translate(new Vector3(0, 0, y));
+	}
+
+	public void SetGroundTile(GameObject sprite, int x, int y) {
+		Destroy (this.tileMap[x, y].ground);
+
+		this.tileMap[x, y].ground = Instantiate (sprite,
+		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+		                                       Quaternion.identity) as GameObject;
 	}
 
 	private void getBiome(int x, int y) {
