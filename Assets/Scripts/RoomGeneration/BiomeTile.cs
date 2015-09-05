@@ -28,7 +28,7 @@ public abstract class BiomeTile : MonoBehaviour
 		
 		Tile tile = this.tileMap[x, y];
 		
-		if (tile.biome != this.getBiomeNumber() || tile.blocking == true) {
+		if (tile.biome != this.getBiomeNumber() || tile.blocking || tile.path) {
 			return;
 		}
 		
