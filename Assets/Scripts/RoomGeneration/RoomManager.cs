@@ -214,9 +214,11 @@ public class RoomManager : MonoBehaviour {
 
 	public void SetupRooms () {
 
+		float startTime = Time.realtimeSinceStartup;
 		this.rooms = new GameObject[roomSide, roomSide];
 
 		TileMapGeneration();
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create rooms
 		for (int i = 0; i < roomSide; i++) {
@@ -224,6 +226,7 @@ public class RoomManager : MonoBehaviour {
 				this.rooms [i, j] = RoomSetup (i, j);
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create outer rock wall
 		for (int x = 0; x < this.roomSide * this.columns; x++) {
@@ -233,9 +236,11 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create altitude sprites
 		this.ElevationTile.placeCliffTiles();
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create climb points
 		for (int i = 0; i < this.regions.Count; i++) {
@@ -264,11 +269,13 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Create blocking tiles
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
@@ -276,6 +283,7 @@ public class RoomManager : MonoBehaviour {
 		foreach (Region region in this.regions) {
 			randomPoints.Add(new Vector2(region.focusX, region.focusY));
 		}
+
 		List <int[]> pointsDist = new List<int[]>();
 		Vector2 start = new Vector2 (16f, 16f);
 		Vector2 exit = new Vector2 (255f, 255f);
@@ -317,10 +325,19 @@ public class RoomManager : MonoBehaviour {
 			placePath(current, next, moveX, moveY);
 
 		}
+		print (Time.realtimeSinceStartup - startTime);
 
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
+		print (Time.realtimeSinceStartup - startTime);
+
+		// Spawn starting enemies
+		for (int i = 0; i < 100; i++) {
+			Region region = this.regions[Random.Range(0, this.regions.Count)];
+			region.spawnEnemy();
+		}
+		print (Time.realtimeSinceStartup - startTime);
 
 	}
 
@@ -388,11 +405,6 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 
-		// Spawn enemies
-		for (int i = 0; i < 100; i++) {
-			Region region = this.regions[Random.Range(0, this.regions.Count)];
-			region.spawnEnemy();
-		}
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {

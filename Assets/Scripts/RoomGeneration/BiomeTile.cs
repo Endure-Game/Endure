@@ -22,7 +22,7 @@ public abstract class BiomeTile : MonoBehaviour
 	// change this into an action
 	public void BlockingExplosion(int x, int y, int level, TilePlacer spritePlacer) {
 
-		if (level < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
+		if (Random.Range (0, level) < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
 			return;
 		}
 		

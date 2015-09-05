@@ -19,11 +19,15 @@ public class BeachTile : BiomeTile
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
-			                  new TilePlacer(this.placeBlockingTile));
+			                  new TilePlacer(this.PlaceWaterTiles));
 		}
 	}
 
 	public override int getBiomeNumber() {
 		return 5;
+	}
+
+	public void PlaceWaterTiles(int x, int y) {
+		this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
 	}
 }

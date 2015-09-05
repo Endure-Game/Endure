@@ -36,12 +36,12 @@ public class Region
 		GameObject enemy = this.biome.getEnemy();
 
 		Tile enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
-		while (enemyTile.item != null) {
+		while (enemyTile.item != null || enemyTile.blocking) {
 			enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
 		}
-		// TODO: change 16 to be whatever the column, row amount is.
+		// TODO: change 32 to be whatever the column, row amount is.
 		this.enemies.Add(GameObject.Instantiate (enemy, 
-		                              new Vector3(enemyTile.x - 16 / 2 + .5f, enemyTile.y - 16 / 2 + .5f, 0f),
+		                              new Vector3(enemyTile.x - 32 / 2 + .5f, enemyTile.y - 32 / 2 + .5f, 0f),
 		                              Quaternion.identity) as GameObject);
 	}
 }
