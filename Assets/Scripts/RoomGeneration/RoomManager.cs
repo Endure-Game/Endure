@@ -238,45 +238,6 @@ public class RoomManager : MonoBehaviour {
 		}
 		print (Time.realtimeSinceStartup - startTime);
 
-		// Create altitude sprites
-		this.ElevationTile.placeCliffTiles();
-		print (Time.realtimeSinceStartup - startTime);
-
-		// Create climb points
-		for (int i = 0; i < this.regions.Count; i++) {
-			Region region = this.regions[i];
-
-			if (i < this.roomSide) {
-				int x = 1;
-				Region rightRegion = this.regions[i + 1];
-				while (region.focusX + x < rightRegion.focusX) {
-					Destroy(this.tileMap[region.focusX + x, region.focusY].item);
-					x++;
-				}
-			}
-
-			if (i < this.regions.Count - this.roomSide) {
-				int y = 1;
-				Region upperRegion = this.regions[i + this.roomSide];
-				while (region.focusY + y < upperRegion.focusY) {
-					Tile tile = this.tileMap[region.focusX, region.focusY + y];
-					if (tile.item != null) {
-						Destroy(tile.item);
-						this.SetGroundTile(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
-						this.tileMap[region.focusX, region.focusY].blocking = true;
-					}
-					y++;
-				}
-			}
-		}
-		print (Time.realtimeSinceStartup - startTime);
-
-		// Create blocking tiles
-		foreach (Region region in this.regions) {
-			region.makeBlocking();
-		}
-		print (Time.realtimeSinceStartup - startTime);
-
 		//create game path
 		//TODO fix sorting algo for randomPoints
 		List<Vector2> randomPoints = new List<Vector2>();
@@ -327,6 +288,45 @@ public class RoomManager : MonoBehaviour {
 		}
 		print (Time.realtimeSinceStartup - startTime);
 
+		// Create altitude sprites
+		this.ElevationTile.placeCliffTiles();
+		print (Time.realtimeSinceStartup - startTime);
+		
+		// Create climb points
+		for (int i = 0; i < this.regions.Count; i++) {
+			Region region = this.regions[i];
+			
+			if (i < this.roomSide) {
+				int x = 1;
+				Region rightRegion = this.regions[i + 1];
+				while (region.focusX + x < rightRegion.focusX) {
+					Destroy(this.tileMap[region.focusX + x, region.focusY].item);
+					x++;
+				}
+			}
+			
+			if (i < this.regions.Count - this.roomSide) {
+				int y = 1;
+				Region upperRegion = this.regions[i + this.roomSide];
+				while (region.focusY + y < upperRegion.focusY) {
+					Tile tile = this.tileMap[region.focusX, region.focusY + y];
+					if (tile.item != null) {
+						Destroy(tile.item);
+						this.SetGroundTile(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
+						this.tileMap[region.focusX, region.focusY].blocking = true;
+					}
+					y++;
+				}
+			}
+		}
+		print (Time.realtimeSinceStartup - startTime);
+		
+		// Create blocking tiles
+		foreach (Region region in this.regions) {
+			region.makeBlocking();
+		}
+		print (Time.realtimeSinceStartup - startTime);
+
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
@@ -361,43 +361,43 @@ public class RoomManager : MonoBehaviour {
 				//DONT TOUCH MY MAGIC IF BLOCK - IAN
 				if (currentX - 1 > 3) {
 					Tile westTile = this.tileMap [(int)Mathf.Floor (currentX) - 1, (int)Mathf.Floor (currentY)];
-					if (westTile.item != null) {
-						Destroy (westTile.item);
-					}
-					tile.path = true;
+//					if (westTile.item != null) {
+//						Destroy (westTile.item);
+//					}
+					westTile.path = true;
 				}
 				if (currentX + 1 < (this.roomSide * this.rows) - 3) {
 					Tile eastTile = this.tileMap [(int)Mathf.Floor (currentX) + 1, (int)Mathf.Floor (currentY)];
-					if (eastTile.item != null) {
-						Destroy (eastTile.item);
-					}
-					tile.path = true;
+//					if (eastTile.item != null) {
+//						Destroy (eastTile.item);
+//					}
+					eastTile.path = true;
 				}
 				if (currentY + 1 < (this.roomSide * this.columns) - 3) {
 					Tile northTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) + 1];
-					if (northTile.item != null) {
-						Destroy (northTile.item);
-					}
-					tile.path = true;
+//					if (northTile.item != null) {
+//						Destroy (northTile.item);
+//					}
+					northTile.path = true;
 				}
 				if (currentY - 1 > 3) {
 					Tile southTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) - 1];
-					if (southTile.item != null) {
-						Destroy (southTile.item);
-					}
-					tile.path = true;
+//					if (southTile.item != null) {
+//						Destroy (southTile.item);
+//					}
+					southTile.path = true;
 				}
 
-				if (tile.item != null) {
-					Destroy (tile.item);
-				}
+//				if (tile.item != null) {
+//					Destroy (tile.item);
+//				}
 				tile.path = true;
 				currentX = currentX + moveX;
 				if (currentX > 1 && currentX < this.roomSide * this.rows - 1 && currentY > 1 && currentY < this.roomSide * this.columns - 1) {
 					tile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY)];
-					if (tile.item != null) {
-						Destroy (tile.item);
-					}
+//					if (tile.item != null) {
+//						Destroy (tile.item);
+//					}
 					tile.path = true;
 				}
 				currentY = currentY + moveY;
@@ -471,13 +471,15 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	public void PlaceItem(GameObject sprite, int x, int y) {
-		this.tileMap[x, y].item = Instantiate (sprite,
-		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
-		                                       Quaternion.identity) as GameObject;
-		this.tileMap[x, y].item.transform.SetParent(this.rooms[0,0].transform);
+
+		Tile tile = this.tileMap[x, y];
+		tile.item = Instantiate (sprite,
+			                         new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+			                         Quaternion.identity) as GameObject;
+		tile.item.transform.SetParent(this.rooms[0,0].transform);
 
 		// Make higher tiles apear behind lower tiles
-		this.tileMap[x, y].item.transform.Translate(new Vector3(0, 0, y));
+		tile.item.transform.Translate(new Vector3(0, 0, y));
 	}
 
 	public void SetGroundTile(GameObject sprite, int x, int y) {

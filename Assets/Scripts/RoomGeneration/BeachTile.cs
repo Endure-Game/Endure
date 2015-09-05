@@ -28,6 +28,6 @@ public class BeachTile : BiomeTile
 	}
 
 	public void PlaceWaterTiles(int x, int y) {
-		this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
+		this.GetComponent<RoomManager>().SetGroundTile(this.getBlockingTile(), x, y);
 	}
 }

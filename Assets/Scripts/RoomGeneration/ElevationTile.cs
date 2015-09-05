@@ -27,7 +27,11 @@ public class ElevationTile : MonoBehaviour
 				}
 
 				if (lower) {
-					this.GetComponent<RoomManager>().PlaceItem(GetWallTile(walls), x, y);
+					if (tileMap[x, y].path) {
+						this.GetComponent<RoomManager>().SetGroundTile(tiles[0], x, y);
+					} else {
+						this.GetComponent<RoomManager>().PlaceItem(GetWallTile(walls), x, y);
+					}
 				}
 			}
 		}
