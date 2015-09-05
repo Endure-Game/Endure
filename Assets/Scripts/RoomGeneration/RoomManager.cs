@@ -27,7 +27,6 @@ public class RoomManager : MonoBehaviour {
 	public int biomeNumber = 4;
 	public Tile[,] tileMap;
 	public List<Region> regions;
-//	public List<Vector4> randomPoints;
 
 	public GameObject[] outerWallTiles;
 
@@ -105,18 +104,8 @@ public class RoomManager : MonoBehaviour {
 					toInstantiate = this.BeachTile.getGroundTile();
 				}
 
-				float width = this.columns;
-				float height = this.rows;
-
-				// TODO: probably don't hardcode, but definitely don't duplicate this in InitializeList
-				float tileWidth = 1;
-				float tileHeight = 1;
-
-				float tileX = x + tileWidth / 2 - width / 2 + centerX;
-				float tileY = y + tileHeight / 2 - height / 2 + centerY;
-
-				GameObject instance = Instantiate (toInstantiate, new Vector3(tileX, tileY, 0f),Quaternion.identity) as GameObject;
-				instance.transform.SetParent (roomHolder);
+				SetGroundTile(toInstantiate, x + gridX * 32, y + gridY * 32);
+				tileMap[x, y].ground.transform.SetParent (roomHolder);
 			}
 		}
 
@@ -268,7 +257,8 @@ public class RoomManager : MonoBehaviour {
 					Tile tile = this.tileMap[region.focusX, region.focusY + y];
 					if (tile.item != null) {
 						Destroy(tile.item);
-						this.PlaceItem(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
+						this.SetGroundTile(this.ElevationTile.tiles[0], region.focusX, region.focusY + y);
+						this.tileMap[region.focusX, region.focusY].blocking = true;
 					}
 					y++;
 				}
@@ -397,6 +387,12 @@ public class RoomManager : MonoBehaviour {
 
 			}
 		}
+
+		// Spawn enemies
+		for (int i = 0; i < 100; i++) {
+			Region region = this.regions[Random.Range(0, this.regions.Count)];
+			region.spawnEnemy();
+		}
 	}
 
 	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
@@ -470,6 +466,14 @@ public class RoomManager : MonoBehaviour {
 
 		// Make higher tiles apear behind lower tiles
 		this.tileMap[x, y].item.transform.Translate(new Vector3(0, 0, y));
+	}
+
+	public void SetGroundTile(GameObject sprite, int x, int y) {
+		Destroy (this.tileMap[x, y].ground);
+
+		this.tileMap[x, y].ground = Instantiate (sprite,
+		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+		                                       Quaternion.identity) as GameObject;
 	}
 
 	private void getBiome(int x, int y) {

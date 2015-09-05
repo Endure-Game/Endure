@@ -431,10 +431,16 @@ MonoBehaviour:
   - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
   - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
+  ice: {fileID: 128288, guid: 3833a58217b66496c8077cd24ece5d7d, type: 2}
+  crackedIce: {fileID: 116440, guid: a3e43a03fd8a04462a503d3ec83112a0, type: 2}
   bloomNum: 90
   bloomSize:
     minimum: 3
     maximum: 7
+  iceBloomNum: 2
+  iceBloomSize:
+    minimum: 7
+    maximum: 8
 --- !u!114 &373454792
 MonoBehaviour:
   m_ObjectHideFlags: 0
