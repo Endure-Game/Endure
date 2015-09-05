@@ -3,12 +3,20 @@ using System.Collections;
 
 public class Enemy1AI : MonoBehaviour {
 	public float speed = 3f;
-	public float aggro = 2f;
+
+	public float aggro = 5f;
+	public float deAggro = 6f;
+	public float moveDuration = 0.8f;
+	public float idleDuration = 0.6f;
+
 
 	private bool active = false;
 	private Rigidbody2D rb2d;
 	private PlayerController player;
 	private Animator animator;
+	private Vector3 oldPosition;
+	private float animationTime = 0f;
+
 
 	private MeleeAttacker melee;
 
@@ -26,6 +34,7 @@ public class Enemy1AI : MonoBehaviour {
 			Vector2 heading = player.transform.position - this.transform.position;
 			//print (heading.magnitude + "|" + this.aggro);
 			if(heading.magnitude < this.aggro){
+				this.oldPosition = this.transform.position;
 				if (!melee.Locked) {
 					this.rb2d.velocity = speed * heading.normalized;
 				} else {
@@ -44,10 +53,34 @@ public class Enemy1AI : MonoBehaviour {
 						this.melee.AttackSouth ();
 					}
 				}
-			} else {
+			} else if(heading.magnitude > this.deAggro){
 				//TODO RANDOM MOVEMENT
 				print("Stopped chasing player");
-				this.rb2d.velocity = Vector2.zero;
+				//if(this.oldPosition = null){
+				//	this.rb2d.velocity = Vector2.zero;
+				//	this.oldPosition = this.transform.position;
+				//}
+				if(this.oldPosition == Vector3.zero){
+					this.oldPosition = this.transform.position;
+				}
+
+				this.animationTime += Time.deltaTime;
+
+				print (this.oldPosition);
+
+				if(this.animationTime < this.idleDuration){
+					this.rb2d.velocity = Vector2.zero;
+				} else if (this.animationTime >= this.idleDuration){
+					if(this.animationTime > this.moveDuration + this.idleDuration){
+						this.rb2d.velocity = Vector2.zero;
+						this.animationTime = 0;						
+					} else if (this.rb2d.velocity == Vector2.zero){
+						float rx = Random.Range (-1f, 1f);
+						float ry = Random.Range (-1f, 1f);
+						Vector2 idleHeading = this.oldPosition - this.transform.position;
+						this.rb2d.velocity = speed * (idleHeading - new Vector2(rx, ry)).normalized;
+					}
+				}
 			}
 		} else {
 			this.rb2d.velocity = Vector2.zero;
@@ -79,7 +112,7 @@ public class Enemy1AI : MonoBehaviour {
 	void OnTriggerExit2D (Collider2D collided) {
 		CircleCollider2D playerCollider = player.GetComponent<CircleCollider2D> ();
 		Vector2 heading = player.transform.position - this.transform.position;
-		print ("collider radius: " + playerCollider.radius + " headingmag: " + heading.magnitude);
+		//print ("collider radius: " + playerCollider.radius + " headingmag: " + heading.magnitude);
 		if (collided.tag == "Player" && heading.magnitude >= playerCollider.radius) {
 			print ("Deactivated Enemy");
 			this.active = false;
