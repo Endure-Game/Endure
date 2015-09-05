@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 440322}
   - 212: {fileID: 21238808}
-  - 114: {fileID: 11456782}
   - 50: {fileID: 5035800}
   - 61: {fileID: 6125026}
   - 114: {fileID: 11416694}
@@ -107,18 +106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   drops: []
---- !u!114 &11456782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aggro: 10
 --- !u!212 &21238808
 SpriteRenderer:
   m_ObjectHideFlags: 1
