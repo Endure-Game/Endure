@@ -10,12 +10,14 @@ public class EnemyCowardAI : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private bool feared = false;
 	private PlayerController player;
+	private Animator animator;
 
 
 	// Use this for initialization
 	void Start () {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
+		this.animator = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,16 @@ public class EnemyCowardAI : MonoBehaviour {
 				//this.rb2d.velocity.
 				this.rb2d.velocity = Vector2.zero;
 			}
+		}
+
+		if (this.rb2d.velocity.x > 0) {
+			animator.SetBool("moving", true);
+			transform.localScale = new Vector3(1f, 1f, 1f);
+		} else if (this.rb2d.velocity.x < 0) {
+			animator.SetBool("moving", true);
+			transform.localScale = new Vector3(-1f, 1f, 1f);
+		} else {
+			animator.SetBool("moving", false);
 		}
 	}
 }

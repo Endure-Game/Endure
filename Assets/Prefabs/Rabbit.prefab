@@ -14,6 +14,7 @@ GameObject:
   - 61: {fileID: 6125026}
   - 114: {fileID: 11416694}
   - 114: {fileID: 11420998}
+  - 95: {fileID: 9507656}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Animal
@@ -62,6 +63,23 @@ BoxCollider2D:
   m_Offset: {x: -.100000001, y: -.100000001}
   serializedVersion: 2
   m_Size: {x: .75, y: .600000024}
+--- !u!95 &9507656
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104892}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0a81d71c202b459aa004def8e18d9b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11416694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,13 +106,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  drops: []
 --- !u!114 &11456782
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
   m_Name: 
@@ -132,7 +151,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f0a81d71c202b459aa004def8e18d9b9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104892}
