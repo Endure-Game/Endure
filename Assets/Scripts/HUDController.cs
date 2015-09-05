@@ -11,6 +11,7 @@ public class HUDController : MonoBehaviour {
 	public Sprite selected;
 	public Sprite mouse;
 	public Sprite space;
+	public Font font;
 
 	public GameObject map;
 	private GameObject inventory;
@@ -31,6 +32,10 @@ public class HUDController : MonoBehaviour {
 		this.inventory.transform.parent = this.gameObject.transform;
 
 		this.rectTransform = this.GetComponent<RectTransform> ();
+
+		if (this.font == null) {
+			this.font = Resources.GetBuiltinResource<Font> ("Arial.ttf");
+		}
 	}
 	
 	// Update is called once per frame
@@ -109,9 +114,36 @@ public class HUDController : MonoBehaviour {
 					control.AddComponent<Image> ().sprite = this.space;
 				break;
 			}
+			var count = new GameObject ();
+
+			switch(PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].name){
+				case "BowAndArrow":
+					var arrowCount = count.AddComponent<Text> ();
+					arrowCount.text = "" + PlayerController.instance.arrows;
+					arrowCount.font = this.font;
+				break;
+				case "Rifle":
+					var rifleCount = count.AddComponent<Text> ();
+					rifleCount.text = "" + PlayerController.instance.bullets;
+					rifleCount.font = this.font;
+				break;
+			}
 
 			control.transform.SetParent (this.inventory.transform);
 			control.transform.position = new Vector3 (selX, selY, 0);
+
+			count.transform.SetParent (this.inventory.transform);
+			count.transform.position = new Vector3 (selX, selY, 0);
+		}
+
+		for (int i = 0; i < PlayerController.instance.inventory.Count - 1; i++) {
+			if(PlayerController.instance.inventory[i].name == "BowAndArrow"){
+				//show the ammount of arrows the player currently has
+
+			}
+			if(PlayerController.instance.inventory[i].name == "Rifle"){
+				//show the amount of bullets the play currently has
+			}
 		}
 	}
 }

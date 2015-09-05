@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour {
 	
 	public float speed = 4;
 	public static PlayerController instance;
-	public int ammo = 0;
+	public int bullets = 0;
+	public int arrows = 0;
 	public Region currentRegion;
 
 	private int counter = 0;
@@ -214,10 +215,15 @@ public class PlayerController : MonoBehaviour {
 			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE, ""));
 			break;
 		case "BowAndArrow":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1, Control.MOUSE, ""));
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE, ""));
+			this.arrows += 9;
 			break;
 		case "Axe":
 			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
+			break;
+		case "Rifle":
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
+			this.bullets += 3;
 			break;
 		default: 
 			print ("Error: not a valid weapon or tool name");
