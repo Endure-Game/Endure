@@ -46,6 +46,11 @@ public class Enemy1AI : MonoBehaviour {
 			rb2d.velocity = Vector2.zero;
 		}
 
+		// Make sure enemy is on the right layer
+		this.transform.position = new Vector3(this.transform.position.x, 
+		                                      this.transform.position.y, 
+		                                      (float)(this.transform.position.y + 16));
+
 		if (this.rb2d.velocity.x > 0) {
 			animator.SetBool("moving", true);
 			transform.localScale = new Vector3(1f, 1f, 1f);
