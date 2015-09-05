@@ -70,7 +70,7 @@ public class Health : MonoBehaviour {
 		}
 
 		var current = 0;
-		var selected = Random.Range (0, max);
+		var selected = Random.Range (0, max + 1);
 		foreach (var drop in this.drops) {
 			current += drop.chance;
 			if (current >= selected) {
