@@ -215,14 +215,14 @@ public class PlayerController : MonoBehaviour {
 			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE, ""));
 			break;
 		case "BowAndArrow":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE));
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE, ""));
 			this.arrows += 9;
 			break;
 		case "Axe":
 			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
 			break;
 		case "Rifle":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE));
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
 			this.bullets += 3;
 			break;
 		default: 
