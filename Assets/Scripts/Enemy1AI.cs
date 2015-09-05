@@ -7,6 +7,7 @@ public class Enemy1AI : MonoBehaviour {
 	private bool active = false;
 	private Rigidbody2D rb2d;
 	private PlayerController player;
+	private Animator animator;
 
 	private MeleeAttacker melee;
 
@@ -15,6 +16,7 @@ public class Enemy1AI : MonoBehaviour {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
 		this.melee = this.GetComponent<MeleeAttacker> ();
+		this.animator = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +44,16 @@ public class Enemy1AI : MonoBehaviour {
 			}
 		} else {
 			rb2d.velocity = Vector2.zero;
+		}
+
+		if (this.rb2d.velocity.x > 0) {
+			animator.SetBool("moving", true);
+			transform.localScale = new Vector3(1f, 1f, 1f);
+		} else if (this.rb2d.velocity.x < 0) {
+			animator.SetBool("moving", true);
+			transform.localScale = new Vector3(-1f, 1f, 1f);
+		} else {
+			animator.SetBool("moving", false);
 		}
 	}
 

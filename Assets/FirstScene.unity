@@ -323,7 +323,7 @@ Transform:
   - {fileID: 649663939}
   - {fileID: 1471773147}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &373454788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +357,7 @@ MonoBehaviour:
     minimum: 50
     maximum: 200
   end: 2000000020000000
+  enemySpawnInterval: 100
   roomSide: 8
   biomeNumber: 16
   outerWallTiles:
@@ -385,6 +386,7 @@ MonoBehaviour:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
   enemies:
   - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   bloomNum: 10
   bloomSize:
     minimum: 28
@@ -410,6 +412,7 @@ MonoBehaviour:
   - {fileID: 124120, guid: 95018a084c8124bccba0b5e33fa2d521, type: 2}
   enemies:
   - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
   bloomNum: 90
   bloomSize:
@@ -434,7 +437,7 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 106628, guid: 67f84996e558c45c194e307262598506, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   bloomNum: 30
   bloomSize:
     minimum: 12
@@ -482,7 +485,7 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 120402, guid: b4b100efd7bdc467cbd000a1a555c9c6, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
     minimum: 10
