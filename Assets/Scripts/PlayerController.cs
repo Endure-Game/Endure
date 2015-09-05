@@ -15,9 +15,11 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
 	private MeleeAttacker meleeAttacker;
 	private RangedAttacker rangedAttacker;
+	private ToolUser toolUser;
+
 	private float playerRadius;
 
-	private bool pusher = false;//FOR PUSHING DEBUGGING SHITEWHO
+	private bool pusher = false;//FOR DEBUGGING
 
 	public enum Control {
 		SPACE,
@@ -31,12 +33,16 @@ public class PlayerController : MonoBehaviour {
 		public string type;
 		public int damage;
 		public Control control;
-		public InventoryItem (string n, Sprite s, string t, int d, Control c) {
+
+		public string tool;
+
+		public InventoryItem (string n, Sprite s, string t, int d, Control c, string tool) {
 			this.name = n;
 			this.sprite = s;
 			this.type = t;
 			this.damage = d;
 			this.control = c;
+			this.tool = tool;
 		}
 	};
 
@@ -58,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 		this.animator = this.GetComponent<Animator> ();
 		this.meleeAttacker = this.GetComponent<MeleeAttacker> ();
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
+		this.toolUser = this.GetComponent<ToolUser> ();
 
 		// Give player starting items
 		//this.inventory.Add("sword");
@@ -70,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 
 		Vector2 playerSpeed = new Vector2 (horizontal, vertical);
 		float magnitude = playerSpeed.magnitude;
-		if(magnitude == 0){
+		if (magnitude == 0) {
 			magnitude = 1;
 		}
 
@@ -110,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Tab) || this.inventory.Count == 1) {
 				print ("Do something");
 				print ("Inv Count" + this.inventory.Count);
-				if(this.selectedInventory >= this.inventory.Count - 1){
+				if (this.selectedInventory >= this.inventory.Count - 1) {
 					this.selectedInventory = 0;
 				} else {
 					this.selectedInventory++;
@@ -119,10 +126,13 @@ public class PlayerController : MonoBehaviour {
 				if(this.inventory[this.selectedInventory].type == "Melee"){
 					this.meleeAttacker.damage = this.inventory[this.selectedInventory].damage;
 					this.rangedAttacker.damage = 0;
+					this.toolUser.toolType = "";
 				} else if (this.inventory[this.selectedInventory].type == "Ranged") {
 					this.rangedAttacker.damage = this.inventory[this.selectedInventory].damage;
 					this.meleeAttacker.damage = 0;
-				} else {
+					this.toolUser.toolType = "";
+				} else if (this.inventory[this.selectedInventory].type == "Tool") {
+					this.toolUser.toolType = this.inventory[this.selectedInventory].tool;
 					this.rangedAttacker.damage = 0;
 					this.meleeAttacker.damage = 0;
 				}
@@ -145,19 +155,33 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// melee attack
-			if (Input.GetKeyDown (KeyCode.Space) && !this.Health.Block && this.meleeAttacker.damage > 0) {
-				this.animator.SetBool ("Idle", true);
-				this.animator.SetTrigger ("Sword");
-				int direction = this.animator.GetInteger ("Direction");
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (!this.Health.Block && this.meleeAttacker.damage > 0) {
+					this.animator.SetBool ("Idle", true);
+					this.animator.SetTrigger ("Sword");
+					int direction = this.animator.GetInteger ("Direction");
 
-				if (direction == 0) {
-					this.meleeAttacker.AttackSouth ();
-				} else if (direction == 1) {
-					this.meleeAttacker.AttackWest ();
-				} else if (direction == 2) {
-					this.meleeAttacker.AttackNorth ();
-				} else if (direction == 3) {
-					this.meleeAttacker.AttackEast ();
+					if (direction == 0) {
+						this.meleeAttacker.AttackSouth ();
+					} else if (direction == 1) {
+						this.meleeAttacker.AttackWest ();
+					} else if (direction == 2) {
+						this.meleeAttacker.AttackNorth ();
+					} else if (direction == 3) {
+						this.meleeAttacker.AttackEast ();
+					}
+				} else if (this.toolUser.toolType.Length > 0) {
+					int direction = this.animator.GetInteger ("Direction");
+					
+					if (direction == 0) {
+						this.toolUser.UseSouth ();
+					} else if (direction == 1) {
+						this.toolUser.UseWest ();
+					} else if (direction == 2) {
+						this.toolUser.UseNorth ();
+					} else if (direction == 3) {
+						this.toolUser.UseEast ();
+					}
 				}
 			}
 		} else {
@@ -187,10 +211,13 @@ public class PlayerController : MonoBehaviour {
 		switch (name) {
 
 		case "RustyMachete":
-			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE));
+			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE, ""));
 			break;
 		case "BowAndArrow":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1, Control.MOUSE));
+			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 1, Control.MOUSE, ""));
+			break;
+		case "Axe":
+			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
 			break;
 		default: 
 			print ("Error: not a valid weapon or tool name");

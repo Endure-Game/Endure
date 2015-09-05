@@ -1,71 +1,78 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &183394
+--- !u!1 &101802
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 432904}
-  - 212: {fileID: 21276110}
-  - 61: {fileID: 6154026}
-  - 114: {fileID: 11473518}
+  - 4: {fileID: 418758}
+  - 212: {fileID: 21271940}
+  - 114: {fileID: 11433016}
+  - 114: {fileID: 11409846}
+  - 61: {fileID: 6106136}
   m_Layer: 0
-  m_Name: SnowMan
+  m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &432904
+--- !u!4 &418758
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183394}
+  m_GameObject: {fileID: 101802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.28685188, y: .760570347, z: 0}
+  m_LocalPosition: {x: -2.50108194, y: 1.18099713, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6154026
+--- !u!61 &6106136
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183394}
+  m_GameObject: {fileID: 101802}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: .0700000003, y: .0599999987}
   serializedVersion: 2
-  m_Size: {x: 1.00882721, y: 1.00882721}
---- !u!114 &11473518
+  m_Size: {x: .769999981, y: .629999995}
+--- !u!114 &11409846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183394}
+  m_GameObject: {fileID: 101802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f48616ddd8f05e743894ce31cccd1c02, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c2be95a401b542b59a10ab21747cb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
-  drops:
-  - chance: 2
-    item: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
-  - chance: 1
-    item: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
---- !u!212 &21276110
+--- !u!114 &11433016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd7884c1fe5647fbabe249310bd97a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Axe
+--- !u!212 &21271940
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183394}
+  m_GameObject: {fileID: 101802}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,7 +91,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300148, guid: 10083174fbc1b46d9a06784902dbacd9, type: 3}
+  m_Sprite: {fileID: 21300076, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -92,32 +99,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: drops.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: maxHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: drops.Array.data[0].item
-      value: 
-      objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
-    - target: {fileID: 0}
-      propertyPath: drops.Array.data[0].chance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: drops.Array.data[1].item
-      value: 
-      objectReference: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
-    - target: {fileID: 0}
-      propertyPath: drops.Array.data[1].chance
-      value: 1
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 183394}
+  m_RootGameObject: {fileID: 101802}
   m_IsPrefabParent: 1
