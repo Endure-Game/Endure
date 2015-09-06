@@ -141,11 +141,39 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// ranged attack
-			if (Input.GetMouseButtonDown (0) && this.rangedAttacker.damage > 0) {
-				Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				pz.z = 0;
+			if (Input.GetMouseButtonDown (0)) {
+				if (this.rangedAttacker.damage > 0) {
+					Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+					pz.z = 0;
 
-				this.rangedAttacker.Attack(pz);
+					this.rangedAttacker.Attack(pz);
+				} else if (this.meleeAttacker.damage > 0) {
+					this.animator.SetBool ("Idle", true);
+					this.animator.SetTrigger ("Sword");
+					int direction = this.animator.GetInteger ("Direction");
+					
+					if (direction == 0) {
+						this.meleeAttacker.AttackSouth ();
+					} else if (direction == 1) {
+						this.meleeAttacker.AttackWest ();
+					} else if (direction == 2) {
+						this.meleeAttacker.AttackNorth ();
+					} else if (direction == 3) {
+						this.meleeAttacker.AttackEast ();
+					}
+				} else if (this.toolUser.toolType.Length > 0) {
+					int direction = this.animator.GetInteger ("Direction");
+					
+					if (direction == 0) {
+						this.toolUser.UseSouth ();
+					} else if (direction == 1) {
+						this.toolUser.UseWest ();
+					} else if (direction == 2) {
+						this.toolUser.UseNorth ();
+					} else if (direction == 3) {
+						this.toolUser.UseEast ();
+					}
+				}
 			}
 
 			// blocking
@@ -182,6 +210,21 @@ public class PlayerController : MonoBehaviour {
 						this.toolUser.UseNorth ();
 					} else if (direction == 3) {
 						this.toolUser.UseEast ();
+					}
+				} else if (this.rangedAttacker.damage > 0) {
+					int direction = this.animator.GetInteger ("Direction");
+					
+					if (direction == 0) {
+						this.rangedAttacker.Attack (this.transform.position + new Vector3(0, -1));
+					} else if (direction == 1) {
+						this.toolUser.UseWest ();
+						this.rangedAttacker.Attack (this.transform.position + new Vector3(-1, 0));
+					} else if (direction == 2) {
+						this.toolUser.UseNorth ();
+						this.rangedAttacker.Attack (this.transform.position + new Vector3(0, 1));
+					} else if (direction == 3) {
+						this.toolUser.UseEast ();
+						this.rangedAttacker.Attack (this.transform.position + new Vector3(1, 0));
 					}
 				}
 			}
