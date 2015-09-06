@@ -43,9 +43,7 @@ public class EnemyCowardAI : MonoBehaviour {
 				}
 				
 				this.animationTime += Time.deltaTime;
-				
-				print (this.oldPosition);
-				
+								
 				if(this.animationTime < this.idleDuration){
 					this.rb2d.velocity = Vector2.zero;
 				} else if (this.animationTime >= this.idleDuration){
