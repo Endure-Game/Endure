@@ -13,6 +13,9 @@ public class HUDController : MonoBehaviour {
 	public Sprite space;
 	public Font font;
 
+	public GameObject world;
+	private RoomManager roomManager;
+
 	public GameObject map;
 	private GameObject inventory;
 
@@ -22,6 +25,8 @@ public class HUDController : MonoBehaviour {
 	private Vector2 resolution;
 
 	private bool paused = false;
+
+	private Texture2D mapTexture;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +42,13 @@ public class HUDController : MonoBehaviour {
 		if (this.font == null) {
 			this.font = Resources.GetBuiltinResource<Font> ("Arial.ttf");
 		}
+
+		this.roomManager = this.world.GetComponent<RoomManager> ();
+
+		this.mapTexture = this.CreateMap ();
+		//var s = this.map.GetComponent<Image> ().sprite;
+		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, 100, 100), new Vector2 (0, 0));
+
 	}
 	
 	// Update is called once per frame
@@ -149,5 +161,20 @@ public class HUDController : MonoBehaviour {
 				//show the amount of bullets the play currently has
 			}
 		}
+	}
+
+	Texture2D CreateMap () {
+		var map = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
+		                         this.roomManager.columns * this.roomManager.roomSide);
+
+		for (var x = 0; x < 100; x++) {
+			for (var y = 0; y < 100; y++) {
+				map.SetPixel(x, y, Color.cyan);
+			}
+		}
+
+		map.Apply ();
+
+		return map;
 	}
 }
