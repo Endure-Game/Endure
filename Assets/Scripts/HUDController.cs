@@ -19,7 +19,7 @@ public class HUDController : MonoBehaviour {
 	private Health playerHealth;
 	private int startingMaxHealth;
 
-	private RectTransform rectTransform;
+	private Vector2 resolution;
 
 	private bool paused = false;
 
@@ -31,7 +31,8 @@ public class HUDController : MonoBehaviour {
 		this.inventory = new GameObject ();
 		this.inventory.transform.parent = this.gameObject.transform;
 
-		this.rectTransform = this.GetComponent<RectTransform> ();
+		this.resolution = this.GetComponent<CanvasScaler> ().referenceResolution;
+		this.resolution.y -= 3;
 
 		if (this.font == null) {
 			this.font = Resources.GetBuiltinResource<Font> ("Arial.ttf");
@@ -88,8 +89,8 @@ public class HUDController : MonoBehaviour {
 				icon.AddComponent<Image> ().sprite = item.sprite;
 				var rectTransform = icon.GetComponent<RectTransform> ();
 				icon.transform.SetParent(this.inventory.transform);
-				float x = this.rectTransform.rect.width - barWidth + i * rectTransform.rect.width;
-				icon.transform.position = new Vector3 (x, this.rectTransform.rect.height - rectTransform.rect.height / 2, 0);
+				float x = this.resolution.x - barWidth + i * rectTransform.rect.width;
+				icon.transform.position = new Vector3 (x, this.resolution.y - rectTransform.rect.height / 2, 0);
 
 				i++;
 			}
@@ -99,8 +100,8 @@ public class HUDController : MonoBehaviour {
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
 
-			var selX = this.rectTransform.rect.width - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
-			var selY = this.rectTransform.rect.height - rt.rect.height / 2;
+			var selX = this.resolution.x - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
+			var selY = this.resolution.y - rt.rect.height / 2;
 
 			border.transform.position = new Vector3 (selX, selY, 0);
 
