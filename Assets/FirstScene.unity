@@ -194,23 +194,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 145957167}
---- !u!1 &199410981 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 136586, guid: fd11df54b479a479b8be820218b187bd, type: 2}
-  m_PrefabInternal: {fileID: 240955787}
---- !u!114 &199410990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 199410981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315801af47dd44d4ba59537d51d25f29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolType: 
-  range: .600000024
 --- !u!1001 &240955787
 Prefab:
   m_ObjectHideFlags: 0
@@ -248,14 +231,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409720, guid: fd11df54b479a479b8be820218b187bd, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11439364, guid: fd11df54b479a479b8be820218b187bd, type: 2}
-      propertyPath: inventoryDisplay
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 21222764, guid: fd11df54b479a479b8be820218b187bd, type: 2}
-      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

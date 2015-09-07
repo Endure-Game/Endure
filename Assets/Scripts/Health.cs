@@ -61,6 +61,10 @@ public class Health : MonoBehaviour {
 
 	void DropAndDestroy ()
 	{
+		if (this.gameObject == PlayerController.instance.gameObject) {
+			Application.LoadLevel (2);
+		}
+
 		var position = this.transform.position;
 		Destroy (this.gameObject);
 
