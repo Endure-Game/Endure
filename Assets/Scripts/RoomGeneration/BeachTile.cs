@@ -21,6 +21,10 @@ public class BeachTile : BiomeTile
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 			                  new TilePlacer(this.PlaceWaterTiles));
 		}
+//		this.PerlinGenerator(region, 
+//		                     new TilePlacer(this.PlaceWaterTiles),
+//		                     .4f,
+//		                     .05f);
 	}
 
 	public override int getBiomeNumber() {
@@ -29,5 +33,6 @@ public class BeachTile : BiomeTile
 
 	public void PlaceWaterTiles(int x, int y) {
 		this.GetComponent<RoomManager>().SetGroundTile(this.getBlockingTile(), x, y);
+		this.tileMap[x,y].blocking = true;
 	}
 }

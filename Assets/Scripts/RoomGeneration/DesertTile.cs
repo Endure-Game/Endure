@@ -17,14 +17,18 @@ public class DesertTile : BiomeTile
 	public override void RandomBlocking(List<Tile> region) {
 
 		// Add Boulders
-		for (int num = 0; num < bloomNum; num++) {
-			
-			Tile randomTile = region[Random.Range(0, region.Count)];
-			BlockingExplosion(randomTile.x,
-			                  randomTile.y,
-			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
-			                  new TilePlacer(this.placeBlockingTile));
-		}
+//		for (int num = 0; num < bloomNum; num++) {
+//			
+//			Tile randomTile = region[Random.Range(0, region.Count)];
+//			BlockingExplosion(randomTile.x,
+//			                  randomTile.y,
+//			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
+//			                  new TilePlacer(this.placeBlockingTile));
+//		}
+		this.PerlinGenerator(region, 
+		                     new TilePlacer(this.placeBlockingTile),
+		                     .75f,
+		                     .2f);
 
 		// Add cactuses
 		int cactusNum = Random.Range(this.cactusCount.minimum, this.cactusCount.maximum);

@@ -402,8 +402,10 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 116392, guid: cb8f99b4ef5e54bea8025e3d5df143db, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
-  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .600000024
+    enemy: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .400000006
+    enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
   bloomNum: 10
   bloomSize:
     minimum: 28
@@ -428,8 +430,12 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 124120, guid: 95018a084c8124bccba0b5e33fa2d521, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
-  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .600000024
+    enemy: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .300000012
+    enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - chance: .100000001
+    enemy: {fileID: 179610, guid: 20c2243f5307846c99465cf6006a1fc3, type: 2}
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
   ice: {fileID: 128288, guid: 3833a58217b66496c8077cd24ece5d7d, type: 2}
   crackedIce: {fileID: 116440, guid: a3e43a03fd8a04462a503d3ec83112a0, type: 2}
@@ -460,7 +466,10 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 106628, guid: 67f84996e558c45c194e307262598506, type: 2}
   enemies:
-  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .800000012
+    enemy: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: .200000003
+    enemy: {fileID: 179610, guid: 20c2243f5307846c99465cf6006a1fc3, type: 2}
   bloomNum: 30
   bloomSize:
     minimum: 12
@@ -484,7 +493,8 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 132716, guid: 6241f2a9353bc43f5b027a9eda45d5a5, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - chance: 1
+    enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
   bloomNum: 100
   bloomSize:
     minimum: 1
@@ -508,7 +518,8 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 120402, guid: b4b100efd7bdc467cbd000a1a555c9c6, type: 2}
   enemies:
-  - {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+  - chance: 1
+    enemy: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
     minimum: 10
@@ -536,11 +547,8 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 125472, guid: cdee29f0838fe4d7a873a1c367958af9, type: 2}
   enemies:
-  - {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
-  bloomNum: 130
-  bloomSize:
-    minimum: 5
-    maximum: 5
+  - chance: 1
+    enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
 --- !u!114 &373454796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,6 +1037,7 @@ MonoBehaviour:
   selected: {fileID: 21300000, guid: 2b9160e8d0f22cc40af3b7b411231073, type: 3}
   mouse: {fileID: 21300000, guid: 6ea91fcf217baa842a84b393b4d6e5e2, type: 3}
   space: {fileID: 21300000, guid: 8dba79b2f0297d643bc1b8899229faa8, type: 3}
+  font: {fileID: 0}
   map: {fileID: 0}
 --- !u!114 &1644791123
 MonoBehaviour:
