@@ -6,11 +6,17 @@ public abstract class BiomeTile : MonoBehaviour
 {
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
-	public GameObject[] enemies;
+	public Spawn[] enemies;
 
 	protected Tile[,] tileMap;
 	protected int width;
 	protected int height;
+
+	[System.Serializable]
+	public class Spawn {
+		public float chance;
+		public GameObject enemy;
+	}
 	
 	void Awake() {
 		this.tileMap = this.GetComponent<RoomManager>().tileMap;
@@ -19,7 +25,7 @@ public abstract class BiomeTile : MonoBehaviour
 	}
 
 	public delegate void TilePlacer(int x, int y);
-	// Blooms are great for making irregular, but roundish shapes liek bodies of water
+	// Blooms are great for making irregular, but roundish shapes like bodies of water
 	public void BlockingExplosion(int x, int y, int level, TilePlacer spritePlacer) {
 
 		if (Random.Range (0, level) < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
@@ -74,7 +80,24 @@ public abstract class BiomeTile : MonoBehaviour
 	}
 
 	public GameObject getEnemy() {
-		return this.enemies[Random.Range(0, this.enemies.Length)];
+
+		float total = 0f;
+		foreach (Spawn enemy in this.enemies) {
+			total += enemy.chance;
+		}
+
+		float selected = Random.Range (0f, total);
+
+		total = 0f;
+		foreach (Spawn enemy in this.enemies) {
+			total += enemy.chance;
+			if (selected < total) {
+				return enemy.enemy;
+			}
+		}
+
+		// this line should never run if this function works correctly
+		return this.enemies[Random.Range(0, this.enemies.Length)].enemy;
 	}
 
 	public abstract void RandomBlocking(List<Tile> region);
