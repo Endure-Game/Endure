@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/StartScreen.unity
   - enabled: 1
     path: Assets/FirstScene.unity
+  - enabled: 1
+    path: Assets/DeathScreen.unity
