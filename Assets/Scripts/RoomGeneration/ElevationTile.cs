@@ -5,20 +5,50 @@ using System.Collections.Generic;
 public class ElevationTile : MonoBehaviour
 {
 	public GameObject[] tiles;
-	
-	public void placeCliffTiles() {
+
+	public void SmoothElevation(List<Tile> tiles) {
 
 		Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
 		int height = tileMap.GetLength(0);
 		int width = tileMap.GetLength(1);
 
-		for (int x = 1; x < width - 1; x++) {
-			for (int y = 1; y < height - 1; y++) {
+		bool smoothing = true;
+		while(smoothing) {
+			smoothing = false;
+			print ("retracing");
+			foreach (Tile tile in tiles) {
 
+				if (tile.x > 0 && tile.y > 0 && tile.x < width - 1 && tile.y < height - 1) {
+					for (int xDelta = -1; xDelta <= 1; xDelta++) {
+						for (int yDelta = -1; yDelta <= 1; yDelta++) {
+							if (tileMap[tile.x + xDelta, tile.y + yDelta].elevation + 1 < tile.elevation) {
+								tile.elevation--;
+								print("smoooting");
+								smoothing = true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void placeCliffTiles(List<Tile> tiles) {
+
+		Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
+		int height = tileMap.GetLength(0);
+		int width = tileMap.GetLength(1);
+
+		foreach (Tile tile in tiles) {
+			int x = tile.x;
+			int y = tile.y;
+
+			if (x > 0 && y > 0 && x < width - 1 && y < height - 1) {
 				bool lower = false;
 				List<int> walls = new List<int>();
 				for (int xDelta = -1; xDelta <= 1; xDelta++) {
 					for (int yDelta = -1; yDelta <= 1; yDelta++) {
+
 						if (tileMap[x + xDelta, y + yDelta].elevation > tileMap[x, y].elevation) {
 							lower = true;
 							walls.Add(xDelta + 1 + (yDelta + 1) * 3);
@@ -27,11 +57,12 @@ public class ElevationTile : MonoBehaviour
 				}
 
 				if (lower) {
-					if (tileMap[x, y].path) {
-						this.GetComponent<RoomManager>().SetGroundTile(tiles[0], x, y);
+					if (tile.path) {
+						this.GetComponent<RoomManager>().SetGroundTile(this.tiles[0], x, y);
 					} else {
-						this.GetComponent<RoomManager>().PlaceItem(GetWallTile(walls), x, y);
+						this.GetComponent<RoomManager>().PlaceItem(this.GetWallTile(walls), x, y);
 					}
+					tile.blocking = true;
 				}
 			}
 		}

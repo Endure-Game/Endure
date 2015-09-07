@@ -9,10 +9,13 @@ public class BeachTile : BiomeTile
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
 	public float bloomTightness = 0.4f;
-	
+
 	public const int BiomeNumber = 5;
-	
+
 	public override void RandomBlocking(List<Tile> region) {
+
+		base.RandomBlocking(region);
+
 		for (int num = 0; num < bloomNum; num++) {
 
 			Tile randomTile = region[Random.Range(0, region.Count)];
@@ -21,7 +24,7 @@ public class BeachTile : BiomeTile
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 			                  new TilePlacer(this.PlaceWaterTiles));
 		}
-//		this.PerlinGenerator(region, 
+//		this.PerlinGenerator(region,
 //		                     new TilePlacer(this.PlaceWaterTiles),
 //		                     .4f,
 //		                     .05f);

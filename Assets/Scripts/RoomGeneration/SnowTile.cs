@@ -16,10 +16,12 @@ public class SnowTile : BiomeTile
 
 	public int iceBloomNum = 2;
 	public RoomManager.Count iceBloomSize = new RoomManager.Count(7, 8);
-	
+
 	public const int BiomeNumber = 4;
-	
+
 	public override void RandomBlocking(List<Tile> region) {
+
+		base.RandomBlocking(region);
 
 		// Place ice tiles
 		for (var num = 0; num < iceBloomNum; num++) {
@@ -32,7 +34,7 @@ public class SnowTile : BiomeTile
 
 		// Place blocking tiles
 		for (int num = 0; num < bloomNum; num++) {
-			
+
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
