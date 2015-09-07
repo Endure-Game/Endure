@@ -333,10 +333,10 @@ public class RoomManager : MonoBehaviour {
 		print (Time.realtimeSinceStartup - startTime);
 
 		// Spawn starting enemies
-		for (int i = 0; i < 100; i++) {
-			Region region = this.regions[Random.Range(0, this.regions.Count)];
-			region.spawnEnemy();
-		}
+//		for (int i = 0; i < 100; i++) {
+//			Region region = this.regions[Random.Range(0, this.regions.Count)];
+//			region.spawnEnemy();
+//		}
 		print (Time.realtimeSinceStartup - startTime);
 
 	}
