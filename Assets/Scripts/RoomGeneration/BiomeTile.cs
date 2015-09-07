@@ -19,7 +19,7 @@ public abstract class BiomeTile : MonoBehaviour
 	}
 
 	public delegate void TilePlacer(int x, int y);
-	// change this into an action
+	// Blooms are great for making irregular, but roundish shapes liek bodies of water
 	public void BlockingExplosion(int x, int y, int level, TilePlacer spritePlacer) {
 
 		if (Random.Range (0, level) < 1 || x < 0 || y < 0 || x >= this.width || y >= this.height) {
@@ -44,6 +44,21 @@ public abstract class BiomeTile : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	// Perlin is faster than blooms and creates a maze-like structure, which is great for forests
+	// blockingRatio: float between 0f and 1f; 1f is no blocking and 0f is all blocking
+	// blockingSize: how large thick the walls of the maze are, recommended .2f 
+	public void PerlinGenerator(List<Tile> tiles, TilePlacer spritePlacer, float blockingRatio, float blockingSize) {
+
+		foreach (Tile tile in tiles) {
+			float noise = Mathf.PerlinNoise((float)tile.x * blockingSize, (float)tile.y * blockingSize);
+			if (noise > blockingRatio && !tile.path && tile.item == null) {
+				tile.blocking = true;
+				spritePlacer(tile.x, tile.y);
+			}
+		}
+
 	}
 
 	public GameObject getGroundTile() {
