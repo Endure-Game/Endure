@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//PUSHES THINGS OUT OF THE WAY
-	void OnCollisionStay2D (Collision2D collider) {
+	void OnCollisionEnter2D (Collision2D collider) {
 		if (this.pusher == true) {
 			collider.transform.position += (collider.transform.position - this.transform.position).normalized * 2;	
 		}
