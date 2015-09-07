@@ -55,7 +55,7 @@ public class Enemy1AI : MonoBehaviour {
 				}
 			} else if(heading.magnitude > this.deAggro){
 				//TODO RANDOM MOVEMENT
-				print("Stopped chasing player");
+				//print("Stopped chasing player");
 				//if(this.oldPosition = null){
 				//	this.rb2d.velocity = Vector2.zero;
 				//	this.oldPosition = this.transform.position;
@@ -82,29 +82,33 @@ public class Enemy1AI : MonoBehaviour {
 					}
 				}
 			}
-		} else {
-			this.rb2d.velocity = Vector2.zero;
+
+			// Make sure enemy is on the right layer
+			if(this.transform.position.z != (float)(this.transform.position.y + 16)){
+				this.transform.position = new Vector3(this.transform.position.x, 
+				                                      this.transform.position.y, 
+				                                      (float)(this.transform.position.y + 16));
+			}
+
+
+			if (this.rb2d.velocity.x > 0) {
+				animator.SetBool("moving", true);
+				transform.localScale = new Vector3(1f, 1f, 1f);
+			} else if (this.rb2d.velocity.x < 0) {
+				animator.SetBool("moving", true);
+				transform.localScale = new Vector3(-1f, 1f, 1f);
+			} else {
+				animator.SetBool("moving", false);
+			}
 		}
 
-		// Make sure enemy is on the right layer
-		this.transform.position = new Vector3(this.transform.position.x, 
-		                                      this.transform.position.y, 
-		                                      (float)(this.transform.position.y + 16));
 
-		if (this.rb2d.velocity.x > 0) {
-			animator.SetBool("moving", true);
-			transform.localScale = new Vector3(1f, 1f, 1f);
-		} else if (this.rb2d.velocity.x < 0) {
-			animator.SetBool("moving", true);
-			transform.localScale = new Vector3(-1f, 1f, 1f);
-		} else {
-			animator.SetBool("moving", false);
-		}
+
 	}
 
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
-			print ("Activated Enemy");
+			//print ("Activated Enemy");
 			this.active = true;
 		}
 	}
@@ -114,7 +118,7 @@ public class Enemy1AI : MonoBehaviour {
 		Vector2 heading = player.transform.position - this.transform.position;
 		//print ("collider radius: " + playerCollider.radius + " headingmag: " + heading.magnitude);
 		if (collided.tag == "Player" && heading.magnitude >= playerCollider.radius) {
-			print ("Deactivated Enemy");
+			//print ("Deactivated Enemy");
 			this.active = false;
 		}
 	}

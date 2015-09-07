@@ -58,23 +58,22 @@ public class EnemyCowardAI : MonoBehaviour {
 					}
 				}
 			}
-		}
-
-		// Make sure enemy is on the right layer
-		this.transform.position = new Vector3(this.transform.position.x, 
-		                                      this.transform.position.y, 
-		                                      (float)(this.transform.position.y + 16));
-
-
-
-		if (this.rb2d.velocity.x > 0) {
-			animator.SetBool("moving", true);
-			transform.localScale = new Vector3(1f, 1f, 1f);
-		} else if (this.rb2d.velocity.x < 0) {
-			animator.SetBool("moving", true);
-			transform.localScale = new Vector3(-1f, 1f, 1f);
-		} else {
-			animator.SetBool("moving", false);
+			// Make sure enemy is on the right layer
+			if(this.transform.position.z != (float)(this.transform.position.y + 16)){
+				this.transform.position = new Vector3(this.transform.position.x, 
+				                                      this.transform.position.y, 
+				                                      (float)(this.transform.position.y + 16));
+			}
+			
+			if (this.rb2d.velocity.x > 0) {
+				animator.SetBool("moving", true);
+				transform.localScale = new Vector3(1f, 1f, 1f);
+			} else if (this.rb2d.velocity.x < 0) {
+				animator.SetBool("moving", true);
+				transform.localScale = new Vector3(-1f, 1f, 1f);
+			} else {
+				animator.SetBool("moving", false);
+			}
 		}
 	}
 
