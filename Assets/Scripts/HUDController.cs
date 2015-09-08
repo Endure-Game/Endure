@@ -121,14 +121,17 @@ public class HUDController : MonoBehaviour {
 					var arrowCount = count.AddComponent<Text> ();
 					arrowCount.text = "" + PlayerController.instance.arrows;
 					arrowCount.font = this.font;
+					arrowCount.fontSize = 32;
 				break;
 				case "Rifle":
 					var rifleCount = count.AddComponent<Text> ();
 					rifleCount.text = "" + PlayerController.instance.bullets;
 					rifleCount.font = this.font;
+					rifleCount.fontSize = 32;
 				break;
 			}
 
+			var outline = count.AddComponent<Outline>();
 			control.transform.SetParent (this.inventory.transform);
 			control.transform.position = new Vector3 (selX, selY, 0);
 

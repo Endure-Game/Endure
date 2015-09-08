@@ -4,7 +4,8 @@ using System.Collections;
 public class RangedAttacker : MonoBehaviour {
 	public int damage = 3;
 	public float knockback = 0.5f;
-	public float delay = 0.5f;
+	public float arrowDelay = 0.5f;
+	public float bulletDelay = 1.5f;
 	
 	public GameObject arrow;
 	public GameObject bullet;
@@ -38,7 +39,7 @@ public class RangedAttacker : MonoBehaviour {
 
 			if (!this.locked && PlayerController.instance.arrows > 0) {
 				this.elapsed = 0;
-				this.untilUnlocked = this.delay;
+				this.untilUnlocked = this.arrowDelay;
 				this.locked = true;
 
 				GameObject weapon = Instantiate (this.arrow, this.transform.position, Quaternion.identity) as GameObject;
@@ -57,7 +58,7 @@ public class RangedAttacker : MonoBehaviour {
 		} else {
 			if (!this.locked && PlayerController.instance.bullets > 0) {
 				this.elapsed = 0;
-				this.untilUnlocked = this.delay;
+				this.untilUnlocked = this.bulletDelay;
 				this.locked = true;
 				
 				GameObject weapon = Instantiate (this.bullet, this.transform.position, Quaternion.identity) as GameObject;
