@@ -172,7 +172,7 @@ public class HUDController : MonoBehaviour {
 			return new Color (208f / 255f, 207f / 255f, 108f / 255f);
 			break;
 		case 2:
-			return new Color (106f / 255f, 165f / 255f, 55f / 255f);
+			return new Color (166f / 255f, 167f / 255f, 55f / 255f);
 			break;
 		case 3:
 			return new Color (167f / 255f, 97f / 255f, 63f / 255f);
@@ -181,7 +181,7 @@ public class HUDController : MonoBehaviour {
 			return new Color (231f / 255f, 255f / 255f, 255f / 255f);
 			break;
 		case 5:
-			return new Color (225f / 255f, 216f / 255f, 123f / 255f);
+			return new Color (225f / 255f, 236f / 255f, 143f / 255f);
 			break;
 		default:
 			return Color.black;
