@@ -86,10 +86,10 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.I)){
 			this.arrows = 10000;
 			this.bullets = 10000;
-		}
-		if (Input.GetKeyDown (KeyCode.G)) {
 			this.Health.maxHealth = 50;
 			this.Health.ChangeHealth(this.Health.maxHealth);
+		}
+		if (Input.GetKeyDown (KeyCode.G)) {
 			if(this.pusher){
 				this.pusher = false;
 			} else{
