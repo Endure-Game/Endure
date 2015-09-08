@@ -217,7 +217,7 @@ public class RoomManager : MonoBehaviour {
 		this.rooms = new GameObject[roomSide, roomSide];
 
 		TileMapGeneration();
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Generate tile map " + (Time.realtimeSinceStartup - startTime));
 
 		// Create rooms
 		for (int i = 0; i < roomSide; i++) {
@@ -225,7 +225,7 @@ public class RoomManager : MonoBehaviour {
 				this.rooms [i, j] = RoomSetup (i, j);
 			}
 		}
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Create rooms " + (Time.realtimeSinceStartup - startTime));
 
 		// Create outer rock wall
 		for (int x = 0; x < this.roomSide * this.columns; x++) {
@@ -235,7 +235,7 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Create outter rock wall " + (Time.realtimeSinceStartup - startTime));
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
@@ -285,7 +285,7 @@ public class RoomManager : MonoBehaviour {
 			placePath(current, next, moveX, moveY);
 
 		}
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Create path " + (Time.realtimeSinceStartup - startTime));
 
 		// Create climb points
 		/*for (int i = 0; i < this.regions.Count; i++) {
@@ -320,19 +320,19 @@ public class RoomManager : MonoBehaviour {
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
 		}
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
 
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Random Objects layed out" + (Time.realtimeSinceStartup - startTime));
 
 		// Spawn starting enemies
 		for (int i = 0; i < 100; i++) {
 			Region region = this.regions[Random.Range(0, this.regions.Count)];
 			region.spawnEnemy();
 		}
-		print (Time.realtimeSinceStartup - startTime);
+		print ("Create blocking tiles " + (Time.realtimeSinceStartup - startTime));
 
 	}
 
@@ -466,6 +466,7 @@ public class RoomManager : MonoBehaviour {
 		this.tileMap[x, y].ground = Instantiate (sprite,
 		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
 		                                       Quaternion.identity) as GameObject;
+		tileMap[x, y].ground.transform.Translate(new Vector3(0, 0, y));
 	}
 
 	private void getBiome(int x, int y) {

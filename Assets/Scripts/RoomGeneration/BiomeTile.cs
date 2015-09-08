@@ -79,7 +79,7 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 	}
 
-	public GameObject getGroundTile() {
+	public virtual GameObject getGroundTile() {
 		return this.groundTiles[Random.Range(0, this.groundTiles.Length)];
 	}
 

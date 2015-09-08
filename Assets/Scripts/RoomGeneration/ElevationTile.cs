@@ -15,7 +15,6 @@ public class ElevationTile : MonoBehaviour
 		bool smoothing = true;
 		while(smoothing) {
 			smoothing = false;
-			print ("retracing");
 			foreach (Tile tile in tiles) {
 
 				if (tile.x > 0 && tile.y > 0 && tile.x < width - 1 && tile.y < height - 1) {
@@ -23,7 +22,6 @@ public class ElevationTile : MonoBehaviour
 						for (int yDelta = -1; yDelta <= 1; yDelta++) {
 							if (tileMap[tile.x + xDelta, tile.y + yDelta].elevation + 1 < tile.elevation) {
 								tile.elevation--;
-								print("smoooting");
 								smoothing = true;
 							}
 						}
@@ -61,6 +59,12 @@ public class ElevationTile : MonoBehaviour
 						this.GetComponent<RoomManager>().SetGroundTile(this.tiles[0], x, y);
 					} else {
 						this.GetComponent<RoomManager>().PlaceItem(this.GetWallTile(walls), x, y);
+
+						// Plains needs a special ground tile for layering
+						if (tile.biome == this.GetComponent<PlainsTile>().getBiomeNumber()) {
+							GameObject flatSprite = this.GetComponent<PlainsTile>().getFlatGroundTile();
+							this.GetComponent<RoomManager>().SetGroundTile(flatSprite, x, y);
+						}
 					}
 					tile.blocking = true;
 				}

@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 			// make sure player is at the right z distance for correct overlap
 			this.transform.position = new Vector3(this.transform.position.x,
 			                                      this.transform.position.y,
-			                                      (float)(this.transform.position.y + 16));
+			                                      (float)(this.transform.position.y + 15.5));
 			if (horizontal > 0) {
 				this.animator.SetInteger ("Direction", 3);
 				this.animator.SetBool ("Idle", false);
