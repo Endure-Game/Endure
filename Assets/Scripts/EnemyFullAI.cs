@@ -16,6 +16,9 @@ public class EnemyFullAI : MonoBehaviour {
 	private bool active = false;
 	private Rigidbody2D rb2d;
 	private PlayerController player;
+	private Vector3 lastPlayerPos;
+	private Vector3 heading;
+	private Vector3 targetHeading;
 	//FOr idle movement (Privately set)
 	private Animator animator;
 	private Vector3 oldPosition;
@@ -59,56 +62,15 @@ public class EnemyFullAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (this.active) {
-			Vector2 heading = player.transform.position - this.transform.position;
+			this.targetHeading = this.player.transform.position - this.transform.position;
 			//print (heading.magnitude + "|" + this.aggro);
-			if(heading.magnitude < this.aggro){
-				this.oldPosition = this.transform.position;
-				if (!this.melee.meleeWeapon.Locked) {
-					this.rb2d.velocity = speed * heading.normalized;
-				} else {
-					this.rb2d.velocity = Vector2.zero;
-				}
-				
-				if (heading.magnitude < this.melee.meleeWeapon.range + 0.5f) {
-					Vector2 n = heading.normalized;
-					if (n.x > Mathf.Sqrt (2) / 2) {
-						this.melee.meleeWeapon.AttackEast ();
-					} else if (n.x < - Mathf.Sqrt (2) / 2) {
-						this.melee.meleeWeapon.AttackWest ();
-					} else if (n.y > Mathf.Sqrt (2) / 2) {
-						this.melee.meleeWeapon.AttackNorth ();
-					} else if (n.y < -Mathf.Sqrt (2) / 2) {
-						this.melee.meleeWeapon.AttackSouth ();
-					}
-				}
-			} else if(heading.magnitude > this.deAggro){
-				//TODO RANDOM MOVEMENT
-				//print("Stopped chasing player");
-				//if(this.oldPosition = null){
-				//	this.rb2d.velocity = Vector2.zero;
-				//	this.oldPosition = this.transform.position;
-				//}
-				if(this.oldPosition == Vector3.zero){
-					this.oldPosition = this.transform.position;
-				}
-				
-				this.animationTime += Time.deltaTime;
-				
-				//print (this.oldPosition);
-				
-				if(this.animationTime < this.idleDuration){
-					this.rb2d.velocity = Vector2.zero;
-				} else if (this.animationTime >= this.idleDuration){
-					if(this.animationTime > this.moveDuration + this.idleDuration){
-						this.rb2d.velocity = Vector2.zero;
-						this.animationTime = 0;
-					} else if (this.rb2d.velocity == Vector2.zero){
-						float rx = Random.Range (-1f, 1f);
-						float ry = Random.Range (-1f, 1f);
-						Vector2 idleHeading = this.oldPosition - this.transform.position;
-						this.rb2d.velocity = speed * (idleHeading - new Vector2(rx, ry)).normalized;
-					}
-				}
+			if(this.targetHeading.magnitude < this.aggro){
+				this.lastPlayerPos = player.transform.position;
+				this.MeleeAttack ();
+			} else if (this.targetHeading.magnitude < this.deAggro){
+				this.MeleeAttack ();
+			} else if(this.targetHeading.magnitude >= this.deAggro){
+				this.IdleMovement ();
 			}
 			
 			// Make sure enemy is on the right layer
@@ -117,8 +79,8 @@ public class EnemyFullAI : MonoBehaviour {
 				                                      this.transform.position.y,
 				                                      (float)(this.transform.position.y + 16));
 			}
-			
-			
+
+			//Animation for player movement
 			if (this.rb2d.velocity.x > 0) {
 				animator.SetBool("moving", true);
 				transform.localScale = new Vector3(1f, 1f, 1f);
@@ -131,17 +93,64 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 		
 	}
-
-	void meleeAttack (){
-
-	}
-	void rangedAttack (){
-
-	}
-	void cowardRun (){
-
+	//moveTo should be a vector2 of position
+	public void MoveTo (Vector3 moveTo){
+		this.heading = moveTo - this.transform.position;
+		this.rb2d.velocity = this.heading.normalized * this.speed;
 	}
 
+	void MeleeAttack (){
+		//heading = this.lastPlayerPos - this.transform.position;
+		this.oldPosition = this.transform.position;
+		if (!this.melee.meleeWeapon.Locked) {
+			this.MoveTo (this.lastPlayerPos);
+		} else {
+			this.rb2d.velocity = Vector2.zero;
+		}
+		
+		if (this.targetHeading.magnitude < this.melee.meleeWeapon.range + 0.5f) {
+			Vector3 n = this.targetHeading.normalized;
+			if (n.x > Mathf.Sqrt (2) / 2) {
+				this.melee.meleeWeapon.AttackEast ();
+			} else if (n.x < - Mathf.Sqrt (2) / 2) {
+				this.melee.meleeWeapon.AttackWest ();
+			} else if (n.y > Mathf.Sqrt (2) / 2) {
+				this.melee.meleeWeapon.AttackNorth ();
+			} else if (n.y < -Mathf.Sqrt (2) / 2) {
+				this.melee.meleeWeapon.AttackSouth ();
+			}
+		}
+	}
+	void RangedAttack (){
+
+	}
+	void CowardRun (){
+
+	}
+	void IdleMovement (){
+		if(this.oldPosition == Vector3.zero){
+			this.oldPosition = this.transform.position;
+		}
+		
+		this.animationTime += Time.deltaTime;
+		
+		//print (this.oldPosition);
+		
+		if(this.animationTime < this.idleDuration){
+			this.rb2d.velocity = Vector2.zero;
+		} else if (this.animationTime >= this.idleDuration){
+			if(this.animationTime > this.moveDuration + this.idleDuration){
+				this.rb2d.velocity = Vector2.zero;
+				this.animationTime = 0;
+			} else if (this.rb2d.velocity == Vector2.zero){
+				float rx = Random.Range (-1f, 1f);
+				float ry = Random.Range (-1f, 1f);
+				Vector3 idleHeading = this.oldPosition - this.transform.position;
+				this.rb2d.velocity = speed * (idleHeading - new Vector3(rx, ry)).normalized;
+			}
+		}
+	}
+	
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
 			//print ("Activated Enemy");
@@ -151,9 +160,9 @@ public class EnemyFullAI : MonoBehaviour {
 	
 	void OnTriggerExit2D (Collider2D collided) {
 		CircleCollider2D playerCollider = player.GetComponent<CircleCollider2D> ();
-		Vector2 heading = player.transform.position - this.transform.position;
+		this.targetHeading = player.transform.position - this.transform.position;
 		//print ("collider radius: " + playerCollider.radius + " headingmag: " + heading.magnitude);
-		if (collided.tag == "Player" && heading.magnitude >= playerCollider.radius) {
+		if (collided.tag == "Player" && this.targetHeading.magnitude >= playerCollider.radius) {
 			//print ("Deactivated Enemy");
 			this.active = false;
 		}
