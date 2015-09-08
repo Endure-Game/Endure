@@ -6,7 +6,7 @@ public class EnemyFullAI : MonoBehaviour {
 	//Basic AI Stats	
 	public float speed = 3f;
 	public float aggro = 5f;
-	public float deAggro = 6f; 
+	public float deAggro = 10f; 
 	
 	//For idle movement
 	public float moveDuration = 0.8f;
@@ -30,7 +30,13 @@ public class EnemyFullAI : MonoBehaviour {
 	[System.Serializable]
 	public class Melee {
 		public bool isMelee = false;
-		public MeleeAttacker meleeWeapon;
+		private MeleeAttacker meleeWeapon;
+		public void setWeapon(MeleeAttacker meleeWep){
+			this.meleeWeapon = meleeWep;
+		}
+		public MeleeAttacker getWeapon () {
+			return this.meleeWeapon;
+		}
 	}
 	public Melee melee;
 
@@ -38,7 +44,13 @@ public class EnemyFullAI : MonoBehaviour {
 	public class Ranged {
 		public bool isRanged = false;
 		public float rangedDistance = 4f;
-		public RangedAttacker rangedWeapon;
+		private RangedAttacker rangedWeapon;
+		public void setWeapon(RangedAttacker rangedWep){
+			this.rangedWeapon = rangedWep;
+		}
+		public RangedAttacker getWeapon () {
+			return this.rangedWeapon;
+		}
 	}
 	public Ranged ranged;
 
@@ -48,6 +60,15 @@ public class EnemyFullAI : MonoBehaviour {
 		public float cowardDistance = 2f;
 		public float maxRunDistance = 6f;
 		private bool feared = false;
+		public bool isFeared (){
+			return this.feared;
+		}
+		public void yesFear(){
+			this.feared = true;
+		}
+		public void noFear (){
+			this.feared = false;
+		}
 	}
 	public Coward coward;
 
@@ -55,7 +76,12 @@ public class EnemyFullAI : MonoBehaviour {
 	void Start () {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
-		this.melee.meleeWeapon = this.GetComponent<MeleeAttacker> ();
+		if (this.melee.isMelee) {
+			this.melee.setWeapon(this.GetComponent<MeleeAttacker> ());
+		}
+		if (this.ranged.isRanged) {
+			this.ranged.setWeapon (this.GetComponent<RangedAttacker>());
+		}
 		this.animator = this.GetComponent<Animator> ();
 	}
 	
@@ -66,10 +92,18 @@ public class EnemyFullAI : MonoBehaviour {
 			//print (heading.magnitude + "|" + this.aggro);
 			if(this.targetHeading.magnitude < this.aggro){
 				this.lastPlayerPos = player.transform.position;
-				this.MeleeAttack ();
-			} else if (this.targetHeading.magnitude < this.deAggro){
-				this.MeleeAttack ();
+			} 
+			if (this.targetHeading.magnitude < this.deAggro){
+				if(this.melee.isMelee){
+					this.MeleeAttack ();
+				} else if (this.ranged.isRanged){
+					this.RangedAttack ();
+				} else if (this.coward.isCoward){
+					this.CowardRun ();
+				}
+				//this.MeleeAttack ();
 			} else if(this.targetHeading.magnitude >= this.deAggro){
+				//Double Check conditional
 				this.IdleMovement ();
 			}
 			
@@ -102,30 +136,57 @@ public class EnemyFullAI : MonoBehaviour {
 	void MeleeAttack (){
 		//heading = this.lastPlayerPos - this.transform.position;
 		this.oldPosition = this.transform.position;
-		if (!this.melee.meleeWeapon.Locked) {
+		if (!this.melee.getWeapon().Locked) {
 			this.MoveTo (this.lastPlayerPos);
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
 		
-		if (this.targetHeading.magnitude < this.melee.meleeWeapon.range + 0.5f) {
+		if (this.targetHeading.magnitude < this.melee.getWeapon().range + 0.5f) {
 			Vector3 n = this.targetHeading.normalized;
 			if (n.x > Mathf.Sqrt (2) / 2) {
-				this.melee.meleeWeapon.AttackEast ();
+				this.melee.getWeapon().AttackEast ();
 			} else if (n.x < - Mathf.Sqrt (2) / 2) {
-				this.melee.meleeWeapon.AttackWest ();
+				this.melee.getWeapon().AttackWest ();
 			} else if (n.y > Mathf.Sqrt (2) / 2) {
-				this.melee.meleeWeapon.AttackNorth ();
+				this.melee.getWeapon().AttackNorth ();
 			} else if (n.y < -Mathf.Sqrt (2) / 2) {
-				this.melee.meleeWeapon.AttackSouth ();
+				this.melee.getWeapon().AttackSouth ();
 			}
 		}
 	}
 	void RangedAttack (){
-
+		//Vector2 heading = player.transform.position - this.transform.position;
+		
+		//if (true) {
+		if (!this.ranged.getWeapon().Locked) {
+			this.rb2d.velocity = this.speed * heading.normalized;
+		} else {
+			this.rb2d.velocity = Vector2.zero;
+		}
+		/*if (heading.magnitude < this.cowardDistance && !ranged.Locked){
+			this.rb2d.velocity = this.speed * -heading.normalized; 
+		}*/
+		if (this.heading.magnitude < this.ranged.rangedDistance){
+			//Vector3 target = heading;
+			//print (target.normalized);
+			//target.z = player.transform.position.z;
+			this.ranged.getWeapon().Attack (player.transform.position);
+		}
 	}
 	void CowardRun (){
-
+		Vector2 heading = player.transform.position - this.transform.position;
+		if (heading.magnitude < this.coward.cowardDistance){
+			this.coward.yesFear();
+		} else if (heading.magnitude > this.coward.maxRunDistance){
+			this.coward.noFear ();
+		}
+		if(this.coward.isFeared()){
+			this.rb2d.velocity = this.speed * - heading.normalized; 
+			this.oldPosition = Vector3.zero;
+		} else {
+			IdleMovement ();
+		}
 	}
 	void IdleMovement (){
 		if(this.oldPosition == Vector3.zero){
