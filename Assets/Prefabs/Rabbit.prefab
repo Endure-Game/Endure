@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11416694}
   - 114: {fileID: 11420998}
   - 95: {fileID: 9507656}
+  - 114: {fileID: 11488832}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Animal
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b5b4791bb263214b836088b9d5f6229, type: 3}
   m_Name: 
@@ -110,6 +111,31 @@ MonoBehaviour:
   drops:
   - chance: 2
     item: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
+--- !u!114 &11488832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05abdaebf7257c4abe8e73870df6143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  aggro: 5
+  deAggro: 10
+  moveDuration: .800000012
+  idleDuration: .600000024
+  melee:
+    isMelee: 0
+  ranged:
+    isRanged: 0
+    rangedDistance: 4
+  coward:
+    isCoward: 1
+    cowardDistance: 2
+    maxRunDistance: 6
 --- !u!212 &21238808
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -166,6 +192,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: coward.isCoward
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

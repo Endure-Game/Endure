@@ -107,17 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05abdaebf7257c4abe8e73870df6143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMelee: 0
-  isRanged: 0
-  isCoward: 0
   speed: 3
   aggro: 5
   deAggro: 6
-  rangedDistance: 4
-  cowardDistance: 2
-  maxRunDistance: 6
   moveDuration: .800000012
   idleDuration: .600000024
+  melee:
+    isMelee: 1
+  ranged:
+    isRanged: 0
+    rangedDistance: 4
+  coward:
+    isCoward: 0
+    cowardDistance: 2
+    maxRunDistance: 6
 --- !u!114 &11447706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +236,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isCoward
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: melee.isMelee
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
