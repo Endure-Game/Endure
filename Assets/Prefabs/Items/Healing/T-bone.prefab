@@ -1,69 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &140046
+--- !u!1 &173490
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 470800}
-  - 212: {fileID: 21217634}
-  - 114: {fileID: 11486836}
-  - 114: {fileID: 11478746}
+  - 4: {fileID: 448256}
+  - 212: {fileID: 21280684}
+  - 114: {fileID: 11483992}
+  - 61: {fileID: 6175942}
+  - 114: {fileID: 11439234}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: T-bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &470800
+--- !u!4 &448256
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140046}
+  m_GameObject: {fileID: 173490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.1213837, y: 68.7549591, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: 1}
+  m_LocalPosition: {x: 14.1678467, y: -2.71675253, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11478746
+--- !u!61 &6175942
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173490}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: .119999997, y: .159999996}
+--- !u!114 &11439234
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140046}
+  m_GameObject: {fileID: 173490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab47e08509719444a6e90ae476b48fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d1a535e27e9495399cfd7d038606a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  life: 2
---- !u!114 &11486836
+  amount: 5
+--- !u!114 &11483992
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140046}
+  m_GameObject: {fileID: 173490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d39f3e628fdbb4c978b2b847dd35d4, type: 3}
+  m_Script: {fileID: 11500000, guid: fbd7884c1fe5647fbabe249310bd97a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: .5
-  spawner: {fileID: 0}
-  destroyOnTouch: 0
---- !u!212 &21217634
+  name: T-bone
+--- !u!212 &21280684
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140046}
+  m_GameObject: {fileID: 173490}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -82,7 +92,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300064, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
+  m_Sprite: {fileID: 21300088, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -90,16 +100,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_LocalScale.x
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalScale.y
-      value: .5
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 140046}
+  m_RootGameObject: {fileID: 173490}
   m_IsPrefabParent: 1

@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//DEBUGGING TOOL ONLY
+		if (Input.GetKeyDown (KeyCode.I)){
+			this.arrows = 10000;
+			this.bullets = 10000;
+		}
 		if (Input.GetKeyDown (KeyCode.G)) {
 			if(this.pusher){
 				this.pusher = false;
