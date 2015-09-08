@@ -78,7 +78,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11401558
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c67a1aa1b7711b9449651ffe09906733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 2
   knockback: .5
   range: .600000024
@@ -104,12 +104,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 195750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbc934d28bdb7f34fb38e2e927ca8eb3, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Script: {fileID: 11500000, guid: c05abdaebf7257c4abe8e73870df6143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMelee: 0
+  isRanged: 0
+  isCoward: 0
   speed: 3
-  aggro: 3
-  deAggro: 3
+  aggro: 5
+  deAggro: 6
+  rangedDistance: 4
+  cowardDistance: 2
+  maxRunDistance: 6
   moveDuration: .800000012
   idleDuration: .600000024
 --- !u!114 &11447706
@@ -121,8 +127,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   aggro: 10
 --- !u!114 &11463666
 MonoBehaviour:
@@ -133,8 +139,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f48616ddd8f05e743894ce31cccd1c02, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxHealth: 10
   drops:
   - chance: 10
@@ -152,7 +158,7 @@ SpriteRenderer:
   m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices:
+  m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_ReflectionProbeUsage: 0
@@ -184,12 +190,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Controller
-      value:
+      value: 
       objectReference: {fileID: 22100000, guid: bf5e26a22bcdf46b49bbdae28558f908,
         type: 2}
     - target: {fileID: 0}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 21300020, guid: d50c1ef21efee44018e6dcf4688c7ddc,
         type: 3}
     - target: {fileID: 0}
@@ -215,6 +221,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMelee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isRanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isCoward
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
