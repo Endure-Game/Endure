@@ -3,24 +3,11 @@ using System.Collections;
 
 public class EnemyFullAI : MonoBehaviour {
 
-	//Determines how AI will function
-	public bool isMelee = false;
-	public bool isRanged = false;
-	public bool isCoward = false;
-
 	//Basic AI Stats	
 	public float speed = 3f;
 	public float aggro = 5f;
 	public float deAggro = 6f; 
-
-	//For ranged flag
-	public float rangedDistance = 4f;
-
-	//For coward flag
-	public float cowardDistance = 2f;
-	public float maxRunDistance = 6f;
-	private bool feared = false;
-
+	
 	//For idle movement
 	public float moveDuration = 0.8f;
 	public float idleDuration = 0.6f;
@@ -29,19 +16,43 @@ public class EnemyFullAI : MonoBehaviour {
 	private bool active = false;
 	private Rigidbody2D rb2d;
 	private PlayerController player;
+	//FOr idle movement (Privately set)
 	private Animator animator;
 	private Vector3 oldPosition;
 	private float animationTime = 0f;
 	
 	//For weapons
-	private MeleeAttacker melee;
-	private RangedAttacker ranged;
+	//private MeleeAttacker melee;
+	//private RangedAttacker ranged;
+	[System.Serializable]
+	public class Melee {
+		public bool isMelee = false;
+		public MeleeAttacker meleeWeapon;
+	}
+	public Melee melee;
+
+	[System.Serializable]
+	public class Ranged {
+		public bool isRanged = false;
+		public float rangedDistance = 4f;
+		public RangedAttacker rangedWeapon;
+	}
+	public Ranged ranged;
+
+	[System.Serializable]
+	public class Coward {
+		public bool isCoward = false;
+		public float cowardDistance = 2f;
+		public float maxRunDistance = 6f;
+		private bool feared = false;
+	}
+	public Coward coward;
 
 	// Use this for initialization
 	void Start () {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
-		this.melee = this.GetComponent<MeleeAttacker> ();
+		this.melee.meleeWeapon = this.GetComponent<MeleeAttacker> ();
 		this.animator = this.GetComponent<Animator> ();
 	}
 	
@@ -52,22 +63,22 @@ public class EnemyFullAI : MonoBehaviour {
 			//print (heading.magnitude + "|" + this.aggro);
 			if(heading.magnitude < this.aggro){
 				this.oldPosition = this.transform.position;
-				if (!melee.Locked) {
+				if (!this.melee.meleeWeapon.Locked) {
 					this.rb2d.velocity = speed * heading.normalized;
 				} else {
 					this.rb2d.velocity = Vector2.zero;
 				}
 				
-				if (heading.magnitude < melee.range + 0.5f) {
+				if (heading.magnitude < this.melee.meleeWeapon.range + 0.5f) {
 					Vector2 n = heading.normalized;
 					if (n.x > Mathf.Sqrt (2) / 2) {
-						this.melee.AttackEast ();
+						this.melee.meleeWeapon.AttackEast ();
 					} else if (n.x < - Mathf.Sqrt (2) / 2) {
-						this.melee.AttackWest ();
+						this.melee.meleeWeapon.AttackWest ();
 					} else if (n.y > Mathf.Sqrt (2) / 2) {
-						this.melee.AttackNorth ();
+						this.melee.meleeWeapon.AttackNorth ();
 					} else if (n.y < -Mathf.Sqrt (2) / 2) {
-						this.melee.AttackSouth ();
+						this.melee.meleeWeapon.AttackSouth ();
 					}
 				}
 			} else if(heading.magnitude > this.deAggro){
@@ -120,7 +131,17 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 		
 	}
-	
+
+	void meleeAttack (){
+
+	}
+	void rangedAttack (){
+
+	}
+	void cowardRun (){
+
+	}
+
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
 			//print ("Activated Enemy");
