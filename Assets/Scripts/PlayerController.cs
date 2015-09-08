@@ -153,7 +153,11 @@ public class PlayerController : MonoBehaviour {
 					pz.z = 0;
 					this.rangedAttacker.Attack(pz);
 					this.animator.SetBool ("Idle", true);
-					this.animator.SetTrigger ("Arrow");
+					if (this.inventory[selectedInventory].name == "Rifle") {
+						this.animator.SetTrigger ("Gun");
+					} else {
+						this.animator.SetTrigger ("Arrow");
+					}
 				} else if (this.meleeAttacker.damage > 0) {
 					this.animator.SetBool ("Idle", true);
 					this.animator.SetTrigger ("Sword");
@@ -221,7 +225,11 @@ public class PlayerController : MonoBehaviour {
 				} else if (this.rangedAttacker.damage > 0) {
 					int direction = this.animator.GetInteger ("Direction");
 					this.animator.SetBool ("Idle", true);
-					this.animator.SetTrigger ("Arrow");
+					if (this.inventory[selectedInventory].name == "Rifle") {
+						this.animator.SetTrigger ("Gun");
+					} else {
+						this.animator.SetTrigger ("Arrow");
+					}
 
 					if (direction == 0) {
 						this.rangedAttacker.Attack (this.transform.position + new Vector3(0, -1));
