@@ -535,6 +535,7 @@ MonoBehaviour:
   enemies:
   - chance: 1
     enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  flatGroundTile: {fileID: 143284, guid: ef9cdb414167e484bbd9f4ced03eef48, type: 2}
   bloomNum: 100
   bloomSize:
     minimum: 1
