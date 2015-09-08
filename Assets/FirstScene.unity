@@ -143,8 +143,9 @@ GameObject:
   - 224: {fileID: 143973010}
   - 222: {fileID: 143973012}
   - 114: {fileID: 143973011}
+  - 114: {fileID: 143973013}
   m_Layer: 5
-  m_Name: Image
+  m_Name: CharacterIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +195,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 143973009}
+--- !u!114 &143973013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143973009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f971d496161a144499331aa47b2068a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 373454786}
 --- !u!1 &145957167
 GameObject:
   m_ObjectHideFlags: 0
