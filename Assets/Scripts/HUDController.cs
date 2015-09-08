@@ -47,7 +47,7 @@ public class HUDController : MonoBehaviour {
 
 		this.mapTexture = this.CreateMap ();
 		//var s = this.map.GetComponent<Image> ().sprite;
-		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, 100, 100), new Vector2 (0, 0));
+		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
 
 	}
 	
@@ -163,13 +163,41 @@ public class HUDController : MonoBehaviour {
 		}
 	}
 
+	Color colorForTile (Tile t) {
+		switch (t.biome) {
+		case 0:
+			return new Color (66f / 255f, 86f / 255f, 0f / 255f);
+			break;
+		case 1:
+			return new Color (208f / 255f, 207f / 255f, 108f / 255f);
+			break;
+		case 2:
+			return new Color (106f / 255f, 165f / 255f, 55f / 255f);
+			break;
+		case 3:
+			return new Color (167f / 255f, 97f / 255f, 63f / 255f);
+			break;
+		case 4:
+			return new Color (231f / 255f, 255f / 255f, 255f / 255f);
+			break;
+		case 5:
+			return new Color (225f / 255f, 216f / 255f, 123f / 255f);
+			break;
+		default:
+			return Color.black;
+			break;
+		}
+	}
+
 	Texture2D CreateMap () {
 		var map = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
 		                         this.roomManager.columns * this.roomManager.roomSide);
 
-		for (var x = 0; x < 100; x++) {
-			for (var y = 0; y < 100; y++) {
-				map.SetPixel(x, y, Color.cyan);
+		//print ("hahableh " + roomManager.tileMap [0, 0].biome);
+
+		for (var x = 0; x < map.width; x++) {
+			for (var y = 0; y < map.height; y++) {
+				map.SetPixel(x, y, this.colorForTile (roomManager.tileMap [x, y]));
 			}
 		}
 
