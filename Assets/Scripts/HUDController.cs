@@ -13,15 +13,20 @@ public class HUDController : MonoBehaviour {
 	public Sprite space;
 	public Font font;
 
+	public GameObject world;
+	private RoomManager roomManager;
+
 	public GameObject map;
 	private GameObject inventory;
 
 	private Health playerHealth;
 	private int startingMaxHealth;
 
-	private RectTransform rectTransform;
+	private Vector2 resolution;
 
 	private bool paused = false;
+
+	private Texture2D mapTexture;
 
 	// Use this for initialization
 	void Start () {
@@ -31,11 +36,19 @@ public class HUDController : MonoBehaviour {
 		this.inventory = new GameObject ();
 		this.inventory.transform.parent = this.gameObject.transform;
 
-		this.rectTransform = this.GetComponent<RectTransform> ();
+		this.resolution = this.GetComponent<CanvasScaler> ().referenceResolution;
+		this.resolution.y -= 3;
 
 		if (this.font == null) {
 			this.font = Resources.GetBuiltinResource<Font> ("Arial.ttf");
 		}
+
+		this.roomManager = this.world.GetComponent<RoomManager> ();
+
+		this.mapTexture = this.CreateMap ();
+		//var s = this.map.GetComponent<Image> ().sprite;
+		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
+
 	}
 	
 	// Update is called once per frame
@@ -88,8 +101,8 @@ public class HUDController : MonoBehaviour {
 				icon.AddComponent<Image> ().sprite = item.sprite;
 				var rectTransform = icon.GetComponent<RectTransform> ();
 				icon.transform.SetParent(this.inventory.transform);
-				float x = this.rectTransform.rect.width - barWidth + i * rectTransform.rect.width;
-				icon.transform.position = new Vector3 (x, this.rectTransform.rect.height - rectTransform.rect.height / 2, 0);
+				float x = this.resolution.x - barWidth + i * rectTransform.rect.width;
+				icon.transform.position = new Vector3 (x, this.resolution.y - rectTransform.rect.height / 2, 0);
 
 				i++;
 			}
@@ -99,8 +112,8 @@ public class HUDController : MonoBehaviour {
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
 
-			var selX = this.rectTransform.rect.width - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
-			var selY = this.rectTransform.rect.height - rt.rect.height / 2;
+			var selX = this.resolution.x - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
+			var selY = this.resolution.y - rt.rect.height / 2;
 
 			border.transform.position = new Vector3 (selX, selY, 0);
 
@@ -148,5 +161,48 @@ public class HUDController : MonoBehaviour {
 				//show the amount of bullets the play currently has
 			}
 		}
+	}
+
+	Color colorForTile (Tile t) {
+		switch (t.biome) {
+		case 0:
+			return new Color (66f / 255f, 86f / 255f, 0f / 255f);
+			break;
+		case 1:
+			return new Color (208f / 255f, 207f / 255f, 108f / 255f);
+			break;
+		case 2:
+			return new Color (106f / 255f, 165f / 255f, 55f / 255f);
+			break;
+		case 3:
+			return new Color (167f / 255f, 97f / 255f, 63f / 255f);
+			break;
+		case 4:
+			return new Color (231f / 255f, 255f / 255f, 255f / 255f);
+			break;
+		case 5:
+			return new Color (225f / 255f, 216f / 255f, 123f / 255f);
+			break;
+		default:
+			return Color.black;
+			break;
+		}
+	}
+
+	Texture2D CreateMap () {
+		var map = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
+		                         this.roomManager.columns * this.roomManager.roomSide);
+
+		//print ("hahableh " + roomManager.tileMap [0, 0].biome);
+
+		for (var x = 0; x < map.width; x++) {
+			for (var y = 0; y < map.height; y++) {
+				map.SetPixel(x, y, this.colorForTile (roomManager.tileMap [x, y]));
+			}
+		}
+
+		map.Apply ();
+
+		return map;
 	}
 }
