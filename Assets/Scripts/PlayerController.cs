@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.I)){
 			this.arrows = 10000;
 			this.bullets = 10000;
+			this.Health.maxHealth = 50;
+			this.Health.ChangeHealth(this.Health.maxHealth);
 		}
 		if (Input.GetKeyDown (KeyCode.G)) {
 			if(this.pusher){
@@ -291,8 +293,8 @@ public class PlayerController : MonoBehaviour {
 			break;
 
 		case "painKillers":
-			this.Health.maxHealth *= 2;
-			this.Health.ChangeHealth(this.Health.maxHealth);
+			this.Health.maxHealth += 20;
+			this.Health.ChangeHealth(20);
 			this.upgrades.Add(name);
 			break;
 
