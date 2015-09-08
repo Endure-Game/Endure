@@ -209,7 +209,6 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
-
 	}
 
 	public void SetupRooms () {
@@ -288,14 +287,10 @@ public class RoomManager : MonoBehaviour {
 		}
 		print (Time.realtimeSinceStartup - startTime);
 
-		// Create altitude sprites
-		this.ElevationTile.placeCliffTiles();
-		print (Time.realtimeSinceStartup - startTime);
-		
 		// Create climb points
-		for (int i = 0; i < this.regions.Count; i++) {
+		/*for (int i = 0; i < this.regions.Count; i++) {
 			Region region = this.regions[i];
-			
+
 			if (i < this.roomSide) {
 				int x = 1;
 				Region rightRegion = this.regions[i + 1];
@@ -304,7 +299,7 @@ public class RoomManager : MonoBehaviour {
 					x++;
 				}
 			}
-			
+
 			if (i < this.regions.Count - this.roomSide) {
 				int y = 1;
 				Region upperRegion = this.regions[i + this.roomSide];
@@ -319,8 +314,8 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
-		print (Time.realtimeSinceStartup - startTime);
-		
+		print (Time.realtimeSinceStartup - startTime);*/
+
 		// Create blocking tiles
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
@@ -482,7 +477,7 @@ public class RoomManager : MonoBehaviour {
 		int closestIndex = 0;
 		for (int regionI = 0; regionI < this.regions.Count; regionI++) {
 			Region region = this.regions[regionI];
-			
+
 			int dist = (int) (Mathf.Abs(region.focusX - x) + Mathf.Abs(region.focusY - y));
 			if (dist < distance) {
 				closestIndex = regionI;

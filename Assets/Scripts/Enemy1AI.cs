@@ -27,7 +27,7 @@ public class Enemy1AI : MonoBehaviour {
 		this.melee = this.GetComponent<MeleeAttacker> ();
 		this.animator = this.GetComponent<Animator> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (this.active) {
@@ -73,7 +73,7 @@ public class Enemy1AI : MonoBehaviour {
 				} else if (this.animationTime >= this.idleDuration){
 					if(this.animationTime > this.moveDuration + this.idleDuration){
 						this.rb2d.velocity = Vector2.zero;
-						this.animationTime = 0;						
+						this.animationTime = 0;
 					} else if (this.rb2d.velocity == Vector2.zero){
 						float rx = Random.Range (-1f, 1f);
 						float ry = Random.Range (-1f, 1f);
@@ -85,8 +85,8 @@ public class Enemy1AI : MonoBehaviour {
 
 			// Make sure enemy is on the right layer
 			if(this.transform.position.z != (float)(this.transform.position.y + 16)){
-				this.transform.position = new Vector3(this.transform.position.x, 
-				                                      this.transform.position.y, 
+				this.transform.position = new Vector3(this.transform.position.x,
+				                                      this.transform.position.y,
 				                                      (float)(this.transform.position.y + 16));
 			}
 
@@ -101,8 +101,6 @@ public class Enemy1AI : MonoBehaviour {
 				animator.SetBool("moving", false);
 			}
 		}
-
-
 
 	}
 

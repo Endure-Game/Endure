@@ -9,12 +9,15 @@ public class PlainsTile : BiomeTile
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
-	
+
 	public const int BiomeNumber = 2;
-	
+
 	public override void RandomBlocking(List<Tile> region) {
+
+		base.RandomBlocking(region);
+
 		for (int num = 0; num < bloomNum; num++) {
-			
+
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,

@@ -7,25 +7,27 @@ public class DesertTile : BiomeTile
 {
 	public GameObject cactus;
 	public RoomManager.Count cactusCount = new RoomManager.Count(10, 30);
-	
+
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
-	
+
 	public const int BiomeNumber = 1;
-	
+
 	public override void RandomBlocking(List<Tile> region) {
+
+		base.RandomBlocking(region);
 
 		// Add Boulders
 //		for (int num = 0; num < bloomNum; num++) {
-//			
+//
 //			Tile randomTile = region[Random.Range(0, region.Count)];
 //			BlockingExplosion(randomTile.x,
 //			                  randomTile.y,
 //			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 //			                  new TilePlacer(this.placeBlockingTile));
 //		}
-		this.PerlinGenerator(region, 
+		this.PerlinGenerator(region,
 		                     new TilePlacer(this.placeBlockingTile),
 		                     .75f,
 		                     .2f);
