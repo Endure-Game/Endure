@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
-	
+
 	public float speed = 4;
 	public static PlayerController instance;
 	public int bullets = 0;
@@ -99,8 +99,8 @@ public class PlayerController : MonoBehaviour {
 		if (!meleeAttacker.Locked) {
 			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
 			// make sure player is at the right z distance for correct overlap
-			this.transform.position = new Vector3(this.transform.position.x, 
-			                                      this.transform.position.y, 
+			this.transform.position = new Vector3(this.transform.position.x,
+			                                      this.transform.position.y,
 			                                      (float)(this.transform.position.y + 16));
 			if (horizontal > 0) {
 				this.animator.SetInteger ("Direction", 3);
@@ -149,13 +149,14 @@ public class PlayerController : MonoBehaviour {
 				if (this.rangedAttacker.damage > 0) {
 					Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 					pz.z = 0;
-
 					this.rangedAttacker.Attack(pz);
+					this.animator.SetBool ("Idle", true);
+					this.animator.SetTrigger ("Arrow");
 				} else if (this.meleeAttacker.damage > 0) {
 					this.animator.SetBool ("Idle", true);
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
-					
+
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
@@ -167,7 +168,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				} else if (this.toolUser.toolType.Length > 0) {
 					int direction = this.animator.GetInteger ("Direction");
-					
+
 					if (direction == 0) {
 						this.toolUser.UseSouth ();
 					} else if (direction == 1) {
@@ -205,7 +206,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				} else if (this.toolUser.toolType.Length > 0) {
 					int direction = this.animator.GetInteger ("Direction");
-					
+
 					if (direction == 0) {
 						this.toolUser.UseSouth ();
 					} else if (direction == 1) {
@@ -217,7 +218,9 @@ public class PlayerController : MonoBehaviour {
 					}
 				} else if (this.rangedAttacker.damage > 0) {
 					int direction = this.animator.GetInteger ("Direction");
-					
+					this.animator.SetBool ("Idle", true);
+					this.animator.SetTrigger ("Arrow");
+
 					if (direction == 0) {
 						this.rangedAttacker.Attack (this.transform.position + new Vector3(0, -1));
 					} else if (direction == 1) {
@@ -272,7 +275,7 @@ public class PlayerController : MonoBehaviour {
 			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
 			this.bullets += 3;
 			break;
-		default: 
+		default:
 			print ("Error: not a valid weapon or tool name");
 			break;
 		}
@@ -292,8 +295,8 @@ public class PlayerController : MonoBehaviour {
 			this.Health.ChangeHealth(this.Health.maxHealth);
 			this.upgrades.Add(name);
 			break;
-			
-		default: 
+
+		default:
 			print ("Error: not a valid upgrade name");
 			break;
 		}
@@ -302,7 +305,7 @@ public class PlayerController : MonoBehaviour {
 	//PUSHES THINGS OUT OF THE WAY
 	void OnCollisionEnter2D (Collision2D collider) {
 		if (this.pusher == true) {
-			collider.transform.position += (collider.transform.position - this.transform.position).normalized * 2;	
+			collider.transform.position += (collider.transform.position - this.transform.position).normalized * 2;
 		}
 	}
 }
