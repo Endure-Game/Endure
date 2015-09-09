@@ -240,4 +240,4 @@ public class EnemyFullAI : MonoBehaviour {
 	public void enemyActive (bool a){
 		this.active = a;
 	}
-}
+} 
