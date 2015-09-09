@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11463666}
   - 114: {fileID: 11433380}
   - 114: {fileID: 11401558}
+  - 114: {fileID: 11491390}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -145,11 +146,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+--- !u!114 &11491390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dfa00793c334840963c5007c7930b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   drops:
-  - chance: 10
-    item: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
-  - chance: 1
+  - chance: .100000001
     item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
+  - chance: .400000006
+    item: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
 --- !u!212 &21262582
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -183,6 +195,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: drops.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
       value: 3
@@ -241,6 +257,22 @@ Prefab:
       propertyPath: melee.isMelee
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[0].chance
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[1].chance
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[0].item
+      value: 
+      objectReference: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[1].item
+      value: 
+      objectReference: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195750}

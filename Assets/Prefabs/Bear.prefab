@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11401730}
   - 114: {fileID: 11467066}
   - 114: {fileID: 11421244}
+  - 114: {fileID: 11404386}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Enemy
@@ -93,11 +94,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+--- !u!114 &11404386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dfa00793c334840963c5007c7930b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   drops:
-  - chance: 10
+  - chance: .5
     item: {fileID: 173490, guid: 52a1ff1a9a476440786eb74654730fb8, type: 2}
-  - chance: 1
-    item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
 --- !u!114 &11421244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,9 +185,17 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: drops.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: drops.Array.data[0].item
       value: 
       objectReference: {fileID: 173490, guid: 52a1ff1a9a476440786eb74654730fb8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[0].chance
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179610}

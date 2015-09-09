@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21276110}
   - 61: {fileID: 6154026}
   - 114: {fileID: 11473518}
+  - 114: {fileID: 11414150}
   m_Layer: 0
   m_Name: SnowMan
   m_TagString: Untagged
@@ -43,6 +44,22 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.00882721, y: 1.00882721}
+--- !u!114 &11414150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dfa00793c334840963c5007c7930b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - chance: .5
+    item: {fileID: 112292, guid: 4de7070b8d865fe42b264741cc057b92, type: 2}
+  - chance: .5
+    item: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
 --- !u!114 &11473518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,11 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  drops:
-  - chance: 2
-    item: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
-  - chance: 1
-    item: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
 --- !u!212 &21276110
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -104,19 +116,35 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].item
       value: 
-      objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+      objectReference: {fileID: 112292, guid: 4de7070b8d865fe42b264741cc057b92, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
-      value: 2
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[1].item
       value: 
-      objectReference: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+      objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[1].chance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[2].chance
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[2].item
+      value: 
+      objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[3].chance
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[3].item
+      value: 
+      objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183394}
