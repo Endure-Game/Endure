@@ -461,12 +461,14 @@ public class RoomManager : MonoBehaviour {
 	}
 
 	public void SetGroundTile(GameObject sprite, int x, int y) {
-		Destroy (this.tileMap[x, y].ground);
 
-		this.tileMap[x, y].ground = Instantiate (sprite,
-		                                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
-		                                       Quaternion.identity) as GameObject;
-		tileMap[x, y].ground.transform.Translate(new Vector3(0, 0, y));
+		Tile tile = this.tileMap[x, y];
+		Destroy (tile.ground);
+
+		tile.ground = Instantiate (sprite,
+		                           new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+		                           Quaternion.identity) as GameObject;
+		tile.ground.transform.Translate(new Vector3(0, 0, y));
 	}
 
 	//used for AI pathfinding
