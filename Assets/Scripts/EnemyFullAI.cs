@@ -78,7 +78,6 @@ public class EnemyFullAI : MonoBehaviour {
 	void Start () {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
-		this.pathFinding = GetComponent<PathFinding> ();
 		if (this.melee.isMelee) {
 			this.melee.setWeapon(this.GetComponent<MeleeAttacker> ());
 		}
@@ -87,7 +86,11 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 		this.animator = this.GetComponent<Animator> ();
 	}
-	
+
+	void Awake (){
+		this.pathFinding = GetComponent<PathFinding> ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (this.active) {

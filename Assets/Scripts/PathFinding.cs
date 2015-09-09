@@ -7,8 +7,12 @@ public class PathFinding : MonoBehaviour {
 	public GameObject world;
 	private RoomManager roomManager;
 	
-	public void start (){
-		this.roomManager = this.world.GetComponent<RoomManager> ();
+	public void Start (){
+
+	}
+
+	public void Awake (){
+		this.roomManager = GetComponent<RoomManager> ();
 	}
 
 	public List<Vector3> PathFinder (Vector3 current, Vector3 destination) {
@@ -65,7 +69,7 @@ public class PathFinding : MonoBehaviour {
 		List<Vector3> nonBlockedTiles = new List<Vector3>();
 
 		for (int i = 0; i < possibleMoves.Length - 1; i++) {
-			if(roomManager.checkForBlock(possibleMoves[i]) != false){
+			if(this.roomManager.checkForBlock(possibleMoves[i]) != false){
 				float tempX = possibleMoves[i].x;
 				float tempY = possibleMoves[i].y;
 				for(int j = 0; j < path.Count - 1; j++){
