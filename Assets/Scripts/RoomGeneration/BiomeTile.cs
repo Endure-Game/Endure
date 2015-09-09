@@ -69,7 +69,6 @@ public abstract class BiomeTile : MonoBehaviour
 	public void CreateHill(Tile centerTile) {
 		int x = centerTile.x;
 		int y = centerTile.y;
-		int elevation = centerTile.elevation;
 		for (int i = -2; i <= 2; i++) {
 			for (int j = -2; j <= 2; j++) {
 				if (Mathf.Abs(i) != 2 || Mathf.Abs(j) != 2) {

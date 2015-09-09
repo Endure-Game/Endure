@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11474492}
   - 114: {fileID: 11402316}
   - 114: {fileID: 11461862}
+  - 114: {fileID: 11463440}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -122,8 +123,24 @@ MonoBehaviour:
   knockback: .5
   arrowDelay: .5
   bulletDelay: 1.5
-  arrow: {fileID: 0}
-  bullet: {fileID: 0}
+  arrow: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
+  bullet: {fileID: 140046, guid: 271aadecde6084ebb8d8c98b2705d855, type: 2}
+--- !u!114 &11463440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dfa00793c334840963c5007c7930b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - chance: .400000006
+    item: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
+  - chance: .100000001
+    item: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
 --- !u!114 &11474492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  drops: []
 --- !u!212 &21214182
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -171,6 +187,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: drops.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300040, guid: d50c1ef21efee44018e6dcf4688c7ddc,
@@ -204,6 +224,30 @@ Prefab:
       propertyPath: m_Offset.y
       value: .0500000007
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[0].item
+      value: 
+      objectReference: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[1].item
+      value: 
+      objectReference: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[1].chance
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[0].chance
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 140046, guid: 271aadecde6084ebb8d8c98b2705d855, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112292}

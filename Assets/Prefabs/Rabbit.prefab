@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11420998}
   - 95: {fileID: 9507656}
   - 114: {fileID: 11488832}
+  - 114: {fileID: 11463070}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Animal
@@ -108,8 +109,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+--- !u!114 &11463070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dfa00793c334840963c5007c7930b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   drops:
-  - chance: 2
+  - chance: .5
     item: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
 --- !u!114 &11488832
 MonoBehaviour:
@@ -191,7 +203,7 @@ Prefab:
       objectReference: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
-      value: 2
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: coward.isCoward

@@ -4,14 +4,6 @@ using System.Collections;
 public class Health : MonoBehaviour {
 	public int maxHealth = 10;
 
-	[System.Serializable]
-	public class Drop {
-		public int chance;
-		public GameObject item;
-	}
-
-	public Drop[] drops;
-
 	private GameObject healthChangeDisplay;
 
 	private int currentHealth;
@@ -54,12 +46,12 @@ public class Health : MonoBehaviour {
 			this.currentHealth += delta;
 
 			if (this.currentHealth <= 0) {
-				this.DropAndDestroy ();
+				this.Die ();
 			}
 		}
 	}
 
-	void DropAndDestroy ()
+	void Die ()
 	{
 		if (this.gameObject == PlayerController.instance.gameObject) {
 			Application.LoadLevel (2);
@@ -67,20 +59,5 @@ public class Health : MonoBehaviour {
 
 		var position = this.transform.position;
 		Destroy (this.gameObject);
-
-		var max = 0;
-		foreach (var drop in this.drops) {
-			max += drop.chance;
-		}
-
-		var current = 0;
-		var selected = Random.Range (0, max + 1);
-		foreach (var drop in this.drops) {
-			current += drop.chance;
-			if (current >= selected) {
-				Instantiate (drop.item, position, Quaternion.identity);
-				break;
-			}
-		}
 	}
 }

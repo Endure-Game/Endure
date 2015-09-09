@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class ElevationTile : MonoBehaviour
 {
 	public GameObject[] tiles;
+	public GameObject xMarksTheSpot;
+	public GameObject hole;
 
 	public void SmoothElevation(List<Tile> tiles) {
 
@@ -140,6 +142,14 @@ public class ElevationTile : MonoBehaviour
 		}
 		print ("elevation placement probems --Show Chris your game if you see this");
 		return this.tiles[0];
+	}
+
+	public GameObject GetXMarksTheSpot() {
+		return this.xMarksTheSpot;
+	}
+
+	public GameObject GetHole() {
+		return this.hole;
 	}
 }
 
