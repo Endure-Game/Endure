@@ -17,9 +17,9 @@ public class EnemyFullAI : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private PlayerController player;
 	private Vector3 lastPlayerPos;
-	private Vector3 heading;
+	private Vector3 heading;//TODO FIGURE OUT WHY I HAVE THIS SHIT
 	private Vector3 targetHeading;
-	//FOr idle movement (Privately set)
+	//For idle movement (Privately set)
 	private Animator animator;
 	private Vector3 oldPosition;
 	private float animationTime = 0f;
@@ -104,7 +104,11 @@ public class EnemyFullAI : MonoBehaviour {
 				//this.MeleeAttack ();
 			} else if(this.targetHeading.magnitude >= this.deAggro){
 				//Double Check conditional
-				this.IdleMovement ();
+				if(this.coward.isCoward){
+					this.CowardRun();
+				} else {
+					this.IdleMovement ();
+				}
 			}
 			
 			// Make sure enemy is on the right layer
@@ -159,7 +163,14 @@ public class EnemyFullAI : MonoBehaviour {
 		//Vector2 heading = player.transform.position - this.transform.position;
 		
 		//if (true) {
-		if (!this.ranged.getWeapon().Locked) {
+
+		if (this.heading.magnitude < this.ranged.rangedDistance){
+			//Vector3 target = heading;
+			//print (target.normalized);
+			//target.z = player.transform.position.z;
+			this.ranged.getWeapon().Attack (player.transform.position);
+		}
+		else if (!this.ranged.getWeapon().Locked) {
 			this.rb2d.velocity = this.speed * heading.normalized;
 		} else {
 			this.rb2d.velocity = Vector2.zero;
@@ -167,15 +178,11 @@ public class EnemyFullAI : MonoBehaviour {
 		/*if (heading.magnitude < this.cowardDistance && !ranged.Locked){
 			this.rb2d.velocity = this.speed * -heading.normalized; 
 		}*/
-		if (this.heading.magnitude < this.ranged.rangedDistance){
-			//Vector3 target = heading;
-			//print (target.normalized);
-			//target.z = player.transform.position.z;
-			this.ranged.getWeapon().Attack (player.transform.position);
-		}
+
 	}
 	void CowardRun (){
-		Vector2 heading = player.transform.position - this.transform.position;
+		this.heading = player.transform.position - this.transform.position;
+
 		if (heading.magnitude < this.coward.cowardDistance){
 			this.coward.yesFear();
 		} else if (heading.magnitude > this.coward.maxRunDistance){
