@@ -5,14 +5,15 @@ using System.Collections.Generic;
 public class PathFinding : MonoBehaviour {
 
 	public GameObject world;
+	public int rows;
+	public int columns;
 	private RoomManager roomManager;
 	
+
 	public void Start (){
-
-	}
-
-	public void Awake (){
-		this.roomManager = GetComponent<RoomManager> ();
+		this.roomManager = this.world.GetComponent<RoomManager> ();
+		this.rows = roomManager.rows;
+		this.columns = roomManager.columns;
 	}
 
 	public List<Vector3> PathFinder (Vector3 current, Vector3 destination) {
@@ -55,15 +56,55 @@ public class PathFinding : MonoBehaviour {
 
 		float x = currentPos.x;
 		float y = currentPos.y;
+		Vector3 north;
+		Vector3 northEast;
+		Vector3 east;
+		Vector3 southEast;
+		Vector3 south;
+		Vector3 southWest;
+		Vector3 west;
+		Vector3 northWest;
 
-		Vector3 north = new Vector3(x, y + 1f, 0f);
-		Vector3 northEast = new Vector3(x + 1f, y + 1f, 0f);
-		Vector3 east = new Vector3(x + 1f, y, 0f);
-		Vector3 southEast = new Vector3(x + 1f, y - 1f, 0f);
-		Vector3 south = new Vector3(x, y - 1f, 0f);
-		Vector3 southWest = new Vector3(x - 1f, y - 1f, 0f);
-		Vector3 west = new Vector3(x - 1f, y, 0f);
-		Vector3 northWest = new Vector3(x - 1f, y + 1f, 0f);
+		if (y + 1 < columns - 2) {
+			north = new Vector3 (x, y + 1f, 0f);
+		}else {
+			north = new Vector3 (0f,0f,0f);
+		}
+		if (x + 1 < rows - 2 && y + 1 < columns - 2) {
+			northEast = new Vector3 (x + 1f, y + 1f, 0f);
+		} else {
+			northEast = new Vector3 (0f,0f,0f);
+		}
+		if (x + 1 < rows - 2) {
+			east = new Vector3 (x + 1f, y, 0f);
+		}else {
+			east = new Vector3 (0f,0f,0f);
+		}
+		if (x + 1 < rows - 2 && y - 1 < columns - 2) {
+			southEast = new Vector3 (x + 1f, y - 1f, 0f);
+		}else {
+			southEast = new Vector3 (0f,0f,0f);
+		}
+		if (y - 1 < columns - 2) {
+			south = new Vector3 (x, y - 1f, 0f);
+		}else {
+			south = new Vector3 (0f,0f,0f);
+		}
+		if (x - 1 < rows - 2 && y - 1 < columns - 2) {
+			southWest = new Vector3 (x - 1f, y - 1f, 0f);
+		}else {
+			southWest = new Vector3 (0f,0f,0f);
+		}
+		if (x - 1 < rows - 2) {
+			west = new Vector3 (x - 1f, y, 0f);
+		}else {
+			west = new Vector3 (0f,0f,0f);
+		}
+		if (x - 1 < rows - 2 && y + 1 < columns - 2) {
+			northWest = new Vector3 (x - 1f, y + 1f, 0f);
+		}else {
+			northWest = new Vector3 (0f,0f,0f);
+		}
 
 		Vector3[] possibleMoves = new Vector3[8] {north, northEast, east, southEast, south, southWest, west, northWest};
 		List<Vector3> nonBlockedTiles = new List<Vector3>();
