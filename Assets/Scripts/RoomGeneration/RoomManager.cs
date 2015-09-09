@@ -469,6 +469,16 @@ public class RoomManager : MonoBehaviour {
 		tileMap[x, y].ground.transform.Translate(new Vector3(0, 0, y));
 	}
 
+	//used for AI pathfinding
+	public bool checkForBlock (Vector3 tile){
+		int x = (int)tile.x;
+		int y = (int)tile.y;
+
+		Tile currentTile = this.tileMap [x, y];
+
+		return currentTile.blocking;
+	}
+
 	private void getBiome(int x, int y) {
 		if (this.tileMap[x, y] != null) {
 			return;
