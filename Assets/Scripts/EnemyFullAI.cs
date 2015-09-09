@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyFullAI : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class EnemyFullAI : MonoBehaviour {
 	private Vector3 lastPlayerPos;
 	private Vector3 heading;//TODO FIGURE OUT WHY I HAVE THIS SHIT
 	private Vector3 targetHeading;
+	private PathFinding pathFinding;// = GetComponent<PathFinding> ();
 	//For idle movement (Privately set)
 	private Animator animator;
 	private Vector3 oldPosition;
@@ -76,6 +78,7 @@ public class EnemyFullAI : MonoBehaviour {
 	void Start () {
 		this.player = PlayerController.instance;
 		this.rb2d = this.GetComponent<Rigidbody2D> ();
+		this.pathFinding = GetComponent<PathFinding> ();
 		if (this.melee.isMelee) {
 			this.melee.setWeapon(this.GetComponent<MeleeAttacker> ());
 		}
@@ -131,10 +134,13 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 		
 	}
-	//moveTo should be a vector2 of position
+	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){
-		this.heading = moveTo - this.transform.position;
+		List<Vector3> path =  this.pathFinding.PathFinder(this.transform.position, moveTo);
+		this.heading = path[0] - this.transform.position;
 		this.rb2d.velocity = this.heading.normalized * this.speed;
+
+
 	}
 
 	void MeleeAttack (){
