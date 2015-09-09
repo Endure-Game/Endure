@@ -82,7 +82,7 @@ public class RangedAttacker : MonoBehaviour {
 		yield return new WaitForSeconds(rifleAnimationDelay);
 
 		GameObject weapon = Instantiate (this.bullet,
-																		 this.transform.position + new Vector3(0f, 0f, .5f),
+																		 this.transform.position + new Vector3(0f, .1f, .5f),
 																		 Quaternion.identity) as GameObject;
 		weapon.GetComponent<Ouch> ().spawner = this.transform;
 
