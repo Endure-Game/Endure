@@ -16,7 +16,7 @@ public class PathFinding : MonoBehaviour {
 		List<Vector3> finalPath = new List<Vector3> ();
 
 		while (current.x != destination.x && current.y != destination.y) {
-			List<Vector3> posPaths = this.OpenTiles (current);
+			List<Vector3> posPaths = this.OpenTiles (current, finalPath);
 			Vector3 temp = new Vector3(100000f, 100000f, 100000f);
 
 			for(int i = 0; i < posPaths.Count - 1; i++){
@@ -47,7 +47,7 @@ public class PathFinding : MonoBehaviour {
 		return position;
 	}
 
-	private List<Vector3> OpenTiles (Vector3 currentPos) {
+	private List<Vector3> OpenTiles (Vector3 currentPos, List<Vector3> path) {
 
 		float x = currentPos.x;
 		float y = currentPos.y;
@@ -66,9 +66,16 @@ public class PathFinding : MonoBehaviour {
 
 		for (int i = 0; i < possibleMoves.Length - 1; i++) {
 			if(roomManager.checkForBlock(possibleMoves[i]) != false){
-				if(possibleMoves[i].z == 0){
-					nonBlockedTiles.Add(possibleMoves[i]);
+				float tempX = possibleMoves[i].x;
+				float tempY = possibleMoves[i].y;
+				for(int j = 0; j < path.Count - 1; j++){
+					if(path[i].x == tempX && path[i].y == tempY){
+						//do nothing
+					}else{
+						nonBlockedTiles.Add(possibleMoves[i]);
+					}
 				}
+					
 			}
 		}
 		return nonBlockedTiles;
