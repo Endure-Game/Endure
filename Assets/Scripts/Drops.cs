@@ -15,7 +15,7 @@ public class Drops : MonoBehaviour {
 
   // Need to make sure that we don't instantiate objects when game ends
   // or they will be left in the object heirarchy
-  void OnApplicationQuit() {
+  void OnDisable() {
     isQuitting = true;
   }
 

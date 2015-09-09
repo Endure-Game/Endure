@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Animal
   - Axe
+  - Lockpick
+  - Shovel
+  - Rope
   layers:
   - Default
   - TransparentFX

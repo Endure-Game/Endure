@@ -14,7 +14,7 @@ public class WorldController : MonoBehaviour {
 	void InitGame () {
 		roomScript.SetupRooms ();
 	}
-	
+
 	private float roomWidth;
 	private float roomHeight;
 
@@ -26,6 +26,7 @@ public class WorldController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		instance = this;
 		roomScript = GetComponent<RoomManager>();
 		InitGame();
 
@@ -37,7 +38,7 @@ public class WorldController : MonoBehaviour {
 
 		this.numRooms = this.roomScript.roomSide;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		this.TrackPlayer ();

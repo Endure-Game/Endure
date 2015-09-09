@@ -176,6 +176,12 @@ public class PlayerController : MonoBehaviour {
 					int direction = this.animator.GetInteger ("Direction");
 					if (this.inventory[selectedInventory].name == "Axe") {
 						this.animator.SetTrigger ("Axe");
+					} else if (this.inventory[selectedInventory].name == "Lockpick") {
+						//this.animator.SetTrigger ("Lockpick");
+					} else if (this.inventory[selectedInventory].name == "Shovel") {
+						//this.animator.SetTrigger ("Shovel");
+					} else if (this.inventory[selectedInventory].name == "Rope") {
+						//this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
@@ -218,6 +224,12 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetBool ("Idle", true);
 					if (this.inventory[selectedInventory].name == "Axe") {
 						this.animator.SetTrigger ("Axe");
+					} else if (this.inventory[selectedInventory].name == "Lockpick") {
+						//this.animator.SetTrigger ("Lockpick");
+					} else if (this.inventory[selectedInventory].name == "Shovel") {
+						//this.animator.SetTrigger ("Shovel");
+					} else if (this.inventory[selectedInventory].name == "Rope") {
+						//this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
@@ -291,6 +303,15 @@ public class PlayerController : MonoBehaviour {
 		case "Rifle":
 			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
 			this.bullets += 3;
+			break;
+		case "Lockpick":
+			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Lockpick"));
+			break;
+		case "Shovel":
+			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Shovel"));
+			break;
+		case "Rope":
+			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Rope"));
 			break;
 		default:
 			print ("Error: not a valid weapon or tool name");
