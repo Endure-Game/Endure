@@ -373,6 +373,18 @@ Prefab:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 140046, guid: 271aadecde6084ebb8d8c98b2705d855, type: 2}
+    - target: {fileID: 11471804, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: delay
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460858, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: bulletDelay
+      value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460858, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: arrowDelay
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_IsPrefabParent: 0
