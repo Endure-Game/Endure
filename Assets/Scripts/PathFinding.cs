@@ -65,42 +65,42 @@ public class PathFinding : MonoBehaviour {
 		Vector3 west;
 		Vector3 northWest;
 
-		if (y + 1 < columns - 2) {
+		if (y + 1 < columns - 2 && y + 1 > 0) {
 			north = new Vector3 (x, y + 1f, 0f);
 		}else {
 			north = new Vector3 (0f,0f,0f);
 		}
-		if (x + 1 < rows - 2 && y + 1 < columns - 2) {
+		if (x + 1 < rows - 2 && y + 1 < columns - 2 && x + 1 > 0 && y + 1 > 0) {
 			northEast = new Vector3 (x + 1f, y + 1f, 0f);
 		} else {
 			northEast = new Vector3 (0f,0f,0f);
 		}
-		if (x + 1 < rows - 2) {
+		if (x + 1 < rows - 2 && x + 1 > 0) {
 			east = new Vector3 (x + 1f, y, 0f);
 		}else {
 			east = new Vector3 (0f,0f,0f);
 		}
-		if (x + 1 < rows - 2 && y - 1 < columns - 2) {
+		if (x + 1 < rows - 2 && y - 1 < columns - 2 && x + 1 > 0 && y - 1 > 0) {
 			southEast = new Vector3 (x + 1f, y - 1f, 0f);
 		}else {
 			southEast = new Vector3 (0f,0f,0f);
 		}
-		if (y - 1 < columns - 2) {
+		if (y - 1 < columns - 2 && y - 1 > 0) {
 			south = new Vector3 (x, y - 1f, 0f);
 		}else {
 			south = new Vector3 (0f,0f,0f);
 		}
-		if (x - 1 < rows - 2 && y - 1 < columns - 2) {
+		if (x - 1 < rows - 2 && y - 1 < columns - 2 && x - 1 > 0 && y - 1> 0) {
 			southWest = new Vector3 (x - 1f, y - 1f, 0f);
 		}else {
 			southWest = new Vector3 (0f,0f,0f);
 		}
-		if (x - 1 < rows - 2) {
+		if (x - 1 < rows - 2 && x - 1 > 0) {
 			west = new Vector3 (x - 1f, y, 0f);
 		}else {
 			west = new Vector3 (0f,0f,0f);
 		}
-		if (x - 1 < rows - 2 && y + 1 < columns - 2) {
+		if (x - 1 < rows - 2 && y + 1 < columns - 2 && x - 1 > 0 && y + 1 > 0) {
 			northWest = new Vector3 (x - 1f, y + 1f, 0f);
 		}else {
 			northWest = new Vector3 (0f,0f,0f);
