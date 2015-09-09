@@ -7,11 +7,11 @@ public class ToolUser : MonoBehaviour {
 
 	private float left = 0.1f;
 	private GameObject tool;
-	
+
 	// Use this for initialization
 	void Start () {
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (tool != null) {
@@ -23,23 +23,26 @@ public class ToolUser : MonoBehaviour {
 			}
 		}
 	}
-	
-	void CreateTool (bool horizontal, int direction) {
+
+	private float toolAnimationDelay = .18f;
+	IEnumerator CreateTool(bool horizontal, int direction) {
+
 		if (this.toolType.Length > 0) {
 			Destroy (this.tool);
-			
+
+			yield return new WaitForSeconds(toolAnimationDelay);
 			this.tool = new GameObject ();
 			tool.name = this.toolType;
 			tool.tag = this.toolType;
 			tool.transform.parent = this.gameObject.transform;
 			tool.transform.position = this.gameObject.transform.position;
-			
+
 			BoxCollider2D collider = tool.AddComponent<BoxCollider2D> ();
 			collider.isTrigger = true;
-			
+
 			Vector2 playerSize = this.Size;
 			collider.size = playerSize;
-			
+
 			if (horizontal) {
 				collider.size = new Vector2 (collider.size.x, this.range);
 				collider.transform.Translate (0, (playerSize.y / 2 + this.range / 2) * direction, 0);
@@ -49,24 +52,25 @@ public class ToolUser : MonoBehaviour {
 			}
 		}
 	}
-	
+
+
 	public void UseNorth () {
 		print ("North~");
-		CreateTool (true, 1);
+		StartCoroutine(CreateTool (true, 1));
 	}
-	
+
 	public void UseEast () {
-		CreateTool (false, 1);
+		StartCoroutine(CreateTool (false, 1));
 	}
-	
+
 	public void UseWest () {
-		CreateTool (false, -1);
+		StartCoroutine(CreateTool (false, -1));
 	}
-	
+
 	public void UseSouth () {
-		CreateTool (true, -1);
+		StartCoroutine(CreateTool (true, -1));
 	}
-	
+
 	public Vector2 Size {
 		get {
 			return this.GetComponent<BoxCollider2D> ().size;
