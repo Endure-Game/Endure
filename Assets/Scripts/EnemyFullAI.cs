@@ -20,7 +20,7 @@ public class EnemyFullAI : MonoBehaviour {
 	private Vector3 lastPlayerPos;
 	private Vector3 heading;//TODO FIGURE OUT WHY I HAVE THIS SHIT
 	private Vector3 targetHeading;
-	private PathFinding pathFinding;// = GetComponent<PathFinding> ();
+	//private PathFinding pathFinding;// = GetComponent<PathFinding> ();
 	//For idle movement (Privately set)
 	private Animator animator;
 	private Vector3 oldPosition;
@@ -88,7 +88,7 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 
 	void Awake (){
-		this.pathFinding = GetComponent<PathFinding> ();
+		//this.pathFinding = GetComponent<PathFinding> ();
 	}
 
 	// Update is called once per frame
@@ -139,11 +139,10 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){
-		List<Vector3> path =  this.pathFinding.PathFinder(this.transform.position, moveTo);
-		this.heading = path[0] - this.transform.position;
+		//List<Vector3> path =  this.pathFinding.PathFinder(this.transform.position, moveTo);
+		//this.heading = path[0] - this.transform.position;
+		this.heading = moveTo - this.transform.position;
 		this.rb2d.velocity = this.heading.normalized * this.speed;
-
-
 	}
 
 	void MeleeAttack (){
