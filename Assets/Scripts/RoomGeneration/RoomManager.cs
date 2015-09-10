@@ -458,6 +458,11 @@ public class RoomManager : MonoBehaviour {
 
 		// Make higher tiles apear behind lower tiles
 		tile.item.transform.Translate(new Vector3(0, 0, y));
+
+		//testing
+		//print ("PRINTING RESULT OF TILE MANP BULLSHTI" + this.tileMap [1, 1].blocking);
+
+
 	}
 
 	public void SetGroundTile(GameObject sprite, int x, int y) {
@@ -473,13 +478,15 @@ public class RoomManager : MonoBehaviour {
 
 	//used for AI pathfinding
 	public bool checkForBlock (Vector3 tile){
-		int x = (int)tile.x;
-		int y = (int)tile.y;
-
+		int x = (int) Mathf.Floor(tile.x);
+		int y = (int) Mathf.Floor(tile.y);
+		//print ("X: " + x + "|Y: " + y);
 		Tile currentTile = this.tileMap [x, y];
 
 		return currentTile.blocking;
 	}
+
+	
 
 	private void getBiome(int x, int y) {
 		if (this.tileMap[x, y] != null) {

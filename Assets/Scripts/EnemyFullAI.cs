@@ -140,11 +140,16 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){
-		if (this.path == null) {
+		//if (this.path == null || this.path.Count == 0) {
+			//moveTo.z = 0f;
+			//Vector2 curPos = this.transform.position;
 			this.path = this.pathFinding.PathFinder (this.transform.position, moveTo);
-		}
-		this.heading = path[0] - this.transform.position;
+		//}
+		Vector2 newHeading = new Vector2(path[0].x, path[0].y);
+		Vector2 newPosition = new Vector2 (this.transform.position.x, this.transform.position.y);
+		this.heading = newHeading - newPosition;
 		//this.heading = moveTo - this.transform.position;
+
 		this.rb2d.velocity = this.heading.normalized * this.speed;
 	}
 
