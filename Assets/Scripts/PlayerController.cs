@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		if (!meleeAttacker.Locked && !rangedAttacker.Locked) {
+		if (!meleeAttacker.Locked && !rangedAttacker.Locked && !toolUser.Locked) {
 			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
 			// make sure player is at the right z distance for correct overlap
 			this.transform.position = new Vector3(this.transform.position.x,

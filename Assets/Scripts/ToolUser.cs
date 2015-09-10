@@ -5,8 +5,20 @@ public class ToolUser : MonoBehaviour {
 	public string toolType = "";
 	public float range = 0.6f;
 
-	private float left = 0.05f;
+	public float delay = 1.0f;
+
+	//private float left = 0.05f;
 	private GameObject tool;
+
+	private float untilUnlocked;
+	private bool locked = false;
+	private float elapsed;
+
+	public bool Locked {
+		get {
+			return locked;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -14,21 +26,34 @@ public class ToolUser : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (tool != null) {
-			left -= Time.deltaTime;
-			if (left <= 0) {
-				left = 0.1f;
+
+		this.untilUnlocked -= Time.deltaTime;
+		print ("unlock time" + this.untilUnlocked);
+
+		if (this.tool != null) {
+			this.elapsed += Time.deltaTime;
+			if (this.elapsed > 0.1f) {
 				Destroy (this.tool);
 				this.tool = null;
 			}
 		}
+
+		if (this.untilUnlocked <= 0) {
+			this.locked = false;
+		}
+
 	}
 
 	private float toolAnimationDelay = .18f;
 	IEnumerator CreateTool(bool horizontal, int direction) {
 
-		if (this.toolType.Length > 0) {
+		if (this.toolType.Length > 0 && !this.locked) {
+
 			Destroy (this.tool);
+
+			this.elapsed = 0;
+			this.untilUnlocked = this.delay;
+			this.locked = true;
 
 			yield return new WaitForSeconds(toolAnimationDelay);
 			this.tool = new GameObject ();
