@@ -43,7 +43,7 @@ public class Drops : MonoBehaviour {
     foreach (var drop in newDrops) {
       current += drop.chance;
       if (current >= selected) {
-        Instantiate (drop.item, this.transform.position, Quaternion.identity);
+        Instantiate (drop.item, this.transform.position + new Vector3(0f, 0f, 0f), Quaternion.identity);
         break;
       }
     }
