@@ -122,28 +122,29 @@ public class PlayerController : MonoBehaviour {
 
 			// combat controls
 			if (Input.GetKeyDown (KeyCode.Tab) || this.inventory.Count == 1) {
-				print ("Do something");
-				print ("Inv Count" + this.inventory.Count);
 				if (this.selectedInventory >= this.inventory.Count - 1) {
-					this.selectedInventory = 0;
+					this.SwitchInventory (0);
 				} else {
-					this.selectedInventory++;
+					this.SwitchInventory (this.selectedInventory + 1);
 				}
+			}
 
-				if(this.inventory[this.selectedInventory].type == "Melee"){
-					this.meleeAttacker.damage = this.inventory[this.selectedInventory].damage;
-					this.rangedAttacker.damage = 0;
-					this.toolUser.toolType = "";
-				} else if (this.inventory[this.selectedInventory].type == "Ranged") {
-					this.rangedAttacker.damage = this.inventory[this.selectedInventory].damage;
-					this.meleeAttacker.damage = 0;
-					this.toolUser.toolType = "";
-				} else if (this.inventory[this.selectedInventory].type == "Tool") {
-					this.toolUser.toolType = this.inventory[this.selectedInventory].tool;
-					this.rangedAttacker.damage = 0;
-					this.meleeAttacker.damage = 0;
+			var keys = new [] {
+				KeyCode.Alpha1,
+				KeyCode.Alpha2,
+				KeyCode.Alpha3,
+				KeyCode.Alpha4,
+				KeyCode.Alpha5,
+				KeyCode.Alpha6,
+				KeyCode.Alpha7,
+				KeyCode.Alpha8,
+				KeyCode.Alpha9
+			};
+
+			for (var i = 0; i < keys.Length; i++) {
+				if (Input.GetKeyDown (keys[i]) && i < this.inventory.Count) {
+					this.SwitchInventory (i);
 				}
-				print (this.selectedInventory);
 			}
 
 			// ranged attack
@@ -268,6 +269,26 @@ public class PlayerController : MonoBehaviour {
 			this.rb2d.velocity = Vector2.zero;
 		}
 	}
+
+	void SwitchInventory (int i)
+	{
+		this.selectedInventory = i;
+		if(this.inventory[this.selectedInventory].type == "Melee"){
+			this.meleeAttacker.damage = this.inventory[this.selectedInventory].damage;
+			this.rangedAttacker.damage = 0;
+			this.toolUser.toolType = "";
+		} else if (this.inventory[this.selectedInventory].type == "Ranged") {
+			this.rangedAttacker.damage = this.inventory[this.selectedInventory].damage;
+			this.meleeAttacker.damage = 0;
+			this.toolUser.toolType = "";
+		} else if (this.inventory[this.selectedInventory].type == "Tool") {
+			this.toolUser.toolType = this.inventory[this.selectedInventory].tool;
+			this.rangedAttacker.damage = 0;
+			this.meleeAttacker.damage = 0;
+		}
+		print (this.selectedInventory);
+	}
+
 	//called before start
 	void Awake () {
 		if (PlayerController.instance == null) {
