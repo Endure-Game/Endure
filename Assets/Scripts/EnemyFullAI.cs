@@ -20,7 +20,7 @@ public class EnemyFullAI : MonoBehaviour {
 	private Vector3 lastPlayerPos;
 	private Vector3 heading;//TODO FIGURE OUT WHY I HAVE THIS SHIT
 	private Vector3 targetHeading;
-	private PathFinding pathFinding;// = GetComponent<PathFinding> ();
+	//private PathFinding pathFinding;// = GetComponent<PathFinding> ();
 	private List<Vector3> path;
 	//For idle movement (Privately set)
 	private Animator animator;
@@ -89,7 +89,7 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 
 	void Awake (){
-		this.pathFinding = GetComponent<PathFinding> ();
+		//this.pathFinding = GetComponent<PathFinding> ();
 	}
 
 	// Update is called once per frame
@@ -143,12 +143,12 @@ public class EnemyFullAI : MonoBehaviour {
 		//if (this.path == null || this.path.Count == 0) {
 			//moveTo.z = 0f;
 			//Vector2 curPos = this.transform.position;
-			this.path = this.pathFinding.PathFinder (this.transform.position, moveTo);
+			//this.path = this.pathFinding.PathFinder (this.transform.position, moveTo);
 		//}
-		Vector2 newHeading = new Vector2(path[0].x, path[0].y);
-		Vector2 newPosition = new Vector2 (this.transform.position.x, this.transform.position.y);
-		this.heading = newHeading - newPosition;
-		//this.heading = moveTo - this.transform.position;
+		//Vector2 newHeading = new Vector2(path[0].x, path[0].y);
+		//Vector2 newPosition = new Vector2 (this.transform.position.x, this.transform.position.y);
+		//this.heading = newHeading - newPosition;
+		this.heading = moveTo - this.transform.position;
 
 		this.rb2d.velocity = this.heading.normalized * this.speed;
 	}
@@ -176,18 +176,23 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 	}
 	void RangedAttack (){
-		//Vector2 heading = player.transform.position - this.transform.position;
+		//heading = player.transform.position - this.transform.position;
 		
 		//if (true) {
-
-		if (this.heading.magnitude < this.ranged.rangedDistance){
+		//print ("Distance: " + this.targetHeading.magnitude + "|cowardDistance: " + this.coward.cowardDistance);
+		this.oldPosition = this.transform.position;
+		if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance) {
+			this.CowardRun ();
+		} else if (this.targetHeading.magnitude < this.ranged.rangedDistance){
+			print ("PRINT SOME SHIT OUT2");
 			//Vector3 target = heading;
 			//print (target.normalized);
 			//target.z = player.transform.position.z;
 			this.ranged.getWeapon().Attack (player.transform.position);
-		}
-		else if (!this.ranged.getWeapon().Locked) {
-			this.rb2d.velocity = this.speed * heading.normalized;
+		} else if (!this.ranged.getWeapon().Locked) {
+			print ("PRINT SOME SHIT OUT");
+			this.MoveTo (lastPlayerPos);
+			//this.rb2d.velocity = this.speed * heading.normalized;
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
