@@ -184,13 +184,13 @@ public class EnemyFullAI : MonoBehaviour {
 		if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance) {
 			this.CowardRun ();
 		} else if (this.targetHeading.magnitude < this.ranged.rangedDistance){
-			print ("PRINT SOME SHIT OUT2");
+			//print ("PRINT SOME SHIT OUT2");
 			//Vector3 target = heading;
 			//print (target.normalized);
 			//target.z = player.transform.position.z;
 			this.ranged.getWeapon().Attack (player.transform.position);
 		} else if (!this.ranged.getWeapon().Locked) {
-			print ("PRINT SOME SHIT OUT");
+			//print ("PRINT SOME SHIT OUT");
 			this.MoveTo (lastPlayerPos);
 			//this.rb2d.velocity = this.speed * heading.normalized;
 		} else {
