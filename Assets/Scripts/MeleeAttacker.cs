@@ -5,13 +5,13 @@ public class MeleeAttacker : MonoBehaviour {
 	public int damage = 3;
 	public float knockback = 0.5f;
 	public float range = 0.6f;
-	public float delay = 0.5f;
 
 	private GameObject weapon;
-	private float elapsed;
 
 	private float untilUnlocked;
 	private bool locked = false;
+	private float elapsed;
+	public float delay = 0.5f;
 
 	public bool Locked {
 		get {
@@ -22,7 +22,7 @@ public class MeleeAttacker : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		this.untilUnlocked -= Time.deltaTime;
@@ -43,6 +43,7 @@ public class MeleeAttacker : MonoBehaviour {
 	private void CreateOuch (bool horizontal, int direction) {
 		if (!this.locked) {
 			Destroy (this.weapon);
+
 			this.elapsed = 0;
 			this.untilUnlocked = this.delay;
 			this.locked = true;
@@ -75,17 +76,17 @@ public class MeleeAttacker : MonoBehaviour {
 		CreateOuch (true, 1);
 		//print ("Attacking north");
 	}
-	
+
 	public void AttackEast () {
 		CreateOuch (false, 1);
 		//print ("Attacking east");
 	}
-	
+
 	public void AttackWest () {
 		CreateOuch (false, -1);
 		//print ("Attacking west");
 	}
-	
+
 	public void AttackSouth () {
 		CreateOuch (true, -1);
 		//print ("Attacking south");

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drops:
-  - chance: .5
+  - chance: .899999976
     item: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
 --- !u!114 &11488832
 MonoBehaviour:
@@ -203,7 +203,7 @@ Prefab:
       objectReference: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
-      value: .5
+      value: .899999976
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: coward.isCoward

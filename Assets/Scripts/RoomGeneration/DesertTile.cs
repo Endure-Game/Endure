@@ -41,6 +41,7 @@ public class DesertTile : BiomeTile
 			}
 			this.GetComponent<RoomManager>().PlaceItem(cactus, cactusTile.x, cactusTile.y);
 		}
+
 	}
 
 	public override int getBiomeNumber() {

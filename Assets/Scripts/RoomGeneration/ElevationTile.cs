@@ -74,6 +74,10 @@ public class ElevationTile : MonoBehaviour
 		}
 	}
 
+	public GameObject GetTreasureTile() {
+		return this.xMarksTheSpot;
+	}
+
 	// DONT TOUCH MY MAGIC FUNCTION --Chris
 	private GameObject GetWallTile(List<int> walls) {
 

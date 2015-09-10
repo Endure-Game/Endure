@@ -15,6 +15,7 @@ public class HandleRope : MonoBehaviour {
 
   void OnTriggerEnter2D (Collider2D collider) {
     if (collider.tag == "Rope") {
+
       Destroy (this.gameObject);
     }
   }

@@ -9,10 +9,10 @@ public class RangedAttacker : MonoBehaviour {
 
 	public GameObject arrow;
 	public GameObject bullet;
-	private float elapsed;
 
 	private float untilUnlocked;
 	private bool locked = false;
+	private float elapsed;
 
 	public bool Locked {
 		get {

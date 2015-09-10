@@ -16,6 +16,10 @@ public class HandleLockpick : MonoBehaviour {
   void OnTriggerEnter2D (Collider2D collider) {
     if (collider.tag == "Lockpick") {
       Destroy (this.gameObject);
+
+      if (this.GetComponent<Drops>() != null) {
+        this.GetComponent<Drops>().DropItem();
+      }
     }
   }
 }
