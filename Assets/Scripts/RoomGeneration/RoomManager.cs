@@ -451,8 +451,8 @@ public class RoomManager : MonoBehaviour {
 
 		Tile tile = this.tileMap[x, y];
 		tile.item = Instantiate (sprite,
-			                         new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
-			                         Quaternion.identity) as GameObject;
+			                       new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+			                       Quaternion.identity) as GameObject;
 		tile.item.transform.SetParent(this.rooms[0,0].transform);
 		tile.blocking = true;
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Drops : MonoBehaviour {
 
@@ -9,25 +10,29 @@ public class Drops : MonoBehaviour {
     public GameObject item;
   }
 
-  private bool isQuitting = false;
-
   public Drop[] drops;
 
   // Need to make sure that we don't instantiate objects when game ends
   // or they will be left in the object heirarchy
-  void OnDisable() {
-    isQuitting = true;
-  }
 
-  void OnDestroy() {
+  public void DropItem() {
 
-    if (isQuitting) {
-      return;
-    }
-
+    // Get only items that are not in player inventory
     float max = 0f;
-    foreach (var drop in this.drops) {
-      max += drop.chance;
+    List<Drop> newDrops = new List<Drop>();
+    foreach (Drop drop in this.drops) {
+
+      bool found = false;
+      foreach (PlayerController.InventoryItem item in PlayerController.instance.inventory) {
+        if (item.name == drop.item.name) {
+          found = true;
+        }
+      }
+
+      if (!found) {
+        max += drop.chance;
+        newDrops.Add(drop);
+      }
     }
     if (max < 1f) {
       max = 1f;
@@ -35,7 +40,7 @@ public class Drops : MonoBehaviour {
 
     float current = 0f;
     float selected = Random.Range (0f, max);
-    foreach (var drop in this.drops) {
+    foreach (var drop in newDrops) {
       current += drop.chance;
       if (current >= selected) {
         Instantiate (drop.item, this.transform.position, Quaternion.identity);

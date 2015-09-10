@@ -7,6 +7,7 @@ public abstract class BiomeTile : MonoBehaviour
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
 	public Spawn[] enemies;
+	public RoomManager.Count treasureCount = new RoomManager.Count(1, 2);
 
 	protected Tile[,] tileMap;
 	protected int width;
@@ -90,6 +91,21 @@ public abstract class BiomeTile : MonoBehaviour
 		this.GetComponent<RoomManager>().PlaceItem(this.getBlockingTile(), x, y);
 	}
 
+	public void placeTreasureTiles(List<Tile> tiles) {
+
+		int treasureNum = Random.Range(this.treasureCount.minimum, this.treasureCount.maximum);
+		for (int i = 0; i < treasureNum; i++) {
+			Tile treasureTile = tiles[Random.Range(0, tiles.Count)];
+			while (treasureTile.item != null) {
+				treasureTile = tiles[Random.Range(0, tiles.Count)];
+			}
+
+			this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().xMarksTheSpot,
+																								 treasureTile.x,
+																								 treasureTile.y);
+		}
+	}
+
 	public GameObject getEnemy() {
 
 		float total = 0f;
@@ -113,6 +129,7 @@ public abstract class BiomeTile : MonoBehaviour
 
 	public virtual void RandomBlocking(List<Tile> region) {
 		this.GetComponent<ElevationTile>().placeCliffTiles(region);
+		this.placeTreasureTiles(region);
 	}
 
 	public abstract int getBiomeNumber();

@@ -3,8 +3,6 @@ using System.Collections;
 
 public class HandleShovel : MonoBehaviour {
 
-  private bool beenduggened = false;
-
 	// Use this for initialization
 	void Start () {
 
@@ -16,14 +14,18 @@ public class HandleShovel : MonoBehaviour {
 	}
 
   void OnTriggerEnter2D (Collider2D collider) {
-    if (collider.tag == "Shovel" && !beenduggened) {
+    if (collider.tag == "Shovel") {
 
-      this.beenduggened = true;
       RoomManager roomManager = WorldController.instance.GetComponent<RoomManager>();
       GameObject hole = roomManager.GetComponent<ElevationTile>().hole;
       roomManager.PlaceItem(hole,
                             (int)(this.transform.position.x + 15.5f),
                             (int)(this.transform.position.y + 15.5f));
+
+      if (this.GetComponent<Drops>() != null) {
+        this.GetComponent<Drops>().DropItem();
+      }
+      Destroy (this.gameObject);
     }
   }
 }

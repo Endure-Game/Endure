@@ -58,6 +58,10 @@ public class Health : MonoBehaviour {
 		}
 
 		var position = this.transform.position;
+		if (this.GetComponent<Drops>() != null) {
+			this.GetComponent<Drops>().DropItem();
+		}
 		Destroy (this.gameObject);
+
 	}
 }

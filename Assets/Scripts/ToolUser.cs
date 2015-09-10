@@ -5,7 +5,7 @@ public class ToolUser : MonoBehaviour {
 	public string toolType = "";
 	public float range = 0.6f;
 
-	private float left = 0.1f;
+	private float left = 0.05f;
 	private GameObject tool;
 
 	// Use this for initialization
@@ -55,7 +55,6 @@ public class ToolUser : MonoBehaviour {
 
 
 	public void UseNorth () {
-		print ("North~");
 		StartCoroutine(CreateTool (true, 1));
 	}
 
