@@ -431,6 +431,10 @@ Prefab:
       propertyPath: range
       value: .400000006
       objectReference: {fileID: 0}
+    - target: {fileID: 11488712, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: delay
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_IsPrefabParent: 0

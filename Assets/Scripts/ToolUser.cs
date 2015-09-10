@@ -7,7 +7,6 @@ public class ToolUser : MonoBehaviour {
 
 	public float delay = 1.0f;
 
-	//private float left = 0.05f;
 	private GameObject tool;
 
 	private float untilUnlocked;
@@ -28,7 +27,6 @@ public class ToolUser : MonoBehaviour {
 	void Update () {
 
 		this.untilUnlocked -= Time.deltaTime;
-		print ("unlock time" + this.untilUnlocked);
 
 		if (this.tool != null) {
 			this.elapsed += Time.deltaTime;
@@ -77,7 +75,6 @@ public class ToolUser : MonoBehaviour {
 			}
 		}
 	}
-
 
 	public void UseNorth () {
 		StartCoroutine(CreateTool (true, 1));
