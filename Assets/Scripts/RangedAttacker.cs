@@ -35,14 +35,15 @@ public class RangedAttacker : MonoBehaviour {
 
 	public void Attack (Vector3 towards) {
 
-		if (PlayerController.instance.inventory [PlayerController.instance.InventoryIndex].name == "BowAndArrow") {
+		if (PlayerController.instance.inventory [PlayerController.instance.InventoryIndex].name == "Rifle") {
+
+			if (!this.locked && PlayerController.instance.bullets > 0) {
+				StartCoroutine(fireBullet(towards));
+			}
+		} else {
 
 			if (!this.locked && PlayerController.instance.arrows > 0) {
 				StartCoroutine(fireArrow(towards));
-			}
-		} else {
-			if (!this.locked && PlayerController.instance.bullets > 0) {
-				StartCoroutine(fireBullet(towards));
 			}
 		}
 	}
