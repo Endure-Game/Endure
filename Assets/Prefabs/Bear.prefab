@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11496056}
   - 95: {fileID: 9593558}
   - 114: {fileID: 11401730}
-  - 114: {fileID: 11467066}
+  - 114: {fileID: 11427952}
   - 114: {fileID: 11421244}
   - 114: {fileID: 11404386}
   m_Layer: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   knockback: 100
   range: .600000024
   delay: 1
---- !u!114 &11467066
+--- !u!114 &11427952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -131,21 +131,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 179610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbc934d28bdb7f34fb38e2e927ca8eb3, type: 3}
+  m_Script: {fileID: 11500000, guid: c05abdaebf7257c4abe8e73870df6143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 6
   aggro: 5
   deAggro: 6
   moveDuration: .800000012
   idleDuration: .600000024
+  melee:
+    isMelee: 1
+  ranged:
+    isRanged: 0
+    rangedDistance: 4
+  coward:
+    isCoward: 0
+    cowardDistance: 2
+    maxRunDistance: 6
 --- !u!114 &11496056
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179610}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
   m_Name: 
@@ -195,6 +204,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deAggro
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: melee.isMelee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
