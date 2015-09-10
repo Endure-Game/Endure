@@ -16,11 +16,7 @@ GameObject:
   - 114: {fileID: 11463666}
   - 114: {fileID: 11433380}
   - 114: {fileID: 11401558}
-<<<<<<< HEAD
   - 114: {fileID: 11491390}
-=======
-  - 114: {fileID: 11462272}
->>>>>>> (Feat) Fixed some bugs for pathfinding
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -138,20 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggro: 10
---- !u!114 &11462272
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79a6fc35e1093480699c3a86a22f17da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  world: {fileID: 0}
-  rows: 0
-  columns: 0
 --- !u!114 &11463666
 MonoBehaviour:
   m_ObjectHideFlags: 1
