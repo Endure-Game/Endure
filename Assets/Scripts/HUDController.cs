@@ -91,7 +91,8 @@ public class HUDController : MonoBehaviour {
 		float barWidth = iconWidth * PlayerController.instance.inventory.Count;
 
 		int newInventorySize = PlayerController.instance.inventory.Count;
-		if (PlayerController.instance.inventory.Count > oldInventorySize) {
+
+		if (PlayerController.instance.inventory.Count != oldInventorySize) {
 			oldInventorySize = newInventorySize;
 
 			// inventory

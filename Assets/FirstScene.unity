@@ -1252,7 +1252,7 @@ MonoBehaviour:
   selected: {fileID: 21300000, guid: 2b9160e8d0f22cc40af3b7b411231073, type: 3}
   mouse: {fileID: 21300000, guid: 6ea91fcf217baa842a84b393b4d6e5e2, type: 3}
   space: {fileID: 21300000, guid: 8dba79b2f0297d643bc1b8899229faa8, type: 3}
-  font: {fileID: 0}
+  font: {fileID: 12800000, guid: 3306ef96b9ea15b48b6211f55b3fa74f, type: 3}
   world: {fileID: 373454786}
   map: {fileID: 1314655351}
 --- !u!1001 &1669030669
