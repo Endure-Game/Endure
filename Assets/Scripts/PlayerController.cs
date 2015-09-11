@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour {
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
 						//this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
-						//this.animator.SetTrigger ("Shovel");
+						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
 						//this.animator.SetTrigger ("Rope");
 					}
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour {
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
 						//this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
-						//this.animator.SetTrigger ("Shovel");
+						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
 						//this.animator.SetTrigger ("Rope");
 					}
