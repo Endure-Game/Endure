@@ -112,6 +112,16 @@ public class HUDController : MonoBehaviour {
 				icon.transform.position = new Vector3 (x, y, 0);
 
 				i++;
+
+				// Give a number to each icon, indicating it's button
+				var number = new GameObject ();
+				var text = number.AddComponent<Text> ();
+				text.text = "" + i;
+				text.font = this.font;
+				text.fontSize = 32;
+
+				number.transform.SetParent (icon.transform);
+				number.transform.position = new Vector3 (x + 4, y - 4, 0);
 			}
 		}
 
@@ -139,6 +149,7 @@ public class HUDController : MonoBehaviour {
 				break;
 			}
 
+			/*
 			Destroy (this.count);
 			this.count = new GameObject ();
 
@@ -155,14 +166,16 @@ public class HUDController : MonoBehaviour {
 					rifleCount.font = this.font;
 					rifleCount.fontSize = 32;
 				break;
-			}
+			}*/
 
 			var outline = count.AddComponent<Outline>();
 			control.transform.SetParent (this.inventory.transform);
 			control.transform.position = new Vector3 (selX, selY, 0);
 
+			/*
 			count.transform.SetParent (this.inventory.transform);
 			count.transform.position = new Vector3 (selX, selY, 0);
+			*/
 		}
 
 		for (int i = 0; i < PlayerController.instance.inventory.Count - 1; i++) {
