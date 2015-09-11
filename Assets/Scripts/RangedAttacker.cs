@@ -35,14 +35,21 @@ public class RangedAttacker : MonoBehaviour {
 
 	public void Attack (Vector3 towards) {
 
-		if (PlayerController.instance.inventory [PlayerController.instance.InventoryIndex].name == "Rifle") {
+		if(this.gameObject.tag == "Player"){
 
-			if (!this.locked && PlayerController.instance.bullets > 0) {
-				StartCoroutine(fireBullet(towards));
+			if (PlayerController.instance.inventory [PlayerController.instance.InventoryIndex].name == "Rifle") {
+
+				if (!this.locked && PlayerController.instance.bullets > 0) {
+					StartCoroutine(fireBullet(towards));
+				}
+			} else {
+
+				if (!this.locked && PlayerController.instance.arrows > 0) {
+					StartCoroutine(fireArrow(towards));
+				}
 			}
-		} else {
-
-			if (!this.locked && PlayerController.instance.arrows > 0) {
+		}else{
+			if(this.locked == false){
 				StartCoroutine(fireArrow(towards));
 			}
 		}
@@ -66,7 +73,9 @@ public class RangedAttacker : MonoBehaviour {
 		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
 		weapon.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 
-		PlayerController.instance.arrows --;
+		if (this.gameObject.tag == "Player") {
+			PlayerController.instance.arrows --;
+		}
 
 		Ouch ouch = weapon.GetComponent<Ouch> ();
 		ouch.damage = this.damage;
