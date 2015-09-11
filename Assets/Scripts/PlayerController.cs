@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 		MOUSE
 	}
 
+
 	public class InventoryItem
 	{
 		public string name;
@@ -47,6 +48,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	};
 
+	
+	private class Sound {
+		public AudioSource sword;
+	}
+	private Sound sound;
+
 	public List<InventoryItem> inventory = new List<InventoryItem> ();
 	private int selectedInventory = 0;
 
@@ -66,6 +73,10 @@ public class PlayerController : MonoBehaviour {
 		this.meleeAttacker = this.GetComponent<MeleeAttacker> ();
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 		this.toolUser = this.GetComponent<ToolUser> ();
+
+		this.sound.sword = gameObject.AddComponent<AudioSource> ();
+		this.sound.sword.clip = Resources.Load ("Sounds/Swoosh1") as AudioClip;
+		print (this.sound.sword);
 
 		// Give player starting items
 		//this.inventory.Add("sword");
@@ -164,6 +175,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
+					this.sound.sword.Play();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
@@ -211,6 +223,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
+					this.sound.sword.Play();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {

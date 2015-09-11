@@ -9,7 +9,6 @@ public class Ouch : MonoBehaviour {
 
 
 	private AudioSource hit;// = gameObject.AddComponent<AudioSource>();
-	private AudioSource death;
 	// Use this for initialization
 	void Start () {
 		BoxCollider2D collider = this.gameObject.GetComponent<BoxCollider2D> ();
@@ -18,10 +17,8 @@ public class Ouch : MonoBehaviour {
 			collider.isTrigger = true;
 		}
 
- 		this.hit = gameObject.AddComponent<AudioSource> ();
-		this.death = gameObject.AddComponent<AudioSource> ();
+		this.hit = gameObject.AddComponent<AudioSource> ();
 		this.hit.clip = Resources.Load ("Sounds/Hurt2") as AudioClip;
-		this.death.clip = Resources.Load ("Sounds/WilhelmScream") as AudioClip;
 		//WilhelmScream.wav
 	}
 
@@ -55,9 +52,13 @@ public class Ouch : MonoBehaviour {
 
 			if (this.destroyOnTouch) {
 				this.hit.Play ();
-				this.GetComponent<Renderer>().enabled = false;
-				Destroy(gameObject, this.hit.clip.length);
+
 				//Destroy (this.gameObject);
+				TrailRenderer trail = this.GetComponent<TrailRenderer>();
+				trail.enabled = false;
+				//this.GetComponent<Renderer>().enabled = false;
+				this.transform.position = Vector3.one * 9999999f;
+				Destroy(gameObject, this.hit.clip.length);
 			}
 		}
 	}
