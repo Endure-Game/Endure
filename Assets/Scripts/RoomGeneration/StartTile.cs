@@ -28,7 +28,7 @@ public class StartTile : MonoBehaviour {
 
     int x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
     int y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
-    while (tileMap[x, y].blocking) {
+    while (tileMap[x, y].blocking || tileMap[x, y].path) {
       x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
       y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
     }
