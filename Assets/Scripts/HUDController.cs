@@ -13,11 +13,18 @@ public class HUDController : MonoBehaviour {
 	public Sprite space;
 	public Font font;
 
+	public Sprite arrow;
+	public Sprite bullet;
+
 	public GameObject world;
 	private RoomManager roomManager;
 
 	public GameObject map;
 	private GameObject inventory;
+	private int oldInventorySize = 0;
+	private GameObject border;
+	private GameObject control;
+	private GameObject count;
 
 	private Health playerHealth;
 	private int startingMaxHealth;
@@ -46,11 +53,10 @@ public class HUDController : MonoBehaviour {
 		this.roomManager = this.world.GetComponent<RoomManager> ();
 
 		this.mapTexture = this.CreateMap ();
-		//var s = this.map.GetComponent<Image> ().sprite;
 		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		// Health bar
@@ -79,20 +85,22 @@ public class HUDController : MonoBehaviour {
 			lowHealth.color = new Color(0, 0, 0, 0.8f);
 		}
 
-		
-		if (PlayerController.instance.inventory.Count > 0) {
+		var sample = new GameObject ();
+		sample.AddComponent<Image> ().sprite = this.selected;
+		float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
+		Destroy (sample);
+
+		float barWidth = iconWidth * PlayerController.instance.inventory.Count;
+
+		int newInventorySize = PlayerController.instance.inventory.Count;
+
+		if (PlayerController.instance.inventory.Count != oldInventorySize) {
+			oldInventorySize = newInventorySize;
 
 			// inventory
 			Destroy (this.inventory);
 			this.inventory = new GameObject ();
 			this.inventory.transform.parent = this.gameObject.transform;
-
-			var sample = new GameObject ();
-			sample.AddComponent<Image> ().sprite = this.selected;
-			float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
-			Destroy (sample);
-
-			float barWidth = iconWidth * PlayerController.instance.inventory.Count;
 
 			int i = 0;
 
@@ -101,23 +109,39 @@ public class HUDController : MonoBehaviour {
 				icon.AddComponent<Image> ().sprite = item.sprite;
 				var rectTransform = icon.GetComponent<RectTransform> ();
 				icon.transform.SetParent(this.inventory.transform);
-				float x = this.resolution.x - barWidth + i * rectTransform.rect.width;
-				icon.transform.position = new Vector3 (x, this.resolution.y - rectTransform.rect.height / 2, 0);
+				float x = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + i * rectTransform.rect.width + 40;
+				float y = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rectTransform.rect.width / 2;
+				icon.transform.position = new Vector3 (x, y, 0);
 
 				i++;
-			}
 
-			var border = new GameObject ();
+				// Give a number to each icon, indicating it's button
+				var number = new GameObject ();
+				var text = number.AddComponent<Text> ();
+				text.text = "" + i;
+				text.font = this.font;
+				text.fontSize = 32;
+				number.AddComponent<Outline>();
+
+				number.transform.SetParent (icon.transform);
+				number.transform.position = new Vector3 (x + 4, y - 4, 0);
+			}
+		}
+
+		if (newInventorySize > 0) {
+			Destroy (this.border);
+			this.border = new GameObject ();
 			border.AddComponent<Image> ().sprite = this.selected;
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
 
-			var selX = this.resolution.x - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
-			var selY = this.resolution.y - rt.rect.height / 2;
+			var selX = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width  + 40;
+			var selY = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rt.rect.height / 2;
 
 			border.transform.position = new Vector3 (selX, selY, 0);
 
-			var control = new GameObject ();
+			Destroy (this.control);
+			this.control = new GameObject ();
 
 			switch (PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].control) {
 				case PlayerController.Control.MOUSE:
@@ -127,40 +151,58 @@ public class HUDController : MonoBehaviour {
 					control.AddComponent<Image> ().sprite = this.space;
 				break;
 			}
-			var count = new GameObject ();
 
-			switch(PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].name){
-				case "BowAndArrow":
-					var arrowCount = count.AddComponent<Text> ();
-					arrowCount.text = "" + PlayerController.instance.arrows;
-					arrowCount.font = this.font;
-					arrowCount.fontSize = 32;
-				break;
-				case "Rifle":
-					var rifleCount = count.AddComponent<Text> ();
-					rifleCount.text = "" + PlayerController.instance.bullets;
-					rifleCount.font = this.font;
-					rifleCount.fontSize = 32;
-				break;
-			}
-
-			var outline = count.AddComponent<Outline>();
 			control.transform.SetParent (this.inventory.transform);
 			control.transform.position = new Vector3 (selX, selY, 0);
-
-			count.transform.SetParent (this.inventory.transform);
-			count.transform.position = new Vector3 (selX, selY, 0);
 		}
 
 		for (int i = 0; i < PlayerController.instance.inventory.Count - 1; i++) {
 			if(PlayerController.instance.inventory[i].name == "BowAndArrow"){
 				//show the ammount of arrows the player currently has
-
 			}
 			if(PlayerController.instance.inventory[i].name == "Rifle"){
-				//show the amount of bullets the play currently has
+				//show the ammount of bullets the player currently has
 			}
 		}
+
+		// Create ammo count objects
+		Destroy (this.count);
+		this.count = new GameObject ();
+
+		float xCount = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - 20;
+		float yCount = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - iconWidth * 2 + 40;
+
+		var arrowCount = new GameObject();
+
+		var arrowNumber = arrowCount.AddComponent<Text> ();
+		arrowNumber.text = "x" + PlayerController.instance.arrows;
+		arrowNumber.font = this.font;
+		arrowNumber.fontSize = 32;
+		arrowCount.AddComponent<Outline>();
+		var arrowSprite = new GameObject();
+		arrowSprite.AddComponent<Image> ().sprite = this.arrow;
+		arrowSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
+		arrowSprite.transform.SetParent (arrowCount.transform);
+		arrowSprite.transform.position = new Vector3 (-70f, 35f, 0f);
+		arrowCount.transform.SetParent (this.count.transform);
+		arrowCount.transform.position = new Vector3 (xCount, yCount, 0f);
+
+		var rifleCount = new GameObject ();
+		var rifleNumber = rifleCount.AddComponent<Text> ();
+		rifleNumber.text = "x" + PlayerController.instance.bullets;
+		rifleNumber.font = this.font;
+		rifleNumber.fontSize = 32;
+		rifleCount.AddComponent<Outline>();
+		var rifleSprite = new GameObject();
+		rifleSprite.AddComponent<Image> ().sprite = this.bullet;
+		rifleSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
+		rifleSprite.transform.SetParent (rifleCount.transform);
+		rifleSprite.transform.position = new Vector3 (-70f, 35f, 0f);
+		rifleCount.transform.SetParent (this.count.transform);
+		rifleCount.transform.position = new Vector3 (xCount, yCount - 35, 0f);
+
+		this.count.transform.SetParent (this.inventory.transform);
+		this.count.transform.position = new Vector3 (0, 0, 0);
 	}
 
 	Color colorForTile (Tile t) {
@@ -192,8 +234,6 @@ public class HUDController : MonoBehaviour {
 	Texture2D CreateMap () {
 		var map = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
 		                         this.roomManager.columns * this.roomManager.roomSide);
-
-		//print ("hahableh " + roomManager.tileMap [0, 0].biome);
 
 		for (var x = 0; x < map.width; x++) {
 			for (var y = 0; y < map.height; y++) {

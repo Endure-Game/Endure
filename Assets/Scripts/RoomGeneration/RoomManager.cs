@@ -322,6 +322,8 @@ public class RoomManager : MonoBehaviour {
 		}
 		print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
 
+		this.StartTile.PlaceStartTiles();
+
 		// Randomly distribute items throughout the game
 		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
@@ -447,6 +449,12 @@ public class RoomManager : MonoBehaviour {
 		}
 	}
 
+	public StartTile StartTile {
+		get {
+			return this.GetComponent<StartTile> ();
+		}
+	}
+
 	public void PlaceItem(GameObject sprite, int x, int y) {
 
 		Tile tile = this.tileMap[x, y];
@@ -486,7 +494,7 @@ public class RoomManager : MonoBehaviour {
 		return currentTile.blocking;
 	}
 
-	
+
 
 	private void getBiome(int x, int y) {
 		if (this.tileMap[x, y] != null) {
