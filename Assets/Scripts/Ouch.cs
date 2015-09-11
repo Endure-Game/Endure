@@ -8,12 +8,7 @@ public class Ouch : MonoBehaviour {
 	public bool destroyOnTouch = false;
 
 
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
+	private AudioSource hit;// = gameObject.AddComponent<AudioSource>();
 	// Use this for initialization
 	void Start () {
 		BoxCollider2D collider = this.gameObject.GetComponent<BoxCollider2D> ();
@@ -22,6 +17,9 @@ public class Ouch : MonoBehaviour {
 			collider.isTrigger = true;
 		}
 
+		this.hit = gameObject.AddComponent<AudioSource> ();
+		this.hit.clip = Resources.Load ("Sounds/Hurt2") as AudioClip;
+		//WilhelmScream.wav
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
@@ -37,6 +35,7 @@ public class Ouch : MonoBehaviour {
 
 
 	void OnOwie (Collider2D collider) {
+		//this.death.Play ();
 		if (!collider.isTrigger && collider.transform != this.spawner) {
 			Health target = collider.GetComponent<Health> ();
 			if (target != null) {
@@ -48,10 +47,18 @@ public class Ouch : MonoBehaviour {
 					EnemyFullAI script = enemy.GetComponent<EnemyFullAI>();
 					script.Stun (enemy);
 				}
+				this.hit.Play();
 			}
 
 			if (this.destroyOnTouch) {
-				Destroy (this.gameObject);
+				this.hit.Play ();
+
+				//Destroy (this.gameObject);
+				TrailRenderer trail = this.GetComponent<TrailRenderer>();
+				trail.enabled = false;
+				//this.GetComponent<Renderer>().enabled = false;
+				this.transform.position = Vector3.one * 9999999f;
+				Destroy(gameObject, this.hit.clip.length);
 			}
 		}
 	}

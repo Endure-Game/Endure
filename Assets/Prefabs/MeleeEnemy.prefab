@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21262582}
   - 50: {fileID: 5015170}
   - 61: {fileID: 6169752}
-  - 114: {fileID: 11447706}
   - 95: {fileID: 9530744}
   - 114: {fileID: 11463666}
   - 114: {fileID: 11433380}
@@ -136,18 +135,6 @@ MonoBehaviour:
     isCoward: 0
     cowardDistance: 2
     maxRunDistance: 6
---- !u!114 &11447706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195750}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aggro: 10
 --- !u!114 &11463666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  deathSound: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
 --- !u!114 &11491390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +275,10 @@ Prefab:
       propertyPath: drops.Array.data[1].item
       value: 
       objectReference: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195750}
