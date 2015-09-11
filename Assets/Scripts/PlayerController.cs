@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 
 	private bool pusher = false;//FOR DEBUGGING
 
+
+
 	public enum Control {
 		SPACE,
 		MOUSE
@@ -48,11 +50,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	};
 
-	
-	private class Sound {
+
+	private AudioSource sword;
+	/*private class Sound {
 		public AudioSource sword;
 	}
-	private Sound sound;
+	private Sound sound;*/
 
 	public List<InventoryItem> inventory = new List<InventoryItem> ();
 	private int selectedInventory = 0;
@@ -176,7 +179,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
-					this.sound.sword.Play();
+					this.sword.Play();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
@@ -224,7 +227,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
-					this.sound.sword.Play();
+					this.sword.Play();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
