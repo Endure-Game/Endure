@@ -18,6 +18,10 @@ public class HUDController : MonoBehaviour {
 
 	public GameObject map;
 	private GameObject inventory;
+	private int oldInventorySize = 0;
+	private GameObject border;
+	private GameObject control;
+	private GameObject count;
 
 	private Health playerHealth;
 	private int startingMaxHealth;
@@ -79,20 +83,21 @@ public class HUDController : MonoBehaviour {
 			lowHealth.color = new Color(0, 0, 0, 0.8f);
 		}
 
+		var sample = new GameObject ();
+		sample.AddComponent<Image> ().sprite = this.selected;
+		float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
+		Destroy (sample);
 
-		if (PlayerController.instance.inventory.Count > 0) {
+		float barWidth = iconWidth * PlayerController.instance.inventory.Count;
+
+		int newInventorySize = PlayerController.instance.inventory.Count;
+		if (PlayerController.instance.inventory.Count > oldInventorySize) {
+			oldInventorySize = newInventorySize;
 
 			// inventory
 			Destroy (this.inventory);
 			this.inventory = new GameObject ();
 			this.inventory.transform.parent = this.gameObject.transform;
-
-			var sample = new GameObject ();
-			sample.AddComponent<Image> ().sprite = this.selected;
-			float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
-			Destroy (sample);
-
-			float barWidth = iconWidth * PlayerController.instance.inventory.Count;
 
 			int i = 0;
 
@@ -107,8 +112,11 @@ public class HUDController : MonoBehaviour {
 
 				i++;
 			}
+		}
 
-			var border = new GameObject ();
+		if (newInventorySize > 0) {
+			Destroy (this.border);
+			this.border = new GameObject ();
 			border.AddComponent<Image> ().sprite = this.selected;
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
@@ -118,7 +126,8 @@ public class HUDController : MonoBehaviour {
 
 			border.transform.position = new Vector3 (selX, selY, 0);
 
-			var control = new GameObject ();
+			Destroy (this.control);
+			this.control = new GameObject ();
 
 			switch (PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].control) {
 				case PlayerController.Control.MOUSE:
@@ -128,7 +137,9 @@ public class HUDController : MonoBehaviour {
 					control.AddComponent<Image> ().sprite = this.space;
 				break;
 			}
-			var count = new GameObject ();
+
+			Destroy (this.count);
+			this.count = new GameObject ();
 
 			switch(PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].name){
 				case "BowAndArrow":
