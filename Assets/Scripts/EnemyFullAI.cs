@@ -26,6 +26,12 @@ public class EnemyFullAI : MonoBehaviour {
 	private Animator animator;
 	private Vector3 oldPosition;
 	private float animationTime = 0f;
+
+	private float hitDelay = 0.10f;
+	private EnemyFullAI standStill;
+	private float stunTime;
+	private bool isStunned;
+
 	
 	//For weapons
 	//private MeleeAttacker melee;
@@ -86,10 +92,14 @@ public class EnemyFullAI : MonoBehaviour {
 			this.ranged.setWeapon (this.GetComponent<RangedAttacker>());
 		}
 		this.animator = this.GetComponent<Animator> ();
+	
 	}
+
+
 
 	void Awake (){
 		//this.pathFinding = GetComponent<PathFinding> ();
+
 	}
 
 	// Update is called once per frame
@@ -101,12 +111,12 @@ public class EnemyFullAI : MonoBehaviour {
 				this.lastPlayerPos = player.transform.position;
 			} 
 			if (this.targetHeading.magnitude < this.deAggro){
-				if(this.melee.isMelee){
-					this.MeleeAttack ();
-				} else if (this.ranged.isRanged){
+				 if (this.ranged.isRanged){
 					this.RangedAttack ();
 				} else if (this.coward.isCoward){
 					this.CowardRun ();
+				}else if(this.melee.isMelee){
+					this.MeleeAttack ();
 				}
 				//this.MeleeAttack ();
 			} else if(this.targetHeading.magnitude >= this.deAggro){
@@ -116,6 +126,12 @@ public class EnemyFullAI : MonoBehaviour {
 				} else {
 					this.IdleMovement ();
 				}
+			}
+
+			this.stunTime += Time.deltaTime;
+			if (stunTime >= this.hitDelay && this.isStunned == true) {
+				this.standStill.coward.isCoward = false;
+				this.isStunned = false;
 			}
 			
 			// Make sure enemy is on the right layer
@@ -137,6 +153,13 @@ public class EnemyFullAI : MonoBehaviour {
 			}
 		}
 		
+	}
+
+	public void Stun (GameObject loser) {
+		this.stunTime = 0f;
+		this.standStill = loser.GetComponent<EnemyFullAI>();
+		this.standStill.coward.isCoward = true;
+		this.isStunned = true;
 	}
 	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){

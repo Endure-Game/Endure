@@ -7,6 +7,13 @@ public class Ouch : MonoBehaviour {
 	public Transform spawner;
 	public bool destroyOnTouch = false;
 
+
+	
+	// Update is called once per frame
+	void Update () {
+
+	}
+
 	// Use this for initialization
 	void Start () {
 		BoxCollider2D collider = this.gameObject.GetComponent<BoxCollider2D> ();
@@ -14,7 +21,7 @@ public class Ouch : MonoBehaviour {
 			collider = this.gameObject.AddComponent<BoxCollider2D> ();
 			collider.isTrigger = true;
 		}
-		StartCoroutine (Wait ());
+
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
@@ -25,18 +32,9 @@ public class Ouch : MonoBehaviour {
 		OnOwie (collider);
 	}
 
-	IEnumerator Wait (){
-		yield return new WaitForSeconds (5);
 
-	}
 
-	void Stun (Rigidbody2D loser){
-		loser.Sleep ();
-		loser.Sleep ();
-		loser.Sleep ();
-		this.Wait ();
-		loser.WakeUp ();
-	}
+
 
 	void OnOwie (Collider2D collider) {
 		if (!collider.isTrigger && collider.transform != this.spawner) {
@@ -45,8 +43,11 @@ public class Ouch : MonoBehaviour {
 				target.ChangeHealth (-damage);
 				collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 				//stun the reciepient for a short amount of time
-				Rigidbody2D enemy = collider.GetComponent<Rigidbody2D>();
-				this.Stun(enemy);
+				GameObject enemy = collider.gameObject;
+				if(enemy.tag != "Player"){
+					EnemyFullAI script = enemy.GetComponent<EnemyFullAI>();
+					script.Stun (enemy);
+				}
 			}
 
 			if (this.destroyOnTouch) {
