@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21271610}
   - 50: {fileID: 5079940}
   - 61: {fileID: 6186202}
-  - 114: {fileID: 11496056}
   - 95: {fileID: 9593558}
   - 114: {fileID: 11401730}
   - 114: {fileID: 11427952}
@@ -94,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  deathSound: {fileID: 0}
 --- !u!114 &11404386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,18 +148,6 @@ MonoBehaviour:
     isCoward: 0
     cowardDistance: 2
     maxRunDistance: 6
---- !u!114 &11496056
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179610}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aggro: 10
 --- !u!212 &21271610
 SpriteRenderer:
   m_ObjectHideFlags: 1

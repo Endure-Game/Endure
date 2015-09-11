@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21214182}
   - 50: {fileID: 5088752}
   - 61: {fileID: 6173414}
-  - 114: {fileID: 11448466}
   - 95: {fileID: 9541416}
   - 114: {fileID: 11474492}
   - 114: {fileID: 11402316}
@@ -107,18 +106,6 @@ MonoBehaviour:
     isCoward: 1
     cowardDistance: 2
     maxRunDistance: 2
---- !u!114 &11448466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63ad0d469db0194dbb16c366e748250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aggro: 10
 --- !u!114 &11461862
 MonoBehaviour:
   m_ObjectHideFlags: 1
