@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  deathSound: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
 --- !u!114 &11491390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +288,10 @@ Prefab:
       propertyPath: drops.Array.data[1].item
       value: 
       objectReference: {fileID: 195262, guid: c12b342d624cc44e48a89f4e38d26156, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195750}

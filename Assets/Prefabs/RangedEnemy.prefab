@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  deathSound: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
 --- !u!212 &21214182
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -271,6 +272,26 @@ Prefab:
       propertyPath: coward.maxRunDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
+    - target: {fileID: 0}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112292}
