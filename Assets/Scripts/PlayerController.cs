@@ -74,9 +74,10 @@ public class PlayerController : MonoBehaviour {
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 		this.toolUser = this.GetComponent<ToolUser> ();
 
-		this.sound.sword = gameObject.AddComponent<AudioSource> ();
-		this.sound.sword.clip = Resources.Load ("Sounds/Swoosh1") as AudioClip;
-		print (this.sound.sword);
+
+		this.sword = gameObject.AddComponent<AudioSource> ();
+		this.sword.clip = Resources.Load ("Sounds/SwordSwing1") as AudioClip;
+		print (this.sword);
 
 		// Give player starting items
 		//this.inventory.Add("sword");
