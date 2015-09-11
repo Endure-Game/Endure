@@ -19,7 +19,7 @@ public abstract class BiomeTile : MonoBehaviour
 		public GameObject enemy;
 	}
 
-	void Awake() {
+	void Start() {
 		this.tileMap = this.GetComponent<RoomManager>().tileMap;
 		this.height = this.tileMap.GetLength(0);
 		this.width = this.tileMap.GetLength(1);
