@@ -109,7 +109,7 @@ public class HUDController : MonoBehaviour {
 				icon.AddComponent<Image> ().sprite = item.sprite;
 				var rectTransform = icon.GetComponent<RectTransform> ();
 				icon.transform.SetParent(this.inventory.transform);
-				float x = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + i * rectTransform.rect.width;
+				float x = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + i * rectTransform.rect.width + 40;
 				float y = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rectTransform.rect.width / 2;
 				icon.transform.position = new Vector3 (x, y, 0);
 
@@ -121,6 +121,7 @@ public class HUDController : MonoBehaviour {
 				text.text = "" + i;
 				text.font = this.font;
 				text.fontSize = 32;
+				number.AddComponent<Outline>();
 
 				number.transform.SetParent (icon.transform);
 				number.transform.position = new Vector3 (x + 4, y - 4, 0);
@@ -134,7 +135,7 @@ public class HUDController : MonoBehaviour {
 			border.transform.SetParent (this.inventory.transform);
 			var rt = border.GetComponent<RectTransform> ();
 
-			var selX = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width;
+			var selX = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width  + 40;
 			var selY = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rt.rect.height / 2;
 
 			border.transform.position = new Vector3 (selX, selY, 0);
@@ -172,10 +173,12 @@ public class HUDController : MonoBehaviour {
 		float yCount = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - iconWidth * 2 + 40;
 
 		var arrowCount = new GameObject();
+
 		var arrowNumber = arrowCount.AddComponent<Text> ();
 		arrowNumber.text = "x" + PlayerController.instance.arrows;
 		arrowNumber.font = this.font;
 		arrowNumber.fontSize = 32;
+		arrowCount.AddComponent<Outline>();
 		var arrowSprite = new GameObject();
 		arrowSprite.AddComponent<Image> ().sprite = this.arrow;
 		arrowSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
@@ -185,11 +188,11 @@ public class HUDController : MonoBehaviour {
 		arrowCount.transform.position = new Vector3 (xCount, yCount, 0f);
 
 		var rifleCount = new GameObject ();
-		//rifleCount.AddComponent<Image> ().sprite = this.bullet;
 		var rifleNumber = rifleCount.AddComponent<Text> ();
 		rifleNumber.text = "x" + PlayerController.instance.bullets;
 		rifleNumber.font = this.font;
 		rifleNumber.fontSize = 32;
+		rifleCount.AddComponent<Outline>();
 		var rifleSprite = new GameObject();
 		rifleSprite.AddComponent<Image> ().sprite = this.bullet;
 		rifleSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
