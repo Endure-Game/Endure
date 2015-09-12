@@ -333,6 +333,66 @@ public class RoomManager : MonoBehaviour {
 		if (!this.startScreen) {
 			this.StartTile.PlaceStartTiles();
 		}
+			
+		//create building
+		foreach (Region region in this.regions) {
+			if(region.biome.getBiomeNumber() == 0){
+				int buildY = region.focusY;
+				int buildX = region.focusX;
+				Tile currentTile = this.tileMap[buildX, buildY];
+				bool notInThisBiome = false;
+				print (currentTile.blocking);
+				print (currentTile.x + "FUCK" + currentTile.y);
+				
+				while (currentTile.blocking){
+					if(buildY - 1 > 0){
+						print("INSIDE THE WHILE LOOP");
+						buildY -= 1;
+						currentTile = this.tileMap[buildX, buildY];
+					}else{
+						notInThisBiome = true;
+					}
+				}
+				
+				if(notInThisBiome == false){
+					Destroy(currentTile.item);
+					this.PlaceItem(buildingTiles[1], buildX, buildY);
+
+					Tile northTile = this.tileMap[buildX, buildY + 2];
+					Destroy(northTile.item);
+					this.PlaceItem(buildingTiles[3],northTile.x, northTile.y);
+
+					Tile northEastTile = this.tileMap[buildX + 1, buildY + 2];
+					Destroy(northEastTile.item);
+					this.PlaceItem(buildingTiles[4], northEastTile.x, northEastTile.y);
+
+					Tile eastTile = this.tileMap[buildX + 1, buildY + 1];
+					Destroy(eastTile.item);
+					this.PlaceItem(buildingTiles[0], eastTile.x, eastTile.y);
+
+					Tile southEastTile = this.tileMap[buildX + 1, buildY];
+					Destroy(southEastTile.item);
+					this.PlaceItem(buildingTiles[6], southEastTile.x, southEastTile.y);
+
+					Tile middleTile = this.tileMap[buildX, buildY + 1];
+					Destroy(middleTile.item);
+					this.PlaceItem(buildingTiles[2], middleTile.x, middleTile.y);
+
+					Tile southWestTile = tileMap[buildX - 1, buildY];
+					Destroy(southWestTile.item);
+					this.PlaceItem(buildingTiles[7], southWestTile.x, southWestTile.y);
+
+					Tile westTile = tileMap[buildX - 1, buildY + 1];
+					Destroy(westTile.item);
+					this.PlaceItem(buildingTiles[8], westTile.x, westTile.y);
+
+					Tile northWestTile = tileMap[buildX - 1, buildY + 2];
+					Destroy(northWestTile.item);
+					this.PlaceItem(buildingTiles[5], northWestTile.x, northWestTile.y);
+				}
+			}
+		}
+	
 
 		// Randomly distribute items throughout the game
 		if (this.startScreen) {
@@ -532,17 +592,6 @@ public class RoomManager : MonoBehaviour {
 		this.regions[closestIndex].tiles.Add(tileMap[x, y]);
 	}
 
-	private void CreateBuilding () {
-//		Tile NE = buildingTiles[4];
-//		Tile E = buildingTiles[0];
-//		Tile SE = buildingTiles[6];
-//		Tile Door = buildingTiles[1];
-//		Tile SW = buildingTiles[7];
-//		Tile W = buildingTiles[8];
-//		Tile NW = buildingTiles[5];
-//		Tile N = buildingTiles[3];
-//		Tile Middle = buildingTiles[2];
 
-//		PlaceItem(bulidingTile[0], x, y)
-	}
+
 }

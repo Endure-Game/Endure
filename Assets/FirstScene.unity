@@ -426,6 +426,16 @@ MonoBehaviour:
   biomeNumber: 16
   outerWallTiles:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
+  buildingTiles:
+  - {fileID: 177790, guid: 9369d0f8477a346e29d61b938ad5783e, type: 2}
+  - {fileID: 152428, guid: d1db876d3916441b19ac95537288db46, type: 2}
+  - {fileID: 143712, guid: fac094f6563f042be889f98eaf1ea358, type: 2}
+  - {fileID: 113812, guid: 861a97bcc55bb4e05843fadee43aa4ee, type: 2}
+  - {fileID: 154240, guid: 8fec7cbe622284b80946ffd310220082, type: 2}
+  - {fileID: 143504, guid: b4b04079f9bd64e7eb677eee35e5f36f, type: 2}
+  - {fileID: 169340, guid: 23771a1b43ed44c5bb773f49984e537b, type: 2}
+  - {fileID: 149216, guid: 15422bb541685488ca1a717412a99db6, type: 2}
+  - {fileID: 143898, guid: 577390f8a8e9e44dab139f730a6c51e5, type: 2}
   coins:
   - {fileID: 141174, guid: 2be921a7b0e264bd09ec756fb9331bf0, type: 2}
   blocks:
