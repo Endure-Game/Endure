@@ -29,6 +29,7 @@ public class RoomManager : MonoBehaviour {
 	public List<Region> regions;
 
 	public GameObject[] outerWallTiles;
+	public GameObject[] buildingTiles;
 
 	//need game objects for collectible items obstacles etc
 	public GameObject[] coins;
@@ -529,5 +530,19 @@ public class RoomManager : MonoBehaviour {
 		Region closest = this.regions[closestIndex];
 		tileMap[x, y] = new Tile (x, y, closestIndex, closest.biome.getBiomeNumber(), false, closest.altitude);
 		this.regions[closestIndex].tiles.Add(tileMap[x, y]);
+	}
+
+	private void CreateBuilding () {
+//		Tile NE = buildingTiles[4];
+//		Tile E = buildingTiles[0];
+//		Tile SE = buildingTiles[6];
+//		Tile Door = buildingTiles[1];
+//		Tile SW = buildingTiles[7];
+//		Tile W = buildingTiles[8];
+//		Tile NW = buildingTiles[5];
+//		Tile N = buildingTiles[3];
+//		Tile Middle = buildingTiles[2];
+
+//		PlaceItem(bulidingTile[0], x, y)
 	}
 }
