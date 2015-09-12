@@ -430,6 +430,7 @@ MonoBehaviour:
   - {fileID: 141174, guid: 2be921a7b0e264bd09ec756fb9331bf0, type: 2}
   blocks:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
+  startScreen: 0
 --- !u!114 &373454790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,7 +1105,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
