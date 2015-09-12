@@ -55,7 +55,9 @@ public class Ouch : MonoBehaviour {
 
 				//Destroy (this.gameObject);
 				TrailRenderer trail = this.GetComponent<TrailRenderer>();
-				trail.enabled = false;
+				if(trail != null) {
+					trail.enabled = false;
+				}
 				//this.GetComponent<Renderer>().enabled = false;
 				this.transform.position = Vector3.one * 9999999f;
 				Destroy(gameObject, this.hit.clip.length);
