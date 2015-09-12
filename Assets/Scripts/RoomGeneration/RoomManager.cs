@@ -34,6 +34,8 @@ public class RoomManager : MonoBehaviour {
 	public GameObject[] coins;
 	public GameObject[] blocks;
 
+	public bool startScreen = false;
+
 	private GameObject[,] rooms;
 
 	void Awake() {
@@ -43,10 +45,13 @@ public class RoomManager : MonoBehaviour {
 	private int timer = 0;
 	void Update() {
 		// spawn enemies
-		timer++;
-		if (timer % this.enemySpawnInterval == 0) {
-			this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
-			print ("enemySpawned");
+
+		if (!startScreen) {
+			timer++;
+			if (timer % this.enemySpawnInterval == 0) {
+				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+				print ("enemySpawned");
+			}
 		}
 	}
 
@@ -235,57 +240,59 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
-		print ("Create outter rock wall " + (Time.realtimeSinceStartup - startTime));
+		print ("Create outer rock wall " + (Time.realtimeSinceStartup - startTime));
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
-		List<Vector2> randomPoints = new List<Vector2>();
-		foreach (Region region in this.regions) {
-			randomPoints.Add(new Vector2(region.focusX, region.focusY));
-		}
-
-		List <int[]> pointsDist = new List<int[]>();
-		Vector2 start = new Vector2 (16f, 16f);
-		Vector2 exit = new Vector2 (255f, 255f);
-		randomPoints.Insert (0, start);
-		randomPoints.Add (exit);
-
-
-		for (int i = 0; i < randomPoints.Count; i++) {
-			int pointX = (int)randomPoints[i].x;
-			int pointY = (int)randomPoints[i].y;
-			float dist = Math.Abs(pointX - end[0]) + Math.Abs(pointY - end[1]);
-			int[] tuple = new int[2] {i, (int)dist};
-			pointsDist.Add(tuple);
-		}
-
-
-		//first item is index of randomPoints the second is the distance
-		pointsDist.Sort ((a, b) => a [1].CompareTo (b [1]));
-
-
-
-		for (int i = 0; i < pointsDist.Count - 1 ; i++) {
-			int index1 = pointsDist[i][0];
-			int index2 = pointsDist[i + 1][0];
-		    float[] current = new float[2] {randomPoints[index1].x, randomPoints[index1].y};
-		    float[] next = new float[2] {randomPoints[index2].x, randomPoints[index2].y};
-			float xDiff = next[0] - current[0];
-			float yDiff = next[1] - current[1];
-			float moveX;
-			float moveY;
-
-			if(Mathf.Abs(xDiff) > Mathf.Abs(yDiff)){
-				moveX = Mathf.Sign(xDiff);
-				moveY = yDiff/Math.Abs(xDiff);
-			}else{
-				moveY = Mathf.Sign(yDiff);
-				moveX = xDiff/Math.Abs (yDiff);
+		if (!this.startScreen) {
+			List<Vector2> randomPoints = new List<Vector2>();
+			foreach (Region region in this.regions) {
+				randomPoints.Add(new Vector2(region.focusX, region.focusY));
 			}
-			placePath(current, next, moveX, moveY);
 
+			List <int[]> pointsDist = new List<int[]>();
+			Vector2 start = new Vector2 (16f, 16f);
+			Vector2 exit = new Vector2 (255f, 255f);
+			randomPoints.Insert (0, start);
+			randomPoints.Add (exit);
+
+
+			for (int i = 0; i < randomPoints.Count; i++) {
+				int pointX = (int)randomPoints[i].x;
+				int pointY = (int)randomPoints[i].y;
+				float dist = Math.Abs(pointX - end[0]) + Math.Abs(pointY - end[1]);
+				int[] tuple = new int[2] {i, (int)dist};
+				pointsDist.Add(tuple);
+			}
+
+
+			//first item is index of randomPoints the second is the distance
+			pointsDist.Sort ((a, b) => a [1].CompareTo (b [1]));
+
+
+
+			for (int i = 0; i < pointsDist.Count - 1 ; i++) {
+				int index1 = pointsDist[i][0];
+				int index2 = pointsDist[i + 1][0];
+			    float[] current = new float[2] {randomPoints[index1].x, randomPoints[index1].y};
+			    float[] next = new float[2] {randomPoints[index2].x, randomPoints[index2].y};
+				float xDiff = next[0] - current[0];
+				float yDiff = next[1] - current[1];
+				float moveX;
+				float moveY;
+
+				if(Mathf.Abs(xDiff) > Mathf.Abs(yDiff)){
+					moveX = Mathf.Sign(xDiff);
+					moveY = yDiff/Math.Abs(xDiff);
+				}else{
+					moveY = Mathf.Sign(yDiff);
+					moveX = xDiff/Math.Abs (yDiff);
+				}
+				placePath(current, next, moveX, moveY);
+
+			}
+			print ("Create path " + (Time.realtimeSinceStartup - startTime));
 		}
-		print ("Create path " + (Time.realtimeSinceStartup - startTime));
 
 		// Create climb points
 		/*for (int i = 0; i < this.regions.Count; i++) {
@@ -322,20 +329,26 @@ public class RoomManager : MonoBehaviour {
 		}
 		print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
 
-		this.StartTile.PlaceStartTiles();
+		if (!this.startScreen) {
+			this.StartTile.PlaceStartTiles();
+		}
 
 		// Randomly distribute items throughout the game
-		LayoutObjectAtRandom (coins, coinCount.minimum, coinCount.maximum);
+		if (this.startScreen) {
+			blockingCount.minimum = 2;
+			blockingCount.maximum = 5;
+		}
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
 		print ("Random Objects layed out" + (Time.realtimeSinceStartup - startTime));
 
 		// Spawn starting enemies
-		for (int i = 0; i < 100; i++) {
-			Region region = this.regions[Random.Range(0, this.regions.Count)];
-			region.spawnEnemy();
+		if (!this.startScreen) {
+			for (int i = 0; i < 100; i++) {
+				Region region = this.regions[Random.Range(0, this.regions.Count)];
+				region.spawnEnemy();
+				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));
+			}
 		}
-		print ("Create blocking tiles " + (Time.realtimeSinceStartup - startTime));
-
 	}
 
 	void placePath (float[] current, float[] next, float moveX, float moveY){

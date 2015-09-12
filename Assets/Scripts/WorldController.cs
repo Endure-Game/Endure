@@ -41,7 +41,9 @@ public class WorldController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		this.TrackPlayer ();
+		if (player != null) {
+			this.TrackPlayer ();
+		}
 	}
 
 	void TrackPlayer () {
