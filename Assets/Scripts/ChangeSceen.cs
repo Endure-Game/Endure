@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ChangeSceen : MonoBehaviour {
 
@@ -12,4 +13,9 @@ public class ChangeSceen : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
+
+
+
 }
