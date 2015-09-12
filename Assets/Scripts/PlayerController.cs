@@ -51,12 +51,6 @@ public class PlayerController : MonoBehaviour {
 	};
 
 
-	private AudioSource sword;
-	/*private class Sound {
-		public AudioSource sword;
-	}
-	private Sound sound;*/
-
 	public List<InventoryItem> inventory = new List<InventoryItem> ();
 	private int selectedInventory = 0;
 
@@ -76,11 +70,6 @@ public class PlayerController : MonoBehaviour {
 		this.meleeAttacker = this.GetComponent<MeleeAttacker> ();
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 		this.toolUser = this.GetComponent<ToolUser> ();
-
-
-		this.sword = gameObject.AddComponent<AudioSource> ();
-		this.sword.clip = Resources.Load ("Sounds/SwordSwing1") as AudioClip;
-		print (this.sword);
 
 		// Give player starting items
 		//this.inventory.Add("sword");
@@ -179,7 +168,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
-					this.sword.Play();
+					Sounds.instance.Sword ();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
@@ -227,7 +216,7 @@ public class PlayerController : MonoBehaviour {
 					this.animator.SetTrigger ("Sword");
 					int direction = this.animator.GetInteger ("Direction");
 
-					this.sword.Play();
+					Sounds.instance.Sword ();
 					if (direction == 0) {
 						this.meleeAttacker.AttackSouth ();
 					} else if (direction == 1) {
@@ -240,6 +229,7 @@ public class PlayerController : MonoBehaviour {
 				} else if (this.toolUser.toolType.Length > 0) {
 					int direction = this.animator.GetInteger ("Direction");
 					this.animator.SetBool ("Idle", true);
+					Sounds.instance.Swoosh ();
 					if (this.inventory[selectedInventory].name == "Axe") {
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {

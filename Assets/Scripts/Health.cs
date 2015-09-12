@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 	public int maxHealth = 10;
-	public AudioClip deathSound;
+	//public AudioClip deathSound;
+
+
+	public Sounds.DeathSound deathSound = Sounds.DeathSound.wihelmScream;
 
 	private GameObject healthChangeDisplay;
-	private AudioSource death;
+	//private AudioSource death;
 
 	private int currentHealth;
 	public int CurrentHealth {
@@ -30,8 +33,8 @@ public class Health : MonoBehaviour {
 	void Start () {
 		this.currentHealth = this.maxHealth;
 		this.healthChangeDisplay = Resources.Load ("HealthChange", typeof(GameObject)) as GameObject;
-		this.death = gameObject.AddComponent<AudioSource> ();
-		this.death.clip = this.deathSound;
+		//this.death = gameObject.AddComponent<AudioSource> ();
+		//this.death.clip = this.deathSound;
 	}
 
 	public void ChangeHealth (int delta) {
@@ -57,7 +60,7 @@ public class Health : MonoBehaviour {
 
 	void Die ()
 	{
-		this.death.Play ();
+		//this.death.Play ();
 		if (this.gameObject == PlayerController.instance.gameObject) {
 			Application.LoadLevel (2);
 		}
@@ -66,12 +69,9 @@ public class Health : MonoBehaviour {
 		if (this.GetComponent<Drops>() != null) {
 			this.GetComponent<Drops>().DropItem();
 		}
-		//this.GetComponent<Renderer>().enabled = false;
-		if (this.tag != "Player") {
-			this.transform.position = Vector3.one * 9999999f;
-		}
-		Destroy(this.gameObject, this.death.clip.length);
-		//Destroy (this.gameObject);
+
+		Sounds.instance.PlayDeathSound (deathSound);
+		Destroy (this.gameObject);
 
 	}
 }

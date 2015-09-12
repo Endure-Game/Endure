@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11401558}
   - 114: {fileID: 11491390}
   - 61: {fileID: 6163806}
+  - 114: {fileID: 11417524}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -110,6 +111,17 @@ MonoBehaviour:
   knockback: .5
   range: .600000024
   delay: 1
+--- !u!114 &11417524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dff5a7f8f817304bb9134eed7fb62c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11433380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  deathSound: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
+  deathSound: 0
 --- !u!114 &11491390
 MonoBehaviour:
   m_ObjectHideFlags: 1
