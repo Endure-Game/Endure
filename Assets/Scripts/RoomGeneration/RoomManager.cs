@@ -45,10 +45,13 @@ public class RoomManager : MonoBehaviour {
 	private int timer = 0;
 	void Update() {
 		// spawn enemies
-		timer++;
-		if (timer % this.enemySpawnInterval == 0) {
-			this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
-			print ("enemySpawned");
+
+		if (!startScreen) {
+			timer++;
+			if (timer % this.enemySpawnInterval == 0) {
+				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+				print ("enemySpawned");
+			}
 		}
 	}
 
@@ -339,11 +342,13 @@ public class RoomManager : MonoBehaviour {
 		print ("Random Objects layed out" + (Time.realtimeSinceStartup - startTime));
 
 		// Spawn starting enemies
-		for (int i = 0; i < 100; i++) {
-			Region region = this.regions[Random.Range(0, this.regions.Count)];
-			region.spawnEnemy();
+		if (!this.startScreen) {
+			for (int i = 0; i < 100; i++) {
+				Region region = this.regions[Random.Range(0, this.regions.Count)];
+				region.spawnEnemy();
+				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));
+			}
 		}
-		print ("Create blocking tiles " + (Time.realtimeSinceStartup - startTime));
 	}
 
 	void placePath (float[] current, float[] next, float moveX, float moveY){
