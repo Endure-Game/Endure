@@ -67,7 +67,9 @@ public class Health : MonoBehaviour {
 			this.GetComponent<Drops>().DropItem();
 		}
 		//this.GetComponent<Renderer>().enabled = false;
-		this.transform.position = Vector3.one * 9999999f;
+		if (this.tag != "Player") {
+			this.transform.position = Vector3.one * 9999999f;
+		}
 		Destroy(this.gameObject, this.death.clip.length);
 		//Destroy (this.gameObject);
 
