@@ -4,8 +4,12 @@ using System.Collections;
 public class HandleShovel : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
 
+	private AudioSource shovelHit;
+
+	void Start () {
+		this.shovelHit = gameObject.AddComponent<AudioSource> ();
+		this.shovelHit.clip = Resources.Load ("Sounds/Shovel1A") as AudioClip;
 	}
 
 	// Update is called once per frame
@@ -15,7 +19,7 @@ public class HandleShovel : MonoBehaviour {
 
   void OnTriggerEnter2D (Collider2D collider) {
     if (collider.tag == "Shovel") {
-
+	  this.shovelHit.Play();
       RoomManager roomManager = WorldController.instance.GetComponent<RoomManager>();
       GameObject hole = roomManager.GetComponent<ElevationTile>().hole;
       roomManager.PlaceItem(hole,
@@ -25,7 +29,9 @@ public class HandleShovel : MonoBehaviour {
       if (this.GetComponent<Drops>() != null) {
         this.GetComponent<Drops>().DropItem();
       }
-      Destroy (this.gameObject);
-    }
-  }
+      //Destroy (this.gameObject);
+	  this.transform.position = Vector3.one * 9999999f;
+      Destroy(gameObject, this.shovelHit.clip.length);
+	  }
+	}
 }
