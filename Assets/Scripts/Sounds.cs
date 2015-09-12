@@ -17,6 +17,7 @@ public class Sounds : MonoBehaviour {
 	private AudioSource wilhelmScream;
 	private AudioSource swoosh;
 	private AudioSource pickup;
+	private AudioSource hit;
 	//public enum AudioSource {axeHit, shovelHit, sword, death1};
 	
 	// Use this for initialization
@@ -27,6 +28,7 @@ public class Sounds : MonoBehaviour {
 		this.wilhelmScream = gameObject.AddComponent<AudioSource> ();
 		this.swoosh = gameObject.AddComponent<AudioSource> ();
 		this.pickup = gameObject.AddComponent<AudioSource> ();
+		this.hit = gameObject.AddComponent<AudioSource> ();
 
 		this.axeHit.clip = Resources.Load ("Sounds/Chop1") as AudioClip;
 		this.shovelHit.clip = Resources.Load ("Sounds/Shovel1A") as AudioClip;
@@ -34,6 +36,7 @@ public class Sounds : MonoBehaviour {
 		this.wilhelmScream.clip = Resources.Load ("Sounds/WilhelmScream") as AudioClip;
 		this.swoosh.clip = Resources.Load ("Sounds/Swoosh2") as AudioClip;
 		this.pickup.clip = Resources.Load ("Sounds/Pickup1") as AudioClip;
+		this.hit.clip = Resources.Load ("Sounds/Hurt2") as AudioClip;
 	}
 	
 	// Update is called once per frame
@@ -56,20 +59,26 @@ public class Sounds : MonoBehaviour {
 	public void Sword(){
 		this.sword.Play ();
 	}
+	public void WihelmScream(){
+		this.wilhelmScream.Play ();
+	}
 	public void Swoosh(){
 		this.swoosh.Play ();
 	}
 	public void Pickup(){
 		this.pickup.Play ();
 	}
+	public void Hit(){
+		this.hit.Play ();
+	}
 	public void PlayDeathSound(DeathSound play){
 		switch (play)
 		{
 		case DeathSound.wihelmScream:
-			this.wilhelmScream.Play ();
+			this.WihelmScream();
 			break;
 		default:
-			this.wilhelmScream.Play ();
+			this.WihelmScream();
 			break;
 		}
 	}
