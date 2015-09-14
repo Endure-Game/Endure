@@ -355,16 +355,16 @@ public class PlayerController : MonoBehaviour {
 		switch (name) {
 
 		case "sneakers":
-			this.speed *= 2;
+			this.speed *= 1.3f;
 			this.upgrades.Add(name);
 			infoText = "Speed Boost";
 			break;
 
 		case "painKillers":
-			this.Health.maxHealth += 20;
-			this.Health.ChangeHealth(20);
+			this.Health.maxHealth += 5;
+			this.Health.ChangeHealth(this.Health.maxHealth);
 			this.upgrades.Add(name);
-			infoText = "+10 Max Health";
+			infoText = "+5 Max Health";
 			break;
 
 		default:

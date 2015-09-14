@@ -1741,7 +1741,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerSouthLockpick
-  m_Speed: 1
+  m_Speed: .800000012
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110170562}
@@ -2146,7 +2146,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerSouthShovel
-  m_Speed: 1
+  m_Speed: .800000012
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110121766}
@@ -2628,7 +2628,7 @@ AnimatorStateMachine:
     m_Position: {x: 228, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110251250}
-    m_Position: {x: 12, y: 156, z: 0}
+    m_Position: {x: 0, y: 156, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110272016}
     m_Position: {x: -360, y: 48, z: 0}

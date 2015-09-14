@@ -23,6 +23,7 @@ public class SnowTile : BiomeTile
 
 		base.RandomBlocking(region);
 
+
 		// Place ice tiles
 		for (var num = 0; num < iceBloomNum; num++) {
 			Tile iceTile = region[Random.Range(0, region.Count)];
