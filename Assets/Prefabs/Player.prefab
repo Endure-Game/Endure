@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  drops: []
+  deathSound: 0
 --- !u!114 &11439364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +151,7 @@ MonoBehaviour:
   speed: 4
   bullets: 0
   arrows: 0
+  itemAnimation: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
 --- !u!114 &11460858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,8 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   knockback: .5
-  delay: .5
-  projectile: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
+  arrowDelay: .5
+  bulletDelay: 1.5
+  arrow: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!114 &11471804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolType: 
   range: .600000024
+  delay: 1
 --- !u!212 &21222764
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -235,6 +239,10 @@ Prefab:
       propertyPath: m_UsedByEffector
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: itemAnimation
+      value: 
+      objectReference: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136586}

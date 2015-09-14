@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 	public int arrows = 0;
 	public Region currentRegion;
 
+	public GameObject itemAnimation;
+
 	private int counter = 0;
 	private Rigidbody2D rb2d;
 	private Animator animator;
@@ -349,23 +351,29 @@ public class PlayerController : MonoBehaviour {
 
 	public void AddUpgrade (string name) {
 
+		string infoText = "";
 		switch (name) {
 
 		case "sneakers":
 			this.speed *= 2;
 			this.upgrades.Add(name);
+			infoText = "Speed Boost";
 			break;
 
 		case "painKillers":
 			this.Health.maxHealth += 20;
 			this.Health.ChangeHealth(20);
 			this.upgrades.Add(name);
+			infoText = "+10 Max Health";
 			break;
 
 		default:
 			print ("Error: not a valid upgrade name");
 			break;
 		}
+
+		GameObject itemInfo = Instantiate (itemAnimation, this.transform.position, Quaternion.identity) as GameObject;
+		itemInfo.GetComponent<ItemAnimation> ().infoText = infoText;
 	}
 
 	//PUSHES THINGS OUT OF THE WAY
