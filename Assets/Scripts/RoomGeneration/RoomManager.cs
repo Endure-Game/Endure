@@ -353,7 +353,7 @@ public class RoomManager : MonoBehaviour {
 				}
 
 				if(notInThisBiome == false && buildings <= buildingCount){
-					print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
+//					print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
 					buildings ++;
 					currentTile = this.tileMap[buildX, buildY - 1];
 
