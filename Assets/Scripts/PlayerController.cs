@@ -186,11 +186,11 @@ public class PlayerController : MonoBehaviour {
 						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
-						//this.animator.SetTrigger ("Lockpick");
+						this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
 						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
-						//this.animator.SetTrigger ("Rope");
+						this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
@@ -236,11 +236,11 @@ public class PlayerController : MonoBehaviour {
 						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
-						//this.animator.SetTrigger ("Lockpick");
+						this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
 						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
-						//this.animator.SetTrigger ("Rope");
+						this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
