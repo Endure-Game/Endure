@@ -38,6 +38,8 @@ public class RoomManager : MonoBehaviour {
 	public bool startScreen = false;
 
 	private GameObject[,] rooms;
+	private int buildings = 0;
+	private int buildingCount;
 
 	void Awake() {
 		this.tileMap = new Tile[this.roomSide * this.columns, this.roomSide * this.rows];
@@ -335,18 +337,16 @@ public class RoomManager : MonoBehaviour {
 		}
 			
 		//create building
+		buildingCount = (int)Mathf.Round(Random.Range (0, 3));
 		foreach (Region region in this.regions) {
-			if(region.biome.getBiomeNumber() == 0){
+			if(region.biome.getBiomeNumber() == 0 || region.biome.getBiomeNumber() == 2){
 				int buildY = region.focusY;
 				int buildX = region.focusX;
 				Tile currentTile = this.tileMap[buildX, buildY];
 				bool notInThisBiome = false;
-				print (currentTile.blocking);
-				print (currentTile.x + "FUCK" + currentTile.y);
 				
 				while (currentTile.blocking){
 					if(buildY - 1 > 0){
-						print("INSIDE THE WHILE LOOP");
 						buildY -= 1;
 						currentTile = this.tileMap[buildX, buildY];
 					}else{
@@ -354,7 +354,11 @@ public class RoomManager : MonoBehaviour {
 					}
 				}
 				
-				if(notInThisBiome == false){
+				if(notInThisBiome == false && buildings <= buildingCount){
+					print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
+					buildings ++;
+					currentTile = this.tileMap[buildX, buildY - 1];
+
 					Destroy(currentTile.item);
 					this.PlaceItem(buildingTiles[1], buildX, buildY);
 
