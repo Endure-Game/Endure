@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/FirstScene.unity
   - enabled: 1
     path: Assets/DeathScreen.unity
+  - enabled: 1
+    path: Assets/Loading.unity
