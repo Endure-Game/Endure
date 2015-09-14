@@ -414,9 +414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 32
   columns: 32
-  coinCount:
-    minimum: 50
-    maximum: 200
   blockingCount:
     minimum: 50
     maximum: 200
@@ -436,8 +433,6 @@ MonoBehaviour:
   - {fileID: 169340, guid: 23771a1b43ed44c5bb773f49984e537b, type: 2}
   - {fileID: 149216, guid: 15422bb541685488ca1a717412a99db6, type: 2}
   - {fileID: 143898, guid: 577390f8a8e9e44dab139f730a6c51e5, type: 2}
-  coins:
-  - {fileID: 141174, guid: 2be921a7b0e264bd09ec756fb9331bf0, type: 2}
   blocks:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
   startScreen: 0
