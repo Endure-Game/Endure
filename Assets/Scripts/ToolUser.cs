@@ -61,16 +61,16 @@ public class ToolUser : MonoBehaviour {
 			tool.transform.position = this.gameObject.transform.position;
 
 			BoxCollider2D collider = tool.AddComponent<BoxCollider2D> ();
-			collider.isTrigger = true;
+ 			collider.isTrigger = true;
 
 			Vector2 playerSize = this.Size;
 			collider.size = playerSize;
 
 			if (horizontal) {
-				collider.size = new Vector2 (collider.size.x / 3, this.range);
+				collider.size = new Vector2 (.05f, this.range);
 				collider.transform.Translate (0, (playerSize.y / 2 + this.range / 2) * direction, 0);
 			} else {
-				collider.size = new Vector2 (this.range, collider.size.y / 3);
+				collider.size = new Vector2 (this.range, .05f);
 				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, 0, 0);
 			}
 		}

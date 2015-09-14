@@ -7,6 +7,7 @@ public class ElevationTile : MonoBehaviour
 	public GameObject[] tiles;
 	public GameObject xMarksTheSpot;
 	public GameObject hole;
+	public GameObject ropeLadder;
 
 	public void SmoothElevation(List<Tile> tiles) {
 

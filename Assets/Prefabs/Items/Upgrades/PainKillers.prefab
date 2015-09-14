@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d62de676ef44ddc9ae308045011d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: +10 Max Healt
 --- !u!212 &21210260
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -107,6 +108,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.y
       value: .800000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: infoText
+      value: +10 Max Healt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

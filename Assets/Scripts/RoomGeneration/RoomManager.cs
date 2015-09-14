@@ -18,7 +18,6 @@ public class RoomManager : MonoBehaviour {
 
 	public int rows = 32;
 	public int columns = 32;
-	public Count coinCount = new Count (4, 10);
 	public Count blockingCount = new Count (5, 20);
 	public int[] end = new int[2] {255, 255};
 	public int enemySpawnInterval = 100;
@@ -32,7 +31,6 @@ public class RoomManager : MonoBehaviour {
 	public GameObject[] buildingTiles;
 
 	//need game objects for collectible items obstacles etc
-	public GameObject[] coins;
 	public GameObject[] blocks;
 
 	public bool startScreen = false;
@@ -335,7 +333,7 @@ public class RoomManager : MonoBehaviour {
 		if (!this.startScreen) {
 			this.StartTile.PlaceStartTiles();
 		}
-			
+
 		//create building
 		buildingCount = (int)Mathf.Round(Random.Range (0, 3));
 		foreach (Region region in this.regions) {
@@ -344,7 +342,7 @@ public class RoomManager : MonoBehaviour {
 				int buildX = region.focusX;
 				Tile currentTile = this.tileMap[buildX, buildY];
 				bool notInThisBiome = false;
-				
+
 				while (currentTile.blocking){
 					if(buildY - 1 > 0){
 						buildY -= 1;
@@ -353,7 +351,7 @@ public class RoomManager : MonoBehaviour {
 						notInThisBiome = true;
 					}
 				}
-				
+
 				if(notInThisBiome == false && buildings <= buildingCount){
 					print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
 					buildings ++;
@@ -396,7 +394,7 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
-	
+
 
 		// Randomly distribute items throughout the game
 		if (this.startScreen) {

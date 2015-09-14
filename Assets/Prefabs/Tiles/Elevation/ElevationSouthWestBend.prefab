@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 484978}
   - 212: {fileID: 21202476}
   - 61: {fileID: 6151742}
+  - 114: {fileID: 11420578}
   m_Layer: 0
   m_Name: ElevationSouthWestBend
   m_TagString: Untagged
@@ -42,6 +43,17 @@ BoxCollider2D:
   m_Offset: {x: -.200000003, y: 0}
   serializedVersion: 2
   m_Size: {x: .600000024, y: 1.00787401}
+--- !u!114 &11420578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7da35be1ecb49b7a4145cdd5c6acff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21202476
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -65,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300216, guid: 10083174fbc1b46d9a06784902dbacd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
@@ -87,6 +99,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.x
       value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
