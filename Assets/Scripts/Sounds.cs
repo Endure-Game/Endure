@@ -18,6 +18,8 @@ public class Sounds : MonoBehaviour {
 	private AudioSource swoosh;
 	private AudioSource pickup;
 	private AudioSource hit;
+	private AudioSource rope;
+	private AudioSource lockpick;
 	//public enum AudioSource {axeHit, shovelHit, sword, death1};
 	
 	// Use this for initialization
@@ -29,6 +31,8 @@ public class Sounds : MonoBehaviour {
 		this.swoosh = gameObject.AddComponent<AudioSource> ();
 		this.pickup = gameObject.AddComponent<AudioSource> ();
 		this.hit = gameObject.AddComponent<AudioSource> ();
+		this.rope = gameObject.AddComponent<AudioSource> ();
+		this.lockpick = gameObject.AddComponent<AudioSource> ();
 
 		this.axeHit.clip = Resources.Load ("Sounds/Chop1") as AudioClip;
 		this.shovelHit.clip = Resources.Load ("Sounds/Shovel1A") as AudioClip;
@@ -37,6 +41,8 @@ public class Sounds : MonoBehaviour {
 		this.swoosh.clip = Resources.Load ("Sounds/Swoosh2") as AudioClip;
 		this.pickup.clip = Resources.Load ("Sounds/Pickup1") as AudioClip;
 		this.hit.clip = Resources.Load ("Sounds/Hurt2") as AudioClip;
+		this.rope.clip = Resources.Load ("Sounds/Rope") as AudioClip;
+		this.lockpick.clip = Resources.Load ("Sounds/Lockpick") as AudioClip;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +76,12 @@ public class Sounds : MonoBehaviour {
 	}
 	public void Hit(){
 		this.hit.Play ();
+	}
+	public void Rope (){
+		this.rope.Play ();
+	}
+	public void Lockpick (){
+		this.lockpick.Play ();
 	}
 	public void PlayDeathSound(DeathSound play){
 		switch (play)

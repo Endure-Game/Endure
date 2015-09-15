@@ -15,6 +15,7 @@ public class HandleRope : MonoBehaviour {
 
   void OnTriggerEnter2D (Collider2D collider) {
     if (collider.tag == "Rope") {
+	  Sounds.instance.Rope ();
 
       if (HandleRope.roped != null) {
         HandleRope.roped.GetComponent<BoxCollider2D>().enabled = true;

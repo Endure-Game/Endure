@@ -19,6 +19,8 @@ public class HandleLockpick : MonoBehaviour {
   void OnTriggerEnter2D (Collider2D collider) {
     if (collider.tag == "Lockpick") {
 
+			Sounds.instance.Lockpick();
+
 			GameObject openDoor = roomManager.buildingTiles[9];
 			roomManager.PlaceItem(openDoor, (int)(this.transform.position.x + 15.5f), (int)(this.transform.position.y + 15.5f));
 
