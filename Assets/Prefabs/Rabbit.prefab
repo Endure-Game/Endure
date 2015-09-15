@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  deathSound: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
+  deathSound: 3
 --- !u!114 &11463070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,8 +195,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deathSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9ba17b1ce8423ae4f8c273725ae46363, type: 3}
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104892}
