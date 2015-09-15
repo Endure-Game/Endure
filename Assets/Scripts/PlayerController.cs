@@ -367,6 +367,13 @@ public class PlayerController : MonoBehaviour {
 			infoText = "+5 Max Health";
 			break;
 
+		case "adrenaline":
+			// increase melee and ranged attack speed, but not animtion speed
+			this.meleeAttacker.speed *= 1.2f;
+			this.rangedAttacker.speed *= 1.2f;
+			infoText = "Attack Speed Boost";
+			break;
+
 		default:
 			print ("Error: not a valid upgrade name");
 			break;
