@@ -3,11 +3,11 @@ using System.Collections;
 
 public class HandleLockpick : MonoBehaviour {
 
-	private RoomManager roomManager = WorldController.instance.GetComponent<RoomManager>();
+	private RoomManager roomManager;
 
   // Use this for initialization
   void Start () {
-		print("WE HAVE ACCESS TO ROOM MANAGER");
+
   }
 
   // Update is called once per frame
@@ -20,8 +20,7 @@ public class HandleLockpick : MonoBehaviour {
 
 			Sounds.instance.Lockpick();
 
-      print (this.name);
-      if (this.name == "MagicDoor") {
+      if (this.name == "MagicDoor(Clone)") {
         GameObject openDoor = roomManager.buildingTiles[9];
         roomManager.PlaceItem(openDoor, (int)(this.transform.position.x + 15.5f), (int)(this.transform.position.y + 15.5f));
       }
