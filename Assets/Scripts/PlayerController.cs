@@ -295,7 +295,6 @@ public class PlayerController : MonoBehaviour {
 			this.rangedAttacker.damage = 0;
 			this.meleeAttacker.damage = 0;
 		}
-		print (this.selectedInventory);
 	}
 
 	//called before start
