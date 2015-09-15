@@ -417,6 +417,9 @@ MonoBehaviour:
   blockingCount:
     minimum: 50
     maximum: 200
+  chestCount:
+    minimum: 5
+    maximum: 8
   end: 2000000020000000
   enemySpawnInterval: 100
   roomSide: 8
@@ -463,7 +466,10 @@ MonoBehaviour:
   - chance: .300000012
     enemy: {fileID: 112292, guid: 4de7070b8d865fe42b264741cc057b92, type: 2}
   treasureCount:
-    minimum: 0
+    minimum: 1
+    maximum: 2
+  chestCount:
+    minimum: 1
     maximum: 2
   bloomNum: 10
   bloomSize:
@@ -496,6 +502,9 @@ MonoBehaviour:
   - chance: .100000001
     enemy: {fileID: 179610, guid: 20c2243f5307846c99465cf6006a1fc3, type: 2}
   treasureCount:
+    minimum: 0
+    maximum: 1
+  chestCount:
     minimum: 0
     maximum: 1
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
@@ -537,6 +546,9 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 3
+  chestCount:
+    minimum: 1
+    maximum: 3
   bloomNum: 30
   bloomSize:
     minimum: 12
@@ -565,6 +577,9 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 0
+  chestCount:
+    minimum: 0
+    maximum: 1
   flatGroundTile: {fileID: 143284, guid: ef9cdb414167e484bbd9f4ced03eef48, type: 2}
   bloomNum: 100
   bloomSize:
@@ -596,6 +611,9 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 4
+  chestCount:
+    minimum: 1
+    maximum: 2
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
     minimum: 10
@@ -628,6 +646,9 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 1
+  chestCount:
+    minimum: 0
+    maximum: 0
 --- !u!114 &373454796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +677,7 @@ MonoBehaviour:
   xMarksTheSpot: {fileID: 139834, guid: 7d5a22760b89043199c64edfb7e045b0, type: 2}
   hole: {fileID: 131320, guid: f10a9a990d4b74ee5a255e7a19742560, type: 2}
   ropeLadder: {fileID: 121778, guid: 235c1ca8e59d54bee8aa265cae207b2b, type: 2}
+  chest: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
 --- !u!114 &373454797
 MonoBehaviour:
   m_ObjectHideFlags: 0

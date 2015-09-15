@@ -18,7 +18,8 @@ public class RoomManager : MonoBehaviour {
 
 	public int rows = 32;
 	public int columns = 32;
-	public Count blockingCount = new Count (5, 20);
+	public Count blockingCount = new Count (15, 25);
+	public Count chestCount = new Count (5, 8);
 	public int[] end = new int[2] {255, 255};
 	public int enemySpawnInterval = 100;
 
