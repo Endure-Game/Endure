@@ -183,6 +183,7 @@ public class PlayerController : MonoBehaviour {
 				} else if (this.toolUser.toolType.Length > 0) {
 					int direction = this.animator.GetInteger ("Direction");
 					if (this.inventory[selectedInventory].name == "Axe") {
+						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
 						//this.animator.SetTrigger ("Lockpick");
@@ -231,8 +232,8 @@ public class PlayerController : MonoBehaviour {
 				} else if (this.toolUser.toolType.Length > 0) {
 					int direction = this.animator.GetInteger ("Direction");
 					this.animator.SetBool ("Idle", true);
-					Sounds.instance.Swoosh ();
 					if (this.inventory[selectedInventory].name == "Axe") {
+						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
 						//this.animator.SetTrigger ("Lockpick");
