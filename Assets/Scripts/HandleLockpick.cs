@@ -18,7 +18,6 @@ public class HandleLockpick : MonoBehaviour {
 
 			Sounds.instance.Lockpick();
 
-      print ("name " + this.name);
       if (this.name == "MagicDoor(Clone)") {
         var roomManager = WorldController.instance.GetComponent<RoomManager>();
         GameObject openDoor = roomManager.buildingTiles[9];
