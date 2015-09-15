@@ -29,6 +29,8 @@ public class HUDController : MonoBehaviour {
 	private Health playerHealth;
 	private int startingMaxHealth;
 
+	public Text pauseText;
+
 	private Vector2 resolution;
 
 	private bool paused = false;
@@ -76,8 +78,11 @@ public class HUDController : MonoBehaviour {
 
 			if (this.paused) {
 				Time.timeScale = 0;
+				this.pauseText.text = "PAUSED [ESC]";
+
 			} else {
 				Time.timeScale = 1;
+				this.pauseText.text = "";
 			}
 		}
 

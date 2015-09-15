@@ -123,6 +123,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: drops.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Size.x
       value: .800000012
       objectReference: {fileID: 0}
@@ -152,6 +156,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[5].item
+      value: 
+      objectReference: {fileID: 128680, guid: 20c0d728f39c54ab380c9f98b146d95e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[5].chance
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

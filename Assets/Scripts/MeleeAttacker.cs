@@ -19,6 +19,18 @@ public class MeleeAttacker : MonoBehaviour {
 		}
 	}
 
+	private float factor = 1f;
+	public float speed {
+		get {
+			return factor;
+		}
+
+		set {
+			factor = value;
+			this.delay /= factor;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -29,7 +41,7 @@ public class MeleeAttacker : MonoBehaviour {
 
 		if (this.weapon != null) {
 			this.elapsed += Time.deltaTime;
-			if (this.elapsed > 0.1f) {
+			if (this.elapsed > .1f) {
 				Destroy (this.weapon);
 				this.weapon = null;
 			}

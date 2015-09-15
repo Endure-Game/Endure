@@ -186,11 +186,11 @@ public class PlayerController : MonoBehaviour {
 						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
-						//this.animator.SetTrigger ("Lockpick");
+						this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
 						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
-						//this.animator.SetTrigger ("Rope");
+						this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
@@ -236,11 +236,11 @@ public class PlayerController : MonoBehaviour {
 						Sounds.instance.Swoosh ();
 						this.animator.SetTrigger ("Axe");
 					} else if (this.inventory[selectedInventory].name == "Lockpick") {
-						//this.animator.SetTrigger ("Lockpick");
+						this.animator.SetTrigger ("Lockpick");
 					} else if (this.inventory[selectedInventory].name == "Shovel") {
 						this.animator.SetTrigger ("Shovel");
 					} else if (this.inventory[selectedInventory].name == "Rope") {
-						//this.animator.SetTrigger ("Rope");
+						this.animator.SetTrigger ("Rope");
 					}
 
 					if (direction == 0) {
@@ -355,16 +355,23 @@ public class PlayerController : MonoBehaviour {
 		switch (name) {
 
 		case "sneakers":
-			this.speed *= 2;
+			this.speed *= 1.3f;
 			this.upgrades.Add(name);
 			infoText = "Speed Boost";
 			break;
 
 		case "painKillers":
-			this.Health.maxHealth += 20;
-			this.Health.ChangeHealth(20);
+			this.Health.maxHealth += 5;
+			this.Health.ChangeHealth(this.Health.maxHealth);
 			this.upgrades.Add(name);
-			infoText = "+10 Max Health";
+			infoText = "+5 Max Health";
+			break;
+
+		case "adrenaline":
+			// increase melee and ranged attack speed, but not animtion speed
+			this.meleeAttacker.speed *= 1.2f;
+			this.rangedAttacker.speed *= 1.2f;
+			infoText = "Attack Speed Boost";
 			break;
 
 		default:

@@ -13,6 +13,8 @@ public abstract class BiomeTile : MonoBehaviour
 	protected int width;
 	protected int height;
 
+	public RoomManager.Count chestCount = new RoomManager.Count(1, 2);
+
 	[System.Serializable]
 	public class Spawn {
 		public float chance;
@@ -106,6 +108,21 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 	}
 
+	public void placeChestTiles(List<Tile> tiles) {
+
+		int chestNum = Random.Range(this.chestCount.minimum, this.chestCount.maximum);
+		for (int i = 0; i < chestNum; i++) {
+			Tile chestTile = tiles[Random.Range(0, tiles.Count)];
+			while (chestTile.item != null) {
+				chestTile = tiles[Random.Range(0, tiles.Count)];
+			}
+
+			this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().chest,
+																								 chestTile.x,
+																								 chestTile.y);
+		}
+	}
+
 	public GameObject getEnemy() {
 
 		float total = 0f;
@@ -130,6 +147,7 @@ public abstract class BiomeTile : MonoBehaviour
 	public virtual void RandomBlocking(List<Tile> region) {
 		this.GetComponent<ElevationTile>().placeCliffTiles(region);
 		this.placeTreasureTiles(region);
+		this.placeChestTiles(region);
 	}
 
 	public abstract int getBiomeNumber();

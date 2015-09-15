@@ -8,6 +8,7 @@ public class ElevationTile : MonoBehaviour
 	public GameObject xMarksTheSpot;
 	public GameObject hole;
 	public GameObject ropeLadder;
+	public GameObject chest;
 
 	public void SmoothElevation(List<Tile> tiles) {
 
@@ -44,33 +45,32 @@ public class ElevationTile : MonoBehaviour
 			int x = tile.x;
 			int y = tile.y;
 
-			if (x > 0 && y > 0 && x < width - 1 && y < height - 1) {
-				bool lower = false;
-				List<int> walls = new List<int>();
-				for (int xDelta = -1; xDelta <= 1; xDelta++) {
-					for (int yDelta = -1; yDelta <= 1; yDelta++) {
+			bool lower = false;
+			List<int> walls = new List<int>();
+			for (int xDelta = -1; xDelta <= 1; xDelta++) {
+				for (int yDelta = -1; yDelta <= 1; yDelta++) {
 
-						if (tileMap[x + xDelta, y + yDelta].elevation > tileMap[x, y].elevation) {
-							lower = true;
-							walls.Add(xDelta + 1 + (yDelta + 1) * 3);
-						}
+					if (x + xDelta >= 0 && y + yDelta >= 0 && x + xDelta < width && y + yDelta < height &&
+							tileMap[x + xDelta, y + yDelta].elevation > tileMap[x, y].elevation) {
+						lower = true;
+						walls.Add(xDelta + 1 + (yDelta + 1) * 3);
 					}
 				}
+			}
 
-				if (lower) {
-					if (tile.path) {
-						this.GetComponent<RoomManager>().SetGroundTile(this.tiles[0], x, y);
-					} else {
-						this.GetComponent<RoomManager>().PlaceItem(this.GetWallTile(walls), x, y);
+			if (lower) {
+				if (tile.path) {
+					this.GetComponent<RoomManager>().SetGroundTile(this.tiles[0], x, y);
+				} else {
+					this.GetComponent<RoomManager>().PlaceItem(this.GetWallTile(walls), x, y);
 
-						// Plains needs a special ground tile for layering
-						if (tile.biome == this.GetComponent<PlainsTile>().getBiomeNumber()) {
-							GameObject flatSprite = this.GetComponent<PlainsTile>().getFlatGroundTile();
-							this.GetComponent<RoomManager>().SetGroundTile(flatSprite, x, y);
-						}
+					// Plains needs a special ground tile for layering
+					if (tile.biome == this.GetComponent<PlainsTile>().getBiomeNumber()) {
+						GameObject flatSprite = this.GetComponent<PlainsTile>().getFlatGroundTile();
+						this.GetComponent<RoomManager>().SetGroundTile(flatSprite, x, y);
 					}
-					tile.blocking = true;
 				}
+				tile.blocking = true;
 			}
 		}
 	}

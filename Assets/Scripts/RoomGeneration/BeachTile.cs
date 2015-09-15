@@ -16,20 +16,20 @@ public class BeachTile : BiomeTile
 
 		base.RandomBlocking(region);
 
-		for (int num = 0; num < bloomNum; num++) {
+		/*for (int num = 0; num < bloomNum; num++) {
 
 			Tile randomTile = region[Random.Range(0, region.Count)];
 			BlockingExplosion(randomTile.x,
 			                  randomTile.y,
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 			                  new TilePlacer(this.PlaceWaterTiles));
-		}
-		/*
+		}*/
+
 		this.PerlinGenerator(region,
 		                     new TilePlacer(this.PlaceWaterTiles),
-		                     .4f,
-		                     .05f);
-		                     */
+		                     .5f,
+		                     .04f);
+
 	}
 
 	public override int getBiomeNumber() {

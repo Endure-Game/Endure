@@ -18,7 +18,8 @@ public class RoomManager : MonoBehaviour {
 
 	public int rows = 32;
 	public int columns = 32;
-	public Count blockingCount = new Count (5, 20);
+	public Count blockingCount = new Count (15, 25);
+	public Count chestCount = new Count (5, 8);
 	public int[] end = new int[2] {255, 255};
 	public int enemySpawnInterval = 100;
 
@@ -234,10 +235,14 @@ public class RoomManager : MonoBehaviour {
 		print ("Create rooms " + (Time.realtimeSinceStartup - startTime));
 
 		// Create outer rock wall
-		for (int x = 0; x < this.roomSide * this.columns; x++) {
-			for (int y = 0; y < this.roomSide * this.rows; y++) {
-				if (x == 0 || x == this.roomSide * this.rows - 1 || y == 0 || y == this.roomSide * this.columns - 1) {
-					this.PlaceItem(outerWallTiles[Random.Range(0, outerWallTiles.Length)], x, y);
+		for (int x = -1; x <= this.roomSide * this.columns; x++) {
+			for (int y = -1; y <= this.roomSide * this.rows; y++) {
+				if (x == -1 || x == this.roomSide * this.rows || y == -1 || y == this.roomSide * this.columns) {
+					//this.PlaceItem(outerWallTiles[Random.Range(0, outerWallTiles.Length)], x, y);
+					GameObject wall = Instantiate (this.outerWallTiles[0],
+						           									 new Vector3(x - this.columns / 2 + .5f, y - this.rows / 2 + .5f, 0f),
+						           									 Quaternion.identity) as GameObject;
+					wall.transform.SetParent(this.rooms[0,0].transform);
 				}
 			}
 		}

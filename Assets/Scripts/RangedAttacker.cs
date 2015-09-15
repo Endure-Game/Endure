@@ -14,9 +14,25 @@ public class RangedAttacker : MonoBehaviour {
 	private bool locked = false;
 	private float elapsed;
 
+	private float arrowAnimationDelay = .25f;
+	private float rifleAnimationDelay = .14f;
+
 	public bool Locked {
 		get {
 			return locked;
+		}
+	}
+
+	private float factor = 1f;
+	public float speed {
+		get {
+			return factor;
+		}
+
+		set {
+			factor *= value;
+			this.arrowDelay /= factor;
+			this.bulletDelay /= factor;
 		}
 	}
 
@@ -55,8 +71,6 @@ public class RangedAttacker : MonoBehaviour {
 		}
 	}
 
-	private float arrowAnimationDelay = .25f;
-
 	IEnumerator fireArrow(Vector3 towards) {
 		this.elapsed = 0;
 		this.untilUnlocked = this.arrowDelay;
@@ -81,8 +95,6 @@ public class RangedAttacker : MonoBehaviour {
 		ouch.damage = this.damage;
 		ouch.destroyOnTouch = true;
 	}
-
-	private float rifleAnimationDelay = .14f;
 
 	IEnumerator fireBullet(Vector3 towards) {
 		this.elapsed = 0;
