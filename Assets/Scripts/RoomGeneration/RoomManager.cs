@@ -342,6 +342,7 @@ public class RoomManager : MonoBehaviour {
 				int buildX = region.focusX;
 				Tile currentTile = this.tileMap[buildX, buildY];
 				bool notInThisBiome = false;
+				bool isInBounds = false;
 
 				while (currentTile.blocking){
 					if(buildY - 1 > 0){
@@ -351,11 +352,32 @@ public class RoomManager : MonoBehaviour {
 						notInThisBiome = true;
 					}
 				}
+				print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
 
-				if(notInThisBiome == false && buildings <= buildingCount){
-//					print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
+				//make sure y is inbounds
+				if(buildY + 1 > 1 && buildY + 1 < columns * roomSide - 1){
+					print ("y + 1 is inbounds");
+					//check southwest corner for inbounds
+					if(buildX - 1 > 1){
+						print ("x - 1 is inbounds");
+						//check southeast corner for inbounds
+						if(buildX + 1 < rows * roomSide - 1){
+							print ("x + 1 is inbounds");
+							//check y + 3 is inbounds
+							if(buildY + 3 < columns * roomSide - 1){
+								print ("y + 3 is inbounds");
+								isInBounds = true;
+							}
+						}
+					}
+				}
+
+
+				if(notInThisBiome == false && buildings <= buildingCount && isInBounds == true){
+
 					buildings ++;
-					currentTile = this.tileMap[buildX, buildY - 1];
+					print ("ADDING BUILDING");
+					currentTile = this.tileMap[buildX, buildY + 1];
 
 					Destroy(currentTile.item);
 					this.PlaceItem(buildingTiles[1], buildX, buildY);
