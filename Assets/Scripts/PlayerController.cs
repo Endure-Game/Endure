@@ -410,7 +410,11 @@ public class PlayerController : MonoBehaviour {
 			this.rangedAttacker.speed *= 1.2f;
 			infoText = "Attack Speed Boost";
 			break;
-
+		case "bearrows":
+			//changes arrows to BEARROWS
+			GameObject bearrow = (GameObject)Resources.Load ("Ammo/Bearrow");
+			this.rangedAttacker.arrow = bearrow;
+			break;
 		default:
 			print ("Error: not a valid upgrade name");
 			break;
