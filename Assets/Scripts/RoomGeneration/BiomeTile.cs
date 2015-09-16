@@ -178,7 +178,8 @@ public abstract class BiomeTile : MonoBehaviour
 		GameObject enemy = this.getEnemy();
 
 		Tile enemyTile = tiles[Random.Range(0, tiles.Count)];
-		while (enemyTile.item != null || enemyTile.blocking) {
+		while (enemyTile.item != null || enemyTile.blocking ||
+					 this.GetComponent<RoomManager>().PlayerIsNear(enemyTile.x, enemyTile.y)) {
 			enemyTile = tiles[Random.Range(0, tiles.Count)];
 		}
 

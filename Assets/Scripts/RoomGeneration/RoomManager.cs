@@ -597,6 +597,17 @@ public class RoomManager : MonoBehaviour {
 		return currentTile.blocking;
 	}
 
+	public bool PlayerIsNear (int x, int y) {
+
+		int near = 8;
+
+		var playerPos = PlayerController.instance.transform.position;
+		return x < (int)(playerPos.x + 15.5) + near &&
+				   x > (int)(playerPos.x + 15.5) - near &&
+				   y < (int)(playerPos.y + 15.5) + near &&
+				   y > (int)(playerPos.y + 15.5) - near;
+	}
+
 
 
 	private void getBiome(int x, int y) {
