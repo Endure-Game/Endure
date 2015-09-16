@@ -10,6 +10,7 @@ public class ElevationTile : MonoBehaviour
 	public GameObject ropeLadder;
 	public GameObject chest;
 	public GameObject tent;
+	public GameObject randomItem;
 
 	public void SmoothElevation(List<Tile> tiles) {
 

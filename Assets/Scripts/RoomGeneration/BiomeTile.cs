@@ -126,7 +126,7 @@ public abstract class BiomeTile : MonoBehaviour
 
 	public void placeCamps(List<Tile> tiles) {
 
-		int tentNum = Random.Range(this.tentCount.minimum, this.tentCount.maximum);
+		int tentNum = Random.Range(this.tentCount.minimum, this.tentCount.maximum + 1);
 		for (int i = 0; i < tentNum; i++) {
 			Tile tentTile = tiles[Random.Range(0, tiles.Count)];
 			while (tentTile.item != null) {
@@ -137,7 +137,7 @@ public abstract class BiomeTile : MonoBehaviour
 																								 tentTile.x,
 																								 tentTile.y);
 
-			// place enemies nearby if there is room
+			// place enemies and item nearby if there is room
 			int enemyMax = Random.Range(3, 5);
 			int enemies = 0;
 			for (int x = -1; x <= 1; x++) {
@@ -149,16 +149,23 @@ public abstract class BiomeTile : MonoBehaviour
 					if (this.inMap(enemyX, enemyY) &&
 							!tileMap[enemyX, enemyY].blocking &&
 							enemies < enemyMax) {
-						this.GetComponent<RoomManager>().PlaceItem(this.getEnemy(),
+
+						// place item for first open spot, then place enemies
+						if (enemies == 0) {
+							this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().randomItem,
+																												 enemyX,
+																												 enemyY);
+						} else {
+							this.GetComponent<RoomManager>().PlaceItem(this.getEnemy(),
 																											 enemyX,
 																											 enemyY);
-
-
-
+						}
 						enemies++;
 					}
 				}
 			}
+
+
 
 			// place reward item in front of tent
 

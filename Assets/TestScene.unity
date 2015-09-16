@@ -361,7 +361,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438314, guid: 6c7e79166893646ccb8b92d93f6bb1ed, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.14385951
+      value: -1.90900004
       objectReference: {fileID: 0}
     - target: {fileID: 438314, guid: 6c7e79166893646ccb8b92d93f6bb1ed, type: 2}
       propertyPath: m_LocalPosition.y
@@ -935,6 +935,7 @@ MonoBehaviour:
   ropeLadder: {fileID: 121778, guid: 235c1ca8e59d54bee8aa265cae207b2b, type: 2}
   chest: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
   tent: {fileID: 188340, guid: 479989f433ba04db1b59f1b0946904e1, type: 2}
+  randomItem: {fileID: 192028, guid: 6484b4b02d9234ccbba2f073053e9ef0, type: 2}
 --- !u!114 &373454797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,48 +1010,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &439484465
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 439484467}
-  - 114: {fileID: 439484466}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &439484466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 439484465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f97377733a0429f9bd11e0d7e10769, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons: []
-  tools: []
-  upgrades: []
---- !u!4 &439484467
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 439484465}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
 --- !u!1 &523205721
 GameObject:
   m_ObjectHideFlags: 0

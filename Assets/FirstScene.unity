@@ -442,8 +442,8 @@ MonoBehaviour:
     minimum: 50
     maximum: 200
   chestCount:
-    minimum: 5
-    maximum: 8
+    minimum: 3
+    maximum: 5
   end: 2000000020000000
   enemySpawnInterval: 100
   roomSide: 8
@@ -721,6 +721,7 @@ MonoBehaviour:
   ropeLadder: {fileID: 121778, guid: 235c1ca8e59d54bee8aa265cae207b2b, type: 2}
   chest: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
   tent: {fileID: 188340, guid: 479989f433ba04db1b59f1b0946904e1, type: 2}
+  randomItem: {fileID: 192028, guid: 6484b4b02d9234ccbba2f073053e9ef0, type: 2}
 --- !u!114 &373454797
 MonoBehaviour:
   m_ObjectHideFlags: 0
