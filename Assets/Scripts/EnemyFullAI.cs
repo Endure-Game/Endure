@@ -248,15 +248,16 @@ public class EnemyFullAI : MonoBehaviour {
 
 		//print (this.oldPosition);
 
-		if(this.animationTime < this.idleDuration){
+		if (this.animationTime < this.idleDuration){
 			this.rb2d.velocity = Vector2.zero;
-		} else if (this.animationTime >= this.idleDuration){
-			if(this.animationTime > this.moveDuration + this.idleDuration){
+		} else {
+			if (this.animationTime > this.moveDuration + this.idleDuration) {
 				this.rb2d.velocity = Vector2.zero;
 				this.animationTime = 0;
 			} else if (this.rb2d.velocity == Vector2.zero){
 				float rx = Random.Range (-1f, 1f);
 				float ry = Random.Range (-1f, 1f);
+				this.moveDuration = Random.Range(.6f, 2f);
 				Vector3 idleHeading = this.oldPosition - this.transform.position;
 				this.rb2d.velocity = speed * (idleHeading - new Vector3(rx, ry)).normalized;
 			}

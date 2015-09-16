@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05abdaebf7257c4abe8e73870df6143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 3.5
   aggro: 8
   deAggro: 15
   moveDuration: .800000012
@@ -204,6 +204,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: deAggro
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
