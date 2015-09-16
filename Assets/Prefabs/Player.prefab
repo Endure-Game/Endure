@@ -151,7 +151,9 @@ MonoBehaviour:
   speed: 4
   bullets: 0
   arrows: 0
+  locked: 1
   itemAnimation: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
+  miniMap: {fileID: 0}
 --- !u!114 &11460858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,12 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f2a4e608d8927408fefbf4710ff8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 3
   knockback: .5
-  arrowDelay: .5
-  bulletDelay: 1.5
-  arrow: {fileID: 0}
-  bullet: {fileID: 0}
+  arrowDelay: .449999988
+  bulletDelay: .600000024
+  arrow: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
+  bullet: {fileID: 140046, guid: 271aadecde6084ebb8d8c98b2705d855, type: 2}
 --- !u!114 &11471804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,7 +185,7 @@ MonoBehaviour:
   damage: 0
   knockback: .5
   range: .600000024
-  delay: .5
+  delay: .300000012
 --- !u!114 &11488712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,8 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolType: 
-  range: .600000024
-  delay: 1
+  range: .400000006
+  delay: .5
 --- !u!212 &21222764
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/DeathScreen.unity
   - enabled: 1
     path: Assets/Loading.unity
+  - enabled: 1
+    path: Assets/EndGame.unity
