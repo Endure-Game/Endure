@@ -151,7 +151,9 @@ MonoBehaviour:
   speed: 4
   bullets: 0
   arrows: 0
+  locked: 1
   itemAnimation: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
+  miniMap: {fileID: 0}
 --- !u!114 &11460858
 MonoBehaviour:
   m_ObjectHideFlags: 1
