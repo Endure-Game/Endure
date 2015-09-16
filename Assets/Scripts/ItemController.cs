@@ -24,10 +24,7 @@ public class ItemController : MonoBehaviour {
 			Sounds.instance.Pickup ();
 			Destroy (this.gameObject);
 		} else {
-			if (!this.gameObject.GetComponent<Collider> ()) {
-				this.gameObject.AddComponent<Collider> ();
-				Physics.IgnoreCollision (this.GetComponent<Collider> (), GetComponent<Collider> ());		
-			}
+				Physics2D.IgnoreCollision (this.GetComponent<Collider2D> (), other);		
 		}
 		//PlayerController.instance.IncrementCounter ();
 		//Destroy (this.gameObject);
