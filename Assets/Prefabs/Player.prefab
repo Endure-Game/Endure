@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  sneak: 1
   bullets: 0
   arrows: 0
   locked: 1
