@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour {
 	public int bullets = 0;
 	public int arrows = 0;
 	public Region currentRegion;
+	public bool locked = true;
 
 	public GameObject itemAnimation;
+	public GameObject miniMap;
 
 	private int counter = 0;
 	private Rigidbody2D rb2d;
@@ -24,13 +26,10 @@ public class PlayerController : MonoBehaviour {
 
 	private bool pusher = false;//FOR DEBUGGING
 
-
-
 	public enum Control {
 		SPACE,
 		MOUSE
 	}
-
 
 	public class InventoryItem
 	{
@@ -73,12 +72,44 @@ public class PlayerController : MonoBehaviour {
 		this.rangedAttacker = this.GetComponent<RangedAttacker> ();
 		this.toolUser = this.GetComponent<ToolUser> ();
 
+		StartCoroutine (StartAnimations());
 		// Give player starting items
-		//this.inventory.Add("sword");
+		// this.inventory.Add("sword");
+	}
+
+	IEnumerator StartAnimations() {
+		yield return new WaitForSeconds(1f);
+		this.animator.SetTrigger ("GetUp");
+		yield return new WaitForSeconds(1f);
+		this.animator.SetTrigger ("ReadMap");
+		yield return new WaitForSeconds(.5f);
+
+		float stepSize = .05f;
+		float alphaTimer = 0;
+		while (alphaTimer < 1f) {
+			alphaTimer += stepSize;
+			this.miniMap.GetComponent<CanvasGroup>().alpha = alphaTimer;
+			yield return new WaitForSeconds(stepSize);
+		}
+		this.miniMap.GetComponent<CanvasGroup>().alpha = 1;
+		yield return new WaitForSeconds(1f);
+		this.animator.SetTrigger ("StoreMap");
+		yield return new WaitForSeconds(1f);
+		this.locked = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+		// make sure player is at the right z distance for correct overlap
+		this.transform.position = new Vector3(this.transform.position.x,
+		                                      this.transform.position.y,
+		                                      (float)(this.transform.position.y + 15.5));
+
+		if (this.locked) {
+			return;
+		}
+
 		float horizontal = Input.GetAxisRaw ("Horizontal");
 		float vertical = Input.GetAxisRaw ("Vertical");
 
@@ -106,10 +137,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (!meleeAttacker.Locked && !rangedAttacker.Locked && !toolUser.Locked) {
 			this.rb2d.velocity = this.speed * (playerSpeed / magnitude);
-			// make sure player is at the right z distance for correct overlap
-			this.transform.position = new Vector3(this.transform.position.x,
-			                                      this.transform.position.y,
-			                                      (float)(this.transform.position.y + 15.5));
+
 			if (horizontal > 0) {
 				this.animator.SetInteger ("Direction", 3);
 				this.animator.SetBool ("Idle", false);
