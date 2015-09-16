@@ -80,19 +80,17 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator StartAnimations() {
 		yield return new WaitForSeconds(1f);
 		this.animator.SetTrigger ("GetUp");
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1.5f);
 		this.animator.SetTrigger ("ReadMap");
 		yield return new WaitForSeconds(.5f);
 
 		float stepSize = .05f;
-		float alphaTimer = 0;
+		float alphaTimer = 0f;
 		while (alphaTimer < 1f) {
 			alphaTimer += stepSize;
 			this.miniMap.GetComponent<CanvasGroup>().alpha = alphaTimer;
 			yield return new WaitForSeconds(stepSize);
 		}
-		this.miniMap.GetComponent<CanvasGroup>().alpha = 1;
-		yield return new WaitForSeconds(1f);
 		this.animator.SetTrigger ("StoreMap");
 		yield return new WaitForSeconds(1f);
 		this.locked = false;

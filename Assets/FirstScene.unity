@@ -393,6 +393,14 @@ Prefab:
       propertyPath: delay
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11439364, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: miniMap
+      value: 
+      objectReference: {fileID: 1314655351}
+    - target: {fileID: 11439364, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: locked
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_IsPrefabParent: 0
@@ -1674,6 +1682,7 @@ GameObject:
   - 222: {fileID: 1314655353}
   - 114: {fileID: 1314655352}
   - 114: {fileID: 1314655355}
+  - 225: {fileID: 1314655356}
   m_Layer: 5
   m_Name: Minimap
   m_TagString: Untagged
@@ -1741,6 +1750,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!225 &1314655356
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1314655351}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1368365873
 Prefab:
   m_ObjectHideFlags: 0
