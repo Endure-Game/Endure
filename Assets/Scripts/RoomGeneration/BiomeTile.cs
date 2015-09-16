@@ -7,13 +7,14 @@ public abstract class BiomeTile : MonoBehaviour
 	public GameObject[] groundTiles;
 	public GameObject[] blockingTiles;
 	public Spawn[] enemies;
-	public RoomManager.Count treasureCount = new RoomManager.Count(1, 2);
 
 	protected Tile[,] tileMap;
 	protected int width;
 	protected int height;
 
+	public RoomManager.Count treasureCount = new RoomManager.Count(1, 2);
 	public RoomManager.Count chestCount = new RoomManager.Count(1, 2);
+	public RoomManager.Count tentCount = new RoomManager.Count(1, 2);
 
 	[System.Serializable]
 	public class Spawn {
@@ -123,6 +124,64 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 	}
 
+	public void placeCamps(List<Tile> tiles) {
+
+		int tentNum = Random.Range(this.tentCount.minimum, this.tentCount.maximum);
+		for (int i = 0; i < tentNum; i++) {
+			Tile tentTile = tiles[Random.Range(0, tiles.Count)];
+			while (tentTile.item != null) {
+				tentTile = tiles[Random.Range(0, tiles.Count)];
+			}
+
+			this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().tent,
+																								 tentTile.x,
+																								 tentTile.y);
+
+			// place enemies nearby if there is room
+			int enemyMax = Random.Range(3, 5);
+			int enemies = 0;
+			for (int x = -1; x <= 1; x++) {
+				for (int y = -1; y <= 1; y++) {
+
+					int enemyX = x + tentTile.x;
+					int enemyY = y + tentTile.y;
+
+					if (this.inMap(enemyX, enemyY) &&
+							!tileMap[enemyX, enemyY].blocking &&
+							enemies < enemyMax) {
+						this.GetComponent<RoomManager>().PlaceItem(this.getEnemy(),
+																											 enemyX,
+																											 enemyY);
+
+
+
+						enemies++;
+					}
+				}
+			}
+
+			// place reward item in front of tent
+
+
+		}
+	}
+
+	public GameObject makeEnemy(List<Tile> tiles) {
+
+		GameObject enemy = this.getEnemy();
+
+		Tile enemyTile = tiles[Random.Range(0, tiles.Count)];
+		while (enemyTile.item != null || enemyTile.blocking) {
+			enemyTile = tiles[Random.Range(0, tiles.Count)];
+		}
+
+		// TODO: change 32 to be whatever the column, row amount is.
+
+		return GameObject.Instantiate (enemy,
+		                               new Vector3(enemyTile.x - 32 / 2 + .5f, enemyTile.y - 32 / 2 + .5f, 0f),
+		                               Quaternion.identity) as GameObject;
+	}
+
 	public GameObject getEnemy() {
 
 		float total = 0f;
@@ -144,12 +203,18 @@ public abstract class BiomeTile : MonoBehaviour
 		return this.enemies[Random.Range(0, this.enemies.Length)].enemy;
 	}
 
-	public virtual void RandomBlocking(List<Tile> region) {
-		this.GetComponent<ElevationTile>().placeCliffTiles(region);
-		this.placeTreasureTiles(region);
-		this.placeChestTiles(region);
+	public virtual void RandomBlocking(List<Tile> tiles) {
+
+		this.GetComponent<ElevationTile>().placeCliffTiles(tiles);
+		this.placeTreasureTiles(tiles);
+		this.placeChestTiles(tiles);
+		this.placeCamps(tiles);
 	}
 
 	public abstract int getBiomeNumber();
+
+	public bool inMap(int x, int y) {
+		return x >= 0 && y >= 0 && x < this.width && y < this.height;
+	}
 }
 

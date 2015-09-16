@@ -11,7 +11,7 @@ public class Region
 
 	public List<Tile> tiles;
 	private List<GameObject> enemies;
-	private int enemyLimit = 10;
+	private int enemyLimit = 40;
 
 	public Region(int focusX, int focusY, BiomeTile biome, int altitude) {
 		this.focusX = focusX;
@@ -29,19 +29,11 @@ public class Region
 
 	public void spawnEnemy() {
 
-		if (this.enemies.Count == this.enemyLimit) {
+		if (this.enemies.Count >= this.enemyLimit) {
 			return;
 		}
 
-		GameObject enemy = this.biome.getEnemy();
-
-		Tile enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
-		while (enemyTile.item != null || enemyTile.blocking) {
-			enemyTile = this.tiles[Random.Range(0, this.tiles.Count)];
-		}
-		// TODO: change 32 to be whatever the column, row amount is.
-		this.enemies.Add(GameObject.Instantiate (enemy, 
-		                              new Vector3(enemyTile.x - 32 / 2 + .5f, enemyTile.y - 32 / 2 + .5f, 0f),
-		                              Quaternion.identity) as GameObject);
+		this.enemies.Add(this.biome.makeEnemy(this.tiles));
 	}
+
 }

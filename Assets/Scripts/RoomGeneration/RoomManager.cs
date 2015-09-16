@@ -433,7 +433,7 @@ public class RoomManager : MonoBehaviour {
 
 		// Spawn starting enemies
 		if (!this.startScreen) {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 300; i++) {
 				Region region = this.regions[Random.Range(0, this.regions.Count)];
 				region.spawnEnemy();
 				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));

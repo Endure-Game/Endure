@@ -495,6 +495,9 @@ MonoBehaviour:
   chestCount:
     minimum: 1
     maximum: 2
+  tentCount:
+    minimum: 0
+    maximum: 1
   bloomNum: 10
   bloomSize:
     minimum: 28
@@ -529,6 +532,9 @@ MonoBehaviour:
     minimum: 0
     maximum: 1
   chestCount:
+    minimum: 0
+    maximum: 1
+  tentCount:
     minimum: 0
     maximum: 1
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
@@ -573,6 +579,9 @@ MonoBehaviour:
   chestCount:
     minimum: 1
     maximum: 3
+  tentCount:
+    minimum: 0
+    maximum: 2
   bloomNum: 30
   bloomSize:
     minimum: 12
@@ -604,6 +613,9 @@ MonoBehaviour:
   chestCount:
     minimum: 0
     maximum: 1
+  tentCount:
+    minimum: 0
+    maximum: 0
   flatGroundTile: {fileID: 143284, guid: ef9cdb414167e484bbd9f4ced03eef48, type: 2}
   bloomNum: 100
   bloomSize:
@@ -636,7 +648,10 @@ MonoBehaviour:
     minimum: 0
     maximum: 4
   chestCount:
-    minimum: 1
+    minimum: 0
+    maximum: 1
+  tentCount:
+    minimum: 0
     maximum: 2
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
@@ -673,6 +688,9 @@ MonoBehaviour:
   chestCount:
     minimum: 0
     maximum: 0
+  tentCount:
+    minimum: 0
+    maximum: 0
 --- !u!114 &373454796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +720,7 @@ MonoBehaviour:
   hole: {fileID: 131320, guid: f10a9a990d4b74ee5a255e7a19742560, type: 2}
   ropeLadder: {fileID: 121778, guid: 235c1ca8e59d54bee8aa265cae207b2b, type: 2}
   chest: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
+  tent: {fileID: 188340, guid: 479989f433ba04db1b59f1b0946904e1, type: 2}
 --- !u!114 &373454797
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class StartTile : MonoBehaviour {
   public GameObject startingWeapon;
   public GameObject[] startingTools;
 
-  public int range = 9;
+  public int range = 7;
 
   public void PlaceStartTiles() {
     Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
