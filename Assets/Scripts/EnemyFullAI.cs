@@ -105,12 +105,14 @@ public class EnemyFullAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (this.active) {
+			//print ("SNEAK VALUE IS + " + this.player.sneak);
+			//print (this.aggro * this.player.sneak);
 			this.targetHeading = this.player.transform.position - this.transform.position;
-			//print (heading.magnitude + "|" + this.aggro);
-			if(this.targetHeading.magnitude < this.aggro){
+			//print (heading.magnitude + "|" + this.aggro * this.player.sneak);
+			if(this.targetHeading.magnitude < this.aggro * this.player.sneak){
 				this.lastPlayerPos = player.transform.position;
 			}
-			if (this.targetHeading.magnitude < this.deAggro){
+			if (this.targetHeading.magnitude < this.deAggro * this.player.sneak){
 				 if (this.ranged.isRanged){
 					this.RangedAttack ();
 				} else if (this.coward.isCoward){
@@ -119,7 +121,7 @@ public class EnemyFullAI : MonoBehaviour {
 					this.MeleeAttack ();
 				}
 				//this.MeleeAttack ();
-			} else if(this.targetHeading.magnitude >= this.deAggro){
+			} else if(this.targetHeading.magnitude >= this.deAggro * this.player.sneak){
 				//Double Check conditional
 				if(this.coward.isCoward){
 					this.CowardRun();
@@ -204,7 +206,7 @@ public class EnemyFullAI : MonoBehaviour {
 		//if (true) {
 		//print ("Distance: " + this.targetHeading.magnitude + "|cowardDistance: " + this.coward.cowardDistance);
 		this.oldPosition = this.transform.position;
-		if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance) {
+		if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance * this.player.sneak) {
 			this.CowardRun ();
 		} else if (this.targetHeading.magnitude < this.ranged.rangedDistance){
 			//print ("PRINT SOME SHIT OUT2");
@@ -227,7 +229,7 @@ public class EnemyFullAI : MonoBehaviour {
 	void CowardRun (){
 		this.heading = player.transform.position - this.transform.position;
 
-		if (heading.magnitude < this.coward.cowardDistance){
+		if (heading.magnitude < this.coward.cowardDistance * this.player.sneak){
 			this.coward.yesFear();
 		} else if (heading.magnitude > this.coward.maxRunDistance){
 			this.coward.noFear ();

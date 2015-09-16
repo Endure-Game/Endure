@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 4;
+	public float sneak = 1f;
+	
 	public static PlayerController instance;
 	public int bullets = 0;
 	public int arrows = 0;
