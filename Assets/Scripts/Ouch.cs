@@ -31,7 +31,7 @@ public class Ouch : MonoBehaviour {
 
 	void OnOwie (Collider2D collider) {
 		//this.death.Play ();
-		if (!collider.isTrigger && collider.transform != this.spawner) {
+		if (!collider.isTrigger && collider.transform != this.spawner && this.tag != collider.tag) {
 			Health target = collider.GetComponent<Health> ();
 			if (target != null) {
 				target.ChangeHealth (-damage);
@@ -47,7 +47,6 @@ public class Ouch : MonoBehaviour {
 
 			if (this.destroyOnTouch) {
 				//this.hit.Play ();
-
 				//Destroy (this.gameObject);
 				TrailRenderer trail = this.GetComponent<TrailRenderer>();
 				if(trail != null) {

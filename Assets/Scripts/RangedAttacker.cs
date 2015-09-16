@@ -93,6 +93,7 @@ public class RangedAttacker : MonoBehaviour {
 
 		Ouch ouch = weapon.GetComponent<Ouch> ();
 		ouch.damage = this.damage;
+		ouch.tag = this.tag;
 		ouch.destroyOnTouch = true;
 	}
 
@@ -116,6 +117,7 @@ public class RangedAttacker : MonoBehaviour {
 
 		Ouch ouch = weapon.GetComponent<Ouch> ();
 		ouch.damage = this.damage;
+		ouch.tag = this.tag;
 		ouch.destroyOnTouch = true;
 	}
 
