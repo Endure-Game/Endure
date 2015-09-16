@@ -417,11 +417,11 @@ public class PlayerController : MonoBehaviour {
 			//changes arrows to BEARROWS
 			GameObject bearrow = (GameObject)Resources.Load ("Ammo/Bearrow");
 			this.rangedAttacker.arrow = bearrow;
-			infoText = "The Right to Bear Arms"
+			infoText = "The Right to Bear Arms";
 			break;
 
 		case "camo":
-
+			this.sneak *= .8f;
 			infoText = "Sneak Boost";
 			break;
 
