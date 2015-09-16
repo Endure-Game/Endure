@@ -42,7 +42,6 @@ public class ToolUser : MonoBehaviour {
 
 	}
 
-	private float toolAnimationDelay = .18f;
 	IEnumerator CreateTool(bool horizontal, int direction) {
 
 		if (this.toolType.Length > 0 && !this.locked) {
@@ -52,6 +51,12 @@ public class ToolUser : MonoBehaviour {
 			this.elapsed = 0;
 			this.untilUnlocked = this.delay;
 			this.locked = true;
+
+			float toolAnimationDelay = .18f;
+			if (this.toolType == "Rope") {
+				print ("we got rope");
+				toolAnimationDelay = .48f;
+			}
 
 			yield return new WaitForSeconds(toolAnimationDelay);
 			this.tool = new GameObject ();

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed = 4;
 	public float sneak = 1f;
-	
+
 	public static PlayerController instance;
 	public int bullets = 0;
 	public int arrows = 0;
@@ -412,11 +412,19 @@ public class PlayerController : MonoBehaviour {
 			this.rangedAttacker.speed *= 1.2f;
 			infoText = "Attack Speed Boost";
 			break;
+
 		case "bearrows":
 			//changes arrows to BEARROWS
 			GameObject bearrow = (GameObject)Resources.Load ("Ammo/Bearrow");
 			this.rangedAttacker.arrow = bearrow;
+			infoText = "The Right to Bear Arms"
 			break;
+
+		case "camo":
+
+			infoText = "Sneak Boost";
+			break;
+
 		default:
 			print ("Error: not a valid upgrade name");
 			break;
