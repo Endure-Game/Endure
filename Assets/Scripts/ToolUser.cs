@@ -66,12 +66,19 @@ public class ToolUser : MonoBehaviour {
 			Vector2 playerSize = this.Size;
 			collider.size = playerSize;
 
+			float verticalAdjustment = playerSize.y / 4;
+			if (this.toolType == "Shovel") {
+				verticalAdjustment = -playerSize.y / 4;
+			} else if (this.toolType == "Lockpick") {
+				verticalAdjustment = 0f;
+			}
+
 			if (horizontal) {
 				collider.size = new Vector2 (.05f, this.range);
 				collider.transform.Translate (0f, (playerSize.y / 2 + this.range / 2) * direction, 0);
 			} else {
 				collider.size = new Vector2 (this.range, .05f);
-				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, playerSize.y / 4, 0);
+				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, verticalAdjustment, 0);
 			}
 		}
 	}
