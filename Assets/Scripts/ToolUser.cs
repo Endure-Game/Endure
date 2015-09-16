@@ -68,10 +68,10 @@ public class ToolUser : MonoBehaviour {
 
 			if (horizontal) {
 				collider.size = new Vector2 (.05f, this.range);
-				collider.transform.Translate (0, (playerSize.y / 2 + this.range / 2) * direction, 0);
+				collider.transform.Translate (0f, (playerSize.y / 2 + this.range / 2) * direction, 0);
 			} else {
 				collider.size = new Vector2 (this.range, .05f);
-				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, 0, 0);
+				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, playerSize.y / 4, 0);
 			}
 		}
 	}
