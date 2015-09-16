@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11478746}
   - 96: {fileID: 9639516}
   - 82: {fileID: 8257818}
+  - 50: {fileID: 5000958}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5000958
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140046}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!82 &8257818
 AudioSource:
   m_ObjectHideFlags: 1
@@ -173,7 +190,7 @@ MonoBehaviour:
   damage: 10
   knockback: .5
   spawner: {fileID: 0}
-  destroyOnTouch: 0
+  destroyOnTouch: 1
 --- !u!212 &21217634
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -230,6 +247,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BypassEffects
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: destroyOnTouch
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

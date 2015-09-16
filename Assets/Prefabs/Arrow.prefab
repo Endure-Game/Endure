@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11451626}
   - 114: {fileID: 11480554}
   - 82: {fileID: 8240578}
+  - 50: {fileID: 5054914}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -31,6 +32,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5054914
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175468}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!82 &8240578
 AudioSource:
   m_ObjectHideFlags: 1
@@ -114,7 +131,7 @@ MonoBehaviour:
   damage: 3
   knockback: .5
   spawner: {fileID: 0}
-  destroyOnTouch: 0
+  destroyOnTouch: 1
 --- !u!114 &11480554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +186,14 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 1fe80261ac76b5b47909fd02ed842082, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: destroyOnTouch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175468}
