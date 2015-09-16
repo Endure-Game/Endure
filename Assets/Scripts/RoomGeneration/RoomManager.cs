@@ -19,7 +19,7 @@ public class RoomManager : MonoBehaviour {
 	public int rows = 32;
 	public int columns = 32;
 	public Count blockingCount = new Count (15, 25);
-	public Count chestCount = new Count (5, 8);
+	public Count chestCount = new Count (3, 5);
 	public int[] end = new int[2] {255, 255};
 	public int enemySpawnInterval = 100;
 
@@ -433,7 +433,7 @@ public class RoomManager : MonoBehaviour {
 
 		// Spawn starting enemies
 		if (!this.startScreen) {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 300; i++) {
 				Region region = this.regions[Random.Range(0, this.regions.Count)];
 				region.spawnEnemy();
 				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));

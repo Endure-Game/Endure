@@ -347,32 +347,43 @@ public class PlayerController : MonoBehaviour {
 		switch (name) {
 
 		case "RustyMachete":
-			this.inventory.Add(new InventoryItem(name, icon, "Melee", 3, Control.SPACE, ""));
+			this.AddToInventory (new InventoryItem(name, icon, "Melee", 3, Control.SPACE, ""));
 			break;
 		case "BowAndArrow":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE, ""));
+			this.AddToInventory (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE, ""));
 			this.arrows += 9;
 			break;
 		case "Axe":
-			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
+			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
 			break;
 		case "Rifle":
-			this.inventory.Add (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
+			this.AddToInventory (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
 			this.bullets += 3;
 			break;
 		case "Lockpick":
-			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Lockpick"));
+			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Lockpick"));
 			break;
 		case "Shovel":
-			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Shovel"));
+			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Shovel"));
 			break;
 		case "Rope":
-			this.inventory.Add (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Rope"));
+			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Rope"));
 			break;
 		default:
 			print ("Error: not a valid weapon or tool name");
 			break;
 		}
+	}
+
+	// Only add item if there are no dupilcates, otherwise give some arrow ammo
+	public void AddToInventory (InventoryItem newItem) {
+		foreach (InventoryItem oldItem in this.inventory) {
+			if (newItem.name == oldItem.name) {
+				this.arrows += 10;
+				return;
+			}
+		}
+		this.inventory.Add (newItem);
 	}
 
 	public void AddUpgrade (string name) {

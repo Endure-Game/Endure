@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  aggro: 5
-  deAggro: 10
+  aggro: 8
+  deAggro: 15
   moveDuration: .800000012
   idleDuration: .600000024
   melee:
@@ -196,6 +196,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: deathSound
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: aggro
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deAggro
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

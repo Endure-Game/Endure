@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 public class EnemyFullAI : MonoBehaviour {
 
-	//Basic AI Stats	
+	//Basic AI Stats
 	public float speed = 3f;
 	public float aggro = 5f;
-	public float deAggro = 10f; 
-	
+	public float deAggro = 10f;
+
 	//For idle movement
 	public float moveDuration = 0.8f;
 	public float idleDuration = 0.6f;
-	
+
 	//Basic AI stats that player shouldn't reaaaally care about
 	private bool active = false;
 	private Rigidbody2D rb2d;
@@ -32,7 +32,7 @@ public class EnemyFullAI : MonoBehaviour {
 	private float stunTime;
 	private bool isStunned;
 
-	
+
 	//For weapons
 	//private MeleeAttacker melee;
 	//private RangedAttacker ranged;
@@ -92,7 +92,7 @@ public class EnemyFullAI : MonoBehaviour {
 			this.ranged.setWeapon (this.GetComponent<RangedAttacker>());
 		}
 		this.animator = this.GetComponent<Animator> ();
-	
+
 	}
 
 
@@ -109,7 +109,7 @@ public class EnemyFullAI : MonoBehaviour {
 			//print (heading.magnitude + "|" + this.aggro);
 			if(this.targetHeading.magnitude < this.aggro){
 				this.lastPlayerPos = player.transform.position;
-			} 
+			}
 			if (this.targetHeading.magnitude < this.deAggro){
 				 if (this.ranged.isRanged){
 					this.RangedAttack ();
@@ -133,7 +133,7 @@ public class EnemyFullAI : MonoBehaviour {
 				this.standStill.coward.isCoward = false;
 				this.isStunned = false;
 			}
-			
+
 			// Make sure enemy is on the right layer
 			if(this.transform.position.z != (float)(this.transform.position.y + 16)){
 				this.transform.position = new Vector3(this.transform.position.x,
@@ -152,7 +152,7 @@ public class EnemyFullAI : MonoBehaviour {
 				animator.SetBool("moving", false);
 			}
 		}
-		
+
 	}
 
 	public void Stun (GameObject loser) {
@@ -184,7 +184,7 @@ public class EnemyFullAI : MonoBehaviour {
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
-		
+
 		if (this.targetHeading.magnitude < this.melee.getWeapon().range + 0.5f) {
 			Vector3 n = this.targetHeading.normalized;
 			if (n.x > Mathf.Sqrt (2) / 2) {
@@ -200,7 +200,7 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 	void RangedAttack (){
 		//heading = player.transform.position - this.transform.position;
-		
+
 		//if (true) {
 		//print ("Distance: " + this.targetHeading.magnitude + "|cowardDistance: " + this.coward.cowardDistance);
 		this.oldPosition = this.transform.position;
@@ -220,7 +220,7 @@ public class EnemyFullAI : MonoBehaviour {
 			this.rb2d.velocity = Vector2.zero;
 		}
 		/*if (heading.magnitude < this.cowardDistance && !ranged.Locked){
-			this.rb2d.velocity = this.speed * -heading.normalized; 
+			this.rb2d.velocity = this.speed * -heading.normalized;
 		}*/
 
 	}
@@ -233,7 +233,7 @@ public class EnemyFullAI : MonoBehaviour {
 			this.coward.noFear ();
 		}
 		if(this.coward.isFeared()){
-			this.rb2d.velocity = this.speed * - heading.normalized; 
+			this.rb2d.velocity = this.speed * - heading.normalized;
 			this.oldPosition = Vector3.zero;
 		} else {
 			IdleMovement ();
@@ -243,11 +243,11 @@ public class EnemyFullAI : MonoBehaviour {
 		if(this.oldPosition == Vector3.zero){
 			this.oldPosition = this.transform.position;
 		}
-		
+
 		this.animationTime += Time.deltaTime;
-		
+
 		//print (this.oldPosition);
-		
+
 		if(this.animationTime < this.idleDuration){
 			this.rb2d.velocity = Vector2.zero;
 		} else if (this.animationTime >= this.idleDuration){
@@ -262,14 +262,14 @@ public class EnemyFullAI : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
 			//print ("Activated Enemy");
 			this.active = true;
 		}
 	}
-	
+
 	void OnTriggerExit2D (Collider2D collided) {
 		CircleCollider2D playerCollider = player.GetComponent<CircleCollider2D> ();
 		this.targetHeading = player.transform.position - this.transform.position;
@@ -279,9 +279,9 @@ public class EnemyFullAI : MonoBehaviour {
 			this.active = false;
 		}
 	}
-	
-	
+
+
 	public void enemyActive (bool a){
 		this.active = a;
 	}
-} 
+}

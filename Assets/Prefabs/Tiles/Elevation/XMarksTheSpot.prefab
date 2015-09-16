@@ -99,6 +99,8 @@ MonoBehaviour:
     item: {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
   - chance: 1
     item: {fileID: 128680, guid: 20c0d728f39c54ab380c9f98b146d95e, type: 2}
+  - chance: .200000003
+    item: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
   - chance: .5
     item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
 --- !u!212 &21225824
@@ -136,7 +138,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: drops.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.z
@@ -165,10 +167,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: drops.Array.data[2].item
       value: 
-      objectReference: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
+      objectReference: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[2].chance
-      value: .5
+      value: .200000003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

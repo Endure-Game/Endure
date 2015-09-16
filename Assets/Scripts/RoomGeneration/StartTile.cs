@@ -8,8 +8,9 @@ public class StartTile : MonoBehaviour {
   public GameObject deadBoy;
   public GameObject deadGirl;
   public GameObject startingWeapon;
+  public GameObject[] startingTools;
 
-  public int range = 9;
+  public int range = 7;
 
   public void PlaceStartTiles() {
     Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
@@ -21,6 +22,7 @@ public class StartTile : MonoBehaviour {
     this.PlaceInStartingRange(deadGirl);
     this.PlaceInStartingRange(deadBoy);
     this.PlaceInStartingRange(startingWeapon);
+    this.PlaceInStartingRange(startingTools[Random.Range(0, startingTools.Length)]);
   }
 
   private void PlaceInStartingRange(GameObject sprite) {
