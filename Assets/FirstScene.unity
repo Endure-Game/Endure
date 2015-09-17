@@ -111,7 +111,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 58173748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1314655354}
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 87be5f7dfad8f41aeaba3c999eec137a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1669,7 +1669,7 @@ MonoBehaviour:
   bullet: {fileID: 21300100, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
   world: {fileID: 373454786}
   map: {fileID: 1314655351}
-  mapCover: {fileID: 0}
+  mapCover: {fileID: 58173748}
   pauseText: {fileID: 523205723}
 --- !u!1 &1765774240
 GameObject:

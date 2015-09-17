@@ -31,11 +31,6 @@ public class BeachTile : BiomeTile
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 			                  new TilePlacer(this.PlacePalmTree));
 		}
-
-		/*this.PerlinGenerator(region,
-		                     new TilePlacer(this.PlacePalmTree),
-		                     .49f,
-		                     .04f); */
 	}
 
 	public override int getBiomeNumber() {
