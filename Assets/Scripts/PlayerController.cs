@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour {
 	public static PlayerController instance;
 	public int bullets = 0;
 	public int arrows = 0;
+
+	public int maxBullets = 50;
+	public int maxArrows = 50;
+
 	public Region currentRegion;
 	public bool locked = true;
 
@@ -355,6 +359,11 @@ public class PlayerController : MonoBehaviour {
 		case "BowAndArrow":
 			this.AddToInventory (new InventoryItem(name, icon, "Ranged", 3, Control.MOUSE, ""));
 			this.arrows += 9;
+			
+			if (arrows > this.maxArrows) {
+				this.arrows = this.maxArrows;
+			}
+
 			break;
 		case "Axe":
 			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Axe"));
@@ -362,6 +371,9 @@ public class PlayerController : MonoBehaviour {
 		case "Rifle":
 			this.AddToInventory (new InventoryItem(name, icon, "Ranged", 10, Control.MOUSE, ""));
 			this.bullets += 3;
+			if (bullets > this.maxBullets) {
+				this.bullets = this.maxBullets;
+			}
 			break;
 		case "Lockpick":
 			this.AddToInventory (new InventoryItem(name, icon, "Tool", 0, Control.SPACE, "Lockpick"));
@@ -383,6 +395,10 @@ public class PlayerController : MonoBehaviour {
 		foreach (InventoryItem oldItem in this.inventory) {
 			if (newItem.name == oldItem.name) {
 				this.arrows += 10;
+				
+				if (arrows > this.maxArrows) {
+					this.arrows = this.maxArrows;
+				}
 				return;
 			}
 		}

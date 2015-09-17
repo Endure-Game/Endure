@@ -152,6 +152,8 @@ MonoBehaviour:
   sneak: 1
   bullets: 0
   arrows: 0
+  maxBullets: 50
+  maxArrows: 50
   locked: 1
   itemAnimation: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
   miniMap: {fileID: 0}
