@@ -20,6 +20,12 @@ public class MeleeAttacker : MonoBehaviour {
 		}
 	}
 
+	public void LockAttacker (){
+		this.elapsed = 0;
+		this.untilUnlocked = this.delay;
+		this.locked = true;
+	}
+
 	private float factor = 1f;
 	public float speed {
 		get {

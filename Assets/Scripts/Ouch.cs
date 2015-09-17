@@ -18,11 +18,24 @@ public class Ouch : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		OnOwie (collider);
+		DoOwie (collider);
 	}
 
 	void OnColliderEnter2D (Collider2D collider) {
-		OnOwie (collider);
+		DoOwie (collider);
+	}
+
+	void DoOwie (Collider2D collider){
+		MeleeAttacker meleeAttacker = this.gameObject.GetComponent<MeleeAttacker> ();
+		print (meleeAttacker);
+		if (meleeAttacker != null) {
+			if (meleeAttacker.Locked == false) {
+				OnOwie (collider);
+				meleeAttacker.LockAttacker ();
+			}
+		} else {
+			OnOwie (collider);
+		}
 	}
 
 
