@@ -52,7 +52,6 @@ public class RoomManager : MonoBehaviour {
 			timer++;
 			if (timer % this.enemySpawnInterval == 0) {
 				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
-				print ("enemySpawned");
 			}
 		}
 	}
@@ -436,7 +435,6 @@ public class RoomManager : MonoBehaviour {
 			for (int i = 0; i < 300; i++) {
 				Region region = this.regions[Random.Range(0, this.regions.Count)];
 				region.spawnEnemy();
-				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));
 			}
 		}
 	}

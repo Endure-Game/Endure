@@ -54,7 +54,6 @@ public class ToolUser : MonoBehaviour {
 
 			float toolAnimationDelay = .18f;
 			if (this.toolType == "Rope") {
-				print ("we got rope");
 				toolAnimationDelay = .48f;
 			}
 

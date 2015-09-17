@@ -712,6 +712,7 @@ MonoBehaviour:
   tentCount:
     minimum: 1
     maximum: 2
+  palmTree: {fileID: 146140, guid: cfbe7f84f21df4fb2ac5eb81eb8e62f4, type: 2}
   bloomNum: 10
   bloomSize:
     minimum: 28
@@ -2262,6 +2263,7 @@ MonoBehaviour:
   bullet: {fileID: 21300100, guid: 8699d7ae2d8b54f918aee5425c6b9ac1, type: 3}
   world: {fileID: 373454786}
   map: {fileID: 1314655351}
+  mapCover: {fileID: 0}
   pauseText: {fileID: 523205723}
 --- !u!1001 &1741385581
 Prefab:

@@ -20,6 +20,7 @@ public class HUDController : MonoBehaviour {
 	private RoomManager roomManager;
 
 	public GameObject map;
+	public GameObject mapCover;
 	private GameObject inventory;
 	private int oldInventorySize = 0;
 	private GameObject border;
