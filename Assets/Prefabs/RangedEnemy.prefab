@@ -139,6 +139,8 @@ MonoBehaviour:
     item: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
   - chance: .200000003
     item: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
+  - chance: .0500000007
+    item: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
 --- !u!114 &11474492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,7 +189,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: drops.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -279,6 +281,14 @@ Prefab:
       propertyPath: deathSound
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[2].chance
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drops.Array.data[2].item
+      value: 
+      objectReference: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112292}
