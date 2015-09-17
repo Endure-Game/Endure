@@ -20,6 +20,7 @@ public class HUDController : MonoBehaviour {
 	private RoomManager roomManager;
 
 	public GameObject map;
+	public GameObject mapCover;
 	private GameObject inventory;
 	private int oldInventorySize = 0;
 	private GameObject border;
@@ -54,13 +55,15 @@ public class HUDController : MonoBehaviour {
 
 		this.roomManager = this.world.GetComponent<RoomManager> ();
 
-		this.mapTexture = this.CreateMap ();
-		this.map.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
-
+		this.CreateMapTexture();
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+
+		this.UpdateMapTexture();
+
 		// Health bar
 		healthBar.transform.localScale = new Vector3(1f * this.playerHealth.CurrentHealth / this.startingMaxHealth, 1f, 1f);
 		maxHealthBar.transform.localScale = new Vector3(1f * this.playerHealth.maxHealth / this.startingMaxHealth, 1f, 1f);
@@ -236,18 +239,58 @@ public class HUDController : MonoBehaviour {
 		}
 	}
 
-	Texture2D CreateMap () {
-		var map = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
-		                         this.roomManager.columns * this.roomManager.roomSide);
-
-		for (var x = 0; x < map.width; x++) {
-			for (var y = 0; y < map.height; y++) {
-				map.SetPixel(x, y, this.colorForTile (roomManager.tileMap [x, y]));
+	// Instantiates mapTexture to clear except for starting area around the player
+	private void CreateMapTexture () {
+		this.mapTexture = new Texture2D (this.roomManager.rows * this.roomManager.roomSide,
+		                         				 this.roomManager.columns * this.roomManager.roomSide);
+		for (var x = 0; x < mapTexture.width; x++) {
+			for (var y = 0; y < mapTexture.height; y++) {
+				mapTexture.SetPixel(x, y, Color.clear);
 			}
 		}
+		int playerX = (int)(PlayerController.instance.transform.position.x + 15.5f);
+		int playerY = (int)(PlayerController.instance.transform.position.y + 15.5f);
 
-		map.Apply ();
-
-		return map;
+		int range = 6;
+		for (var x = playerX - range; x < playerX + range; x++) {
+			for (var y = playerY - range; y < playerY + range; y++) {
+				mapTexture.SetPixel(x, y, this.colorForTile (roomManager.tileMap [x, y]));
+			}
+		}
+		mapTexture.Apply();
 	}
+
+	// Only updates the pixels on the rim of the player view
+	private void UpdateMapTexture () {
+
+		int playerX = (int)(PlayerController.instance.transform.position.x + 15.5f);
+		int playerY = (int)(PlayerController.instance.transform.position.y + 15.5f);
+
+		int range = 6;
+		for (var x = playerX - range; x < playerX + range; x++) {
+			mapTexture.SetPixel(x, playerY - range, this.colorForTile (roomManager.tileMap [x, playerY - range]));
+			mapTexture.SetPixel(x, playerY + range, this.colorForTile (roomManager.tileMap [x, playerY + range]));
+		}
+		for (var y = playerY - range; y < playerY + range; y++) {
+			mapTexture.SetPixel(playerX - range, y, this.colorForTile (roomManager.tileMap [playerX - range, y]));
+			mapTexture.SetPixel(playerX + range, y, this.colorForTile (roomManager.tileMap [playerX + range, y]));
+		}
+		mapTexture.Apply();
+
+		this.mapCover.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
+	}
+
+	// Updates entire mapTexture
+	public void FillMapTexture () {
+
+		for (var x = 0; x < mapTexture.width; x++) {
+			for (var y = 0; y < mapTexture.height; y++) {
+				mapTexture.SetPixel(x, y, this.colorForTile (roomManager.tileMap [x, y]));
+			}
+		}
+		mapTexture.Apply();
+
+		this.mapCover.GetComponent<Image> ().sprite = Sprite.Create(this.mapTexture, new Rect(0, 0, this.mapTexture.width, this.mapTexture.height), new Vector2 ());
+	}
+
 }

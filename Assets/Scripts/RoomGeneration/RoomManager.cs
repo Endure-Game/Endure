@@ -52,7 +52,6 @@ public class RoomManager : MonoBehaviour {
 			timer++;
 			if (timer % this.enemySpawnInterval == 0) {
 				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
-				print ("enemySpawned");
 			}
 		}
 	}
@@ -436,7 +435,6 @@ public class RoomManager : MonoBehaviour {
 			for (int i = 0; i < 300; i++) {
 				Region region = this.regions[Random.Range(0, this.regions.Count)];
 				region.spawnEnemy();
-				print ("Create enemies " + (Time.realtimeSinceStartup - startTime));
 			}
 		}
 	}
@@ -595,6 +593,17 @@ public class RoomManager : MonoBehaviour {
 		Tile currentTile = this.tileMap [x, y];
 
 		return currentTile.blocking;
+	}
+
+	public bool PlayerIsNear (int x, int y) {
+
+		int near = 8;
+
+		var playerPos = PlayerController.instance.transform.position;
+		return x < (int)(playerPos.x + 15.5) + near &&
+				   x > (int)(playerPos.x + 15.5) - near &&
+				   y < (int)(playerPos.y + 15.5) + near &&
+				   y > (int)(playerPos.y + 15.5) - near;
 	}
 
 

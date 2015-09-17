@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drops:
-  - chance: .400000006
+  - chance: .600000024
     item: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
-  - chance: .100000001
+  - chance: .200000003
     item: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
 --- !u!114 &11474492
 MonoBehaviour:
@@ -233,11 +233,11 @@ Prefab:
       objectReference: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[1].chance
-      value: .100000001
+      value: .200000003
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
-      value: .400000006
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: arrow

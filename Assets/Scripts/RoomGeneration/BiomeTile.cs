@@ -8,9 +8,39 @@ public abstract class BiomeTile : MonoBehaviour
 	public GameObject[] blockingTiles;
 	public Spawn[] enemies;
 
-	protected Tile[,] tileMap;
-	protected int width;
-	protected int height;
+	private Tile[,] myTileMap = null;
+	protected Tile[,] tileMap {
+		get {
+			if (this.myTileMap == null) {
+				this.myTileMap = this.GetComponent<RoomManager>().tileMap;
+			}
+			return this.myTileMap;
+		}
+	}
+
+	private int myWidth = 0;
+	protected int width {
+		get {
+			if (this.myWidth == 0) {
+				this.myWidth = this.tileMap.GetLength(1);
+			}
+			return this.myWidth;
+		}
+	}
+
+	private int myHeight = 0;
+	protected int height {
+		get {
+			if (this.myHeight == 0) {
+				this.myHeight = this.tileMap.GetLength(0);
+			}
+			return this.myHeight;
+		}
+	}
+
+	//protected Tile[,] tileMap;
+	//protected int width;
+	//protected int height;
 
 	public RoomManager.Count treasureCount = new RoomManager.Count(1, 2);
 	public RoomManager.Count chestCount = new RoomManager.Count(1, 2);
@@ -22,11 +52,12 @@ public abstract class BiomeTile : MonoBehaviour
 		public GameObject enemy;
 	}
 
-	void Awake() {
+	/*
+	void Start() {
 		this.tileMap = this.GetComponent<RoomManager>().tileMap;
 		this.height = this.tileMap.GetLength(0);
 		this.width = this.tileMap.GetLength(1);
-	}
+	}*/
 
 	public delegate void TilePlacer(int x, int y);
 	// Blooms are great for making irregular, but roundish shapes like bodies of water
@@ -43,8 +74,8 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 
 		if (tile.item == null) {
-			tile.blocking = true;
 			spritePlacer(x, y);
+			tile.blocking = true;
 		}
 
 		for (int i = -1; i <= 1; i++) {
@@ -178,7 +209,8 @@ public abstract class BiomeTile : MonoBehaviour
 		GameObject enemy = this.getEnemy();
 
 		Tile enemyTile = tiles[Random.Range(0, tiles.Count)];
-		while (enemyTile.item != null || enemyTile.blocking) {
+		while (enemyTile.item != null || enemyTile.blocking ||
+					 this.GetComponent<RoomManager>().PlayerIsNear(enemyTile.x, enemyTile.y)) {
 			enemyTile = tiles[Random.Range(0, tiles.Count)];
 		}
 

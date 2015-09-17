@@ -373,6 +373,10 @@ MonoBehaviour:
   - {fileID: 172630, guid: 6a38d033b29cc40cf998e01b02efc305, type: 2}
   xMarksTheSpot: {fileID: 139834, guid: 7d5a22760b89043199c64edfb7e045b0, type: 2}
   hole: {fileID: 131320, guid: f10a9a990d4b74ee5a255e7a19742560, type: 2}
+  ropeLadder: {fileID: 121778, guid: 235c1ca8e59d54bee8aa265cae207b2b, type: 2}
+  chest: {fileID: 105248, guid: fa5141689c0a24e5db5d08570d8c6684, type: 2}
+  tent: {fileID: 188340, guid: 479989f433ba04db1b59f1b0946904e1, type: 2}
+  randomItem: {fileID: 192028, guid: 6484b4b02d9234ccbba2f073053e9ef0, type: 2}
 --- !u!114 &1087000108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,10 +405,17 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 2
-  bloomNum: 10
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
+  palmTree: {fileID: 146140, guid: cfbe7f84f21df4fb2ac5eb81eb8e62f4, type: 2}
+  bloomNum: 30
   bloomSize:
-    minimum: 28
-    maximum: 22
+    minimum: 3
+    maximum: 5
   bloomTightness: .400000006
 --- !u!114 &1087000109
 MonoBehaviour:
@@ -434,6 +445,12 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 1
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
   snowMan: {fileID: 183394, guid: 5d4f1ef6504f1413d8ecce25c2da6456, type: 2}
   ice: {fileID: 128288, guid: 3833a58217b66496c8077cd24ece5d7d, type: 2}
   crackedIce: {fileID: 116440, guid: a3e43a03fd8a04462a503d3ec83112a0, type: 2}
@@ -473,6 +490,12 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 3
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
   bloomNum: 30
   bloomSize:
     minimum: 12
@@ -501,6 +524,12 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 0
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
   flatGroundTile: {fileID: 143284, guid: ef9cdb414167e484bbd9f4ced03eef48, type: 2}
   bloomNum: 100
   bloomSize:
@@ -532,6 +561,12 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 4
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
   cactus: {fileID: 127694, guid: e64a10141e20c4aada2872ba16b1330c, type: 2}
   cactusCount:
     minimum: 10
@@ -564,6 +599,12 @@ MonoBehaviour:
   treasureCount:
     minimum: 0
     maximum: 1
+  chestCount:
+    minimum: 1
+    maximum: 2
+  tentCount:
+    minimum: 1
+    maximum: 2
 --- !u!114 &1087000114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,20 +618,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 32
   columns: 32
-  coinCount:
-    minimum: 50
-    maximum: 200
   blockingCount:
     minimum: 50
     maximum: 200
+  chestCount:
+    minimum: 3
+    maximum: 5
   end: 2000000020000000
   enemySpawnInterval: 100
   roomSide: 1
   biomeNumber: 1
   outerWallTiles:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
-  coins:
-  - {fileID: 141174, guid: 2be921a7b0e264bd09ec756fb9331bf0, type: 2}
+  buildingTiles: []
   blocks:
   - {fileID: 107280, guid: 58e74354b2ae4427c8c6bf45abe33544, type: 2}
   startScreen: 1
