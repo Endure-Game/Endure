@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
   - {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
   - {fileID: 134906, guid: 18dc52576b3af4f04acf8c92f038a7a0, type: 2}
+  - {fileID: 146552, guid: cafee7de271f14d2287c804ad0a6659a, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -62,12 +63,12 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: upgrades.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: upgrades.Array.data[4]
       value: 
-      objectReference: {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
+      objectReference: {fileID: 146552, guid: cafee7de271f14d2287c804ad0a6659a, type: 2}
     - target: {fileID: 0}
       propertyPath: upgrades.Array.data[3]
       value: 

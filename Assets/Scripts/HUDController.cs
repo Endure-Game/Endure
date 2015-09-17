@@ -281,7 +281,7 @@ public class HUDController : MonoBehaviour {
 	}
 
 	// Updates entire mapTexture
-	public void FillMapTexture () {
+	public void FillMap () {
 
 		for (var x = 0; x < mapTexture.width; x++) {
 			for (var y = 0; y < mapTexture.height; y++) {

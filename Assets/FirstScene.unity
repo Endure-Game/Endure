@@ -326,6 +326,10 @@ Prefab:
       propertyPath: miniMap
       value: 
       objectReference: {fileID: 1314655351}
+    - target: {fileID: 11439364, guid: fd11df54b479a479b8be820218b187bd, type: 2}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 1644791117}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd11df54b479a479b8be820218b187bd, type: 2}
   m_IsPrefabParent: 0

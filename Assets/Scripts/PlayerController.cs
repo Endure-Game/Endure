@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	public bool locked = true;
 
 	public GameObject itemAnimation;
+	public GameObject hud;
 	public GameObject miniMap;
 
 	private int counter = 0;
@@ -423,6 +424,11 @@ public class PlayerController : MonoBehaviour {
 		case "camo":
 			this.sneak *= .8f;
 			infoText = "Sneak Boost";
+			break;
+
+		case "map":
+			this.hud.GetComponent<HUDController>().FillMap();
+			infoText = "World Revealed";
 			break;
 
 		default:
