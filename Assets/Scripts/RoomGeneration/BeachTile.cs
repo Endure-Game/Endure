@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class BeachTile : BiomeTile
 {
+
+	public GameObject palmTree;
 	// randomization constants
 	public int bloomNum = 100;
 	public RoomManager.Count bloomSize = new RoomManager.Count(3, 7);
@@ -16,20 +18,24 @@ public class BeachTile : BiomeTile
 
 		base.RandomBlocking(region);
 
-		/*for (int num = 0; num < bloomNum; num++) {
-
-			Tile randomTile = region[Random.Range(0, region.Count)];
-			BlockingExplosion(randomTile.x,
-			                  randomTile.y,
-			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
-			                  new TilePlacer(this.PlaceWaterTiles));
-		}*/
-
 		this.PerlinGenerator(region,
 		                     new TilePlacer(this.PlaceWaterTiles),
 		                     .5f,
 		                     .04f);
 
+		for (int num = 0; num < bloomNum; num++) {
+
+			Tile randomTile = region[Random.Range(0, region.Count)];
+			BlockingExplosion(randomTile.x,
+			                  randomTile.y,
+			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
+			                  new TilePlacer(this.PlacePalmTree));
+		}
+
+		/*this.PerlinGenerator(region,
+		                     new TilePlacer(this.PlacePalmTree),
+		                     .49f,
+		                     .04f); */
 	}
 
 	public override int getBiomeNumber() {
@@ -39,5 +45,13 @@ public class BeachTile : BiomeTile
 	public void PlaceWaterTiles(int x, int y) {
 		this.GetComponent<RoomManager>().SetGroundTile(this.getBlockingTile(), x, y);
 		this.tileMap[x,y].blocking = true;
+	}
+
+	public void PlacePalmTree(int x, int y) {
+
+		if (!this.tileMap[x, y].blocking) {
+			this.GetComponent<RoomManager>().PlaceItem(palmTree, x, y);
+			this.tileMap[x,y].blocking = true;
+		}
 	}
 }

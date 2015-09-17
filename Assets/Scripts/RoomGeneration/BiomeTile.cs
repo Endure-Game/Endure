@@ -43,8 +43,8 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 
 		if (tile.item == null) {
-			tile.blocking = true;
 			spritePlacer(x, y);
+			tile.blocking = true;
 		}
 
 		for (int i = -1; i <= 1; i++) {

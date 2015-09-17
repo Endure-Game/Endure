@@ -496,10 +496,11 @@ MonoBehaviour:
   tentCount:
     minimum: 0
     maximum: 1
-  bloomNum: 10
+  palmTree: {fileID: 146140, guid: cfbe7f84f21df4fb2ac5eb81eb8e62f4, type: 2}
+  bloomNum: 100
   bloomSize:
-    minimum: 28
-    maximum: 22
+    minimum: 4
+    maximum: 2
   bloomTightness: .400000006
 --- !u!114 &373454791
 MonoBehaviour:
@@ -603,8 +604,10 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 132716, guid: 6241f2a9353bc43f5b027a9eda45d5a5, type: 2}
   enemies:
-  - chance: 1
+  - chance: .600000024
     enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - chance: .400000006
+    enemy: {fileID: 112292, guid: 4de7070b8d865fe42b264741cc057b92, type: 2}
   treasureCount:
     minimum: 0
     maximum: 0
@@ -678,8 +681,10 @@ MonoBehaviour:
   blockingTiles:
   - {fileID: 125472, guid: cdee29f0838fe4d7a873a1c367958af9, type: 2}
   enemies:
-  - chance: 1
+  - chance: .5
     enemy: {fileID: 104892, guid: 4b16e0c2eda59714186a8cb0417f1480, type: 2}
+  - chance: .5
+    enemy: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
   treasureCount:
     minimum: 0
     maximum: 1
