@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ItemController : MonoBehaviour {
 
-	public string name;
+	new public string name;
 
 	// Use this for initialization
 	private float aggro = (float) 0.18;
