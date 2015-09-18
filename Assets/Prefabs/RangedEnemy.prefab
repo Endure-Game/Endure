@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  aggro: 5
+  aggro: 7
   deAggro: 10
   moveDuration: .800000012
   idleDuration: .600000024
@@ -101,7 +101,7 @@ MonoBehaviour:
     isMelee: 0
   ranged:
     isRanged: 1
-    rangedDistance: 4
+    rangedDistance: 5
   coward:
     isCoward: 1
     cowardDistance: 2
@@ -119,8 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   knockback: .5
-  arrowDelay: .5
-  bulletDelay: 1.5
+  arrowDelay: 1.5
+  bulletDelay: 3
   arrow: {fileID: 175468, guid: e7979e722d426934caf56efc3aad3726, type: 2}
   bullet: {fileID: 140046, guid: 271aadecde6084ebb8d8c98b2705d855, type: 2}
 --- !u!114 &11463440
@@ -289,6 +289,22 @@ Prefab:
       propertyPath: drops.Array.data[2].item
       value: 
       objectReference: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: arrowDelay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bulletDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ranged.rangedDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: aggro
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112292}

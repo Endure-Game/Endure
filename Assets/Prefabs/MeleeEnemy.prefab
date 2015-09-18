@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   aggro: 5
-  deAggro: 6
+  deAggro: 8
   moveDuration: .800000012
   idleDuration: .600000024
   melee:
@@ -230,7 +230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deAggro
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
