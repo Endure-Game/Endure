@@ -5,6 +5,7 @@ public class MeleeAttacker : MonoBehaviour {
 	public int damage = 3;
 	public float knockback = 0.5f;
 	public float range = 0.6f;
+	public float widthMultiplier = 1.5f;
 
 	private GameObject weapon;
 
@@ -72,10 +73,10 @@ public class MeleeAttacker : MonoBehaviour {
 			collider.size = playerSize;
 
 			if (horizontal) {
-				collider.size = new Vector2 (collider.size.x, this.range);
+				collider.size = new Vector2 (collider.size.x * this.widthMultiplier, this.range);
 				collider.transform.Translate (0, (playerSize.y / 2 + this.range / 2) * direction, 0);
 			} else {
-				collider.size = new Vector2 (this.range, collider.size.y);
+				collider.size = new Vector2 (this.range, collider.size.y * this.widthMultiplier);
 				collider.transform.Translate ((playerSize.x / 2 + this.range / 2) * direction, 0, 0);
 			}
 

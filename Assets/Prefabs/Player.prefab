@@ -156,6 +156,7 @@ MonoBehaviour:
   maxArrows: 50
   locked: 1
   itemAnimation: {fileID: 136876, guid: 3e1189794040845ec97709b94512fb8d, type: 2}
+  hud: {fileID: 0}
   miniMap: {fileID: 0}
 --- !u!114 &11460858
 MonoBehaviour:
@@ -188,6 +189,7 @@ MonoBehaviour:
   damage: 0
   knockback: .5
   range: .600000024
+  widthMultiplier: 1.5
   delay: .300000012
 --- !u!114 &11488712
 MonoBehaviour:

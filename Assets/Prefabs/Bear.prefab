@@ -122,6 +122,7 @@ MonoBehaviour:
   damage: 4
   knockback: 100
   range: .600000024
+  widthMultiplier: 1
   delay: 1
 --- !u!114 &11427952
 MonoBehaviour:
@@ -212,6 +213,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: deathSound
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: widthMultiplier
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
