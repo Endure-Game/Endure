@@ -219,6 +219,12 @@ public abstract class BiomeTile : MonoBehaviour
 		return null;
 	}
 
+	public void RandomFlip(GameObject item) {
+		if (Random.Range(0, 2) == 1) {
+	    item.transform.localScale = new Vector3(-1f, 1f, 1f);
+	  }
+	}
+
 	public GameObject makeEnemy(List<Tile> tiles) {
 
 		GameObject enemy = this.getEnemy();

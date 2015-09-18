@@ -36,11 +36,6 @@ public class StartTile : MonoBehaviour {
     }
 
     this.GetComponent<RoomManager>().PlaceItem(sprite, x, y);
-
-    // Flip tile half of the time
-    if (Random.Range(0, 2) == 1) {
-      tileMap[x, y].item.transform.localScale = new Vector3(-1f, 1f, 1f);
-    }
   }
 
   private void PlaceInStartingPath(GameObject sprite) {
