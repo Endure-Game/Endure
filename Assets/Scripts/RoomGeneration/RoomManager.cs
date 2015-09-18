@@ -597,7 +597,7 @@ public class RoomManager : MonoBehaviour {
 
 	public bool PlayerIsNear (int x, int y) {
 
-		int near = 8;
+		int near = 15;
 
 		var playerPos = PlayerController.instance.transform.position;
 		return x < (int)(playerPos.x + 15.5) + near &&
