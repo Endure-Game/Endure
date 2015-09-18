@@ -144,10 +144,10 @@ public class EnemyFullAI : MonoBehaviour {
 			}
 
 			//Animation for player movement
-			if (this.rb2d.velocity.x > 0) {
+			if (this.rb2d.velocity.x > 0 && this.rb2d.velocity.y != 0) {
 				animator.SetBool("moving", true);
 				transform.localScale = new Vector3(1f, 1f, 1f);
-			} else if (this.rb2d.velocity.x < 0) {
+			} else if (this.rb2d.velocity.x < 0 && this.rb2d.velocity.y != 0) {
 				animator.SetBool("moving", true);
 				transform.localScale = new Vector3(-1f, 1f, 1f);
 			} else {
