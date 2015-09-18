@@ -204,7 +204,7 @@ public abstract class BiomeTile : MonoBehaviour
 					int xPos = tile.x + x;
 					int yPos = tile.y + y;
 
-					if (xPos < 0 || yPos < 0 || xPos > width || yPos >= height ||
+					if (xPos < 0 || yPos < 0 || xPos >= width || yPos >= height ||
 							this.tileMap[xPos, yPos].blocking || biome != tile.biome) {
 						open = false;
 					}

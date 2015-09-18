@@ -135,6 +135,18 @@ public class RoomManager : MonoBehaviour {
 				int biomeIndex = Random.Range (0, 6);
 				int altitude = Random.Range (0, 2);
 
+				// Don't put a forest or plains in the last biome
+				if ((i / randomPointsRegion + j / randomPointsRegion) == 9) {
+					while (biomeIndex == 0 || biomeIndex == 2) {
+						biomeIndex = Random.Range (0, 6);
+					}
+				// Don't put a mountain or desert in the first biome
+				} else if (i + j == 0) {
+					while (biomeIndex == 1 || biomeIndex == 3) {
+						biomeIndex = Random.Range (0, 6);
+					}
+				}
+
 				BiomeTile biome;
 				if (biomeIndex == 0) {
 					biome = this.ForestTile;
@@ -215,6 +227,10 @@ public class RoomManager : MonoBehaviour {
 					}
 				}
 			}
+		}
+
+		foreach (Region region in this.regions) {
+			region.ShuffleRegion();
 		}
 	}
 
