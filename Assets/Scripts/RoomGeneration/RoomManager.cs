@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviour {
 	public Count blockingCount = new Count (15, 25);
 	public Count chestCount = new Count (3, 5);
 	public int[] end = new int[2] {255, 255};
-	public int enemySpawnInterval = 100;
+	public int enemySpawnInterval = 10;
 
 	public int roomSide = 3;
 	public int biomeNumber = 4;
@@ -46,12 +46,14 @@ public class RoomManager : MonoBehaviour {
 
 	private int timer = 0;
 	void Update() {
-		// spawn enemies
 
+		// spawn enemies
 		if (!startScreen) {
 			timer++;
 			if (timer % this.enemySpawnInterval == 0) {
-				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+				int randomRegionIndex = (int) Math.Sqrt(Random.Range(0, this.regions.Count * this.regions.Count));
+				print (randomRegionIndex);
+				this.regions[randomRegionIndex].spawnEnemy();
 			}
 		}
 	}

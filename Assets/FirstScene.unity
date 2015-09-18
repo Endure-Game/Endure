@@ -508,7 +508,7 @@ MonoBehaviour:
     minimum: 3
     maximum: 5
   end: 2000000020000000
-  enemySpawnInterval: 100
+  enemySpawnInterval: 30
   roomSide: 8
   biomeNumber: 16
   outerWallTiles:
