@@ -16,8 +16,6 @@ public class BeachTile : BiomeTile
 
 	public override void RandomBlocking(List<Tile> region) {
 
-		base.RandomBlocking(region);
-
 		this.PerlinGenerator(region,
 		                     new TilePlacer(this.PlaceWaterTiles),
 		                     .5f,
@@ -31,6 +29,8 @@ public class BeachTile : BiomeTile
 			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
 			                  new TilePlacer(this.PlacePalmTree));
 		}
+
+		base.RandomBlocking(region);
 	}
 
 	public override int getBiomeNumber() {

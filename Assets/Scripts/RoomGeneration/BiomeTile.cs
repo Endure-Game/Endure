@@ -101,18 +101,6 @@ public abstract class BiomeTile : MonoBehaviour
 		}
 	}
 
-	public void CreateHill(Tile centerTile) {
-		int x = centerTile.x;
-		int y = centerTile.y;
-		for (int i = -2; i <= 2; i++) {
-			for (int j = -2; j <= 2; j++) {
-				if (Mathf.Abs(i) != 2 || Mathf.Abs(j) != 2) {
-					tileMap[x + i, y + j].elevation++;
-				}
-			}
-		}
-	}
-
 	public virtual GameObject getGroundTile() {
 		return this.groundTiles[Random.Range(0, this.groundTiles.Length)];
 	}
@@ -202,6 +190,33 @@ public abstract class BiomeTile : MonoBehaviour
 
 
 		}
+	}
+
+	public Tile GetOpenArea(List<Tile> tiles) {
+
+		int biome = tiles[0].biome;
+		foreach (Tile tile in tiles) {
+
+			bool open = true;
+			for (int x = -1; x <= 1; x++) {
+				for (int y = -1; y <= 1; y++) {
+
+					int xPos = tile.x + x;
+					int yPos = tile.y + y;
+
+					if (xPos < 0 || yPos < 0 || xPos > width || yPos >= height ||
+							this.tileMap[xPos, yPos].blocking || biome != tile.biome) {
+						open = false;
+					}
+				}
+			}
+
+			if (open) {
+				return tile;
+			}
+		}
+
+		return null;
 	}
 
 	public GameObject makeEnemy(List<Tile> tiles) {
