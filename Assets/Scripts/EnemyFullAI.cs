@@ -158,10 +158,11 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 
 	public void Stun (GameObject loser) {
-		this.stunTime = 0f;
+		/*this.stunTime = 0f;
 		this.standStill = loser.GetComponent<EnemyFullAI>();
 		this.standStill.coward.isCoward = true;
-		this.isStunned = true;
+		this.isStunned = true;*/
+		this.gameObject.GetComponent<MeleeAttacker>().LockAttacker();
 	}
 	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){
@@ -187,6 +188,7 @@ public class EnemyFullAI : MonoBehaviour {
 			this.rb2d.velocity = Vector2.zero;
 		}
 
+<<<<<<< HEAD
 		/*if (this.targetHeading.magnitude < this.melee.getWeapon ().range + 0.5f) {
 			Vector3 n = this.targetHeading.normalized;
 			if (n.x > Mathf.Sqrt (2f) / 2f) {
@@ -202,6 +204,18 @@ public class EnemyFullAI : MonoBehaviour {
 			Vector3 n = this.targetHeading.normalized;
 			if (n.y < - Mathf.Sqrt (2f) / 2f) {
 				this.melee.getWeapon ().AttackSouth ();
+=======
+		/*if (this.targetHeading.magnitude < this.melee.getWeapon().range + 0.5f) {
+			Vector3 n = this.targetHeading.normalized;
+			if (n.x > Mathf.Sqrt (2) / 2) {
+				this.melee.getWeapon().AttackEast ();
+			} else if (n.x < - Mathf.Sqrt (2) / 2) {
+				this.melee.getWeapon().AttackWest ();
+			} else if (n.y > Mathf.Sqrt (2) / 2) {
+				this.melee.getWeapon().AttackNorth ();
+			} else if (n.y < -Mathf.Sqrt (2) / 2) {
+				this.melee.getWeapon().AttackSouth ();
+>>>>>>> (Bug) Changed melee attackers to hit player on contact. Fixed snowman
 			}
 		}*/
 	}

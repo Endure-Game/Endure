@@ -50,11 +50,11 @@ public class Ouch : MonoBehaviour {
 				target.ChangeHealth (-damage);
 				collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 				//stun the reciepient for a short amount of time
-				GameObject enemy = collider.gameObject;
+				/*GameObject enemy = collider.gameObject;
 				if(enemy.tag != "Player"){
 					EnemyFullAI script = enemy.GetComponent<EnemyFullAI>();
 					script.Stun (enemy);
-				}
+				}*/
 				Sounds.instance.Hit();
 			}
 

@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11401558}
   - 114: {fileID: 11491390}
   - 61: {fileID: 6163806}
+  - 114: {fileID: 11488150}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -149,6 +150,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   deathSound: 1
+--- !u!114 &11488150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d39f3e628fdbb4c978b2b847dd35d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  knockback: .5
+  spawner: {fileID: 0}
+  destroyOnTouch: 0
 --- !u!114 &11491390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,6 +299,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: widthMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damage
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
