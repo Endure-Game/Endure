@@ -158,10 +158,11 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 
 	public void Stun (GameObject loser) {
-		this.stunTime = 0f;
+		/*this.stunTime = 0f;
 		this.standStill = loser.GetComponent<EnemyFullAI>();
 		this.standStill.coward.isCoward = true;
-		this.isStunned = true;
+		this.isStunned = true;*/
+		this.gameObject.GetComponent<MeleeAttacker>().LockAttacker();
 	}
 	//moveTo should be a vector3 of position
 	public void MoveTo (Vector3 moveTo){
@@ -187,7 +188,7 @@ public class EnemyFullAI : MonoBehaviour {
 			this.rb2d.velocity = Vector2.zero;
 		}
 
-		if (this.targetHeading.magnitude < this.melee.getWeapon ().range + 0.5f) {
+		/*if (this.targetHeading.magnitude < this.melee.getWeapon ().range + 0.5f) {
 			Vector3 n = this.targetHeading.normalized;
 			if (n.x > Mathf.Sqrt (2f) / 2f) {
 				this.melee.getWeapon ().AttackEast ();
@@ -203,7 +204,7 @@ public class EnemyFullAI : MonoBehaviour {
 			if (n.y < - Mathf.Sqrt (2f) / 2f) {
 				this.melee.getWeapon ().AttackSouth ();
 			}
-		}
+		}*/
 	}
 	void RangedAttack (){
 		//heading = player.transform.position - this.transform.position;
@@ -272,6 +273,7 @@ public class EnemyFullAI : MonoBehaviour {
 			}
 		}
 	}
+
 
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){

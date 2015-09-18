@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11414150}
   m_Layer: 0
   m_Name: SnowMan
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
+  deathSound: 0
 --- !u!212 &21276110
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -145,6 +146,10 @@ Prefab:
       propertyPath: drops.Array.data[3].item
       value: 
       objectReference: {fileID: 195750, guid: 2f9b1b45b6920f14d90c25aad3a7756e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183394}

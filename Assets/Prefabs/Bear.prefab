@@ -16,6 +16,8 @@ GameObject:
   - 114: {fileID: 11427952}
   - 114: {fileID: 11421244}
   - 114: {fileID: 11404386}
+  - 114: {fileID: 11485124}
+  - 61: {fileID: 6131318}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Enemy
@@ -30,7 +32,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.8929996, y: -6.29099989, z: 0}
+  m_LocalPosition: {x: 3.74629307, y: -4.44907665, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +53,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &6131318
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179610}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -.0199999996}
+  serializedVersion: 2
+  m_Size: {x: 1.64999998, y: 1.16999996}
 --- !u!61 &6186202
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -63,7 +78,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: -.0199999996}
   serializedVersion: 2
-  m_Size: {x: 1.64999998, y: 1.16999996}
+  m_Size: {x: 1.54999995, y: 1.04999995}
 --- !u!95 &9593558
 Animator:
   serializedVersion: 3
@@ -149,6 +164,21 @@ MonoBehaviour:
     isCoward: 0
     cowardDistance: 2
     maxRunDistance: 6
+--- !u!114 &11485124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d39f3e628fdbb4c978b2b847dd35d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  knockback: 2
+  spawner: {fileID: 0}
+  destroyOnTouch: 0
 --- !u!212 &21271610
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -217,6 +247,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: widthMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.04999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.54999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

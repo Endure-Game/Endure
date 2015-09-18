@@ -18,11 +18,26 @@ public class Ouch : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		OnOwie (collider);
+		DoOwie (collider);
 	}
 
 	void OnColliderEnter2D (Collider2D collider) {
-		OnOwie (collider);
+		DoOwie (collider);
+	}
+
+	void DoOwie (Collider2D collider){
+		MeleeAttacker meleeAttacker = this.gameObject.GetComponent<MeleeAttacker> ();
+		print (meleeAttacker);
+		if (collider.tag != this.tag) {
+			if (meleeAttacker != null) {
+				if (meleeAttacker.Locked == false) {
+					OnOwie (collider);
+					meleeAttacker.LockAttacker ();
+				}
+			} else {
+				OnOwie (collider);
+			}
+		}
 	}
 
 
@@ -37,11 +52,11 @@ public class Ouch : MonoBehaviour {
 				target.ChangeHealth (-damage);
 				collider.transform.position += (collider.transform.position - this.transform.position).normalized * this.knockback;
 				//stun the reciepient for a short amount of time
-				GameObject enemy = collider.gameObject;
+				/*GameObject enemy = collider.gameObject;
 				if(enemy.tag != "Player"){
 					EnemyFullAI script = enemy.GetComponent<EnemyFullAI>();
 					script.Stun (enemy);
-				}
+				}*/
 				Sounds.instance.Hit();
 			}
 
