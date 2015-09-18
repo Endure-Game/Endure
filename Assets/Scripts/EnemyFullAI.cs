@@ -181,22 +181,27 @@ public class EnemyFullAI : MonoBehaviour {
 	void MeleeAttack (){
 		//heading = this.lastPlayerPos - this.transform.position;
 		this.oldPosition = this.transform.position;
-		if (!this.melee.getWeapon().Locked) {
+		if (!this.melee.getWeapon ().Locked) {
 			this.MoveTo (this.lastPlayerPos);
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
 
-		if (this.targetHeading.magnitude < this.melee.getWeapon().range + 0.5f) {
+		if (this.targetHeading.magnitude < this.melee.getWeapon ().range + 0.5f) {
 			Vector3 n = this.targetHeading.normalized;
-			if (n.x > Mathf.Sqrt (2) / 2) {
-				this.melee.getWeapon().AttackEast ();
-			} else if (n.x < - Mathf.Sqrt (2) / 2) {
-				this.melee.getWeapon().AttackWest ();
-			} else if (n.y > Mathf.Sqrt (2) / 2) {
-				this.melee.getWeapon().AttackNorth ();
-			} else if (n.y < -Mathf.Sqrt (2) / 2) {
-				this.melee.getWeapon().AttackSouth ();
+			if (n.x > Mathf.Sqrt (2f) / 2f) {
+				this.melee.getWeapon ().AttackEast ();
+			} else if (n.x < - Mathf.Sqrt (2f) / 2f) {
+				this.melee.getWeapon ().AttackWest ();
+			} else if (n.y > Mathf.Sqrt (2f) / 2f) {
+				this.melee.getWeapon ().AttackNorth ();
+			} else if (n.y < - Mathf.Sqrt (2f) / 2f) {
+				this.melee.getWeapon ().AttackSouth ();
+			}
+		} else if (this.targetHeading.magnitude < this.melee.getWeapon ().range + 5f){
+			Vector3 n = this.targetHeading.normalized;
+			if (n.y < - Mathf.Sqrt (2f) / 2f) {
+				this.melee.getWeapon ().AttackSouth ();
 			}
 		}
 	}
@@ -206,18 +211,20 @@ public class EnemyFullAI : MonoBehaviour {
 		//if (true) {
 		//print ("Distance: " + this.targetHeading.magnitude + "|cowardDistance: " + this.coward.cowardDistance);
 		this.oldPosition = this.transform.position;
-		if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance * this.player.sneak) {
-			this.CowardRun ();
-		} else if (this.targetHeading.magnitude < this.ranged.rangedDistance){
-			//print ("PRINT SOME SHIT OUT2");
-			//Vector3 target = heading;
-			//print (target.normalized);
-			//target.z = player.transform.position.z;
-			this.ranged.getWeapon().Attack (player.transform.position);
-		} else if (!this.ranged.getWeapon().Locked) {
-			//print ("PRINT SOME SHIT OUT");
-			this.MoveTo (lastPlayerPos);
-			//this.rb2d.velocity = this.speed * heading.normalized;
+		if (!this.ranged.getWeapon ().Locked) {
+			if (this.coward.isCoward && this.targetHeading.magnitude < this.coward.cowardDistance * this.player.sneak) {
+				this.CowardRun ();
+			} else if (this.targetHeading.magnitude < this.ranged.rangedDistance) {
+				//print ("PRINT SOME SHIT OUT2");
+				//Vector3 target = heading;
+				//print (target.normalized);
+				//target.z = player.transform.position.z;
+				this.ranged.getWeapon ().Attack (player.transform.position);
+			} else {
+				//print ("PRINT SOME SHIT OUT");
+				this.MoveTo (lastPlayerPos);
+				//this.rb2d.velocity = this.speed * heading.normalized;
+			}
 		} else {
 			this.rb2d.velocity = Vector2.zero;
 		}
