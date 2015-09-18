@@ -19,7 +19,7 @@ public class ItemController : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D newOther) {
 		Collider2D other = newOther.collider;
-		print ("Is touching");
+		//print ("Is touching");
 		if (other.tag == "Player") {
 			Sounds.instance.Pickup ();
 			Destroy (this.gameObject);
