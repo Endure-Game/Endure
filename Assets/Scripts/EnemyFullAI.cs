@@ -277,7 +277,7 @@ public class EnemyFullAI : MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D collided){
 		if (collided.gameObject.tag == "Player" && this.melee.isMelee) {
 			print ("COLLIDED");
-			this.gameObject.GetComponent<MeleeAttacker>().LockAttacker();
+			//this.gameObject.GetComponent<MeleeAttacker>().LockAttacker();
 		}
 	}
 

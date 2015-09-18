@@ -21,20 +21,22 @@ public class Ouch : MonoBehaviour {
 		DoOwie (collider);
 	}
 
-	void OnColliderEnter2D (Collider2D collider) {
-		DoOwie (collider);
+	void OnColliderEnter2D (Collision2D collider) {
+		DoOwie (collider.gameObject.GetComponent<Collider2D>());
 	}
 
 	void DoOwie (Collider2D collider){
 		MeleeAttacker meleeAttacker = this.gameObject.GetComponent<MeleeAttacker> ();
 		print (meleeAttacker);
-		if (meleeAttacker != null) {
-			if (meleeAttacker.Locked == false) {
+		if (collider.tag != this.tag) {
+			if (meleeAttacker != null) {
+				if (meleeAttacker.Locked == false) {
+					OnOwie (collider);
+					meleeAttacker.LockAttacker ();
+				}
+			} else {
 				OnOwie (collider);
-				meleeAttacker.LockAttacker ();
 			}
-		} else {
-			OnOwie (collider);
 		}
 	}
 

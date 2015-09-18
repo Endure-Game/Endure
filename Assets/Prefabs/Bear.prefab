@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11427952}
   - 114: {fileID: 11421244}
   - 114: {fileID: 11404386}
-  - 114: {fileID: 11445116}
+  - 114: {fileID: 11485124}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Enemy
@@ -150,7 +150,7 @@ MonoBehaviour:
     isCoward: 0
     cowardDistance: 2
     maxRunDistance: 6
---- !u!114 &11445116
+--- !u!114 &11485124
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d39f3e628fdbb4c978b2b847dd35d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
-  knockback: 4
+  damage: 40
+  knockback: .5
   spawner: {fileID: 0}
   destroyOnTouch: 0
 --- !u!212 &21271610
@@ -236,7 +236,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
-      value: 4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: knockback
