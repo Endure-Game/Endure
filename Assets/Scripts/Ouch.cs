@@ -21,8 +21,8 @@ public class Ouch : MonoBehaviour {
 		DoOwie (collider);
 	}
 
-	void OnColliderEnter2D (Collision2D collider) {
-		DoOwie (collider.gameObject.GetComponent<Collider2D>());
+	void OnColliderEnter2D (Collider2D collider) {
+		DoOwie (collider);
 	}
 
 	void DoOwie (Collider2D collider){

@@ -274,12 +274,6 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D (Collision2D collided){
-		if (collided.gameObject.tag == "Player" && this.melee.isMelee) {
-			print ("COLLIDED");
-			//this.gameObject.GetComponent<MeleeAttacker>().LockAttacker();
-		}
-	}
 
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
