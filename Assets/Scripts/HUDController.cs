@@ -38,6 +38,10 @@ public class HUDController : MonoBehaviour {
 
 	private Texture2D mapTexture;
 
+	//Reduce hud updates
+	private float timer = 0;
+	private float updateTime = 0.05f;
+
 	// Use this for initialization
 	void Start () {
 		this.playerHealth = PlayerController.instance.Health;
@@ -61,156 +65,160 @@ public class HUDController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		timer += Time.deltaTime;
 
-		this.UpdateMapTexture();
+		if (timer >= updateTime) {
+			timer = 0;
+			this.UpdateMapTexture ();
 
-		// Health bar
-		healthBar.transform.localScale = new Vector3(1f * this.playerHealth.CurrentHealth / this.startingMaxHealth, 1f, 1f);
-		maxHealthBar.transform.localScale = new Vector3(1f * this.playerHealth.maxHealth / this.startingMaxHealth, 1f, 1f);
+			// Health bar
+			healthBar.transform.localScale = new Vector3 (1f * this.playerHealth.CurrentHealth / this.startingMaxHealth, 1f, 1f);
+			maxHealthBar.transform.localScale = new Vector3 (1f * this.playerHealth.maxHealth / this.startingMaxHealth, 1f, 1f);
 
-		// low health warning
-		if (this.playerHealth.CurrentHealth <= this.playerHealth.maxHealth / 10) {
-			lowHealth.color = new Color(255, 0, 0, 0.3f);
-		} else {
-			lowHealth.color = new Color(0, 0, 0, 0);
-		}
+			// low health warning
+			if (this.playerHealth.CurrentHealth <= this.playerHealth.maxHealth / 10) {
+				lowHealth.color = new Color (255, 0, 0, 0.3f);
+			} else {
+				lowHealth.color = new Color (0, 0, 0, 0);
+			}
 
-		// pause
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			this.paused = !this.paused;
+			// pause
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				this.paused = !this.paused;
+
+				if (this.paused) {
+					Time.timeScale = 0;
+					this.pauseText.text = "PAUSED [ESC]";
+
+				} else {
+					Time.timeScale = 1;
+					this.pauseText.text = "";
+				}
+			}
 
 			if (this.paused) {
-				Time.timeScale = 0;
-				this.pauseText.text = "PAUSED [ESC]";
-
-			} else {
-				Time.timeScale = 1;
-				this.pauseText.text = "";
+				lowHealth.color = new Color (0, 0, 0, 0.8f);
 			}
-		}
 
-		if (this.paused) {
-			lowHealth.color = new Color(0, 0, 0, 0.8f);
-		}
+			var sample = new GameObject ();
+			sample.AddComponent<Image> ().sprite = this.selected;
+			float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
+			Destroy (sample);
 
-		var sample = new GameObject ();
-		sample.AddComponent<Image> ().sprite = this.selected;
-		float iconWidth = sample.GetComponent<RectTransform> ().rect.width;
-		Destroy (sample);
+			float barWidth = iconWidth * PlayerController.instance.inventory.Count;
 
-		float barWidth = iconWidth * PlayerController.instance.inventory.Count;
+			int newInventorySize = PlayerController.instance.inventory.Count;
 
-		int newInventorySize = PlayerController.instance.inventory.Count;
+			if (PlayerController.instance.inventory.Count != oldInventorySize) {
+				oldInventorySize = newInventorySize;
 
-		if (PlayerController.instance.inventory.Count != oldInventorySize) {
-			oldInventorySize = newInventorySize;
+				// inventory
+				Destroy (this.inventory);
+				this.inventory = new GameObject ();
+				this.inventory.transform.parent = this.gameObject.transform;
 
-			// inventory
-			Destroy (this.inventory);
-			this.inventory = new GameObject ();
-			this.inventory.transform.parent = this.gameObject.transform;
+				int i = 0;
 
-			int i = 0;
+				foreach (var item in PlayerController.instance.inventory) {
+					var icon = new GameObject ();
+					icon.AddComponent<Image> ().sprite = item.sprite;
+					var rectTransform = icon.GetComponent<RectTransform> ();
+					icon.transform.SetParent (this.inventory.transform);
+					float x = this.GetComponent<RectTransform> ().rect.width * this.GetComponent<Canvas> ().scaleFactor - barWidth + i * rectTransform.rect.width + 40;
+					float y = this.GetComponent<RectTransform> ().rect.height * this.GetComponent<Canvas> ().scaleFactor - rectTransform.rect.width / 2;
+					icon.transform.position = new Vector3 (x, y, 0);
 
-			foreach (var item in PlayerController.instance.inventory) {
-				var icon = new GameObject ();
-				icon.AddComponent<Image> ().sprite = item.sprite;
-				var rectTransform = icon.GetComponent<RectTransform> ();
-				icon.transform.SetParent(this.inventory.transform);
-				float x = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + i * rectTransform.rect.width + 40;
-				float y = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rectTransform.rect.width / 2;
-				icon.transform.position = new Vector3 (x, y, 0);
+					i++;
 
-				i++;
+					// Give a number to each icon, indicating it's button
+					var number = new GameObject ();
+					var text = number.AddComponent<Text> ();
+					text.text = "" + i;
+					text.font = this.font;
+					text.fontSize = 32;
+					number.AddComponent<Outline> ();
 
-				// Give a number to each icon, indicating it's button
-				var number = new GameObject ();
-				var text = number.AddComponent<Text> ();
-				text.text = "" + i;
-				text.font = this.font;
-				text.fontSize = 32;
-				number.AddComponent<Outline>();
-
-				number.transform.SetParent (icon.transform);
-				number.transform.position = new Vector3 (x + 4, y - 4, 0);
+					number.transform.SetParent (icon.transform);
+					number.transform.position = new Vector3 (x + 4, y - 4, 0);
+				}
 			}
-		}
 
-		if (newInventorySize > 0) {
-			Destroy (this.border);
-			this.border = new GameObject ();
-			border.AddComponent<Image> ().sprite = this.selected;
-			border.transform.SetParent (this.inventory.transform);
-			var rt = border.GetComponent<RectTransform> ();
+			if (newInventorySize > 0) {
+				Destroy (this.border);
+				this.border = new GameObject ();
+				border.AddComponent<Image> ().sprite = this.selected;
+				border.transform.SetParent (this.inventory.transform);
+				var rt = border.GetComponent<RectTransform> ();
 
-			var selX = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width  + 40;
-			var selY = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - rt.rect.height / 2;
+				var selX = this.GetComponent<RectTransform> ().rect.width * this.GetComponent<Canvas> ().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width + 40;
+				var selY = this.GetComponent<RectTransform> ().rect.height * this.GetComponent<Canvas> ().scaleFactor - rt.rect.height / 2;
 
-			border.transform.position = new Vector3 (selX, selY, 0);
+				border.transform.position = new Vector3 (selX, selY, 0);
 
-			Destroy (this.control);
-			this.control = new GameObject ();
+				Destroy (this.control);
+				this.control = new GameObject ();
 
-			switch (PlayerController.instance.inventory[PlayerController.instance.InventoryIndex].control) {
+				switch (PlayerController.instance.inventory [PlayerController.instance.InventoryIndex].control) {
 				case PlayerController.Control.MOUSE:
 					control.AddComponent<Image> ().sprite = this.mouse;
-				break;
+					break;
 				case PlayerController.Control.SPACE:
 					control.AddComponent<Image> ().sprite = this.space;
-				break;
+					break;
+				}
+
+				control.transform.SetParent (this.inventory.transform);
+				control.transform.position = new Vector3 (selX, selY, 0);
 			}
 
-			control.transform.SetParent (this.inventory.transform);
-			control.transform.position = new Vector3 (selX, selY, 0);
+			for (int i = 0; i < PlayerController.instance.inventory.Count - 1; i++) {
+				if (PlayerController.instance.inventory [i].name == "BowAndArrow") {
+					//show the ammount of arrows the player currently has
+				}
+				if (PlayerController.instance.inventory [i].name == "Rifle") {
+					//show the ammount of bullets the player currently has
+				}
+			}
+
+			// Create ammo count objects
+			Destroy (this.count);
+			this.count = new GameObject ();
+
+			float xCount = this.GetComponent<RectTransform> ().rect.width * this.GetComponent<Canvas> ().scaleFactor - 20;
+			float yCount = this.GetComponent<RectTransform> ().rect.height * this.GetComponent<Canvas> ().scaleFactor - iconWidth * 2 + 40;
+
+			var arrowCount = new GameObject ();
+
+			var arrowNumber = arrowCount.AddComponent<Text> ();
+			arrowNumber.text = "x" + PlayerController.instance.arrows;
+			arrowNumber.font = this.font;
+			arrowNumber.fontSize = 32;
+			arrowCount.AddComponent<Outline> ();
+			var arrowSprite = new GameObject ();
+			arrowSprite.AddComponent<Image> ().sprite = this.arrow;
+			arrowSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
+			arrowSprite.transform.SetParent (arrowCount.transform);
+			arrowSprite.transform.position = new Vector3 (-70f, 35f, 0f);
+			arrowCount.transform.SetParent (this.count.transform);
+			arrowCount.transform.position = new Vector3 (xCount, yCount, 0f);
+
+			var rifleCount = new GameObject ();
+			var rifleNumber = rifleCount.AddComponent<Text> ();
+			rifleNumber.text = "x" + PlayerController.instance.bullets;
+			rifleNumber.font = this.font;
+			rifleNumber.fontSize = 32;
+			rifleCount.AddComponent<Outline> ();
+			var rifleSprite = new GameObject ();
+			rifleSprite.AddComponent<Image> ().sprite = this.bullet;
+			rifleSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
+			rifleSprite.transform.SetParent (rifleCount.transform);
+			rifleSprite.transform.position = new Vector3 (-70f, 35f, 0f);
+			rifleCount.transform.SetParent (this.count.transform);
+			rifleCount.transform.position = new Vector3 (xCount, yCount - 35, 0f);
+
+			this.count.transform.SetParent (this.inventory.transform);
+			this.count.transform.position = new Vector3 (0, 0, 0);
 		}
-
-		for (int i = 0; i < PlayerController.instance.inventory.Count - 1; i++) {
-			if(PlayerController.instance.inventory[i].name == "BowAndArrow"){
-				//show the ammount of arrows the player currently has
-			}
-			if(PlayerController.instance.inventory[i].name == "Rifle"){
-				//show the ammount of bullets the player currently has
-			}
-		}
-
-		// Create ammo count objects
-		Destroy (this.count);
-		this.count = new GameObject ();
-
-		float xCount = this.GetComponent<RectTransform>().rect.width * this.GetComponent<Canvas>().scaleFactor - 20;
-		float yCount = this.GetComponent<RectTransform>().rect.height * this.GetComponent<Canvas>().scaleFactor - iconWidth * 2 + 40;
-
-		var arrowCount = new GameObject();
-
-		var arrowNumber = arrowCount.AddComponent<Text> ();
-		arrowNumber.text = "x" + PlayerController.instance.arrows;
-		arrowNumber.font = this.font;
-		arrowNumber.fontSize = 32;
-		arrowCount.AddComponent<Outline>();
-		var arrowSprite = new GameObject();
-		arrowSprite.AddComponent<Image> ().sprite = this.arrow;
-		arrowSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
-		arrowSprite.transform.SetParent (arrowCount.transform);
-		arrowSprite.transform.position = new Vector3 (-70f, 35f, 0f);
-		arrowCount.transform.SetParent (this.count.transform);
-		arrowCount.transform.position = new Vector3 (xCount, yCount, 0f);
-
-		var rifleCount = new GameObject ();
-		var rifleNumber = rifleCount.AddComponent<Text> ();
-		rifleNumber.text = "x" + PlayerController.instance.bullets;
-		rifleNumber.font = this.font;
-		rifleNumber.fontSize = 32;
-		rifleCount.AddComponent<Outline>();
-		var rifleSprite = new GameObject();
-		rifleSprite.AddComponent<Image> ().sprite = this.bullet;
-		rifleSprite.transform.localScale = new Vector3 (.4f, .4f, 1f);
-		rifleSprite.transform.SetParent (rifleCount.transform);
-		rifleSprite.transform.position = new Vector3 (-70f, 35f, 0f);
-		rifleCount.transform.SetParent (this.count.transform);
-		rifleCount.transform.position = new Vector3 (xCount, yCount - 35, 0f);
-
-		this.count.transform.SetParent (this.inventory.transform);
-		this.count.transform.position = new Vector3 (0, 0, 0);
 	}
 
 	Color colorForTile (Tile t) {

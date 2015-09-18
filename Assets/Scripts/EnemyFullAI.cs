@@ -278,6 +278,7 @@ public class EnemyFullAI : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D collided){
 		if(collided.tag == "Player"){
 			//print ("Activated Enemy");
+			this.gameObject.SetActiveRecursively(true);
 			this.active = true;
 		}
 	}
@@ -288,6 +289,7 @@ public class EnemyFullAI : MonoBehaviour {
 		//print ("collider radius: " + playerCollider.radius + " headingmag: " + heading.magnitude);
 		if (collided.tag == "Player" && this.targetHeading.magnitude >= playerCollider.radius) {
 			//print ("Deactivated Enemy");
+			this.gameObject.SetActiveRecursively(false);
 			this.active = false;
 		}
 	}
