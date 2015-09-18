@@ -215,7 +215,7 @@ public class ElevationTile : MonoBehaviour
 		return wallObject;
 	}
 
-	private Dictionary<string, GameObject> wallsHash = new Dictionary<string, GameObject>();
+	public static Dictionary<string, GameObject> wallsHash = new Dictionary<string, GameObject>();
 	private GameObject GetWallTile(List<int> walls) {
 
 		string key = "";
@@ -224,15 +224,15 @@ public class ElevationTile : MonoBehaviour
 		}
 
 		GameObject newWall = null;
-		if (!wallsHash.TryGetValue(key, out newWall)) {
+		if (!ElevationTile.wallsHash.TryGetValue(key, out newWall)) {
 			newWall = this.GenerateWallTile(walls);
-			wallsHash.Add(key, newWall);
+			ElevationTile.wallsHash.Add(key, newWall);
 		}
 		return newWall;
 	}
 
-	private void ClearWallsHash() {
-		foreach (GameObject wall in this.wallsHash.Values) {
+	public static void ClearWallsHash() {
+		foreach (GameObject wall in ElevationTile.wallsHash.Values) {
 			wall.transform.position = new Vector3(-20f, -20f, 0f);
 		}
 	}
