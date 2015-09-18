@@ -10,6 +10,6 @@ public class PlayButton : MonoBehaviour {
 	}
 	
 	void OnClick () {
-		Application.LoadLevel (1);
+		Application.LoadLevel (3);
 	}
 }

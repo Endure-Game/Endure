@@ -433,6 +433,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11415768, guid: 2a3d81e7d0c2c31499abfa247aba8ff2, type: 2}
+      propertyPath: endDialogue
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415768, guid: 2a3d81e7d0c2c31499abfa247aba8ff2, type: 2}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 160520, guid: 6d8d5b10115724f45bd98a77c7b7264f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a3d81e7d0c2c31499abfa247aba8ff2, type: 2}
   m_IsPrefabParent: 0
