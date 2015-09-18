@@ -25,17 +25,20 @@ public class MountainTile : BiomeTile
 
 		}
 
-		this.GetComponent<ElevationTile>().SmoothElevation(region);
-
-		/* foreach (Tile tile in region) {
-
-			if (tile.x <= 0 || tile.y <= 0 || tile.x >= )
+		// Add hill with treasure sometimes
+		Tile openTile = this.GetOpenArea(region);
+		if (openTile != null) {
 			for (int x = -1; x <= 1; x++) {
 				for (int y = -1; y <= 1; y++) {
-
+					this.tileMap[openTile.x + x, openTile.y + y].elevation +=2;
 				}
 			}
-		} */
+			openTile.elevation++;
+			this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().randomItem, openTile.x, openTile.y);
+		}
+
+
+		this.GetComponent<ElevationTile>().SmoothElevation(region);
 
 		base.RandomBlocking(region);
 	}

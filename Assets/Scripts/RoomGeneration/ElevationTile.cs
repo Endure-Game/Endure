@@ -75,6 +75,8 @@ public class ElevationTile : MonoBehaviour
 				tile.blocking = true;
 			}
 		}
+
+		this.ClearWallsHash();
 	}
 
 	public GameObject GetTreasureTile() {
@@ -82,9 +84,69 @@ public class ElevationTile : MonoBehaviour
 	}
 
 	// DONT TOUCH MY MAGIC FUNCTION --Chris
-	private GameObject GetWallTile(List<int> walls) {
+	private GameObject GenerateWallTile(List<int> walls) {
 
-		if (walls.Contains(2)) {
+		GameObject wallObject = new GameObject();
+
+		if (walls.Contains(1)) {
+			GameObject copy = Instantiate (this.tiles[1],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[1].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(7)) {
+			GameObject copy = Instantiate (this.tiles[5],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//copy.transform.position = new Vector3(0f, 0f, 0f);
+			//this.tiles[5].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(3)) {
+			GameObject copy = Instantiate (this.tiles[3],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[3].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(5)) {
+			GameObject copy = Instantiate (this.tiles[7],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[7].transform.SetParent( wallObject.transform );
+		}
+
+		if (walls.Contains(8) && !walls.Contains(7) && !walls.Contains(5)) {
+			GameObject copy = Instantiate (this.tiles[6],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[6].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(6) && !walls.Contains(7) && !walls.Contains(3)) {
+			GameObject copy = Instantiate (this.tiles[4],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[4].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(2) && !walls.Contains(1) && !walls.Contains(5)) {
+			GameObject copy = Instantiate (this.tiles[8],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[8].transform.SetParent( wallObject.transform );
+		}
+		if (walls.Contains(0) && !walls.Contains(1) && !walls.Contains(3)) {
+			GameObject copy = Instantiate (this.tiles[2],
+																		 new Vector3(0f, 0f, 0f),
+																		 Quaternion.identity) as GameObject;
+			copy.transform.SetParent( wallObject.transform );
+			//this.tiles[2].transform.SetParent( wallObject.transform );
+		}
+		/*if (walls.Contains(2)) {
 			if (walls.Contains(1) && walls.Contains(5)) {
 				return this.tiles[10];
 			} else if (walls.Contains(1)) {
@@ -148,7 +210,31 @@ public class ElevationTile : MonoBehaviour
 			return this.tiles[5];
 		}
 		print ("elevation placement probems --Show Chris your game if you see this");
-		return this.tiles[0];
+		return this.tiles[0];*/
+
+		return wallObject;
+	}
+
+	public static Dictionary<string, GameObject> wallsHash = new Dictionary<string, GameObject>();
+	private GameObject GetWallTile(List<int> walls) {
+
+		string key = "";
+		foreach (int number in walls) {
+			key += number;
+		}
+
+		GameObject newWall = null;
+		if (!ElevationTile.wallsHash.TryGetValue(key, out newWall)) {
+			newWall = this.GenerateWallTile(walls);
+			ElevationTile.wallsHash.Add(key, newWall);
+		}
+		return newWall;
+	}
+
+	public static void ClearWallsHash() {
+		foreach (GameObject wall in ElevationTile.wallsHash.Values) {
+			wall.transform.position = new Vector3(-20f, -20f, 0f);
+		}
 	}
 
 	public GameObject GetXMarksTheSpot() {

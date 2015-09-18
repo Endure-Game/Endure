@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviour {
 	public Count blockingCount = new Count (15, 25);
 	public Count chestCount = new Count (3, 5);
 	public int[] end = new int[2] {255, 255};
-	public int enemySpawnInterval = 100;
+	public int enemySpawnInterval = 10;
 
 	public int roomSide = 3;
 	public int biomeNumber = 4;
@@ -46,12 +46,13 @@ public class RoomManager : MonoBehaviour {
 
 	private int timer = 0;
 	void Update() {
-		// spawn enemies
 
+		// spawn enemies
 		if (!startScreen) {
 			timer++;
 			if (timer % this.enemySpawnInterval == 0) {
-				this.regions[Random.Range(0, this.regions.Count)].spawnEnemy();
+				int randomRegionIndex = (int) Math.Sqrt(Random.Range(0, this.regions.Count * this.regions.Count));
+				this.regions[randomRegionIndex].spawnEnemy();
 			}
 		}
 	}
@@ -134,6 +135,18 @@ public class RoomManager : MonoBehaviour {
 				int biomeIndex = Random.Range (0, 6);
 				int altitude = Random.Range (0, 2);
 
+				// Don't put a forest or plains in the last biome
+				if ((i / randomPointsRegion + j / randomPointsRegion) == 9) {
+					while (biomeIndex == 0 || biomeIndex == 2) {
+						biomeIndex = Random.Range (0, 6);
+					}
+				// Don't put a mountain or desert in the first biome
+				} else if (i + j == 0) {
+					while (biomeIndex == 1 || biomeIndex == 3) {
+						biomeIndex = Random.Range (0, 6);
+					}
+				}
+
 				BiomeTile biome;
 				if (biomeIndex == 0) {
 					biome = this.ForestTile;
@@ -215,6 +228,10 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+
+		foreach (Region region in this.regions) {
+			region.ShuffleRegion();
+		}
 	}
 
 	public void SetupRooms () {
@@ -245,6 +262,7 @@ public class RoomManager : MonoBehaviour {
 				}
 			}
 		}
+
 		print ("Create outer rock wall " + (Time.realtimeSinceStartup - startTime));
 
 		//create game path
@@ -460,18 +478,22 @@ public class RoomManager : MonoBehaviour {
 				if (currentX - 1 > 3) {
 					Tile westTile = this.tileMap [(int)Mathf.Floor (currentX) - 1, (int)Mathf.Floor (currentY)];
 					westTile.path = true;
+					westTile.blocking = true;
 				}
 				if (currentX + 1 < (this.roomSide * this.rows) - 3) {
 					Tile eastTile = this.tileMap [(int)Mathf.Floor (currentX) + 1, (int)Mathf.Floor (currentY)];
 					eastTile.path = true;
+					eastTile.blocking = true;
 				}
 				if (currentY + 1 < (this.roomSide * this.columns) - 3) {
 					Tile northTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) + 1];
 					northTile.path = true;
+					northTile.blocking = true;
 				}
 				if (currentY - 1 > 3) {
 					Tile southTile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY) - 1];
 					southTile.path = true;
+					southTile.blocking = true;
 				}
 
 				tile.path = true;
@@ -479,6 +501,7 @@ public class RoomManager : MonoBehaviour {
 				if (currentX > 1 && currentX < this.roomSide * this.rows - 1 && currentY > 1 && currentY < this.roomSide * this.columns - 1) {
 					tile = this.tileMap [(int)Mathf.Floor (currentX), (int)Mathf.Floor (currentY)];
 					tile.path = true;
+					tile.blocking = true;
 				}
 				currentY = currentY + moveY;
 
@@ -597,7 +620,7 @@ public class RoomManager : MonoBehaviour {
 
 	public bool PlayerIsNear (int x, int y) {
 
-		int near = 8;
+		int near = 15;
 
 		var playerPos = PlayerController.instance.transform.position;
 		return x < (int)(playerPos.x + 15.5) + near &&
@@ -605,8 +628,6 @@ public class RoomManager : MonoBehaviour {
 				   y < (int)(playerPos.y + 15.5) + near &&
 				   y > (int)(playerPos.y + 15.5) - near;
 	}
-
-
 
 	private void getBiome(int x, int y) {
 		if (this.tileMap[x, y] != null) {
@@ -629,7 +650,5 @@ public class RoomManager : MonoBehaviour {
 		tileMap[x, y] = new Tile (x, y, closestIndex, closest.biome.getBiomeNumber(), false, closest.altitude);
 		this.regions[closestIndex].tiles.Add(tileMap[x, y]);
 	}
-
-
 
 }

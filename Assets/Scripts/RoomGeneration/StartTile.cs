@@ -21,8 +21,8 @@ public class StartTile : MonoBehaviour {
 
     this.PlaceInStartingRange(deadGirl);
     this.PlaceInStartingRange(deadBoy);
-    this.PlaceInStartingRange(startingWeapon);
-    this.PlaceInStartingRange(startingTools[Random.Range(0, startingTools.Length)]);
+    this.PlaceInStartingPath(startingWeapon);
+    this.PlaceInStartingPath(startingTools[Random.Range(0, startingTools.Length)]);
   }
 
   private void PlaceInStartingRange(GameObject sprite) {
@@ -30,16 +30,24 @@ public class StartTile : MonoBehaviour {
 
     int x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
     int y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
-    while (tileMap[x, y].blocking || tileMap[x, y].path) {
+    while (tileMap[x, y].blocking) {
       x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
       y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
     }
 
     this.GetComponent<RoomManager>().PlaceItem(sprite, x, y);
+  }
 
-    // Flip tile half of the time
-    if (Random.Range(0, 2) == 1) {
-      tileMap[x, y].item.transform.localScale = new Vector3(-1f, 1f, 1f);
+  private void PlaceInStartingPath(GameObject sprite) {
+    Tile[,] tileMap = this.GetComponent<RoomManager>().tileMap;
+
+    int x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
+    int y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
+    while (!tileMap[x, y].path || (x == 15 || x == 16) && (y == 15 || y == 16)) {
+      x = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
+      y = 16 + Random.Range((int) (-range / 2), (int) (range / 2));
     }
+
+    this.GetComponent<RoomManager>().PlaceItem(sprite, x, y);
   }
 }

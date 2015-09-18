@@ -16,17 +16,7 @@ public class DesertTile : BiomeTile
 
 	public override void RandomBlocking(List<Tile> region) {
 
-		base.RandomBlocking(region);
-
 		// Add Boulders
-//		for (int num = 0; num < bloomNum; num++) {
-//
-//			Tile randomTile = region[Random.Range(0, region.Count)];
-//			BlockingExplosion(randomTile.x,
-//			                  randomTile.y,
-//			                  Random.Range (this.bloomSize.minimum, this.bloomSize.maximum + 1),
-//			                  new TilePlacer(this.placeBlockingTile));
-//		}
 		this.PerlinGenerator(region,
 		                     new TilePlacer(this.placeBlockingTile),
 		                     .75f,
@@ -41,6 +31,21 @@ public class DesertTile : BiomeTile
 			}
 			this.GetComponent<RoomManager>().PlaceItem(cactus, cactusTile.x, cactusTile.y);
 		}
+
+		// Add sink hole with treasure sometimes
+		Tile openTile = this.GetOpenArea(region);
+		if (openTile != null) {
+			for (int x = -1; x <= 1; x++) {
+				for (int y = -1; y <= 1; y++) {
+					this.tileMap[openTile.x + x, openTile.y + y].elevation--;
+				}
+			}
+			this.GetComponent<RoomManager>().PlaceItem(this.GetComponent<ElevationTile>().randomItem, openTile.x, openTile.y);
+		}
+
+		this.GetComponent<ElevationTile>().SmoothElevation(region);
+
+		base.RandomBlocking(region);
 
 	}
 
