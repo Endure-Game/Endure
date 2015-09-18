@@ -67,6 +67,25 @@ public class HUDController : MonoBehaviour {
 
 		timer += Time.deltaTime;
 
+		// pause
+		print ("we pausing");
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			this.paused = !this.paused;
+
+			if (this.paused) {
+				Time.timeScale = 0;
+				this.pauseText.text = "PAUSED [ESC]";
+
+			} else {
+				Time.timeScale = 1;
+				this.pauseText.text = "";
+			}
+		}
+
+		if (this.paused) {
+			lowHealth.color = new Color (0, 0, 0, 0.8f);
+		}
+
 		if (timer >= updateTime) {
 			timer = 0;
 			this.UpdateMapTexture ();
@@ -80,24 +99,6 @@ public class HUDController : MonoBehaviour {
 				lowHealth.color = new Color (255, 0, 0, 0.3f);
 			} else {
 				lowHealth.color = new Color (0, 0, 0, 0);
-			}
-
-			// pause
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				this.paused = !this.paused;
-
-				if (this.paused) {
-					Time.timeScale = 0;
-					this.pauseText.text = "PAUSED [ESC]";
-
-				} else {
-					Time.timeScale = 1;
-					this.pauseText.text = "";
-				}
-			}
-
-			if (this.paused) {
-				lowHealth.color = new Color (0, 0, 0, 0.8f);
 			}
 
 			var sample = new GameObject ();
