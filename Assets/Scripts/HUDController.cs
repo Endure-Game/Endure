@@ -40,7 +40,7 @@ public class HUDController : MonoBehaviour {
 
 	//Reduce hud updates
 	private float timer = 0;
-	private float updateTime = 0.5f;
+	private float updateTime = 0.1f;
 
 	// Use this for initialization
 	void Start () {
