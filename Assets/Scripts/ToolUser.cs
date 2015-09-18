@@ -70,7 +70,7 @@ public class ToolUser : MonoBehaviour {
 			Vector2 playerSize = this.Size;
 			collider.size = playerSize;
 
-			float verticalAdjustment = playerSize.y / 4;
+			float verticalAdjustment = -playerSize.y / 4;
 			if (this.toolType == "Shovel") {
 				verticalAdjustment = -playerSize.y / 4;
 			} else if (this.toolType == "Lockpick") {
