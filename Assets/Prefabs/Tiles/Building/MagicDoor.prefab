@@ -81,23 +81,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drops:
-  - chance: 4
+  - chance: 9
     item: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
-  - chance: 4
+  - chance: 9
     item: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
-  - chance: 2
-    item: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
-  - chance: 3
-    item: {fileID: 173490, guid: 52a1ff1a9a476440786eb74654730fb8, type: 2}
-  - chance: 6
-    item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
   - chance: 10
-    item: {fileID: 132694, guid: 7faa752b001784610905230bdf2efef9, type: 2}
+    item: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
   - chance: 8
-    item: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
-  - chance: 100
-    item: {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
+    item: {fileID: 173490, guid: 52a1ff1a9a476440786eb74654730fb8, type: 2}
   - chance: 5
+    item: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
+  - chance: 2
+    item: {fileID: 132694, guid: 7faa752b001784610905230bdf2efef9, type: 2}
+  - chance: 3
+    item: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
+  - chance: 1
+    item: {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
+  - chance: 6
     item: {fileID: 101802, guid: 0f9628d1b755d7341a1170c413772178, type: 2}
   - chance: 7
     item: {fileID: 159974, guid: 68def3c6fe10741a78f8da07e47f5e08, type: 2}
@@ -146,7 +146,7 @@ Prefab:
       objectReference: {fileID: 136054, guid: 1d4ea577785c1480fb7969fcd67d385f, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[0].chance
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[1].item
@@ -154,7 +154,7 @@ Prefab:
       objectReference: {fileID: 134756, guid: 69efed2a02ac64b7dbfa69b8e01913f3, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[1].chance
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[2].item
@@ -162,7 +162,7 @@ Prefab:
       objectReference: {fileID: 150814, guid: 93c9347b909284ec28858c83e13833b5, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[2].chance
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[3].item
@@ -170,7 +170,7 @@ Prefab:
       objectReference: {fileID: 173490, guid: 52a1ff1a9a476440786eb74654730fb8, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[3].chance
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[4].item
@@ -178,7 +178,7 @@ Prefab:
       objectReference: {fileID: 133138, guid: 18e14580ae81f491cad9d9e48d9ec50f, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[4].chance
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[5].item
@@ -186,7 +186,7 @@ Prefab:
       objectReference: {fileID: 132694, guid: 7faa752b001784610905230bdf2efef9, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[5].chance
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[6].item
@@ -194,7 +194,7 @@ Prefab:
       objectReference: {fileID: 160124, guid: af39d66b21e01404bb69f850b5eeba8e, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[6].chance
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[7].item
@@ -202,7 +202,7 @@ Prefab:
       objectReference: {fileID: 110054, guid: bf355bc8a89ee4d0ab8b3b448f53ae81, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[7].chance
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[8].item
@@ -210,7 +210,7 @@ Prefab:
       objectReference: {fileID: 101802, guid: 0f9628d1b755d7341a1170c413772178, type: 2}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[8].chance
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: drops.Array.data[9].item
