@@ -275,7 +275,7 @@ public class RoomManager : MonoBehaviour {
 
 			List <int[]> pointsDist = new List<int[]>();
 			Vector2 start = new Vector2 (16f, 16f);
-			Vector2 exit = new Vector2 (255f, 255f);
+			Vector2 exit = new Vector2 ((float)rows * roomSide, (float)columns * roomSide);
 			randomPoints.Insert (0, start);
 			randomPoints.Add (exit);
 
