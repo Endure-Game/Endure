@@ -11,19 +11,21 @@ public class CharacterIcon : MonoBehaviour {
 		this.roomManager = world.GetComponent<RoomManager> ();
 		this.rt = this.GetComponent<RectTransform> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		var roomWidth = this.roomManager.columns;
-		var roomHeight = this.roomManager.rows;
 
-		var newLocation = PlayerController.instance.transform.position;
-		newLocation += new Vector3 (roomWidth / 2, roomHeight / 2);
+		if (PlayerController.instance != null) {
+			var roomWidth = this.roomManager.columns;
+			var roomHeight = this.roomManager.rows;
 
-		newLocation = Vector3.Scale (newLocation, new Vector3 (150f / (roomWidth * this.roomManager.roomSide), 150f / (roomHeight * this.roomManager.roomSide), 1));
+			var newLocation = PlayerController.instance.transform.position;
+			newLocation += new Vector3 (roomWidth / 2, roomHeight / 2);
 
-		//print ("heeey" + newLocation);
+			newLocation = Vector3.Scale (newLocation, new Vector3 (150f / (roomWidth * this.roomManager.roomSide), 150f / (roomHeight * this.roomManager.roomSide), 1));
 
-		this.rt.anchoredPosition = newLocation;
+			this.rt.anchoredPosition = newLocation;
+		}
+
 	}
 }

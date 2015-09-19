@@ -27,7 +27,7 @@ public class Ouch : MonoBehaviour {
 
 	void DoOwie (Collider2D collider){
 		MeleeAttacker meleeAttacker = this.gameObject.GetComponent<MeleeAttacker> ();
-		if (collider.tag != this.tag) {
+		if (collider.tag == "Player") {
 			if (meleeAttacker != null) {
 				if (meleeAttacker.Locked == false) {
 					OnOwie (collider);

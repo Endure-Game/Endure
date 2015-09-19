@@ -67,6 +67,24 @@ public class HUDController : MonoBehaviour {
 
 		timer += Time.deltaTime;
 
+		// pause
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			this.paused = !this.paused;
+
+			if (this.paused) {
+				Time.timeScale = 0;
+				this.pauseText.text = "PAUSED [ESC]";
+
+			} else {
+				Time.timeScale = 1;
+				this.pauseText.text = "";
+			}
+		}
+
+		if (this.paused) {
+			lowHealth.color = new Color (0, 0, 0, 0.8f);
+		}
+
 		if (timer >= updateTime) {
 			timer = 0;
 			this.UpdateMapTexture ();
@@ -80,24 +98,6 @@ public class HUDController : MonoBehaviour {
 				lowHealth.color = new Color (255, 0, 0, 0.3f);
 			} else {
 				lowHealth.color = new Color (0, 0, 0, 0);
-			}
-
-			// pause
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				this.paused = !this.paused;
-
-				if (this.paused) {
-					Time.timeScale = 0;
-					this.pauseText.text = "PAUSED [ESC]";
-
-				} else {
-					Time.timeScale = 1;
-					this.pauseText.text = "";
-				}
-			}
-
-			if (this.paused) {
-				lowHealth.color = new Color (0, 0, 0, 0.8f);
 			}
 
 			var sample = new GameObject ();
@@ -141,13 +141,16 @@ public class HUDController : MonoBehaviour {
 					number.transform.SetParent (icon.transform);
 					number.transform.position = new Vector3 (x + 4, y - 4, 0);
 				}
-			}
 
-			if (newInventorySize > 0) {
-				Destroy (this.border);
+				// Create iventory select border
 				this.border = new GameObject ();
 				border.AddComponent<Image> ().sprite = this.selected;
 				border.transform.SetParent (this.inventory.transform);
+			}
+
+			if (newInventorySize > 0) {
+
+				// move inventory select border
 				var rt = border.GetComponent<RectTransform> ();
 
 				var selX = this.GetComponent<RectTransform> ().rect.width * this.GetComponent<Canvas> ().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width + 40;
@@ -225,25 +228,18 @@ public class HUDController : MonoBehaviour {
 		switch (t.biome) {
 		case 0:
 			return new Color (66f / 255f, 86f / 255f, 0f / 255f);
-			break;
 		case 1:
 			return new Color (208f / 255f, 207f / 255f, 108f / 255f);
-			break;
 		case 2:
 			return new Color (166f / 255f, 167f / 255f, 55f / 255f);
-			break;
 		case 3:
 			return new Color (167f / 255f, 97f / 255f, 63f / 255f);
-			break;
 		case 4:
 			return new Color (231f / 255f, 255f / 255f, 255f / 255f);
-			break;
 		case 5:
 			return new Color (225f / 255f, 236f / 255f, 143f / 255f);
-			break;
 		default:
 			return Color.black;
-			break;
 		}
 	}
 

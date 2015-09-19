@@ -19,9 +19,9 @@ public class BiomeChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		int biome = this.GetCurrentBiome ();
@@ -39,21 +39,25 @@ public class BiomeChange : MonoBehaviour {
 
 	int GetCurrentBiome ()
 	{
-		var roomWidth = this.roomManager.columns;
-		var roomHeight = this.roomManager.rows;
+		if (PlayerController.instance != null) {
+			var roomWidth = this.roomManager.columns;
+			var roomHeight = this.roomManager.rows;
 
-		var pos = PlayerController.instance.transform.position + new Vector3 (roomWidth / 2, roomHeight / 2);
+			var pos = PlayerController.instance.transform.position + new Vector3 (roomWidth / 2, roomHeight / 2);
 
-		int x = (int) pos.x;
-		int y = (int) pos.y;
+			int x = (int) pos.x;
+			int y = (int) pos.y;
 
-		try {
-			return this.roomManager.tileMap[x, y].biome;
-		} catch (UnityException e) {
+			try {
+				return this.roomManager.tileMap[x, y].biome;
+			} catch (UnityException e) {
+				return -1;
+			}
+		} else {
 			return -1;
 		}
 	}
-	
+
 	void Play (int biome)
 	{
 		BiomeSnapshot (biome).TransitionTo (0);

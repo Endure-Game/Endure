@@ -350,7 +350,9 @@ public class RoomManager : MonoBehaviour {
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
 		}
-		//print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
+		ElevationTile.ClearWallsHash();
+		print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
+
 
 		if (!this.startScreen) {
 			this.StartTile.PlaceStartTiles();
@@ -590,11 +592,6 @@ public class RoomManager : MonoBehaviour {
 
 		// Make higher tiles apear behind lower tiles
 		tile.item.transform.Translate(new Vector3(0, 0, y));
-
-		//testing
-		//print ("PRINTING RESULT OF TILE MANP BULLSHTI" + this.tileMap [1, 1].blocking);
-
-
 	}
 
 	public void SetGroundTile(GameObject sprite, int x, int y) {

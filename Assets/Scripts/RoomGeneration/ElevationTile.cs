@@ -75,8 +75,6 @@ public class ElevationTile : MonoBehaviour
 				tile.blocking = true;
 			}
 		}
-
-		this.ClearWallsHash();
 	}
 
 	public GameObject GetTreasureTile() {
@@ -233,8 +231,9 @@ public class ElevationTile : MonoBehaviour
 
 	public static void ClearWallsHash() {
 		foreach (GameObject wall in ElevationTile.wallsHash.Values) {
-			wall.transform.position = new Vector3(-20f, -20f, 0f);
+			Destroy (wall);
 		}
+		ElevationTile.wallsHash = new Dictionary<string, GameObject>();
 	}
 
 	public GameObject GetXMarksTheSpot() {
