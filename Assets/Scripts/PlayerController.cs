@@ -31,6 +31,35 @@ public class PlayerController : MonoBehaviour {
 
 	private float playerRadius;
 
+	private Combo healthCombo = new Combo(new [] {
+		KeyCode.I,
+		KeyCode.D,
+		KeyCode.D,
+		KeyCode.Q,
+		KeyCode.D
+	});
+	
+	private Combo ammoCombo = new Combo(new [] {
+		KeyCode.I,
+		KeyCode.D,
+		KeyCode.K,
+		KeyCode.F,
+		KeyCode.A
+	});
+	
+	private Combo pushCombo = new Combo(new [] {
+		KeyCode.UpArrow,
+		KeyCode.UpArrow,
+		KeyCode.DownArrow,
+		KeyCode.DownArrow,
+		KeyCode.LeftArrow,
+		KeyCode.RightArrow,
+		KeyCode.LeftArrow,
+		KeyCode.RightArrow,
+		KeyCode.B,
+		KeyCode.A
+	});
+
 	private bool pusher = false;//FOR DEBUGGING
 
 	public enum Control {
@@ -125,13 +154,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//DEBUGGING TOOL ONLY
-		if (Input.GetKeyDown (KeyCode.I)){
-			this.arrows = 10000;
-			this.bullets = 10000;
+		if (this.healthCombo.GetCombo ()){
 			this.Health.maxHealth = 50;
 			this.Health.ChangeHealth(this.Health.maxHealth);
 		}
-		if (Input.GetKeyDown (KeyCode.G)) {
+		if (this.ammoCombo.GetCombo ()) {
+			this.arrows = 10000;
+			this.bullets = 10000;
+		}
+		if (this.pushCombo.GetCombo ()) {
 			if(this.pusher){
 				this.pusher = false;
 			} else{
