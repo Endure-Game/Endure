@@ -161,6 +161,13 @@ public class EnemyFullAI : MonoBehaviour {
 
 	}
 
+	public void toggleAggro (bool isAggro){
+		if (isAggro) {
+			this.lastPlayerPos = player.transform.position;
+			this.aggro = isAggro;
+		}
+	}
+
 	public void Stun (GameObject loser) {
 		/*this.stunTime = 0f;
 		this.standStill = loser.GetComponent<EnemyFullAI>();

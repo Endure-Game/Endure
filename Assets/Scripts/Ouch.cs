@@ -29,6 +29,9 @@ public class Ouch : MonoBehaviour {
 		MeleeAttacker meleeAttacker = this.gameObject.GetComponent<MeleeAttacker> ();
 		if (collider.tag != this.tag) {
 			if (collider.tag == "Player" || collider.tag == "Enemy" || collider.tag == "Animal") {
+				if(collider.tag == "Enemy"){
+					collider.gameObject.GetComponent<EnemyFullAI>().toggleAggro (true);
+				}
 				if (meleeAttacker != null) {
 					if (meleeAttacker.Locked == false) {
 						OnOwie (collider);
