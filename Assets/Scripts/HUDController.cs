@@ -68,7 +68,6 @@ public class HUDController : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		// pause
-		print ("we pausing");
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			this.paused = !this.paused;
 
@@ -142,13 +141,16 @@ public class HUDController : MonoBehaviour {
 					number.transform.SetParent (icon.transform);
 					number.transform.position = new Vector3 (x + 4, y - 4, 0);
 				}
-			}
 
-			if (newInventorySize > 0) {
-				Destroy (this.border);
+				// Create iventory select border
 				this.border = new GameObject ();
 				border.AddComponent<Image> ().sprite = this.selected;
 				border.transform.SetParent (this.inventory.transform);
+			}
+
+			if (newInventorySize > 0) {
+
+				// move inventory select border
 				var rt = border.GetComponent<RectTransform> ();
 
 				var selX = this.GetComponent<RectTransform> ().rect.width * this.GetComponent<Canvas> ().scaleFactor - barWidth + PlayerController.instance.InventoryIndex * rt.rect.width + 40;

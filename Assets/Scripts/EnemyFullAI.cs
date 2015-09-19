@@ -6,8 +6,8 @@ public class EnemyFullAI : MonoBehaviour {
 
 	//Basic AI Stats
 	public float speed = 3f;
-	public float aggro = 5f;
-	public float deAggro = 10f;
+	public float aggroDist = 5f;
+	public float deAggroDist = 10f;
 
 	//For idle movement
 	public float moveDuration = 0.8f;
@@ -103,16 +103,19 @@ public class EnemyFullAI : MonoBehaviour {
 	}
 
 	// Update is called once per frame
+	private bool aggro = false;
 	void Update () {
 		if (this.active) {
 			//print ("SNEAK VALUE IS + " + this.player.sneak);
-			//print (this.aggro * this.player.sneak);
+			//print (this.aggroDist * this.player.sneak);
 			this.targetHeading = this.player.transform.position - this.transform.position;
-			//print (heading.magnitude + "|" + this.aggro * this.player.sneak);
-			if(this.targetHeading.magnitude < this.aggro * this.player.sneak){
+			//print (heading.magnitude + "|" + this.aggroDist * this.player.sneak);
+
+			if(this.targetHeading.magnitude < this.aggroDist * this.player.sneak){
 				this.lastPlayerPos = player.transform.position;
+				this.aggro = true;
 			}
-			if (this.targetHeading.magnitude < this.deAggro * this.player.sneak){
+			if (this.targetHeading.magnitude < this.deAggroDist * this.player.sneak && this.aggro){
 				 if (this.ranged.isRanged){
 					this.RangedAttack ();
 				} else if (this.coward.isCoward){
@@ -121,8 +124,9 @@ public class EnemyFullAI : MonoBehaviour {
 					this.MeleeAttack ();
 				}
 				//this.MeleeAttack ();
-			} else if(this.targetHeading.magnitude >= this.deAggro * this.player.sneak){
+			} else {
 				//Double Check conditional
+				this.aggro = false;
 				if(this.coward.isCoward){
 					this.CowardRun();
 				} else {
@@ -250,7 +254,7 @@ public class EnemyFullAI : MonoBehaviour {
 		}
 	}
 	void IdleMovement (){
-		if(this.oldPosition == Vector3.zero){
+		if(this.oldPosition == Vector3.zero || this.oldPosition == null){
 			this.oldPosition = this.transform.position;
 		}
 
@@ -258,18 +262,21 @@ public class EnemyFullAI : MonoBehaviour {
 
 		//print (this.oldPosition);
 
+		// The enemy stops during the idleDuration, before the moveDuration
 		if (this.animationTime < this.idleDuration){
 			this.rb2d.velocity = Vector2.zero;
 		} else {
+			// The enemy stops after the moveDuration
 			if (this.animationTime > this.moveDuration + this.idleDuration) {
 				this.rb2d.velocity = Vector2.zero;
 				this.animationTime = 0;
+			// The enemy moves during the moveDuration
 			} else if (this.rb2d.velocity == Vector2.zero){
 				float rx = Random.Range (-1f, 1f);
 				float ry = Random.Range (-1f, 1f);
 				this.moveDuration = Random.Range(.6f, 2f);
-				Vector3 idleHeading = this.oldPosition - this.transform.position;
-				this.rb2d.velocity = speed * (idleHeading - new Vector3(rx, ry)).normalized;
+				Vector2 idleHeading = this.oldPosition - this.transform.position;
+				this.rb2d.velocity = speed / 2 * (idleHeading - new Vector2(rx, ry)).normalized;
 			}
 		}
 	}
