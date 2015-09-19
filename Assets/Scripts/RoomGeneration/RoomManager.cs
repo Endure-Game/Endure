@@ -240,7 +240,7 @@ public class RoomManager : MonoBehaviour {
 		this.rooms = new GameObject[roomSide, roomSide];
 
 		TileMapGeneration();
-		print ("Generate tile map " + (Time.realtimeSinceStartup - startTime));
+		//print ("Generate tile map " + (Time.realtimeSinceStartup - startTime));
 
 		// Create rooms
 		for (int i = 0; i < roomSide; i++) {
@@ -248,7 +248,7 @@ public class RoomManager : MonoBehaviour {
 				this.rooms [i, j] = RoomSetup (i, j);
 			}
 		}
-		print ("Create rooms " + (Time.realtimeSinceStartup - startTime));
+		//print ("Create rooms " + (Time.realtimeSinceStartup - startTime));
 
 		// Create outer rock wall
 		for (int x = -1; x <= this.roomSide * this.columns; x++) {
@@ -263,7 +263,7 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 
-		print ("Create outer rock wall " + (Time.realtimeSinceStartup - startTime));
+		//print ("Create outer rock wall " + (Time.realtimeSinceStartup - startTime));
 
 		//create game path
 		//TODO fix sorting algo for randomPoints
@@ -314,7 +314,7 @@ public class RoomManager : MonoBehaviour {
 				placePath(current, next, moveX, moveY);
 
 			}
-			print ("Create path " + (Time.realtimeSinceStartup - startTime));
+			//print ("Create path " + (Time.realtimeSinceStartup - startTime));
 		}
 
 		// Create climb points
@@ -350,7 +350,7 @@ public class RoomManager : MonoBehaviour {
 		foreach (Region region in this.regions) {
 			region.makeBlocking();
 		}
-		print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
+		//print ("Create blocking Tiles" + (Time.realtimeSinceStartup - startTime));
 
 		if (!this.startScreen) {
 			this.StartTile.PlaceStartTiles();
@@ -374,20 +374,20 @@ public class RoomManager : MonoBehaviour {
 						notInThisBiome = true;
 					}
 				}
-				print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
+				//print ("THIS IS THE BUILDINGCOUNT" + buildingCount);
 
 				//make sure y is inbounds
 				if(buildY + 1 > 1 && buildY + 1 < columns * roomSide - 1){
-					print ("y + 1 is inbounds");
+					//print ("y + 1 is inbounds");
 					//check southwest corner for inbounds
 					if(buildX - 1 > 1){
-						print ("x - 1 is inbounds");
+						//print ("x - 1 is inbounds");
 						//check southeast corner for inbounds
 						if(buildX + 1 < rows * roomSide - 1){
-							print ("x + 1 is inbounds");
+							//print ("x + 1 is inbounds");
 							//check y + 3 is inbounds
 							if(buildY + 3 < columns * roomSide - 1){
-								print ("y + 3 is inbounds");
+								//print ("y + 3 is inbounds");
 								isInBounds = true;
 							}
 						}
@@ -398,7 +398,7 @@ public class RoomManager : MonoBehaviour {
 				if(notInThisBiome == false && buildings <= buildingCount && isInBounds == true){
 
 					buildings ++;
-					print ("ADDING BUILDING");
+					//print ("ADDING BUILDING");
 					currentTile = this.tileMap[buildX, buildY + 1];
 
 					Destroy(currentTile.item);
@@ -446,7 +446,7 @@ public class RoomManager : MonoBehaviour {
 			blockingCount.maximum = 5;
 		}
 		LayoutObjectAtRandom (blocks, blockingCount.minimum, blockingCount.maximum);
-		print ("Random Objects layed out" + (Time.realtimeSinceStartup - startTime));
+		//print ("Random Objects layed out" + (Time.realtimeSinceStartup - startTime));
 
 		// Spawn starting enemies
 		if (!this.startScreen) {

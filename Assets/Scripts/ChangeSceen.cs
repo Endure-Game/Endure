@@ -15,7 +15,7 @@ public class ChangeSceen : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (){
-		print ("CHANGESCREEN HAS BEEN CALLED");
+		//print ("CHANGESCREEN HAS BEEN CALLED");
 //		Application.LoadLevelAsync (3);
 //		print("Total levels!!" + Application.levelCount); total count is 3 levels
 //		Time.timeScale = 0;
