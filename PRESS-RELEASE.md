@@ -20,7 +20,7 @@ Once the project moves into development, the press release can be used as a touc
 ProjectLand
 
 ## Sub-Heading ##
-Survive the wilds of ProjectLand;  crush your enemies, see them driven before you and enjoy the lamentation of their men/women/people.
+Survive the wilds of ProjectLand!  Crush your enemies: see them driven before you and enjoy the lamentation of their men/women/people.
 
 ## Summary ##
 Top down real-time stratagy game where you can get lost in the experience and not worry about your mortgage.
@@ -35,10 +35,10 @@ You will never be bored again.
 "Ahhhhhh, run for your life" - Chris Lockwood, product owner ProjectLand / KnockoutDonkey
 
 ## How to Get Started ##
-Go to the website, no login required! 
+Go to the [website](endure.site), no login required! 
 
 ## Customer Quote ##
-"Oh my gosh, this is the greatest game in the world. I have no doubt that it will become a classic." - Lauren Janicki
+"Oh my gosh, this is the greatest game in the world. I have no doubt that it will totally become a classic." - Lauren Janicki
 "I asked them to make a character based on me, and they totally did! Awesome!" - Jacki Ho
 
 ## Closing and Call to Action ##
